@@ -16,7 +16,7 @@
 			cursor: pointer;
 		}
 
-		p.contents {
+		pre.contents {
             margin: auto;
 			border: 1px solid none;
 			width: 600px;
@@ -51,16 +51,16 @@
     <div class="guide-wrapper">
     
     <div class="guide-name">WHY USE THE SIMS</div>
-    <p class="contents">1</p>
+    <pre class="contents">저희 심즈를 사용해야 하는 이유는 바로 편의성 때문이죠 !</pre>
 
     <div class="guide-name">HOW TO USE SIMS</div>
-    <p class="contents">2</p>
+    <pre class="contents">2</pre>
 
     <div class="guide-name">BOARD GUIDE</div>
-    <p class="contents">3</p>
+    <pre class="contents">3</pre>
 
     <div class="guide-name">WHAT CONTENTS DO YO HAVE ON SIMS</div>
-    <p class="contents">4</p>
+    <pre class="contents">4</pre>
     
     </div>
 
