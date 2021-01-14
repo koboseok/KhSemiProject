@@ -4,6 +4,13 @@
 <head>
 <meta charset="UTF-8">
 
+
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+
+
+
+
 <style>
 div.contain  {
 /* 	width: 1200px; 
@@ -11,11 +18,6 @@ div.contain  {
 	padding: 100px;
 	margin-top : 100px;
 	margin-bottom : 100px;
-	
-}
-
-
-div.col-md-3 {
 	
 }
 
@@ -27,19 +29,19 @@ div.col-md-3 {
 	display: none;
 }
 
-.container.contain .row .col-md-3:hover .showdocument.si {
+.container.contain .row .col-md-3:hover .showdocument {
 	display: block;
 	position: absolute;
 }
 
-.container.contain .row .col-md-3 .showdocument.si {
+.container.contain .row .col-md-3 .showdocument {
 	position: absolute;
 	display: none;
 }
 
 
 
-.showdocument.si {
+.showdocument {
 	width: 200px;
 	heigth: 200px;
 	margin: auto;
@@ -57,6 +59,10 @@ div.col-md-3 {
 	width:400px;
 	heigth: 400px;
 }
+.imgMouseover{
+	width : 200%;
+	 
+}
 
 </style>
 
@@ -67,16 +73,17 @@ div.col-md-3 {
 
 
 
-	<div class="container contain bgPinkLighten1">
-		<div class="row">
-			<div class="col-md-3">
+	<div class="container contain" style=" background-color: white;">
+	
+		<div class="row" id="slider-div" style ="height : 300px;" >
+			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12 " id="test1" width="25%">
+					<div class="col-md-12 " id="test1" width="30%">
 						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
-						<img class="imgMouseover" alt="" width="100%"
+						<img class="imgMouseover" alt=""
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/netflix.jpg" />
-						<div class="showdocument si">
+						<div class="showdocument si slider-div">
 
 							NETFLIX
 							<button class="float-right">x</button>
@@ -86,13 +93,13 @@ div.col-md-3 {
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12 " id="test1" width="25%">
-						<img class="imgMouseover" alt="" width="100%"
+					<div class="col-md-12  " id="test1" width="30%">
+						<img class="imgMouseover" alt="" 
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/wavve.png" />
-						<div class="showdocument si">
+						<div class="showdocument">
 
 							WAVVE
 							<button class="float-right">x</button>
@@ -102,18 +109,40 @@ div.col-md-3 {
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			
+			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12" id="test1" width="25%">
+					<div class="col-md-12" id="test1" width="30%">
+					 	 <img class="imgMouseover" alt="" 
+							class="img-responsive center-block"
+							src="${ contextPath }/resources/images/watcha.png" /> 
+						<!-- <button class="btn addBtn" data-toggle="modal"
+							href="#modal-container-2">
+							<br>
+							<br><pre>    구독 서비스 추가+</pre>
+						</button> -->
+						<div class="showdocument">
+
+								WATCHA <button class="float-right">x</button><br>
+							<br> 구독기간<br> 시작 : 2021-01-11<br> 종료 : 2021-03-13<br>
+							<br> 금액 : 13,000원
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12" id="test1" width="30%">
 						<%-- <img class="imgMouseover" alt="" width="100%"
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/watcha.png" /> --%>
 						<button class="btn addBtn" data-toggle="modal"
 							href="#modal-container-2">
 							<br>
-							<br><pre>    구독 서비스 추가 +</pre>
+							<br><pre>    구독 서비스 추가+</pre>
 						</button>
-						<div class="showdocument si">
+						<div class="showdocument">
 
 							<%-- 	WATCHA <button class="float-right">x</button><br>
 							<br> 구독기간<br> 시작 : 2021-01-11<br> 종료 : 2021-03-13<br>
@@ -122,18 +151,80 @@ div.col-md-3 {
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			
+			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12" id="test1" width="25%">
+					<div class="col-md-12 " id="test1" width="30%">
 						<%-- <img class="imgMouseover" alt="" width="100%"
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
 						<button class="btn addBtn " data-toggle="modal"
 							href="#modal-container-2" >
 							<br>
-							<br><pre>   구독 서비스 추가 +</pre>
+							<br><pre>   구독 서비스 추가+</pre>
 						</button>
-						<div class="showdocument si">
+						<div class="showdocument">
+
+							<%-- COUPANG <button class="float-right">x</button><br> 
+							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
+							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12 " id="test1" width="25%">
+						<%-- <img class="imgMouseover" alt="" width="100%"
+							class="img-responsive center-block"
+							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
+						<button class="btn addBtn " data-toggle="modal"
+							href="#modal-container-2" >
+							<br>
+							<br><pre>   구독 서비스 추가+</pre>
+						</button>
+						<div class="showdocument">
+
+							<%-- COUPANG <button class="float-right">x</button><br> 
+							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
+							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12 " id="test1" width="25%">
+						<%-- <img class="imgMouseover" alt="" width="100%"
+							class="img-responsive center-block"
+							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
+						<button class="btn addBtn " data-toggle="modal"
+							href="#modal-container-2" >
+							<br>
+							<br><pre>   구독 서비스 추가+</pre>
+						</button>
+						<div class="showdocument">
+
+							<%-- COUPANG <button class="float-right">x</button><br> 
+							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
+							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12 " id="test1" width="25%">
+						<%-- <img class="imgMouseover" alt="" width="100%"
+							class="img-responsive center-block"
+							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
+						<button class="btn addBtn " data-toggle="modal"
+							href="#modal-container-2" >
+							<br>
+							<br><pre>   구독 서비스 추가+</pre>
+						</button>
+						<div class="showdocument">
 
 							<%-- COUPANG <button class="float-right">x</button><br> 
 							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
@@ -143,7 +234,15 @@ div.col-md-3 {
 				</div>
 			</div>
 		</div>
+		
 	</div>
+	
+	
+	
+	
+	
+	
+	
 
 	<div class="container contain">
 		<div class="row">
@@ -217,20 +316,48 @@ div.col-md-3 {
 	<!--<img src="이미지 경로" alt="이미지 설명"  class="imgMouseover" />
 		<div class="showImage"><img src="마우스오버시 나올 이미지 경로" alt="이미지 설명" /></div>  -->
 
-	<script>
-		$(window).load(function() {
-			/*   $(function() {
-			      $("div.si").hide();
-			      $(".imgMouseover").hover(function() {
-			          $("div.si").fadeIn();
-			      }, function() {
-			          $("div.si").fadeOut();
-			      });
-			   }); */
-		});
-	</script>
+	
+	 <script>
+	 $(function(){
+			$('#slider-div').slick({
+				slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
+				infinite : true, 	//무한 반복 옵션	 
+				slidesToShow : 4,		// 한 화면에 보여질 컨텐츠 개수
+				slidesToScroll : 4,		//스크롤 한번에 움직일 컨텐츠 개수
+				speed : 100,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+				arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+				dots : true, 		// 스크롤바 아래 점으로 페이지네이션 여부
+				autoplay : false,			// 자동 스크롤 사용 여부
+				autoplaySpeed : 10000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+				pauseOnHover : true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
+				vertical : false,		// 세로 방향 슬라이드 옵션
+				prevArrow : "<button type='button' class='slick-prev '>Previous</button>",		// 이전 화살표 모양 설정
+				nextArrow : "<button type='button' class='slick-next '>Next</button>",		// 다음 화살표 모양 설정
+				dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
+				draggable : true, 	//드래그 가능 여부 
+				
+				responsive: [ // 반응형 웹 구현 옵션
+					{  
+						breakpoint: 960, //화면 사이즈 960px
+						settings: {
+							//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+							slidesToShow:3 
+						} 
+					},
+					{ 
+						breakpoint: 768, //화면 사이즈 768px
+						settings: {	
+							//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+							slidesToShow:2 
+						} 
+					}
+				]
 
+			});
+		})
+    </script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+
 
 </body>
 

@@ -65,6 +65,7 @@ Bootstrap core JS
               POLICY
             </h6>
             <p>
+            	청렴 결백 정직 사랑 <br>
                	모두가 함께 만드는 SIMS
             </p>
           </div>
@@ -75,7 +76,7 @@ Bootstrap core JS
             <div class="info_link-box">
               <a href="">
                 <img src="${ contextPath }/resources/images/location.png" alt="">
-                <span> 서울특별시 노원구 <br> 상계동 1265 </span>
+                <span> 서울특별시 중구 <br> 남대문로1가 남대문로 120 </span> 
               </a>
               <a href="">
                 <img src="${ contextPath }/resources/images/call.png" alt="">

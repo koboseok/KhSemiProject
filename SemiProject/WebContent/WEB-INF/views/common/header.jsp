@@ -6,8 +6,7 @@
 <html>
 
 <head>
-<c:set var="contextPath" scope="application"
-	value="${ pageContext.servletContext.contextPath }" />
+<c:set var="contextPath" scope="application" value="${ pageContext.servletContext.contextPath }"/>
 <!-- Basic -->
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,30 +21,24 @@
 <title>SIMS</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript"
-	src="${ contextPath }/resources/js/bootstrap.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-	
-</script>
-<script type="text/javascript"
-	src="${ contextPath }/resources/js/custom.js"></script>
-
-
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<script type="text/javascript"src="${ contextPath }/resources/js/bootstrap.js"></script>
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script type="text/javascript" src="${ contextPath }/resources/js/custom.js"></script>
 <!-- fonts style -->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,700&display=swap"
-	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,700&display=swap"rel="stylesheet" />
 
 <!-- bootstrap core css -->
-<link rel="stylesheet" type="text/css"
-	href="${ contextPath }/resources/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="${ contextPath }/resources/css/bootstrap.css" />
 
 <!-- Custom styles for this template -->
 <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" />
 <!-- responsive style -->
-<link href="${ contextPath }/resources/css/responsive.css"
-	rel="stylesheet" />
+<link href="${ contextPath }/resources/css/responsive.css"rel="stylesheet" />
+
 
 <style>
 .modal-dialog {
@@ -81,7 +74,6 @@
 									data-toggle="modal" href="#modal-container-1">Login</a></li>
 								<li class="nav-item "><a class="nav-link"
 									data-toggle="modal" href="">회원가입</a></li>
-
 							</c:when>
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
@@ -91,10 +83,9 @@
 								<li class="nav-item active"><a class="nav-link" href="">Logout</a>
 								</li>
 							</c:otherwise>
-
 						</c:choose>
 					</ul>
-
+				
 
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -122,6 +113,7 @@
 				
 			</div>
 		</header>
+		</div>
 		
 		
 		<%-- Modal창에 해당하는 html 코드는 페이지 마지막에 작성하는게 좋다 --%>
