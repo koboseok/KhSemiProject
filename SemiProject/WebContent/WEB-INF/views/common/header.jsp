@@ -110,7 +110,7 @@ ul li:hover #inner-ul{
 							<ul class="navbar-nav">
 								<li class="nav-item "><a class="nav-link" href="${contextPath}/member/aboutSims.do ">
 										about</a></li>
-								<li class="nav-item"><a class="nav-link" href=" ">
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/subscribe/main">
 										subscribe </a></li>
 
 							
