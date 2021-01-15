@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SIMS</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Basic -->
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,7 +15,6 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
-
 
 
 <style>
@@ -35,8 +32,7 @@ ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	display: inline-block;
-	margin-block-start: 1em;
+	display: inline-block; margin-block-start : 1em;
 	margin-block-end: 1em;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
@@ -77,7 +73,7 @@ a {
 
 .w100 {
 	width: 100%;
-	height: 150px;
+	height: 75px;
 }
 
 .main_title {
@@ -92,8 +88,8 @@ a {
 .banner2 li {
 	position: relative;
 	float: left;
-	width: 325px;
-	height: 200px;
+	width: 200px;
+	height: 100px;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	box-shadow: 2px 2px 2px #ccc;
@@ -129,19 +125,18 @@ a {
 	margin: 45px 45px 150px;
 }
 
-.banner2 li:hover {
-	cursor: pointer;
-	transform: scale(1.2);
-	-o-transform: scale(1.2);
-	-moz-transform: scale(1.2);
-	-webkit-transform: scale(1.2);
-	transition: transform .35s
-}
+.banner2 li:hover{
+       cursor:pointer;
+       transform:scale(1.2); 
+       -o-transform:scale(1.2); 
+       -moz-transform:scale(1.2);
+       -webkit-transform:scale(1.2);
+       transition: transform .35s
+    }  
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
-
 
 	<div id="container_wr">
 		<div id="container">
@@ -156,112 +151,62 @@ a {
 				</div>
 				<ul class="banner2">
 					<li><a href="${contextPath}/subscribe/info"><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
+							src="${contextPath}/resources/images/ex.jpg" class="w100" alt="" /></a>
 						<p>Example</p> <span class="hot">HOT</span></li>
 					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
 						<p>Example</p></li>
 					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
 						<p>Example</p></li>
 					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
+						<p>Example</p></li>
+					<li><a href=""> <img
+							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
 						<p>Example</p></li>
 				</ul>
 			</div>
-
-			<br> <br>
-
-
-
-			<div class="middle_top">
-				<div class="title_box">
-					<p class="main_title">LIFE STYLE</p>
-					<span> <a href="">더보기</a>
-					</span>
-				</div>
-				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-				</ul>
-			</div>
-
-			<br> <br>
-
-
-			<div class="middle_top">
-				<div class="title_box">
-					<p class="main_title">NEWS LETTER</p>
-					<span> <a href="">더보기</a>
-					</span>
-				</div>
-				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-
-				</ul>
-			</div>
-
-			<br> <br>
-
-
-
-			<div class="middle_top">
-				<div class="title_box">
-					<p class="main_title">FOOD</p>
-					<span> <a href="">더보기</a>
-					</span>
-				</div>
-				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-
-				</ul>
-			</div>
-
-
-
 
 		</div>
+
 	</div>
-
-
-
-
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
@@ -272,5 +217,7 @@ a {
 
 
 
+
+	
 </body>
 </html>
