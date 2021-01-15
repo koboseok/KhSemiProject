@@ -35,6 +35,19 @@ pre {
 		"Courier New", monospace;
 	font-size: small;
 }
+
+.ab-txt {
+	margin-top: 5px;
+	text-decoration: underline;
+	color: black;
+	margin-top: 0px;
+	padding: 0px;
+	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
+	font-size: small;
+}
+
+
 </style>
 </head>
 <body>
