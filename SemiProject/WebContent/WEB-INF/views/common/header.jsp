@@ -58,7 +58,7 @@ li {
 ul li:hover #inner-ul{
 	display: inline-block;
 }
-/* 안녕하세요  */
+
 
 
 </style>
@@ -112,14 +112,17 @@ ul li:hover #inner-ul{
 										about</a></li>
 								<li class="nav-item"><a class="nav-link" href=" ">
 										subscribe </a></li>
-								<li class="nav-item "><a class="nav-link" href=" "> board </a>
-									<ul id ="inner-ul">
-										<li><a href="">자유 게시판</a></li>
-										<li><a href="">공동구매 게시판</a></li>
-										<li><a href="">비공개 건의 게시판</a></li>
-									</ul>
-								
-								</li>
+
+							
+
+								<li class="nav-item"><a class="nav-link" href=" ">
+										board </a>
+										<ul>
+										<li><a href="${contextPath}/freeBoard/main.do">자유 게시판</a></li>
+										<li><a href="${contextPath}/jointBoard/main.do">공동 구매 게시판</a></li>
+										<li><a href="${contextPath}/privateBoard/main.do">비공개 건의 게시판</a></li>
+									</ul></li>
+
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/myList/myList.do ">
 										my sims </a></li>
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/guide/guide.do ">
