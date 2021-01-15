@@ -98,7 +98,12 @@
 								<li class="nav-item"><a class="nav-link" href=" ">
 										subscribe </a></li>
 								<li class="nav-item"><a class="nav-link" href=" ">
-										board </a></li>
+										board </a>
+										<ul>
+										<li><a href="${contextPath}/freeBoard/main.do">자유 게시판</a></li>
+										<li><a href="${contextPath}/jointBoard/main.do">공동 구매 게시판</a></li>
+										<li><a href="${contextPath}/privateBoard/main.do">비공개 건의 게시판</a></li>
+									</ul></li>
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/myList/myList.do ">
 										my sims </a></li>
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/guide/guide.do ">
