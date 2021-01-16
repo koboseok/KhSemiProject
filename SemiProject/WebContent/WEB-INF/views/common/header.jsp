@@ -38,6 +38,8 @@
 
 <!-- Custom styles for this template -->
 <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" />
+<link href="${ contextPath }/resources/css/stylecsy.css" rel="stylesheet" />
+
 <!-- responsive style -->
 <link href="${ contextPath }/resources/css/responsive.css"rel="stylesheet" />
 
@@ -110,7 +112,7 @@ ul li:hover #inner-ul{
 							<ul class="navbar-nav">
 								<li class="nav-item "><a class="nav-link" href="${contextPath}/member/aboutSims.do ">
 										about</a></li>
-								<li class="nav-item"><a class="nav-link" href=" ">
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/subscribe/main">
 										subscribe </a></li>
 
 							
