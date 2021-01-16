@@ -89,7 +89,7 @@ ul li:hover #inner-ul{
 								<li class="nav-item "><a class="nav-link"
 									data-toggle="modal" href="#modal-container-1">Login</a></li>
 								<li class="nav-item "><a class="nav-link"
-									data-toggle="modal" href="${contextPath}/member/signUpForm.do">회원가입</a></li>
+									href="${contextPath}/member/signUpForm.do">회원가입</a></li>
 							</c:when>
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
