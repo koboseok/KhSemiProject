@@ -8,21 +8,6 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
-
-@font-face {
-	font-family: 'SDSamliphopangche_Outline';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-.font_title {
-   font-family:'SDSamliphopangche_Outline';
-   font-size: 150%;
-}
-
 .pagination {
 	justify-content: center;
 }
@@ -107,7 +92,7 @@
 	<div class="container my-5">
 
 		<h2 class="entry-title text-center py-5">
-			<span class="font_title">회원관리</span>
+			<span class="title-font">회원관리</span>
 		</h2>
 		<a class="nav-link" data-toggle="modal" href="#report-modal">
 			<button class="btn btn-secondary btn-sm" id="toBlockBtn">불량 회원으로 설정</button></a>
