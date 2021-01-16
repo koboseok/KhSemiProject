@@ -19,12 +19,14 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
-
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!--  slick -->
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+
 <script type="text/javascript"src="${ contextPath }/resources/js/bootstrap.js"></script>
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script type="text/javascript" src="${ contextPath }/resources/js/custom.js"></script>
@@ -36,6 +38,8 @@
 
 <!-- Custom styles for this template -->
 <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" />
+<link href="${ contextPath }/resources/css/stylecsy.css" rel="stylesheet" />
+
 <!-- responsive style -->
 <link href="${ contextPath }/resources/css/responsive.css"rel="stylesheet" />
 
@@ -45,6 +49,20 @@
 	width: 100%;
 	z-index : 5010;
 }
+li {
+	list-style : none;
+}
+#inner-ul {
+	display : none;
+	
+}
+
+ul li:hover #inner-ul{
+	display: inline-block;
+}
+
+
+
 </style>
 </head>
 
@@ -73,7 +91,7 @@
 								<li class="nav-item "><a class="nav-link"
 									data-toggle="modal" href="#modal-container-1">Login</a></li>
 								<li class="nav-item "><a class="nav-link"
-									data-toggle="modal" href="">회원가입</a></li>
+									href="${contextPath}/member/signUpForm.do">회원가입</a></li>
 							</c:when>
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
@@ -90,13 +108,15 @@
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<div
-							class="d-flex ml-auto flex-column flex-lg-row align-items-center"
-							>
-							<ul class="navbar-nav  ">
+							class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+							<ul class="navbar-nav">
 								<li class="nav-item "><a class="nav-link" href="${contextPath}/member/aboutSims.do ">
 										about</a></li>
-								<li class="nav-item"><a class="nav-link" href=" ">
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/subscribe/main">
 										subscribe </a></li>
+
+							
+
 								<li class="nav-item"><a class="nav-link" href=" ">
 										board </a>
 										<ul>
@@ -104,6 +124,7 @@
 										<li><a href="${contextPath}/jointBoard/main.do">공동 구매 게시판</a></li>
 										<li><a href="${contextPath}/privateBoard/main.do">비공개 건의 게시판</a></li>
 									</ul></li>
+
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/myList/myList.do ">
 										my sims </a></li>
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/guide/guide.do ">

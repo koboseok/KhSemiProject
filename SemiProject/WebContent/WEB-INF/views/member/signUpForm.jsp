@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 
 <title>signUp</title>
-<script src="https://kit.fontawesome.com/955b087c12.js"
-	crossorigin="anonymous"></script>
+
 <style>
 @font-face {
 	font-family: 'SDSamliphopangche_Outline';
@@ -46,7 +45,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	margin: 0px;
 	padding: 10px;
 	border-radius: 3%;
-	background-color: #E2E2E2;
+	background-color: #f7ce94;
+
 }
 
 .text-sm {
@@ -63,18 +63,18 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 .select-modal {
 	padding: 5px !important;
 }
+
+.search-select {
+	margin-left: 10px;	
+}
+
+.form-background {
+	background-color: #FFFBF2;
+;
+}
+
 </style>
 
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-<!-- Bootstrap core JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -83,7 +83,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 
 		<div class="row">
-			<div class="col-md-6 offset-md-3">
+			<div class="col-md-4 offset-md-4 form-background">
 				<h2 class="entry-title text-center py-5">
 					<span id="title_font">회원가입</span>
 				</h2>
@@ -208,7 +208,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 											<input type="text" class="text-sm" name="serviceName"
 												id="serviceName" placeholder="검색을 눌러주세요." disabled>
 										</div>
-										<div class="col-md-3 offset-md-3">
+										<div class="col-md-3 offset-md-2">
 											<a class="nav-link" data-toggle="modal" href="#search-modal">
 												<button type="button"
 													class="btn btn-secondary btn-sm btn-block search-select">검색</button>
@@ -236,49 +236,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 												id="serviceDate">
 										</div>
 										<div class="offset-md-6"></div>
-									</div>
-
-									<div class="row m-3 form-row">
-										<div class="col-md-3">
-											<label for="paymentCycle">결제 주기</label>
-										</div>
-										<div class="col-md-9">
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="1week" value="7"
-													class="form-check-input custom-control-input"> <label
-													class="form-check-label custom-control-label" for="1week">1주</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="2week"
-													value="14" class="form-check-input custom-control-input">
-												<label class="form-check-label custom-control-label"
-													for="2week">2주</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="3week"
-													value="21" class="form-check-input custom-control-input">
-												<label class="form-check-label custom-control-label"
-													for="3week">3주</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="1month"
-													value="1m" class="form-check-input custom-control-input">
-												<label class="form-check-label custom-control-label"
-													for="1month">4주</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="6month"
-													value="6m" class="form-check-input custom-control-input">
-												<label class="form-check-label custom-control-label"
-													for="6month">6개월</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<input type="radio" name="paymentCycle" id="1year"
-													value="1y" class="form-check-input custom-control-input">
-												<label class="form-check-label custom-control-label"
-													for="1year">1년</label>
-											</div>
-										</div>
 									</div>
 								</div>
 

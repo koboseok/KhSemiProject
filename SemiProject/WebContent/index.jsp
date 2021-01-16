@@ -33,7 +33,19 @@
 
 	 	
 
-    
+    	
+	<jsp:include page="WEB-INF/views/main/slider.jsp"></jsp:include>
+	
+	
+	
+	<jsp:include page="WEB-INF/views/main/newsubscribe.jsp"></jsp:include>
+	
+	
+	
+	<jsp:include page="WEB-INF/views/main/popularcategory.jsp"></jsp:include>
+
+
+	<jsp:include page="WEB-INF/views/main/eventsubscribe.jsp"></jsp:include>
 
 
 
