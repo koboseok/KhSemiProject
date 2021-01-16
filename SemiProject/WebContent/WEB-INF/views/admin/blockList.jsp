@@ -10,20 +10,6 @@
 <script src="https://kit.fontawesome.com/955b087c12.js"
 	crossorigin="anonymous"></script>
 <style>
-@font-face {
-	font-family: 'SDSamliphopangche_Outline';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-.font_title {
-   font-family:'SDSamliphopangche_Outline';
-   font-size: 150%;
-}
-
 
 .pagination {
 	justify-content: center;
@@ -72,7 +58,7 @@ text-align:center;
 	<div class="container my-5">
 
 		<h2 class="entry-title text-center py-5">
-			<span class="font_title">불량회원관리</span>
+			<span class="title-font">불량회원관리</span>
 		</h2>
 
 		<button class="btn btn-secondary btn-sm" id="toBlockBtn">일반회원으로 되돌리기</button>
