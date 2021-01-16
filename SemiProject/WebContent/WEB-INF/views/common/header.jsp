@@ -38,6 +38,8 @@
 
 <!-- Custom styles for this template -->
 <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" />
+<link href="${ contextPath }/resources/css/stylecsy.css" rel="stylesheet" />
+
 <!-- responsive style -->
 <link href="${ contextPath }/resources/css/responsive.css"rel="stylesheet" />
 
