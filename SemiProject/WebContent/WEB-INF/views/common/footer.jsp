@@ -91,7 +91,5 @@ Bootstrap core JS
         </div>
       </div>
     </div>
-
-
 </body>
 </html>

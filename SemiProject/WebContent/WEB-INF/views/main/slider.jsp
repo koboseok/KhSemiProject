@@ -120,8 +120,5 @@
 	<script type="text/javascript" src="${contextPath}/resources/js/custom.js"></script>
 
 
-
-
-
 </body>
 </html>
