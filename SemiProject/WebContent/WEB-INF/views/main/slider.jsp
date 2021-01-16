@@ -39,7 +39,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/youtube.jpg" alt="" />
+										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -61,7 +61,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/bookcrew.png" alt="" />
+										<img src="${contextPath}/resources/images/main-bookcrew.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -83,7 +83,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/greencar.png" alt="" />
+										<img src="${contextPath}/resources/images/main-greencar.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -118,9 +118,6 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   	</script>
 	<script type="text/javascript" src="${contextPath}/resources/js/custom.js"></script>
-
-
-
 
 
 </body>
