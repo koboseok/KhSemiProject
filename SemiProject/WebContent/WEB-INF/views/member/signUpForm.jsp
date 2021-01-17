@@ -200,7 +200,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 											<label for="serviceName">서비스명</label>
 										</div>
 										<div class="col-md-3">
-											<input type="text" class="text-sm" name="serviceName"
+											<input type="text" class="text-sm serviceName" name="serviceName"
 												id="serviceName" placeholder="검색을 눌러주세요." disabled>
 										</div>
 										<div class="col-md-3 offset-md-2">
@@ -216,7 +216,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 											<label for="serviceCharge">요금</label>
 										</div>
 										<div class="col-md-3">
-											<input type="text" class="text-sm" name="serviceCharge"
+											<input type="text" class="text-sm serviceCharge" name="serviceCharge"
 												id="serviceCharge">
 										</div>
 										<div class="offset-md-6"></div>
@@ -227,7 +227,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 											<label for="paymentDate">결제일</label>
 										</div>
 										<div class="col-md-3">
-											<input type="date" class="text-sm" name="serviceDate"
+											<input type="date" class="text-sm paymentDate" name="paymentDate"
 												id="serviceDate">
 										</div>
 										<div class="offset-md-6"></div>
@@ -311,10 +311,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			count = ++count;
 			console.log(count);
 			
-			newForm.find('#serviceName').val("").prop('id', 'serviceName' + count);
-			newForm.find('#serviceCharge').val("").prop('id', 'serviceCharge' + count);
-			newForm.find('#paymentDate').val("").prop('id', 'paymentDate' + count);
-			newForm.find('#paymentCycle').val("").attr('id', 'paymentCycle' + count);
+			newForm.find('.serviceName').val("").attr('id', 'serviceName' + count);
+			newForm.find('.serviceCharge').val("").attr('id', 'serviceCharge' + count);
+			newForm.find('.paymentDate').val("").attr('id', 'paymentDate' + count);
 			newForm.find('#searchFT').val(false).attr('id', 'searchFT' + count);
 			
 						
@@ -322,7 +321,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			newForm.find('label[for=serviceName]').prop('for', 'serviceName' + count);
 			newForm.find('label[for=serviceCharge]').prop('for', 'serviceCharge' + count);
 			newForm.find('label[for=paymentDate]').prop('for', 'paymentDate' + count);
-			newForm.find('label[for=paymentCycle]').prop('for', 'paymentCycle' + count);
 			
 			
 			//마이너스 버튼 추가

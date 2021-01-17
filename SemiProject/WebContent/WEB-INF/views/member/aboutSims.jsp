@@ -21,30 +21,29 @@ pre {
 
 .ab-img {
 	margin-bottom: 0px;
-	width: 140px;
-	height: 140px;
+	width: 150px;
+	height: 150px;
+	text-align: center;
+}
+
+.ab-img:hover {
+	width: 170px;
+	height: 170px;
+
 }
 
 .ab-txt {
-	margin-top: 5px;
+	margin-top: 10px;
 	text-decoration: underline;
 	color: black;
-	margin-top: 0px;
 	padding: 0px;
 	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
 		"Courier New", monospace;
 	font-size: small;
 }
 
-.ab-txt {
-	margin-top: 5px;
-	text-decoration: underline;
-	color: black;
-	margin-top: 0px;
-	padding: 0px;
-	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-		"Courier New", monospace;
-	font-size: small;
+.inner-group {
+	height: 200px;
 }
 
 
