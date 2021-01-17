@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+<!--전체 게시글 수 조회 SQL-->
+<entry key ="fListCount">
+SELECT COUNT(*) FROM F_VIEW
+WHERE FR_FL ='N'
+</entry>
+
+<!--  -->
+<entry key="selectFBoardNoticeList">
+	
+	SELECT * FROM FREE_BOARD
+	JOIN MEMBER USING(MEM_NO)
+	WHERE FR_FL = 'N'
+	AND MEM_GRADE = 'A'
+	<![CDATA[
+	AND ROWNUM <= 5
+	ORDER BY FR_NO DESC
+	]]>
+</entry>
+
+<entry key="selectFBoardList">
+SELECT * FROM 
+(SELECT ROWNUM RNUM, V.* FROM
+    (SELECT * FROM FREE_BOARD
+    JOIN MEMBER USING(MEM_NO)
+    WHERE FR_FL = 'N'
+    AND MEM_GRADE != 'A'
+    ORDER BY FR_NO DESC) V)
+WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+</properties>
