@@ -88,7 +88,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					name="signUpForm" onsubmit="return validate();">
 
 					<!-- 아이디 -->
-					<div class="row mb-5 form-row">
+					<div class="row mb-3 form-row">
 						<div class="col-md-3">
 							<label for="email">이메일 <span class="text-danger">*</span></label>
 						</div>
@@ -97,10 +97,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								autocomplete="off" placeholder="이메일을 입력해주세요." required>
 						</div>
 						<div class="col-md-6 offset-md-3">
-							<span id="checkId"></span>
+							<span id="checkEmail">&nbsp;</span>
 						</div>
 					</div>
-
 
 					<!-- 비밀번호 -->
 					<div class="row mb-3 form-row">
@@ -109,7 +108,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</div>
 						<div class="col-md-6">
 							<input type="password" class="form-control" id="pwd1" name="pwd1"
-								maxlength="12" placeholder="영문 대/소문자, 숫자 포함 8자" required>
+								maxlength="12" placeholder="영문 대/소문자, 숫자 포함 8 ~ 12글자" required>
 						</div>
 
 						<div class="col-md-6 offset-md-3">
@@ -133,14 +132,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<br>
 
-					<!-- 이름 -->
+					<!-- 별명 -->
 					<div class="row mb-3 form-row">
 						<div class="col-md-3">
 							<label for="name">별명</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="name" name="name"
-								placeholder="2~10자 내외 특수문자 사용 불가" required>
+								placeholder="2~10자 내 특수문자 사용 불가" required>
 						</div>
 
 						<div class="col-md-6 offset-md-3">
@@ -337,8 +336,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			var el = $(event.target).parent().remove();
     	});
 		
-		
 	</script>
 
+	<script src="${contextPath}/resources/js/sims_member.js"></script>
 </body>
 </html>
