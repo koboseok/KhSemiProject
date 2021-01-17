@@ -84,46 +84,48 @@
 					<%-- 게시글 목록 출력 --%>
 					<tbody>
 					
-						<%-- <c:choose>
-					 <c:when test="${empty }">
+						<c:choose>
+							<c:when test="${empty fList}">
 								<tr>
-									<td colspan="6">존재하는 게시글이 없습니다.</td>
+									<td colspan="5">존재하는 게시글이 없습니다.</td>
 								</tr>
 							</c:when> 
-							
-							
-							<c:otherwise>	조회된 게시글 목록이 있을 때
 								
-								<c:forEach var="board" items=""> --%>
+								
+							<c:otherwise>	
+									
+								<c:forEach var="board" items="${fList }">
+								
 									<tr>
-										<td>글번호</td>
-										<td>제목</td>
-										<td>작성자</td>
-										<td>조회수</td>
+										<td>
+											<c:if test="${board.memberGrade != 'A' }">
+												${board.fBoardNo }
+											</c:if>
+										</td>
+										<td>${board.fBoardTitle }</td>
+										<td>${board.memberName }</td>
+										<td>${board.fReadCount }</td>
 										<td>
 											<%-- 날짜 출력 모양 지정 --%>
-									<%-- 		<fmt:formatDate var="createDate" value=""  pattern="yyyy-MM-dd"/>                          
-											<fmt:formatDate var="today" value="<%=  %>"  pattern="yyyy-MM-dd"/>                          
-											
-											<c:choose>
-												글 작성일이 오늘이 아닐 경우
-												<c:when test="${ != today}"> --%>
-													작성일
-												<%-- </c:when>
+											<fmt:formatDate var="createDate" value="${board.fCreateDate }"  pattern="yyyy-MM-dd"/>                          
+											<fmt:formatDate var="today" value="<%= new java.util.Date()  %>"  pattern="yyyy-MM-dd"/>                          
+												${createDate}
+											<%-- <c:choose>
+												<c:when test="${createDate != today}">
+													${createDate}
+												</c:when>
 												
-												글 작성일이 오늘일 경우
 												<c:otherwise>
-													<fmt:formatDate value=""  pattern="HH:mm"/>                          
+													<fmt:formatDate value="createDate"  pattern="HH:mm"/>                          
 												</c:otherwise>
-											</c:choose> --%>
+											</c:choose>  --%>
 										
 										</td>
 										
 									</tr>
-				<%-- 				</c:forEach>
+								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-					 --%>
 					</tbody>
 				</table>
 			</div>

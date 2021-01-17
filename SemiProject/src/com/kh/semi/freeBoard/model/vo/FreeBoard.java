@@ -12,14 +12,22 @@ public class FreeBoard {
 	private int fReadCount;
 	private char fBoardFL;
 	private int memberNo;
+	private String memberName;
+	private String memberGrade;
+	
+
+
 	private char boardCode;
+	
+	
 
 	public FreeBoard() {
 		
 	}
 
+
 	public FreeBoard(int fBoardNo, String fBoardTitle, String fBoardContent, Timestamp fCreateDate,
-			Timestamp fModifyDate, int fReadCount, char fBoardFL, int memberNo, char boardCode) {
+			Timestamp fModifyDate, int fReadCount, char fBoardFL, int memberNo, String memberName, char boardCode) {
 		super();
 		this.fBoardNo = fBoardNo;
 		this.fBoardTitle = fBoardTitle;
@@ -29,8 +37,10 @@ public class FreeBoard {
 		this.fReadCount = fReadCount;
 		this.fBoardFL = fBoardFL;
 		this.memberNo = memberNo;
+		this.memberName = memberName;
 		this.boardCode = boardCode;
 	}
+
 
 	public int getfBoardNo() {
 		return fBoardNo;
@@ -104,12 +114,32 @@ public class FreeBoard {
 		this.boardCode = boardCode;
 	}
 
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMemberGrade() {
+		return memberGrade;
+	}
+
+
+	public void setMemberGrade(String memberGrade) {
+		this.memberGrade = memberGrade;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeBoard [fBoardNo=" + fBoardNo + ", fBoardTitle=" + fBoardTitle + ", fBoardContent=" + fBoardContent
 				+ ", fCreateDate=" + fCreateDate + ", fModifyDate=" + fModifyDate + ", fReadCount=" + fReadCount
-				+ ", fBoardFL=" + fBoardFL + ", memberNo=" + memberNo + ", boardCode=" + boardCode + "]";
+				+ ", fBoardFL=" + fBoardFL + ", memberNo=" + memberNo + ", memberName=" + memberName + ", memberGrade="
+				+ memberGrade + ", boardCode=" + boardCode + "]";
 	}
+
 	
 	
 	

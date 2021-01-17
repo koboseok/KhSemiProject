@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.freeBoard.model.service.FreeBoardService;
 //import com.kh.semi.freeBoard.model.service.FreeBoardService;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
@@ -39,8 +40,7 @@ public class FreeController extends HttpServlet {
 		String errorMsg = null;
 		
 		try {
-			
-			//FreeBoardService service = new FreeBoardService();
+			FreeBoardService service = new FreeBoardService();
 
 			// 현재 페이지 얻어오기(currentPage)
 			String cp = request.getParameter("cp");
@@ -51,20 +51,23 @@ public class FreeController extends HttpServlet {
 			if(command.equals("/main.do")) {
 				errorMsg = "게시판 목록 조회 과정에서 오류 발생";
 			
-				/*
-				 * // 페이징 처리를 위한 값 계산 Service 호출 FreePageInfo fPInfo =
-				 * service.getFreePageInfo(cp); // 매개변수로 현재 페이지 전달
-				 * 
-				 * // 게시글 목록 조회 // 현재 페이지에 있는 목록을 조회하기 위해 fPInfo 가져옴(currentPage, limit)
-				 * List<FreeBoard> fList = service.selectFBoardList(fPInfo);
-				 */
-				
+				// 페이징 처리를 위한 값 계산 Service 호출 
+				FreePageInfo fPInfo = service.getFreePageInfo(cp); // 매개변수로 현재 페이지 전달
+				 
+				// 게시글 목록 조회 // 현재 페이지에 있는 목록을 조회하기 위해 fPInfo 가져옴(currentPage, limit)
+				List<FreeBoard> fList = service.selectFBoardList(fPInfo);
+				 
+				for(FreeBoard f : fList) {
+					System.out.println(f);
+				}
 				
 				
 				path = "/WEB-INF/views/freeBoard/freeMain.jsp";
-
+				request.setAttribute("fList", fList);
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
+				
+				
 				
 				
 			// 게시글 상세 조회=======================================================	
