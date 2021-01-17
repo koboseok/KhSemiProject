@@ -15,6 +15,7 @@
 	color: orange;
 }
 
+
 .insert-label {
 	display: inline-block;
 	width: 80px;
@@ -108,5 +109,6 @@ function boardValidate() {
 	}
 }
 </script>
+>>>>>>> branch 'master' of https://github.com/koboseok/KhSemiProject.git
 </body>
 </html>

@@ -15,7 +15,7 @@
 
 
 body {
-  font-family: "poppins", sans-serif;
+  font-family: "poppins" sans-serif, sans-serif;
   color: #101010;
   background-color: #ffffff;
 }
@@ -78,6 +78,10 @@ body {
   padding-right: 30px;
   padding-left: 30px;
 }
+/* .header_section .container-fluid {
+	padding-right: 25px;
+	padding-left: 25px;
+} */
 
 .header_section .nav_container {
   margin: 0 auto;
@@ -85,6 +89,7 @@ body {
 
 .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item .nav-link {
   padding: 10px 50px;
+  /* padding: 10px 30px; */
   margin: 0 15px;
   color: #514f4f;
   text-align: center;

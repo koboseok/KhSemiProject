@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>비공개 건의 게시판 (글쓰기)</title>
 </head>
 <style>

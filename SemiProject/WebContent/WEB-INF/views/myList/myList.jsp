@@ -5,16 +5,12 @@
 <meta charset="UTF-8">
 
 
-<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 
 
 
 
 <style>
 div.contain  {
-/* 	width: 1200px; 
-	 margin: 50px; */
 	padding: 100px;
 	margin-top : 100px;
 	margin-bottom : 100px;
@@ -45,6 +41,7 @@ div.contain  {
 	width: 200px;
 	heigth: 200px;
 	margin: auto;
+	
 }
 
 .won {
@@ -60,8 +57,27 @@ div.contain  {
 	heigth: 400px;
 }
 .imgMouseover{
-	width : 200%;
+	width : 500%;
 	 
+}
+.gear{
+	width : 25px;
+	height : 25px;
+}
+.add-sub{
+	width : 45px;
+	height : 45px;
+	margin-left : 40px;
+}
+
+/* div button{
+	background : forestgreen;
+}
+ */
+ 
+.gearBtn{
+	background : white;
+	border : none;
 }
 
 </style>
@@ -78,7 +94,7 @@ div.contain  {
 		<div class="row" id="slider-div" style ="height : 300px;" >
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12 " id="test1" width="30%">
+					<div class="col-md-12" id="test1" width="30%">
 						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
 						<img class="imgMouseover" alt=""
 							class="img-responsive center-block"
@@ -86,7 +102,7 @@ div.contain  {
 						<div class="showdocument si slider-div">
 
 							NETFLIX
-							<button class="float-right">x</button>
+							<button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png"/></button>
 							<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
 							2021-01-15<br> <br> 금액 : 12,000원
 						</div>
@@ -95,14 +111,14 @@ div.contain  {
 			</div>
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12  " id="test1" width="30%">
+					<div class="col-md-12" id="test1" width="30%">
 						<img class="imgMouseover" alt="" 
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/wavve.png" />
 						<div class="showdocument">
 
 							WAVVE
-							<button class="float-right">x</button>
+							<button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png"/></button>
 							<br> <br> 구독기간<br> 시작 : 2020-12-26<br> 종료 :
 							2021-01-25<br> <br> 금액 : 11,000원
 						</div>
@@ -116,14 +132,9 @@ div.contain  {
 					 	 <img class="imgMouseover" alt="" 
 							class="img-responsive center-block"
 							src="${ contextPath }/resources/images/watcha.png" /> 
-						<!-- <button class="btn addBtn" data-toggle="modal"
-							href="#modal-container-2">
-							<br>
-							<br><pre>    구독 서비스 추가+</pre>
-						</button> -->
 						<div class="showdocument">
 
-								WATCHA <button class="float-right">x</button><br>
+								WATCHA <button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png" /></button><br>
 							<br> 구독기간<br> 시작 : 2021-01-11<br> 종료 : 2021-03-13<br>
 							<br> 금액 : 13,000원
 						</div>
@@ -134,19 +145,13 @@ div.contain  {
 			<div class="col-md-3 ">
 				<div class="row">
 					<div class="col-md-12" id="test1" width="30%">
-						<%-- <img class="imgMouseover" alt="" width="100%"
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/watcha.png" /> --%>
-						<button class="btn addBtn" data-toggle="modal"
+						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
 							href="#modal-container-2">
-							<br>
-							<br><pre>    구독 서비스 추가+</pre>
+								<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
+								<pre style="color: white;">구독 서비스 추가</pre>
 						</button>
 						<div class="showdocument">
 
-							<%-- 	WATCHA <button class="float-right">x</button><br>
-							<br> 구독기간<br> 시작 : 2021-01-11<br> 종료 : 2021-03-13<br>
-							<br> 금액 : 13,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
 						</div>
 					</div>
 				</div>
@@ -155,19 +160,12 @@ div.contain  {
 			<div class="col-md-3 ">
 				<div class="row">
 					<div class="col-md-12 " id="test1" width="30%">
-						<%-- <img class="imgMouseover" alt="" width="100%"
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
-						<button class="btn addBtn " data-toggle="modal"
+						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
 							href="#modal-container-2" >
-							<br>
-							<br><pre>   구독 서비스 추가+</pre>
+							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
+							<pre  style="color: white;" >구독 서비스 추가</pre>
 						</button>
 						<div class="showdocument">
-
-							<%-- COUPANG <button class="float-right">x</button><br> 
-							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
-							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
 						</div>
 					</div>
 				</div>
@@ -176,19 +174,13 @@ div.contain  {
 			<div class="col-md-3 ">
 				<div class="row">
 					<div class="col-md-12 " id="test1" width="25%">
-						<%-- <img class="imgMouseover" alt="" width="100%"
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
-						<button class="btn addBtn " data-toggle="modal"
+						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
 							href="#modal-container-2" >
-							<br>
-							<br><pre>   구독 서비스 추가+</pre>
+							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
+								<pre  style="color: white;" >구독 서비스 추가</pre>
 						</button>
 						<div class="showdocument">
 
-							<%-- COUPANG <button class="float-right">x</button><br> 
-							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
-							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
 						</div>
 					</div>
 				</div>
@@ -196,19 +188,13 @@ div.contain  {
 			<div class="col-md-3 ">
 				<div class="row">
 					<div class="col-md-12 " id="test1" width="25%">
-						<%-- <img class="imgMouseover" alt="" width="100%"
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
-						<button class="btn addBtn " data-toggle="modal"
+						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
 							href="#modal-container-2" >
-							<br>
-							<br><pre>   구독 서비스 추가+</pre>
+							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
+								<pre  style="color: white;" >구독 서비스 추가</pre>
 						</button>
 						<div class="showdocument">
 
-							<%-- COUPANG <button class="float-right">x</button><br> 
-							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
-							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
 						</div>
 					</div>
 				</div>
@@ -216,19 +202,13 @@ div.contain  {
 			<div class="col-md-3 ">
 				<div class="row">
 					<div class="col-md-12 " id="test1" width="25%">
-						<%-- <img class="imgMouseover" alt="" width="100%"
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/coupang.jpg" /> --%>
-						<button class="btn addBtn " data-toggle="modal"
+						<button class="btn addBtn "  style="background: forestgreen;" data-toggle="modal"
 							href="#modal-container-2" >
-							<br>
-							<br><pre>   구독 서비스 추가+</pre>
+							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
+								<pre  style="color: white;" >구독 서비스 추가</pre>
 						</button>
 						<div class="showdocument">
 
-							<%-- COUPANG <button class="float-right">x</button><br> 
-							<br> 구독기간<br> 시작 : 2020-11-10<br> 종료 : 2021-02-12<br>
-							<br> 금액 : 7,000<img class="won" src="${ contextPath }/resources/images/won.PNG"/> --%>
 						</div>
 					</div>
 				</div>
@@ -281,7 +261,7 @@ div.contain  {
 				<div class="modal-body">
 					<form class="form-addSub" method="POST" action=" # ">
 						<label>구독 서비스</label> <select class="custom-select" id="subCode"
-							name="subCode" style="width: 150px;">
+							name="subCode" style="width: 200px;">
 							<option value="10">넷플릭스</option>
 							<option value="20">유튜브 프리미엄</option>
 							<option value="30">왓챠</option>
@@ -292,12 +272,13 @@ div.contain  {
 
 						<%-- el 식은 null포인터 예외를 나타내지않고 빈문자열을 출력한다. --%>
 						<br>
-						<br> 구독 시작일 <br> <input type="date" class="form-control"
-							id="subStartDt" name="subStartDt" placeholder="구독 시작일"> <br>
-						구독 종료일 <br> <input type="date" class="form-control"
-							id="subEndDt" name="subEndDt" placeholder="구독 종료일 "> <br>
+						<br>
 						금액 <br> <input type="number" class="form-control"
 							id="subPrice" name="subPrice" placeholder="금액 "> <br>
+						 구독 시작일 <br> <input type="date" class="form-control"
+							id="subStartDt" name="subStartDt" placeholder="구독 시작일"> <br>
+						<!-- 구독 종료일 <br> <input type="date" class="form-control"
+							id="subEndDt" name="subEndDt" placeholder="구독 종료일 "> <br> -->
 
 
 
@@ -325,7 +306,7 @@ div.contain  {
 				slidesToShow : 4,		// 한 화면에 보여질 컨텐츠 개수
 				slidesToScroll : 4,		//스크롤 한번에 움직일 컨텐츠 개수
 				speed : 100,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-				arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+				arrows : false, 		// 옆으로 이동하는 화살표 표시 여부
 				dots : true, 		// 스크롤바 아래 점으로 페이지네이션 여부
 				autoplay : false,			// 자동 스크롤 사용 여부
 				autoplaySpeed : 10000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)

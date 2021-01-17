@@ -42,4 +42,90 @@ public class MemberService {
 		return result;
 	}
 
+	/** 비밀번호 변경 Service
+	 * @param loginMember
+	 * @param newPwd
+	 * @return result
+	 */
+	public int updatePwd(Member loginMember, String newPwd) throws Exception  {
+		Connection conn = getConnection();
+//		1) 현재 비밀번호가 일치하는지 검사
+		int result = dao.checkCurrentPwd(conn, loginMember);
+
+//		2) 현재 비밀번호 일치 시 새 비밀번호로 수정
+		if (result > 0) { // 현재 비밀번호 일치
+
+//			loginMember 비밀번호 필드에 newPwd를 세팅하여 재활용
+			loginMember.setMemPwd(newPwd);
+
+			result = dao.updatePwd(conn, loginMember);
+
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+
+		} else { // 현재 비밀번호 불일치
+			result = -1;
+
+		}
+		
+		close(conn);
+		
+		return result;
+//		-1 , 0 , 1
+	}
+
+	/** 회원 탈퇴 Service
+	 * @param loginMember
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateStatus(Member loginMember) throws Exception {
+		Connection conn = getConnection();
+
+//		1) 현재 비밀번호가 일치하는지 검사
+		int result = dao.checkCurrentPwd(conn, loginMember);
+
+//		2) 현재 비밀번호 일치 시 상태 변경 진행
+		if (result > 0) {
+
+			result = dao.updateStatus(conn, loginMember);
+
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+
+		} else { // 현재 비밀번호 불일치
+			result = -1;
+		}
+		close(conn);
+
+		return result;
+	
+	}
+
+	/** 로그인 Service
+	 * @param member
+	 * @return loginMember
+	 * @throws Exception
+	 */
+	public Member loginMember(Member member) throws Exception {
+//		1) Connection 얻어오기
+
+		Connection conn = getConnection();
+
+//		2) DAO 메소드를 수행하여 결과 반환 받기
+
+		Member loginMember = dao.loginMember(conn, member);
+
+//		3) Connection 반환하기
+		close(conn);
+
+//		4) DAO 수행 결과를 Controller로 반환하기
+
+		return loginMember;
+	}
+
 }

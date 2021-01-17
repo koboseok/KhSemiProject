@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/guide/guide.do")
 public class GuideController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private int age;
-//	private char gender;
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	

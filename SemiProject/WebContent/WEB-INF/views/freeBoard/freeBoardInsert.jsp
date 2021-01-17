@@ -24,6 +24,9 @@
 			<thead>
 				<tr>
 					<td colspan="2">
+
+
+
 						<h1>자유 게시판 등록</h1>
 					</td>
 				</tr>
