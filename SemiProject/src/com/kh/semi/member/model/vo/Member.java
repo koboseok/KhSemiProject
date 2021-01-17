@@ -30,6 +30,16 @@ public class Member {
 		this.memEnrollDate = memEnrollDate;
 	}
 
+	
+
+	public Member(String memEmail, String memPwd, String memName, String memPhone) {
+		super();
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+	}
+
 	public int getMemNo() {
 		return memNo;
 	}
