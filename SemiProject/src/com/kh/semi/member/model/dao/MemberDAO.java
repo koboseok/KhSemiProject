@@ -79,7 +79,7 @@ public class MemberDAO {
 		
 		
 		
-		return 0;
+		return result;
 	}
 
 
