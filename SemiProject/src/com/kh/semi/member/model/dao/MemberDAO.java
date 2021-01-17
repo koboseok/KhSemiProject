@@ -60,12 +60,21 @@ public class MemberDAO {
 	/**구독서비스 목록 입력 DAO
 	 * @param conn
 	 * @param service
+	 * @param memNo 
 	 * @return result
+	 * @throws Exception
 	 */
-	public int insertMemSub(Connection conn, Map<String, Object> service) {
+	public int insertMemSub(Connection conn, Map<String, Object> service, int memNo) throws Exception {
 		int result = 0;
 		String query = prop.getProperty("insertMemSub");
 		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			//임시 중단
+		} finally {
+			
+		}
 		
 		
 		
