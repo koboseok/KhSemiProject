@@ -3,5 +3,16 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+<entry key="signUp">
+INSERT INTO MEMBER
+VALUES(SEQ_MNO.NEXTVAL,
+		?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+</entry>
+
+<entry key="insertMemSub">
+INSERT INTO MEM_SUB
+VALUES(?)
+
+</entry>
 
 </properties>
