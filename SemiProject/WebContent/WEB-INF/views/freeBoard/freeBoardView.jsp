@@ -209,6 +209,8 @@
 	</div>
 
 
+<jsp:include page="../reply/freeReply.jsp"></jsp:include>
+
 
 
 

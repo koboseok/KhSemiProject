@@ -210,7 +210,7 @@
 	</div>
 
 
-
+<jsp:include page="../reply/jointReply.jsp"></jsp:include>
 
 
 	<script>
