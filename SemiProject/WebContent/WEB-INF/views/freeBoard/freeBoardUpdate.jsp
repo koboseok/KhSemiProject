@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유 게시판 (글쓰기)</title>
+<title>자유 게시판 (수정)</title>
 </head>
 <style>
 #buttonArea {
@@ -24,16 +24,13 @@
 			<thead>
 				<tr>
 					<td colspan="2">
-
-
-
-						<h1>자유 게시판 등록</h1>
+						<h1>자유 게시판 수정</h1>
 					</td>
 				</tr>
 			
 			</thead>
 			<tbody>
-				<form action="${contextPath}/freeBoard/insert.do" method="post">
+				<form action="${contextPath}/freeBoard/update.do" method="post">
 					<div class="contentArea">
 						<tr>
 							<td style="color: gray">제목</td>
@@ -71,28 +68,15 @@
 		<div id="buttonArea">
 			<tr>
 				<td>
-					<button type="submit" class="btn btn-warning">등록</button>
-					<button type="button" class="btn btn-secondary">취소</button>
+					<button type="submit" class="btn btn-warning">수정</button>
+					<button type="button" class="btn btn-secondary">이전으로</button>
 				</td>
 			</tr>
 		</div>
 		</form>
 	</div>
 <script>
-//유효성 검사 
-function boardValidate() {
-	if ($("#freeTitle").val().trim().length == 0) {
-		alert("제목을 입력해 주세요.");
-		$("#freeTitle").focus();
-		return false;
-	}
 
-	if ($("#freeContent").val().trim().length == 0) {
-		alert("내용을 입력해 주세요.");
-		$("#freeContent").focus();
-		return false;
-	}
-}
 </script>
 </body>
 </html>

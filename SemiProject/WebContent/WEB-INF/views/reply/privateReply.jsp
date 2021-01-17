@@ -71,7 +71,7 @@
 						placeholder="댓글을 작성해 주세요." id="floatingTextarea2"
 						style="height: 100px"></textarea></td>
 				<td id="replyBtnArea">
-					<button class="btn btn-primary" id="addReply">입력</button>
+					<button class=" btn btn-warning" id="addReply" style = "width : 70px; height : 70px">입력</button>
 				</td>
 			</tr>
 		</table>

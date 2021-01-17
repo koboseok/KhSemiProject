@@ -1,11 +1,21 @@
 /* 웹폰트 */
-<script src="https://kit.fontawesome.com/955b087c12.js"
-	crossorigin="anonymous"></script>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
+#title-font {
+   font-family:'SDSamliphopangche_Outline';
+   font-size: 150%;
+}
 
 
 body {
-  font-family: "poppins", sans-serif;
+  font-family: "poppins" sans-serif, sans-serif;
   color: #101010;
   background-color: #ffffff;
 }
@@ -68,6 +78,10 @@ body {
   padding-right: 30px;
   padding-left: 30px;
 }
+/* .header_section .container-fluid {
+	padding-right: 25px;
+	padding-left: 25px;
+} */
 
 .header_section .nav_container {
   margin: 0 auto;
@@ -75,6 +89,7 @@ body {
 
 .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item .nav-link {
   padding: 10px 50px;
+  /* padding: 10px 30px; */
   margin: 0 15px;
   color: #514f4f;
   text-align: center;

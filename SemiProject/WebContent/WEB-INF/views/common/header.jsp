@@ -60,7 +60,21 @@ li {
 ul li:hover #inner-ul{
 	display: inline-block;
 }
+li{
+	display: inline-block;
+}
+#inner-li{
+	margin : 10px;
+	padding : 5px;
+}
 
+#inner-a {
+	color: darkorange;
+}
+#inner-a:hover {
+	color: black;
+	
+}
 
 </style>
 </head>
@@ -95,9 +109,9 @@ ul li:hover #inner-ul{
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
 								<li class="nav-item active">
-									<%-- 로그인 회원의 이름을 가져와 출력 --%> <a class="nav-link" href="">${loginMember.memberName }</a>
+									<%-- 로그인 회원의 이름을 가져와 출력 --%> <a class="nav-link" href="${contextPath}/member/myPage.do">${loginMember.memberName }</a>
 								</li>
-								<li class="nav-item active"><a class="nav-link" href="">Logout</a>
+								<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout.do">Logout</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -118,10 +132,10 @@ ul li:hover #inner-ul{
 
 								<li class="nav-item"><a class="nav-link" href=" ">
 										board </a>
-										<ul>
-										<li><a href="${contextPath}/freeBoard/main.do">자유 게시판</a></li>
-										<li><a href="${contextPath}/jointBoard/main.do">공동 구매 게시판</a></li>
-										<li><a href="${contextPath}/privateBoard/main.do">비공개 건의 게시판</a></li>
+										<ul class="navbar-nav" id="inner-ul">
+										<li id="inner-li"><a id="inner-a"  href="${contextPath}/freeBoard/main.do">자유 게시판</a></li>
+										<li id="inner-li"><a id="inner-a" href="${contextPath}/jointBoard/main.do">공동 구매 게시판</a></li>
+										<li id="inner-li"><a id="inner-a" href="${contextPath}/privateBoard/main.do">비공개 건의 게시판</a></li>
 									</ul></li>
 
 								<li class="nav-item"><a class="nav-link" href="${contextPath}/myList/myList.do ">
