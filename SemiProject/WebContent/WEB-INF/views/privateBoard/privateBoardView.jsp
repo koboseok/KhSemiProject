@@ -211,7 +211,7 @@
 	</div>
 
 
-
+<jsp:include page="../reply/privateReply.jsp"></jsp:include>
 
 
 	<script>
