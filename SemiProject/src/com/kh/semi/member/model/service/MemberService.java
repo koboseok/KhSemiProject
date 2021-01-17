@@ -28,7 +28,7 @@ public class MemberService {
 		
 		//가입 성공시 회원 구독 정보 입력 
 		if(result>0) {
-			result = dao.insertMemSub(conn, service);
+			result = dao.insertMemSub(conn, service, member.getMemNo());
 			
 			if(result>0) commit(conn);
 			else rollback(conn);
