@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	<section class="main_section">
+	<section class="event_section">
 		<div class="heading_container">
 			<h2>
 				subscribe service <span> event</span>
@@ -28,29 +28,29 @@
 		<div class="main_container layout_padding">
 			<div class="box-1">
 				<div class="img-box b-1">
-					<img src="resources/images/p1.jpg" alt="">
+					<img src="resources/images/socarevent.PNG" alt="">
 					<div class="btn-box">
-						<a href="" class="btn-1"> </a> <a href="" class="btn-2"> </a>
+						<a href="https://www.socar.kr/benefit" class="btn-2"> </a>
 					</div>
 				</div>
 				<div class="img-box b-2">
-					<img src="resources/images/p2.jpg" alt="">
+					<img src="resources/images/osullocevent.PNG" alt="">
 					<div class="btn-box">
-						<a href="" class="btn-1"> </a> <a href="" class="btn-2"> </a>
+						<a href="https://www.osulloc.com/kr/ko/life/event/list/ing" class="btn-2"> </a>
 					</div>
 				</div>
 			</div>
 			<div class="box-2">
 				<div class="img-box b-3">
-					<img src="resources/images/p3.jpg" alt="">
+					<img src="resources/images/cleanevent.png" alt="">
 					<div class="btn-box">
-						<a href="" class="btn-1"> </a> <a href="" class="btn-2"> </a>
+						<a href="https://m.bccard.com/event/2020/2020070050.html" class="btn-2"> </a>
 					</div>
 				</div>
 				<div class="img-box b-4">
-					<img src="resources/images/p4.jpg" alt="">
+					<img src="resources/images/waveevent.png" alt="">
 					<div class="btn-box">
-						<a href="" class="btn-1"> </a> <a href="" class="btn-2"> </a>
+						<a href="https://www.wavve.com/customer/event_view?eventId=507&prevPage=1" class="btn-2"> </a>
 					</div>
 				</div>
 			</div>
