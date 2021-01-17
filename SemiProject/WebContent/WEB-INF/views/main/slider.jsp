@@ -39,7 +39,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" />
+										<img src="${contextPath}/resources/images/youtube.jpg" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -48,9 +48,10 @@
 										<br>
 										<h2>CONTENTS</h2>
 										<br>
-										<p>Enjoy the videos and music you love, upload original content, 
-										and share it all with friends, family, and the world on YouTube.</p>
-										<a href=""> 바로 가기 </a>
+										<p>광고 없이 음악과 동영상 무제한 감상. 신규 가입 시 1개월 무료.<br>
+										별도 조건 적용. 동영상과 음악을 광고 없이, <br>
+										오프라인과 백그라운드에서 즐기세요. 지금 가입하세요. <br>
+										단 하나의 멤버십. 지금 무료체험하세요. 광고 없는 YouTube</p>
 									</div>
 								</div>
 							</div>
@@ -61,7 +62,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-bookcrew.png" alt="" />
+										<img src="${contextPath}/resources/images/bookcrew.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -70,8 +71,11 @@
 										<br>
 										<h2>NEWS LETTER</h2>
 										<br>
-										<p>Enjoy the videos and music you love, upload original content, 
-										and share it all with friends, family, and the world on YouTube.</p>
+										<p>
+										책모임에서 나눈 토론과 교실에서 받은 수업에서 <br>
+										남긴 뒤죽박죽 손메모에 담긴 생각, 목표, 열정, 계획...<br>
+										이제, 작가와 직접 만나 인생의 단편으로 영원히 남기세요. <br>
+										북크루에서 작가와 마주할 수 있게 됩니다.</p>
 										<a href=""> 바로 가기 </a>
 									</div>
 								</div>
@@ -83,7 +87,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-greencar.png" alt="" />
+										<img src="${contextPath}/resources/images/greencar.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -92,8 +96,10 @@
 										<br>
 										<h2>LIFE STYLE</h2>
 										<br>
-										<p>Enjoy the videos and music you love, upload original content, 
-										and share it all with friends, family, and the world on YouTube.</p>
+										<p>이동을 새로 그리다! 그린카와 당신의 일상을 새로 그려보세요.<br>
+										24시간  쉽고 편하게, 스마트 카셰어링 그린카! <br>
+										신규 가입하면 3시간 무료!<br>
+										2020 K-BPI 카셰어링 부문,5년 연속 1위 수상</p>
 										<a href=""> 바로 가기 </a>
 									</div>
 								</div>
@@ -118,6 +124,9 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   	</script>
 	<script type="text/javascript" src="${contextPath}/resources/js/custom.js"></script>
+
+
+
 
 
 </body>

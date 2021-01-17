@@ -49,7 +49,7 @@
 </style>
 </head>
 <body>
-	<section class="main_section">
+	<section class="new_section">
 		<div class="heading_container">
 			<h2>
 				new <span> subscribe </span> service
@@ -60,7 +60,7 @@
 
 			<div class="box-1">
 				<div class="img-box b-1">
-					<img src="${contextPath}/resources/images/main-fitpet.jpg" alt="">
+					<img src="${contextPath}/resources/images/fitpet.jpg" alt="">
 					<div class="btn-box">
 						<a href="" class="btn-2"> </a>
 					</div>
@@ -88,7 +88,7 @@
 					</p>
 				</div>
 				<div class="img-box b-1">
-					<img src="${contextPath}/resources/images/main-laftel.png" alt="">
+					<img src="${contextPath}/resources/images/laftel.png" alt="">
 					<div class="btn-box">
 						<a href="" class="btn-2"> </a>
 					</div>
@@ -96,7 +96,7 @@
 			</div>
 			<div class="box-1">
 				<div class="img-box b-1">
-					<img src="${contextPath}/resources/images/main-freshcode.PNG" alt="">
+					<img src="${contextPath}/resources/images/freshcode.PNG" alt="">
 					<div class="btn-box">
 						<a href="" class="btn-2"> </a>
 					</div>
