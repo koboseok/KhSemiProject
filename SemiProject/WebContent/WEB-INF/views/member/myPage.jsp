@@ -21,14 +21,17 @@
 		
 		<%-- 전화번호, 주소를 구분자를 이용하여 분리된 배열 형태로 저장 --%>
 		
-		<c:set var="phone" value="${fn:split(loginMember.memberPhone,'-') }"/>
-		<c:set var="address" value="${fn:split(loginMember.memberAddress,',') }"/>
+		<c:set var="phone" value="${fn:split(loginMember.memPhone,'-') }"/>
+		
+		<h1 style="text-align: center; margin:100px;">MY PAGE</h1>
 
 		<div class="row my-5">
 			<jsp:include page="sideMenu.jsp"></jsp:include>		
 				
+				
+				
 			<div class="col-sm-8">
-				<h3>MY PAGE</h3>
+				<h3>내 정보</h3>
 				<hr>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateMember.do" onsubmit="return memberUpdateValidate();" class="form-horizontal" role="form">
@@ -38,7 +41,7 @@
 								<h6>이메일</h6>
 							</div>
 							<div class="col-md-6">
-								<h5 id="id">${loginMember.memberEmail } </h5>
+								<h5 id="id">${loginMember.memEmail } </h5>
 							</div>
 						</div>
 	
@@ -48,7 +51,7 @@
 								<h6>별명</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control name" id="name" value="${ loginMember.memberName }">
+								<input type="text" class="form-control name" id="name" value="${ loginMember.memName }">
 							</div>
 						</div>
 	
@@ -90,7 +93,7 @@
 	
 						<!-- 관심분야 -->
 						<hr class="mb-4">
-						<div class="row">
+					<%-- 	<div class="row">
 							<div class="col-md-3">
 								<label>관심 분야</label>
 							</div>
@@ -136,7 +139,7 @@
 								</div>
 								
 							</div>
-						</div>
+						</div>  --%>
 	
 						<hr class="mb-4">
 						<button class="btn btn-warning btn-lg btn-block" type="submit">수정</button>
@@ -155,7 +158,7 @@
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	
 	<!-- 회원 관련 Javascript 코드를 모아둘 wsp_member.js 파일을 작성 -->
-	<%-- <script src="${contextPath}/resources/js/wsp_member.js"></script> --%>
+	 <script src="${contextPath}/resources/js/sims_member.js"></script> 
 	
  		
 	<script>
@@ -188,24 +191,7 @@
 		})();
 		
 		
-		// 관심 분야 중 회원정보와 일치하는 부분 체크하기
-		(function(){
-			
-			// 회원정보에서 관심분야 문자열을 얻어와 ','를 구분자로하여 분리하기
-			var interest = "${loginMember.memberInterest}".split(",");
-			// 체크박스 요소들 모두 선택하여 반복 접근
-			$("input[name='memberInterest']").each(function(index, item){
-				
-				// interest 배열 내에 
-				// 현재 접근중인 체크박스 value와 일치하는 요소가 있는지 확인
-				// indexOf 일치하면 0 반환 일치하지 않으면 -1 반환하는 속성을 이용해서 != -1 조건을 주어 중복을 제거 한다.
-				if(interest.indexOf($(item).val()) != -1){
-					$(item).prop("checked",true);
-				}
-			});
-			
-			
-		})();
+		
 	
 		
 		

@@ -14,11 +14,15 @@
 <body>
 	<div class="container" id="content-main">
 		<jsp:include page="../common/header.jsp"></jsp:include>
-
+		
+		
+		<h1 style="text-align: center; margin:100px;">MY PAGE</h1>
+		
+		
 		<div class="row my-5">
 			<jsp:include page="sideMenu.jsp"></jsp:include>
 
-			<div class="col-sm-offset-2 col-sm-8">
+			<div class="col-sm-8">
 				<h3>회원 탈퇴</h3>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateStatus.do" onsubmit="return secessionValidate();" 
@@ -29,7 +33,7 @@
 								<h6>아이디</h6>
 							</div>
 							<div class="col-md-6">
-								<h5 id="id">${loginMember.memberId }</h5>
+								<h5 id="id">${loginMember.memEmail }</h5>
 							</div>
 						</div>
 
@@ -91,14 +95,24 @@
 						</div>
 
 						<hr class="mb-4">
-						<button class="btn btn-primary btn-lg btn-block" id="btn"
-							type="submit">탈퇴</button>
+						<button class="btn btn-warning btn-lg btn-block" id="btn"
+							type="submit" style= "margin : 30px;">탈퇴</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@ include file="../common/footer.jsp"%>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	
+	
+	
+	
 
 
 	

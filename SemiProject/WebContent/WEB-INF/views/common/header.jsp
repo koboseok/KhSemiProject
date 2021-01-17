@@ -96,7 +96,7 @@ li{
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					
-					<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav ml-auto" style="margin: 10px;">
 						<c:choose>
 							<%-- 로그인이 되어있지 않을때 == session에 loginMember라는 값이 없을 때 --%>
 							<c:when test="${empty sessionScope.loginMember }">
@@ -109,9 +109,12 @@ li{
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
 								<li class="nav-item active">
-									<%-- 로그인 회원의 이름을 가져와 출력 --%> <a class="nav-link" href="${contextPath}/member/myPage.do">${loginMember.memberName }</a>
+									<%-- 로그인 회원의 이름을 가져와 출력 --%> 
+									<a class="nav-link" style="background-color: dimgray;"
+									href="${contextPath}/member/myPage.do">${loginMember.memName }</a>
 								</li>
-								<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout.do">Logout</a>
+								<li class="nav-item active" ><a class="nav-link" style="background-color: dimgray;"
+								href="${contextPath}/member/logout.do">Logout</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -174,12 +177,12 @@ li{
 								action="${ contextPath }/member/login.do">
 
 
-								<input type="text" class="form-control" id="memberId"
-									name="memberId" placeholder="ID"
+								<input type="text" class="form-control" id="memEmail"
+									name="memEmail" placeholder="ID"
 									value="${ cookie.saveId.value }">
 								<%-- el 식은 null포인터 예외를 나타내지않고 빈문자열을 출력한다. --%>
 								<br> <input type="password" class="form-control"
-									id="memberPwd" name="memberPwd" placeholder="PASSWORD"> <br>
+									id="memPwd" name="memPwd" placeholder="PASSWORD"> <br>
 
 								<div class="checkbox mb-3">
 									<label> <%-- cookie에 저장된 아이디가 있을 경우 checked 속성을 추가한다. --%>

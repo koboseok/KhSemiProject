@@ -15,4 +15,15 @@ VALUES(?)
 
 </entry>
 
+
+<entry key="loginMember">
+SELECT MEM_NO , MEM_EMAIL , MEM_NM , MEM_PHONE , MEM_GRADE , MEM_STATUS, MEM_CHECK , MEM_ENROLL_DATE
+FROM MEMBER
+WHERE MEM_EMAIL = ?
+AND MEM_PWD = ?
+AND MEM_STATUS = 'Y'
+
+
+</entry>
+
 </properties>

@@ -15,6 +15,23 @@ public class Member {
 	
 	public Member() {
 	}
+	
+	
+//  로그인용
+	public Member(int memNo, String memEmail, String memName, String memPhone, String memGrade, String memStatus,
+			String memCheck, Date memEnrollDate) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+	}
+
+
 
 	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
 			String memStatus, String memCheck, Date memEnrollDate) {
