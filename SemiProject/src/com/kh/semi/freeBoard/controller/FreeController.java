@@ -74,9 +74,28 @@ public class FreeController extends HttpServlet {
 			// 게시글 상세 조회=======================================================	
 			}else if(command.equals("/view.do")){
 				
-				path = "/WEB-INF/views/freeBoard/freeBoardView.jsp";
-				view = request.getRequestDispatcher(path); // 요청 위임 객체 생성
-				view.forward(request, response); // forward 진행
+				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+				
+			    int fBoardNo = Integer.parseInt(request.getParameter("fNo"));
+				
+			    // 상세조회 비즈니스 로직
+			    
+			    FreeBoard fBoard = service.selectFBoard(fBoardNo);
+			    
+			    if(fBoard != null) {
+					path = "/WEB-INF/views/freeBoard/freeBoardView.jsp";
+					request.setAttribute("fBoard", fBoard);
+					view = request.getRequestDispatcher(path); // 요청 위임 객체 생성
+					view.forward(request, response); // forward 진행
+			    	
+			    }else {
+			    	request.getSession().setAttribute("swalIcon", "error");
+			    	request.getSession().setAttribute("swalTitle", "게시글 상세조회 실패하였습니다.");
+			    	response.sendRedirect("main.do?cp=1"); // 목록으로 보내기
+			    }
+			    
+			    
+			   
 				
 				
 		  // 게시글 작성 화면 전환 Controller =================================================================

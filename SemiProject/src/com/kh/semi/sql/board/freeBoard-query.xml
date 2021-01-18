@@ -5,7 +5,7 @@
 
 
 <!--전체 게시글 수 조회 SQL-->
-<entry key ="fListCount">
+<entry key ="getfListCount">
 SELECT COUNT(*) FROM F_VIEW
 WHERE FR_FL ='N'
 </entry>
@@ -19,6 +19,13 @@ SELECT * FROM
     AND MEM_GRADE = 'G'
     ORDER BY FR_NO DESC) V)
 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selectFBoard">
+SELECT * FROM FREE_BOARD
+JOIN MEMBER USING(MEM_NO)
+WHERE FR_NO = ?
+AND FR_FL = 'N'
 </entry>
 
 </properties>

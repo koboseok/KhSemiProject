@@ -50,7 +50,7 @@ public class FreeBoardDAO {
 
 		int fListCount = 0;
 
-		String query = prop.getProperty("fListCount");
+		String query = prop.getProperty("getfListCount");
 
 		try {
 
@@ -125,6 +125,54 @@ public class FreeBoardDAO {
 		}
 
 		return fList;
+	}
+
+	/** 게시글 상세 조회
+	 * @param conn
+	 * @param fboardNo
+	 * @return fBoard
+	 * @throws Exception
+	 */
+	public FreeBoard selectFBoard(Connection conn, int fboardNo)throws Exception {
+	
+		FreeBoard fBoard = null;
+		
+		String query = prop.getProperty("selectFBoard");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, fboardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				fBoard = new FreeBoard();
+				
+				fBoard.setfBoardNo(rset.getInt("FR_NO"));
+				fBoard.setfBoardTitle(rset.getString("FR_TITLE"));
+				fBoard.setfBoardContent(rset.getString("FR_CONTENT"));
+				fBoard.setMemName(rset.getString("MEM_NM"));
+				fBoard.setfCreateDate(rset.getTimestamp("FR_C_DT"));
+				fBoard.setfReadCount(rset.getInt("FR_READ_COUNT"));
+				fBoard.setMemGrade(rset.getString("MEM_GRADE"));
+		
+				
+			}
+			
+			
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+			
+		}
+		
+		
+		
+		return fBoard;
 	}
 }
 

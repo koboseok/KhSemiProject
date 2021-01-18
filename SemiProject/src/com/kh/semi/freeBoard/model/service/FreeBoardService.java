@@ -44,15 +44,32 @@ public class FreeBoardService {
 	 * @return fLsit
 	 */
 	public List<FreeBoard> selectFBoardList(FreePageInfo fPInfo) throws Exception {
-		
+
 		Connection conn = getConnection();
 		List<FreeBoard> fList = dao.selectFBoardList(conn, fPInfo);
-		
+
 		close(conn);
 		return fList;
 	}
-		
-	
+
+	/** 게시물 상세 조회
+	 * @param fBoard
+	 * @return
+	 */
+	public FreeBoard selectFBoard(int fboardNo)throws Exception {
+
+		Connection conn =getConnection();
+
+		FreeBoard fBoard = dao.selectFBoard(conn, fboardNo);
+
+		close(conn);
+
+
+
+		return fBoard;
+	}
+
+
 
 }
 
