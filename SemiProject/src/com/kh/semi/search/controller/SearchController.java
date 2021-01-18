@@ -2,6 +2,7 @@ package com.kh.semi.search.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 import com.kh.semi.search.model.service.SearchService;
 import com.sun.javafx.collections.MappingChange.Map;
@@ -19,10 +21,11 @@ public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response, Object cp) throws ServletException, IOException {
 		String uri = request.getRequestURI();  // 요청 들어 오는 주소
 		String contextPath = request.getContextPath(); // 
-		String command = uri.substring((contextPath + "/freeBoard").length());  // freeBoard 뒤만 잘라내기
+		
+		String command = uri.substring((contextPath).length());  // freeBoard 뒤만 잘라내기
 
 		String path = null;
 		RequestDispatcher view = null;
@@ -40,17 +43,29 @@ public class SearchController extends HttpServlet {
 			
 			String searchKey = request.getParameter("fsk");
 			String searchValue = request.getParameter("fsv");
-			String currentpage = request.getParameter("cp");
+			String currentPage = request.getParameter("cp");
 
 			// 세개를 전달하기 위한 Map
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("searchKey", searchKey); 
+			map.put("searchValue", searchValue); 
+			map.put("currentPage", cp); 
 			
 			SearchService service = new SearchService();
 			
 			// fPInfo 얻어오기
-			 FreePageInfo fPInfo = service.getPageInfo();
+			 FreePageInfo fPInfo = service.getPageInfo(map);
 			 
+			// 검색 게시글 목록 조회 
+			 
+			 List<FreeBoard> fList = service.searchFBoardList(map, fPInfo);
+			 
+			 System.out.println(fPInfo);
+			 
+			 for(FreeBoard f : fList) {
+				 System.out.println(f);
+			 }
 			
 		}
 
