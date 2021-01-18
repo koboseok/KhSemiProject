@@ -67,7 +67,7 @@ div.contain  {
 .add-sub{
 	width : 45px;
 	height : 45px;
-	margin-left : 40px;
+	margin-left : 35px;
 }
 
 /* div button{
