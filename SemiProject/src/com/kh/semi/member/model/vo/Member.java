@@ -13,6 +13,106 @@ public class Member {
 	private String memCheck; //인증
 	private Date memEnrollDate; //가입일
 	
+	private String memSub1;
+	private String memSub2;
+	private String memSub3;
+	private String memSub4;
+	private String memSub5;
+	
+	
+
+	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
+			String memStatus, String memCheck, Date memEnrollDate, String memSub1) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+		this.memSub1 = memSub1;
+	}
+
+
+	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
+			String memStatus, String memCheck, Date memEnrollDate, String memSub1, String memSub2) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+		this.memSub1 = memSub1;
+		this.memSub2 = memSub2;
+	}
+
+
+	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
+			String memStatus, String memCheck, Date memEnrollDate, String memSub1, String memSub2, String memSub3) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+		this.memSub1 = memSub1;
+		this.memSub2 = memSub2;
+		this.memSub3 = memSub3;
+	}
+
+
+	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
+			String memStatus, String memCheck, Date memEnrollDate, String memSub1, String memSub2, String memSub3,
+			String memSub4) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+		this.memSub1 = memSub1;
+		this.memSub2 = memSub2;
+		this.memSub3 = memSub3;
+		this.memSub4 = memSub4;
+	}
+
+
+	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
+			String memStatus, String memCheck, Date memEnrollDate, String memSub1, String memSub2, String memSub3,
+			String memSub4, String memSub5) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memGrade = memGrade;
+		this.memStatus = memStatus;
+		this.memCheck = memCheck;
+		this.memEnrollDate = memEnrollDate;
+		this.memSub1 = memSub1;
+		this.memSub2 = memSub2;
+		this.memSub3 = memSub3;
+		this.memSub4 = memSub4;
+		this.memSub5 = memSub5;
+	}
+
+
 	public Member() {
 	}
 	
@@ -57,6 +157,7 @@ public class Member {
 		this.memPhone = memPhone;
 	}
 
+	
 	public int getMemNo() {
 		return memNo;
 	}
@@ -128,13 +229,66 @@ public class Member {
 	public void setMemEnrollDate(Date memEnrollDate) {
 		this.memEnrollDate = memEnrollDate;
 	}
+	
+	public String getMemSub1() {
+		return memSub1;
+	}
+
+
+	public void setMemSub1(String memSub1) {
+		this.memSub1 = memSub1;
+	}
+
+
+	public String getMemSub2() {
+		return memSub2;
+	}
+
+
+	public void setMemSub2(String memSub2) {
+		this.memSub2 = memSub2;
+	}
+
+
+	public String getMemSub3() {
+		return memSub3;
+	}
+
+
+	public void setMemSub3(String memSub3) {
+		this.memSub3 = memSub3;
+	}
+
+
+	public String getMemSub4() {
+		return memSub4;
+	}
+
+
+	public void setMemSub4(String memSub4) {
+		this.memSub4 = memSub4;
+	}
+
+
+	public String getMemSub5() {
+		return memSub5;
+	}
+
+
+	public void setMemSub5(String memSub5) {
+		this.memSub5 = memSub5;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", memEmail=" + memEmail + ", memPwd=" + memPwd + ", memName=" + memName
 				+ ", memPhone=" + memPhone + ", memGrade=" + memGrade + ", memStatus=" + memStatus + ", memCheck="
-				+ memCheck + ", memEnrollDate=" + memEnrollDate + "]";
+				+ memCheck + ", memEnrollDate=" + memEnrollDate + ", memSub1=" + memSub1 + ", memSub2=" + memSub2
+				+ ", memSub3=" + memSub3 + ", memSub4=" + memSub4 + ", memSub5=" + memSub5 + "]";
 	}
+
+
 
 	
 }

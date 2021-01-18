@@ -115,34 +115,34 @@
 					</tr>
 				</thead>
 
-				<%-- 게시글 목록 출력 --%>
+				<%-- 회원 목록 출력 --%>
 				<tbody>
-					<%-- <c:choose>
+					<c:choose>
 						<c:when test="${empty mList}">
 							<tr>
 								<td colspan="10">존재하는 회원이 없습니다.</td>
 							</tr>
-						</c:when>--%>
-						<%--조회된 게시글 목록이 있을 때 
+						</c:when>
+						<%--조회된  목록이 있을 때  --%>
 						<c:otherwise>
-							<c:forEach var="board" items="">--%>
+							<c:forEach var="member" items="${mList}">
 								<tr>
 									<td><input type="radio"></td>
-									<td>1</td>
-									<td>착한유저</td>
-									<td>user01@naver.com</td>
-									<td>010-1111-1111</td>
+									<td>${member.memNo}</td>
+									<td>${member.memName}</td>
+									<td>${member.memEmail}</td>
+									<td>${member.memPhone}</td>
+							</c:forEach>
+							<c:forEach var="memsub" items="${sList}">		
 									<td>왓챠</td>
 									<td>넷플릭스</td>
 									<td>오설록</td>
 									<td></td>
 									<td></td>
-									
-									
 								</tr>
-							<%--</c:forEach>
+							</c:forEach>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose> 
 				</tbody>
 			</table>
 		</div>

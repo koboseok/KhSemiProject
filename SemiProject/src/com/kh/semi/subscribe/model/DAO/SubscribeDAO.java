@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+
 
 public class SubscribeDAO {
 
@@ -34,16 +37,24 @@ public class SubscribeDAO {
 	 * @throws Exception
 	 */
 	public List<String> getCategory(Connection conn) throws Exception {
-		List<String> category = null;
+		List<String> category = null ;
 		String query = prop.getProperty("getCategory");
 
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
-
-			while(rset.next()) {
-				category.add(rset.getString("SERV_CATEGORY"));
+			
+			category = new ArrayList<String>();
+			
+			if(!rset.next()) {
+				System.out.println("출력결과 없음");
 			}
+			
+			
+			while(rset.next()) {
+				category.add(rset.getString(1));
+			}
+			
 		} finally {
 			close(rset);
 			close(pstmt);

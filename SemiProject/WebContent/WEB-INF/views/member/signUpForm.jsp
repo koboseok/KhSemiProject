@@ -266,15 +266,32 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form class="form-addSub" method="POST" action=" # ">
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="categoryCode">카테고리</label></span>
-							<select class="custom-select" id="categoryCode" name="subCode"
+							<!-- <select class="custom-select" id="categoryCode" name="categoryCode"
 								style="width: 150px;">
 								<option selected>카테고리</option>
 								
-								<c:forEach items="${categoryName}" var="category">
-									<option><c:out value="${category.category_name}"/></option>
+								<c:forEach items="${category}" var="name">
+									<option><c:out value="${name.category}"/></option>
 								</c:forEach>
-							</select> <br>
-							
+							</select> <br>  -->
+
+							<c:if test="${!empty category}">
+								<select name="categoryCode" id="categoryCode" style="width: 150px;"
+									class="custom-select">
+
+									<c:forEach var="testList" items="${category}" varStatus="i">
+
+										<option value="${category}">${category}</option>
+
+									</c:forEach>
+
+								</select>
+
+							</c:if>
+
+
+
+
 						</div>
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="subCode">서비스명</label></span>
@@ -338,6 +355,26 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$(document).on("click", ".minus-icon", function(event) { 
 			var el = $(event.target).parent().remove();
     	});
+		
+		//-----------------------------------------------------------
+
+		$(".search-select").on("click", function() {
+		    
+		    $.ajax({
+		        url : "${contextPath}/subscribe/getCategory.do", 
+		        type : "post",
+		        dataType : "json",
+		        success : function(category) {
+		        	console.log(category);
+		        
+		            $('#testList').val(category); 
+		        },
+		        error: function() {
+		            console.log("서비스 찾기 실패");
+		        }
+
+		    });
+		});
 		
 		
 	</script>
