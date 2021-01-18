@@ -371,11 +371,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$(document).on("change", "select[name=categoryCode]", function(){
 		
 		var category = $("select[name=categoryCode]>option:selected").val();
-			console.log(category);	
-		
+		console.log(category);
 		    $.ajax({
 		        url : "${contextPath}/subscribe/getService.do", 
-		        
 		        type : "post",
 		        data : {"category" : category},
 		        dataType : "json",
