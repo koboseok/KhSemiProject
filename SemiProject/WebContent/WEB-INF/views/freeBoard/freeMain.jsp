@@ -244,7 +244,7 @@
 		});
 		
 		
-		/* 
+		
 		// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
 		 (function(){
 			var searchKey = "${param.fsk}"; 
@@ -264,7 +264,7 @@
 			// 검색어 입력창에 searcValue 값 출력
 			$("input[name=fsv]").val(searchValue);
 		})();
-		  */
+		  
 		
 		
 		
