@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.semi.subscribe.model.service.SubscribeService;
 
 @WebServlet("/subscribe/getCategory.do")
@@ -18,7 +20,9 @@ public class SubscribeGetCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			List<String> category = new SubscribeService().getCategory();
-			response.getWriter().print(category);
+			//response.getWriter().print(category);
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(category, response.getWriter());
 			
 		} catch (Exception e) {
 			
