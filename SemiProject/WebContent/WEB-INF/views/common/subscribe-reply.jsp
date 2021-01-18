@@ -21,6 +21,7 @@
 .replyWrite>table {
 	width: 90%;
 	margin-top: 100px;
+	
 }
 
 #replyContentArea {

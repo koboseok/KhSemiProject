@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +75,7 @@ a {
 
 .w100 {
 	width: 100%;
-	height: 75px;
+	height: 150px;
 }
 
 .main_title {
@@ -82,15 +84,16 @@ a {
 }
 
 .banner2 {
-	width: 100%;
+	display:inline-block;
+	width:100%;
 }
 
 .banner2 li {
 	position: relative;
 	float: left;
-	width: 200px;
-	height: 100px;
-	margin-right: 10px;
+	width: 315px;
+	height: 200px;
+	margin-right: 20px;
 	margin-bottom: 10px;
 	box-shadow: 2px 2px 2px #ccc;
 	box-sizing: border-box;
@@ -117,7 +120,7 @@ a {
 
 .banner2 li p {
 	text-align: center;
-	height: 20px;
+	margin-top: 10px;
 	background: white;
 }
 
@@ -146,52 +149,11 @@ a {
 			<div class="middle_top">
 				<div class="title_box">
 					<p class="main_title">CONTENTS</p>
-					<span> <a href="${contextPath}/subscribe/extends">더보기</a>
-					</span>
 				</div>
 				<ul class="banner2">
 					<li><a href="${contextPath}/subscribe/info"><img
 							src="${contextPath}/resources/images/ex.jpg" class="w100" alt="" /></a>
 						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
 					<li><a href=""> <img
 							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
 						<p>Example</p></li>
