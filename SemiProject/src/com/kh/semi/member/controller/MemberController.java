@@ -126,6 +126,8 @@ public class MemberController extends HttpServlet {
 			}
 			
 			
+			
+			
 //			로그인 ********************************************
 			else if (command.equals("/login.do")) {
 				
