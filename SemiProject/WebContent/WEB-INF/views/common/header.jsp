@@ -19,6 +19,9 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
+
+
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--  slick -->
@@ -43,6 +46,8 @@
 <!-- responsive style -->
 <link href="${ contextPath }/resources/css/responsive.css"rel="stylesheet" />
 
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 .modal-dialog {

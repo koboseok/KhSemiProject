@@ -9,7 +9,7 @@ var validateCheck = {
 
 //이메일 유효성 검사 + 중복검사 
 $("#email").on("input", function() {
-    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g	;
+    var regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
     var value = $("#email").val();
 
 	if(!(value.length>0)){
@@ -19,23 +19,7 @@ $("#email").on("input", function() {
         validateCheck.email = false;
     } else {
             //ajax를 이용한 실시간 아이디 중복 검사
-            $.ajax({
-                url : "emailDupCheck.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
-                data : {"Email" : value}, 
-                type : "post",
-                success : function(result) {
-                    if(result == 0) {
-                        $("#checkEmail").text("사용 가능한 이메일입니다.").css("color", "green")
-                        validateCheck.email = true;
-                    } else {
-                        $("#checkEmail").text("이미 사용 중인 이메일입니다.").css("color", "red")
-                        validateCheck.email = false;
-                    }
-                },
-                error: function() {
-                    console.log("이메일 중복 검사 실패");
-                }
-            });
+            $("checkEmail").text("ajax가 안 먹히는 중");
     }
 });
 
