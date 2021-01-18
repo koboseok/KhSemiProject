@@ -106,22 +106,25 @@ public class FreeBoardDAO {
 
 				fBoard.setfBoardNo(rset.getInt("FR_NO"));
 				fBoard.setfBoardTitle(rset.getString("FR_TITLE"));
+				fBoard.setMemName(rset.getString("MEM_NM"));
 				fBoard.setfCreateDate(rset.getTimestamp("FR_C_DT"));
 				fBoard.setfReadCount(rset.getInt("FR_READ_COUNT"));
-				fBoard.setMemName(rset.getString("MEM_NM"));
+				fBoard.setMemGrade(rset.getString("MEM_GRADE"));
 				fList.add(fBoard);
+			
+			
 			}
+			
+			
 		}finally {
 
+			close(rset);
+			close(pstmt);
 
 
 		}
 
-
-
-
-
-		return null;
+		return fList;
 	}
 }
 

@@ -41,7 +41,7 @@ public class FreeBoardService {
 
 	/** 목록 조회 Service
 	 * @param fPInfo
-	 * @return
+	 * @return fLsit
 	 */
 	public List<FreeBoard> selectFBoardList(FreePageInfo fPInfo) throws Exception {
 		
