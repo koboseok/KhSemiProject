@@ -22,7 +22,8 @@ public class SubscribeGetServiceServlet extends HttpServlet {
 			String category = request.getParameter("category");
 			
 			List<String> service = new SubscribeService().getService(category);
-			//response.getWriter().print(category);
+			//response.getWriter().print(service);
+			
 			Gson gson = new GsonBuilder().create();
 			gson.toJson(service, response.getWriter());
 			

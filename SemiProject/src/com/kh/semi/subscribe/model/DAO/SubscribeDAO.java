@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.semi.member.model.dao.MemberDAO;
+
 
 public class SubscribeDAO {
 
