@@ -13,16 +13,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.semi.subscribe.model.service.SubscribeService;
 
-@WebServlet("/subscribe/getCategory.do")
-public class SubscribeGetCategoryServlet extends HttpServlet {
+@WebServlet("/subscribe/getService.do")
+public class SubscribeGetServiceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<String> category = new SubscribeService().getCategory();
+			String category = request.getParameter("category");
+			
+			List<String> service = new SubscribeService().getService(category);
 			//response.getWriter().print(category);
 			Gson gson = new GsonBuilder().create();
-			gson.toJson(category, response.getWriter());
+			gson.toJson(service, response.getWriter());
 			
 		} catch (Exception e) {
 			

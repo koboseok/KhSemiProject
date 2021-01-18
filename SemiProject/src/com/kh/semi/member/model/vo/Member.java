@@ -21,6 +21,15 @@ public class Member {
 	
 	
 
+	public Member(int memNo, String memEmail, String memName, String memPhone) {
+		super();
+		this.memNo = memNo;
+		this.memEmail = memEmail;
+		this.memName = memName;
+		this.memPhone = memPhone;
+	}
+
+
 	public Member(int memNo, String memEmail, String memPwd, String memName, String memPhone, String memGrade,
 			String memStatus, String memCheck, Date memEnrollDate, String memSub1) {
 		super();

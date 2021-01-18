@@ -103,8 +103,8 @@
 					<tr>
 						<th></th>
 						<th>회원번호</th>
-						<th>닉네임</th>
 						<th>이메일</th>
+						<th>닉네임</th>
 						<th>전화번호</th>
 						<th>구독서비스1</th>
 						<th>구독서비스2</th>
@@ -132,13 +132,11 @@
 									<td>${member.memName}</td>
 									<td>${member.memEmail}</td>
 									<td>${member.memPhone}</td>
-							</c:forEach>
-							<c:forEach var="memsub" items="${sList}">		
-									<td>왓챠</td>
-									<td>넷플릭스</td>
-									<td>오설록</td>
-									<td></td>
-									<td></td>
+									<td>${member.memSub1}</td>
+									<td>${member.memSub2}</td>
+									<td>${member.memSub3}</td>
+									<td>${member.memSub4}</td>
+									<td>${member.memSub5}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

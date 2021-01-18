@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.admin.model.service.AdminService;
+import com.kh.semi.admin.model.vo.PageInfo;
+import com.kh.semi.member.model.vo.Member;
+
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
@@ -37,14 +41,23 @@ public class AdminController extends HttpServlet {
 
 		try {
 
-			//AdminService service = new AdminService();
-			//String cp = request.getParameter("cp");
+			AdminService service = new AdminService();
+			String cp = request.getParameter("cp");
 			
 			//회원 조회 Controller ******************************************
 			if(command.equals("/memberList.do")) {
 				errorMsg = "회원 조회 과정에서 오류 발생";
 				
+				//페이징 처리를 위한 값 계산
+				PageInfo pInfo = service.getPageInfo(cp);
+				
+				//게시글 목록 조회 비즈니스 로직
+				List<Member> mList = service.selectMemberList(pInfo);
+				
 				path = "/WEB-INF/views/admin/memberList.jsp";
+				request.setAttribute("mList", mList);
+				request.setAttribute("pInfo", pInfo);
+				
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			} 

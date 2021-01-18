@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Properties;
 
 
-
 public class SubscribeDAO {
 
 	private Statement stmt = null;
@@ -31,35 +30,31 @@ public class SubscribeDAO {
 	}
 
 
-	/** 구독 카테고리를 가져오는 DAO
+	/** 구독 서비스를 가져오는 DAO
 	 * @param conn
-	 * @return 
+	 * @param category 
+	 * @return service
 	 * @throws Exception
 	 */
-	public List<String> getCategory(Connection conn) throws Exception {
-		List<String> category = null ;
-		String query = prop.getProperty("getCategory");
-
+	public List<String> getService(Connection conn, String category) throws Exception {
+		List<String> service = null;
+		String query = prop.getProperty("getService");
+		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
 			
-			category = new ArrayList<String>();
-			
-			if(!rset.next()) {
-				System.out.println("출력결과 없음");
-			}
-			
-			
+			service = new ArrayList<String>();
 			while(rset.next()) {
-				category.add(rset.getString(1));
+				service.add(rset.getString(1));
 			}
 			
-		} finally {
+		}finally {
 			close(rset);
 			close(pstmt);
 		}
-		return category;
+		
+		return service;
 	}
 
 }

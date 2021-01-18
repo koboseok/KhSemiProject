@@ -11,15 +11,16 @@ public class SubscribeService {
 	
 	private SubscribeDAO dao = new SubscribeDAO();
 	
-	/** 구독 서비스 카테고리를 가져오는 service
+	/** 카테고리별 구독 서비스를 가져오는 service
+	 * @param category 
 	 * @return category
 	 * @throws Exception
 	 */
-	public List<String> getCategory() throws Exception {
+	public List<String> getService(String category) throws Exception {
 		Connection conn = getConnection();
-		List<String> category = dao.getCategory(conn);
+		List<String> service = dao.getService(conn, category);
 		close(conn);
-		return category;
+		return service;
 	}
 
 }
