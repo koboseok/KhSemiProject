@@ -3,6 +3,7 @@ package com.kh.semi.freeBoard.model.dao;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -133,7 +134,7 @@ public class FreeBoardDAO {
 	 * @return fBoard
 	 * @throws Exception
 	 */
-	public FreeBoard selectFBoard(Connection conn, int fboardNo)throws Exception {
+	public FreeBoard selectFBoard(Connection conn, int fBoardNo)throws Exception {
 	
 		FreeBoard fBoard = null;
 		
@@ -143,7 +144,7 @@ public class FreeBoardDAO {
 			
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, fboardNo);
+			pstmt.setInt(1, fBoardNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -156,13 +157,10 @@ public class FreeBoardDAO {
 				fBoard.setMemName(rset.getString("MEM_NM"));
 				fBoard.setfCreateDate(rset.getTimestamp("FR_C_DT"));
 				fBoard.setfReadCount(rset.getInt("FR_READ_COUNT"));
-				fBoard.setMemGrade(rset.getString("MEM_GRADE"));
-		
+				fBoard.setMemGrade(rset.getString("MEM_GRADE"));	
 				
 			}
-			
-			
-			
+	
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -174,7 +172,34 @@ public class FreeBoardDAO {
 		
 		return fBoard;
 	}
-}
+
+	/** 게시물 조회수 증가
+	 * @param conn
+	 * @param fBoardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int fBoardNo) throws Exception {
+		
+		int result = 0;
+		
+		String query = prop.getProperty("increaseReadCount");
+		
+				try {
+	         
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setInt(1,fBoardNo);
+	         
+	         result = pstmt.executeUpdate();
+	     
+				}finally {
+	       
+	    	  close(pstmt);
+	      }
+	      
+	      return result;
+	   }
+	}
 
 
 

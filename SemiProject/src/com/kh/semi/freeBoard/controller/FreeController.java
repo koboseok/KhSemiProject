@@ -76,7 +76,7 @@ public class FreeController extends HttpServlet {
 				
 				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
 				
-			    int fBoardNo = Integer.parseInt(request.getParameter("fNo"));
+			    int fBoardNo = Integer.parseInt(request.getParameter("no"));
 				
 			    // 상세조회 비즈니스 로직
 			    
