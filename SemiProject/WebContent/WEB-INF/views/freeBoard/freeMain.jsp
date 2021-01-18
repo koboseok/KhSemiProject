@@ -65,10 +65,10 @@
 			
 			
 					<%-- 로그인이 되어있는 경우 --%>
-		<%-- 	<c:if test="${!empty  }"> --%>
+		 	<c:if test="${!empty loginMember}">
 				<button type="button" class="btn btn-warning float-right" id="insertBtn"
 				 onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
-		<%-- 	</c:if> --%>
+		 	</c:if>
 		
 		
 				<table class="table table-hover my-5" id="free-table">
@@ -99,27 +99,24 @@
 								
 									<tr>
 										<td>
-											<c:if test="${board.memberGrade != 'A' }">
-												${board.fBoardNo }
-											</c:if>
+										${board.fBoardNo }
 										</td>
 										<td>${board.fBoardTitle }</td>
-										<td>${board.memberName }</td>
+										<td>${board.memName }</td>
 										<td>${board.fReadCount }</td>
 										<td>
 											<%-- 날짜 출력 모양 지정 --%>
 											<fmt:formatDate var="createDate" value="${board.fCreateDate }"  pattern="yyyy-MM-dd"/>                          
 											<fmt:formatDate var="today" value="<%= new java.util.Date()  %>"  pattern="yyyy-MM-dd"/>                          
 												${createDate}
-											<%-- <c:choose>
+											 <c:choose>
 												<c:when test="${createDate != today}">
 													${createDate}
 												</c:when>
-												
 												<c:otherwise>
 													<fmt:formatDate value="createDate"  pattern="HH:mm"/>                          
 												</c:otherwise>
-											</c:choose>  --%>
+											</c:choose>
 										
 										</td>
 										
@@ -129,49 +126,41 @@
 						</c:choose>
 					</tbody>
 				</table>
+				
+			
 			</div>
 		
 			
-		<%-- 	
-			-------------------- Pagination --------------------
-			페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장
+		 	
+			<!-- -------------------- Pagination -------------------- -->
+		
 			<c:choose>
-				검색 내용이 파라미터에 존재할 때   ==  검색을 통해 만들어진 페이지인가? 
-				<c:when test="${!empty  }">
-					<c:url var="pageUrl" value=""/>
+				<%-- 검색으로 만들어진 페이지? --%>
+				<c:when test="${!empty param.fsk && !empty param.fsv}">
+					<c:url var="pageUrl" value="/freeBaord/main.do"/>
 					
-					쿼리스트링으로 사용할 내용을 변수에 저장
-					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
+				<!-- 	쿼리스트링으로 사용할 내용을 변수에 저장 -->
+					<c:set var="searchStr" value="&fsk=${param.fsk}&fsv=${param.fsv}" />
 				</c:when>
 			
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/list.do"/>
+					<c:url var="pageUrl" value="/board/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
 			
 			
-			<!-- 화살표에 들어갈 주소를 변수로 생성 -->
-			
-				검색을 안했을 때 : /board/list.do?cp=1
-				검색을 했을 때 : /search.do?cp=1&sk=title&sv=49
-			
-			
+		
 			<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
-			<c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
+			<c:set var="lastPage" value="${pageUrl}?cp=${fPInfo.maxPage}${searchStr}"/>
 			
-			EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다
-			
-				<fmt:parseNumber>   : 숫자 형태를 지정하여 변수 선언 
-				integerOnly="true"  : 정수로만 숫자 표현 (소수점 버림)
-			
-			
-			<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }"  integerOnly="true" />
+		
+			<fmt:parseNumber var="c1" value="${(fPInfo.currentPage - 1) / 10 }"  integerOnly="true" />
 			<fmt:parseNumber var="prev" value="${ c1 * 10 }"  integerOnly="true" />
 			<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
 			
 			
-			<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
+			<fmt:parseNumber var="c2" value="${(fPInfo.currentPage + 9) / 10 }" integerOnly="true" />
 			<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
 			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
 			
@@ -179,26 +168,26 @@
 			<div class="my-5">
 				<ul class="pagination">
 				
-					현재 페이지가 10페이지 초과인 경우
-					<c:if test="${pInfo.currentPage > 10}">
-						<li> <!-- 첫 페이지로 이동(<<) -->
+					<%--<< < --%>
+					<c:if test="${fPInfo.currentPage > 10}">
+						<li> 
 							<a class="page-link" href="${firstPage}">&lt;&lt;</a>
 						</li>
 						
-						<li> <!-- 이전 페이지로 이동 (<) -->
+						<li> 
 							<a class="page-link" href="${prevPage}">&lt;</a>
 						</li>
 					</c:if>
 					
-					 --%>
+					  
 					 
 					 
 					 
 					 
 					<!-- 페이지 목록 -->
-			<%-- 		<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
+			 		<c:forEach var="page" begin="${fPInfo.startPage}" end="${fPInfo.endPage}" >
 						<c:choose>
-							<c:when test="${pInfo.currentPage == page }">
+							<c:when test="${fPInfo.currentPage == page }">
 								<li>
 									<a class="page-link">${page}</a>
 								</li>
@@ -210,20 +199,20 @@
 								</li>
 							</c:otherwise>
 						</c:choose>
-					</c:forEach> --%>
+					</c:forEach>
 					
 					
-					<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
-					<%-- <c:if test="${next <= pInfo.maxPage}">
-						<li> <!-- 다음 페이지로 이동 (>) -->
+					<%--> >> --%>
+					 <c:if test="${next <= fPInfo.maxPage}">
+						<li> 
 							<a class="page-link" href="${nextPage}">&gt;</a>
 						</li>
 						
-						<li> <!-- 마지막 페이지로 이동(>>) -->
+						<li> 
 							<a class="page-link" href="${lastPage}">&gt;&gt;</a>
 						</li>
 						
-					</c:if> --%>
+					</c:if>
 				
 
 				</ul>
@@ -240,20 +229,31 @@
 		
 		$("#free-table td").on("click", function(){
 			
-		/* 	// 게시글 번호 얻어오기
-			var boardNo = $(this).parent().children().eq(0).text();
-			//console.log(boardNo); */
+			if(loginMember != null){
+				
+				
+			// 게시글 번호 얻어오기
+			var fBoardNo = $(this).parent().children().eq(0).text();
+	        console.log(fBoardNo);
 			
-			var url = "${contextPath}/freeBoard/view.do";
-			
+			var url = "${contextPath}/freeBoard/main.do?cp=${fPInfo.currentPage}&no=" + fBoardNo + "${searchStr}";
 			location.href = url;
+			
+			}else{
+				alert("회원만 열람 가능 합니다. 로그인 후 이용해 주세요.");
+			}
+		
+				
+				
+				
+			}
 			
 		});
 		
 		
 		
 		// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
-		/* (function(){
+		 (function(){
 			var searchKey = "${param.fsk}"; 
 			
 			var searchValue = "${param.fsv}";
@@ -271,7 +271,7 @@
 			// 검색어 입력창에 searcValue 값 출력
 			$("input[name=fsv]").val(searchValue);
 		})();
-		 */
+		 
 		
 		
 		
