@@ -266,6 +266,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form class="form-addSub" method="POST" action=" # ">
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="categoryCode">카테고리</label></span>
+							<select class="custom-select" id="categoryCode" name="categoryCode"
+								style="width: 150px;">
+								<option>카테고리</option>
+								<option>Contents</option>
+								<option>Food</option>
+								<option>Lifestyle</option>
+								<option>Newsletter</option>
+							</select>
+							
 							<!-- <select class="custom-select" id="categoryCode" name="categoryCode"
 								style="width: 150px;">
 								<option selected>카테고리</option>
@@ -275,7 +284,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								</c:forEach>
 							</select> <br>  -->
 
-							<c:if test="${!empty category}">
+							<!--<c:if test="${!empty category}">
 								<select name="categoryCode" id="categoryCode" style="width: 150px;"
 									class="custom-select">
 
@@ -287,7 +296,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 								</select>
 
-							</c:if>
+							</c:if>-->
 
 
 
@@ -358,16 +367,21 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		
 		//-----------------------------------------------------------
 
-		$(".search-select").on("click", function() {
-		    
+		
+		$(document).on("change", "select[name=categoryCode]", function(){
+		
+		var category = $("select[name=categoryCode]>option:selected").val();
+			console.log(category);	
+		
 		    $.ajax({
-		        url : "${contextPath}/subscribe/getCategory.do", 
-		        type : "post",
-		        dataType : "json",
-		        success : function(category) {
-		        	console.log(category);
+		        url : "${contextPath}/subscribe/getService.do", 
 		        
-		            $('#testList').val(category); 
+		        type : "post",
+		        data : {"category" : category},
+		        dataType : "json",
+		        success : function(subservice) {
+		        	console.log(subservice);
+		        
 		        },
 		        error: function() {
 		            console.log("서비스 찾기 실패");
