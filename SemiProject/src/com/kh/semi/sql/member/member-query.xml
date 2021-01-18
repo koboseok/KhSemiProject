@@ -22,14 +22,14 @@ VALUES(?)
 <entry key="emailDupCheck">
 SELECT COUNT(*) FROM MEMBER
 WHERE MEM_EMAIL = ?
-AND MEMBER_STATUS = 'Y'
+AND MEM_STATUS = 'Y'
 </entry>
 
 <!-- 별명 중복 체크 -->
 <entry key="nameDupCheck">
 SELECT COUNT(*) FROM MEMBER
 WHERE MEM_NM = ?
-AND MEMBER_STATUS = 'Y'
+AND MEM_STATUS = 'Y'
 </entry>
 
 

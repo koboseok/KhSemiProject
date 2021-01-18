@@ -267,10 +267,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<span class="modal-align-box"><label for="categoryCode">카테고리</label></span>
 							<select class="custom-select" id="categoryCode" name="subCode"
 								style="width: 150px;">
-								<option value="10">Contents</option>
-								<option value="20">Food</option>
-								<option value="30">LifeStyle</option>
-								<option value="40">NewsLetter</option>
+								<option selected>카테고리</option>
+								<c:forEach items="${categoryName}" var="category">
+									<option><c:out value="${category.category_name}"/></option>
+								</c:forEach>
 							</select> <br>
 						</div>
 						<div class="select-modal">
@@ -335,6 +335,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$(document).on("click", ".minus-icon", function(event) { 
 			var el = $(event.target).parent().remove();
     	});
+		
 		
 	</script>
 

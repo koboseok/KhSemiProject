@@ -9,19 +9,19 @@ var validateCheck = {
 
 //이메일 유효성 검사 + 중복검사 
 $("#email").on("input", function() {
-    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g	;
+    var regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
     var value = $("#email").val();
 
-	if(!(value.length>0)){
+	if(value.length <= 0){
 		$("#checkEmail").html("&nbsp;");
     } else if(!regExp.test(value)) {
         $("#checkEmail").text("유효하지 않은 이메일입니다.").css("color", "red");
         validateCheck.email = false;
     } else {
-            //ajax를 이용한 실시간 아이디 중복 검사
+            //실시간 아이디 중복 검사
             $.ajax({
-                url : "emailDupCheck.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
-                data : {"Email" : value}, 
+                url : "emailDupCheck.do",
+                data : {"email" : value}, 
                 type : "post",
                 success : function(result) {
                     if(result == 0) {
@@ -114,8 +114,7 @@ $("#email").on("input", function() {
     var regExp = /^[\wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
     var value = $("#name").val();
 
-
-   if(!(value.length>0)){
+   if(value.length<=0){
 		$("#checkName").html("&nbsp;");
 	} else if(!regExp.test(value)) {
         $("#checkName").text("사용할 수 없는 별명입니다.").css("color", "red");
@@ -170,3 +169,20 @@ $("#email").on("input", function() {
          }
      }
  }
+
+//모달창 관련 js-----------------------------------------------------------------
+//모달창이 열렸을 때 카테고리 option 가져오기
+$("#serviceName").on("click", function() {
+ 	$.ajax({
+           url : "selectCategory.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
+           data : {"category" : value}, 
+           type : "post",
+           success : function(result) {
+               
+        
+           },
+           error: function() {
+           console.log("카테고리 가져오기 실패");
+          }
+       });	
+});
