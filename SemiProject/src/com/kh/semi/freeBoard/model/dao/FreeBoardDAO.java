@@ -16,6 +16,7 @@ import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 
+
 public class FreeBoardDAO {
 
 	private Statement stmt = null;
@@ -70,66 +71,26 @@ public class FreeBoardDAO {
 		return fListCount;
 	}
 
-	/**
-	 * 공지사항 목록 조회 DAO
-	 * @param conn
-	 * @return
-	 * @throws Exception
-	 */
-	public List<FreeBoard> selectFBoardNoticeList(Connection conn) throws Exception {
-
-		List<FreeBoard> fList = null;
-
-		String query = prop.getProperty("selectFBoardNoticeList");
-
-		try {
-
-			stmt = conn.createStatement();
-
-			rset = stmt.executeQuery(query);
-
-			fList = new ArrayList<FreeBoard>();
-
-			while (rset.next()) {
-				FreeBoard fBoard = new FreeBoard();
-
-				fBoard.setfBoardNo(rset.getInt("FR_NO"));
-				fBoard.setfBoardTitle(rset.getString("FR_TITLE"));
-				fBoard.setfCreateDate(rset.getTimestamp("FR_C_DT"));
-				fBoard.setfReadCount(rset.getInt("FR_READ_COUNT"));
-				fBoard.setMemberName(rset.getString("MEM_NM"));
-				fBoard.setMemberGrade(rset.getString("MEM_GRADE"));
-				
-				fList.add(fBoard);
-
-			}
-
-		} finally {
-			close(rset);
-			close(stmt);
-
-		}
-
-		return fList;
-	}
-
-	/**
-	 * 게시글 목록 조회 DAO
+	/** 목록  조회 DAO
 	 * @param conn
 	 * @param fPInfo
-	 * @return fList
-	 * @throws Exception
+	 * @return
 	 */
 	public List<FreeBoard> selectFBoardList(Connection conn, FreePageInfo fPInfo) throws Exception {
 
 		List<FreeBoard> fList = null;
+
 		String query = prop.getProperty("selectFBoardList");
 
-		try {
-			int startRow = (fPInfo.getCurrentPage() - 1) * fPInfo.getLimit() + 1;
-			int endRow = startRow + fPInfo.getLimit() - 1;
 
-			
+
+
+
+		try {
+			// SQL 구문 조건절에 대입할 변수 생성
+			int startRow = (fPInfo.getCurrentPage() - 1) * fPInfo.getLimit() + 1; 
+			int endRow = startRow + fPInfo.getLimit() - 1; 
+
 			pstmt = conn.prepareStatement(query);
 
 			pstmt.setInt(1, startRow);
@@ -139,6 +100,7 @@ public class FreeBoardDAO {
 
 			fList = new ArrayList<FreeBoard>();
 
+
 			while (rset.next()) {
 				FreeBoard fBoard = new FreeBoard();
 
@@ -146,20 +108,22 @@ public class FreeBoardDAO {
 				fBoard.setfBoardTitle(rset.getString("FR_TITLE"));
 				fBoard.setfCreateDate(rset.getTimestamp("FR_C_DT"));
 				fBoard.setfReadCount(rset.getInt("FR_READ_COUNT"));
-				fBoard.setMemberName(rset.getString("MEM_NM"));
-				fBoard.setMemberGrade(rset.getString("MEM_GRADE"));
-
+				fBoard.setMemName(rset.getString("MEM_NM"));
 				fList.add(fBoard);
-
 			}
+		}finally {
 
-		} finally {
-			close(rset);
-			close(pstmt);
+
+
 		}
 
-		return fList;
 
+
+
+
+		return null;
 	}
-
 }
+
+
+

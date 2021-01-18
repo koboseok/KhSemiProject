@@ -19,6 +19,7 @@ import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 
 
 
+
 @WebServlet("/freeBoard/*")
 public class FreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -58,13 +59,11 @@ public class FreeController extends HttpServlet {
 				// 게시글 목록 조회 // 현재 페이지에 있는 목록을 조회하기 위해 fPInfo 가져옴(currentPage, limit)
 				List<FreeBoard> fList = service.selectFBoardList(fPInfo);
 				 
-				for(FreeBoard f : fList) {
-					System.out.println(f);
-				}
+				
 				
 				
 				path = "/WEB-INF/views/freeBoard/freeMain.jsp";
-				request.setAttribute("fList", fList);
+				//request.setAttribute("fList", fList);
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 				

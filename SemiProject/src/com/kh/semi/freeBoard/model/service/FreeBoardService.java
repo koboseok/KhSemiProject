@@ -3,12 +3,14 @@ package com.kh.semi.freeBoard.model.service;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
+
 
 public class FreeBoardService {
 
@@ -37,43 +39,20 @@ public class FreeBoardService {
 		return new FreePageInfo(currentPage, fListCount);
 	}
 
-	/**
-	 * 게시물 목록 조회 Service
-	 * 
+	/** 목록 조회 Service
 	 * @param fPInfo
-	 * @return NList
-	 * @throws Exception
+	 * @return
 	 */
-
-	public List<FreeBoard> selectFBoardList(FreePageInfo fPInfo) throws Exception{
-
-		Connection conn = getConnection();
-
-		// 1. 최근 공지사항을 최대 5개까지 조회하여 List에 저장
-		List<FreeBoard> fList = dao.selectFBoardNoticeList(conn);
+	public List<FreeBoard> selectFBoardList(FreePageInfo fPInfo) throws Exception {
 		
-		if(fList != null) {
-			
-			// 2. PageInfo의 limit 값을 (10 - 조회된 공지글 수) 변환
-			fPInfo.setLimit(fPInfo.getLimit() - fList.size());
-			
-			// 3. 일반 게시글 목록을 조회하여 List에 저장
-			// 이 때 변경된 PageInfo를 이용해 조회하기 때문에
-			// 일반 게시글이 현재 페이지에 맞는 7개가 조회됨.
-			List<FreeBoard> fList2 = dao.selectFBoardList(conn, fPInfo);
-			
-			//4. 공지사항을 저장해둔 List와  일반 게시글을 저장한 List를  하나의 List로 합쳐서 반환
-			if(fList2 != null && !fList2.isEmpty()) {
-				fList.addAll(fList2);
-			}
-			
-		}
-
+		Connection conn = getConnection();
+		List<FreeBoard> fList = dao.selectFBoardList(conn, fPInfo);
+		
 		close(conn);
-
 		return fList;
-
 	}
+		
+	
 
 }
 
