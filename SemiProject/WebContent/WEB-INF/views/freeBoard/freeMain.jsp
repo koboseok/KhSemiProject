@@ -232,12 +232,10 @@
 		$("#free-table td").on("click", function(){
 			
 			
-			
-			
 			// 게시글 번호 얻어오기
-			var fBoardNo = $(this).parent().children().eq(0).text();
+			var fboardNo = $(this).parent().children().eq(0).text();
 			
-			var url = "${contextPath}/freeBoard/view.do?cp=${fPInfo.currentPage}&no=" + fBoardNo + "${searchStr}";
+			var url = "${contextPath}/freeBoard/view.do?cp=${fPInfo.currentPage}&fNo=" + fboardNo ;
 			
 			location.href = url;
 			

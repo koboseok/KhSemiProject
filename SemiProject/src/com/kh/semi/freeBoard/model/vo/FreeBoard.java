@@ -14,10 +14,7 @@ public class FreeBoard {
 	private int memNo;
 	private String memName;
 	private String memGrade;
-	
-
-
-	private char boardCode;
+	private String boardCode;
 	
 	
 
@@ -29,7 +26,7 @@ public class FreeBoard {
 
 	public FreeBoard(int fBoardNo, String fBoardTitle, String fBoardContent, Timestamp fCreateDate,
 			Timestamp fModifyDate, int fReadCount, char fBoardFL, int memNo, String memName, String memGrade,
-			char boardCode) {
+			String boardCode) {
 		super();
 		this.fBoardNo = fBoardNo;
 		this.fBoardTitle = fBoardTitle;
@@ -166,13 +163,13 @@ public class FreeBoard {
 
 
 
-	public char getBoardCode() {
+	public String getBoardCode() {
 		return boardCode;
 	}
 
 
 
-	public void setBoardCode(char boardCode) {
+	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
 	}
 
@@ -186,11 +183,13 @@ public class FreeBoard {
 				+ ", boardCode=" + boardCode + "]";
 	}
 	
-	
 
-	
-	
+
 }
+
+
+
+
 
 
 

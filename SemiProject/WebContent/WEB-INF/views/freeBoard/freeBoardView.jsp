@@ -98,19 +98,19 @@
 
 				<!--Board No.-->
 				<br>
-				<h5 style="color:gray ">No.</h5>
+				<h5 style="color:gray">${fBoard.fBoardNo }</h5>
 				<br>
 				<!-- Title -->
-				<h2>제목</h2>
+				<h2>${fBoard.fBoardTitle }</h2>
 
 				<br>
 				<!-- Writer -->
 				<p class="wdr" style="color:gray ">
-					작성자 &nbsp;|&nbsp;
+					${fBoard.memName } &nbsp;|&nbsp;
 					<!-- Date -->
 
-					<span> 작성일 <%--  <fmt:formatDate value="" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> --%>
-						<%-- <br> 마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>  --%>
+					<span> 작성일  <fmt:formatDate value="${fBoard.fCreateDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
+					<br> 마지막 수정일  <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
 					</span> &nbsp;|&nbsp; <span>조회수</span>
 				</p>
 				<br>
