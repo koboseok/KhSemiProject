@@ -128,4 +128,30 @@ public class MemberService {
 		return loginMember;
 	}
 
+	/** 이메일 중복 검사 Service
+	 * @param email
+	 * @return result
+	 * @throws Exception
+	 */
+	public int emailDupCheck(String email) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.emailDupCheck(conn, email);
+		close(conn);
+		
+		return result;
+	}
+
+	/** 별명 중복 검사 Service
+	 * @param name
+	 * @return result
+	 * @throws Exception
+	 */
+	public int nameDupCheck(String name) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.nameDupCheck(conn, name);
+		close(conn);
+		
+		return result;
+	}
+
 }

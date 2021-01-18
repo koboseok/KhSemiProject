@@ -3,16 +3,33 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+<!-- 회원가입 -->
 <entry key="signUp">
 INSERT INTO MEMBER
 VALUES(SEQ_MNO.NEXTVAL,
 		?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 </entry>
 
+
+<!-- (옮길 수 있음)멤버 구독 목록 입력 -->
 <entry key="insertMemSub">
 INSERT INTO MEM_SUB
 VALUES(?)
 
+</entry>
+
+<!-- 이메일 중복 체크 -->
+<entry key="emailDupCheck">
+SELECT COUNT(*) FROM MEMBER
+WHERE MEM_EMAIL = ?
+AND MEMBER_STATUS = 'Y'
+</entry>
+
+<!-- 별명 중복 체크 -->
+<entry key="nameDupCheck">
+SELECT COUNT(*) FROM MEMBER
+WHERE MEM_NM = ?
+AND MEMBER_STATUS = 'Y'
 </entry>
 
 
