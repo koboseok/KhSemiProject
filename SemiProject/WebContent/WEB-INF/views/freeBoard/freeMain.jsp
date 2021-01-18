@@ -233,9 +233,9 @@
 			
 			
 			// 게시글 번호 얻어오기
-			var fboardNo = $(this).parent().children().eq(0).text();
+			var fBoardNo = $(this).parent().children().eq(0).text();
 			
-			var url = "${contextPath}/freeBoard/view.do?cp=${fPInfo.currentPage}&fNo=" + fboardNo ;
+			var url = "${contextPath}/freeBoard/view.do?cp=${fPInfo.currentPage}&no=" + fBoardNo ;
 			
 			location.href = url;
 			

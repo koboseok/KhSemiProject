@@ -98,7 +98,7 @@
 
 				<!--Board No.-->
 				<br>
-				<h5 style="color:gray">${fBoard.fBoardNo }</h5>
+				<h5 style="color:gray">No. ${fBoard.fBoardNo }</h5>
 				<br>
 				<!-- Title -->
 				<h2>${fBoard.fBoardTitle }</h2>
@@ -108,10 +108,10 @@
 				<p class="wdr" style="color:gray ">
 					${fBoard.memName } &nbsp;|&nbsp;
 					<!-- Date -->
-
-					<span> 작성일  <fmt:formatDate value="${fBoard.fCreateDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
-					<br> 마지막 수정일  <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
-					</span> &nbsp;|&nbsp; <span>조회수</span>
+			
+					<span> 작성일  : <fmt:formatDate value="${fBoard.fCreateDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
+					   &nbsp;|&nbsp; 마지막 수정일 :  <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
+					</span> &nbsp;|&nbsp; <span> 조회수${fBoard.fReadCount }</span>
 				</p>
 				<br>
 				<hr>
@@ -156,7 +156,7 @@
 
 
 				<!-- Content -->
-				<div id="board-content">${board.boardContent }</div>
+				<div id="board-content">${fBoard.fBoardContent}</div>
 
 
 				<hr>
@@ -165,23 +165,26 @@
 
 				<div class = "buttonArea">
 					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
-					<%-- <c:if test="${!empty  }"> --%>
+					<c:if test="${!empty loginMember && (fBoard.memName == loginMember.memName)}"> 
+					
 					<button id="deleteBtn"
+					
 						class="btn btn-danger btn btn-primary float-right">삭제</button>
+						
 					<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
-					<%-- <c:if test="${!empty }"> --%>
+					<%--  <c:if test="${!empty }">  --%>
 					<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
-					<%-- 	<c:set var="searchStr" value="" />
-						</c:if>		 --%>
+					 	<%-- <c:set var="searchStr" value="" />
+						</c:if>
 
 					<button type="button" id="modifyBnt"
 						class="btn btn-secondary btn btn-primary float-right "
-						onclick="location.href = '${contextPath}/freeBoard/updateForm.do'">수정</button>
-					<%-- 	</c:if> --%>
+						onclick="location.href = '${contextPath}/freeBoard/updateForm.do'">수정</button> --%>
+				       </c:if> 
 
 
 
-					<%-- 		<c:choose>
+					 		<c:choose>
 						<c:when test="${!empty param.sk && !empty param.sv }">
 							<c:url var="goToList" value="../search.do">
 								<c:param name="cp">${param.cp}</c:param>
@@ -191,16 +194,16 @@
 						</c:when>
 						
 						<c:otherwise>
-							<c:url var="goToList" value="list.do">
+							<c:url var="goToList" value="${contextPath}/freeBoard/main.do">
 								<c:param name="cp">${param.cp}</c:param>
 							</c:url>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 
 
 					<button type="button" id="listBtn"
 						class="btn btn-warning btn btn-primary float-right"
-						onclick="location.href = '${contextPath}/freeBoard/list.do'">목록으로</button>
+						onclick="location.href = '${contextPath}/freeBoard/main.do'">목록으로</button>
 
 				</div>
 			</div>

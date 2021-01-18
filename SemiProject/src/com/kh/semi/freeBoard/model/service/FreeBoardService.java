@@ -56,12 +56,25 @@ public class FreeBoardService {
 	 * @param fBoard
 	 * @return
 	 */
-	public FreeBoard selectFBoard(int fboardNo)throws Exception {
+	public FreeBoard selectFBoard(int fBoardNo)throws Exception {
 
 		Connection conn =getConnection();
 
-		FreeBoard fBoard = dao.selectFBoard(conn, fboardNo);
+		FreeBoard fBoard = dao.selectFBoard(conn, fBoardNo);
 
+		if(fBoard != null) {
+			int result = dao.increaseReadCount(conn,fBoardNo); 
+			
+			if(result > 0) {
+				commit(conn);
+				
+				fBoard.setfReadCount(fBoard.getfReadCount() + 1);
+			}else			
+			rollback(conn);	
+		}
+		
+		
+		
 		close(conn);
 
 
