@@ -174,7 +174,7 @@ $("#email").on("input", function() {
 //모달창이 열렸을 때 카테고리 option 가져오기
 $("#serviceName").on("click", function() {
  	$.ajax({
-           url : "selectCategory.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
+           url : "subscribe/getCategory.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
            data : {"category" : value}, 
            type : "post",
            success : function(result) {

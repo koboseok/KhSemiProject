@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -268,10 +269,12 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<select class="custom-select" id="categoryCode" name="subCode"
 								style="width: 150px;">
 								<option selected>카테고리</option>
+								
 								<c:forEach items="${categoryName}" var="category">
 									<option><c:out value="${category.category_name}"/></option>
 								</c:forEach>
 							</select> <br>
+							
 						</div>
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="subCode">서비스명</label></span>
