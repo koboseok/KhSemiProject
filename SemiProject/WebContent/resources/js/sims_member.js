@@ -4,33 +4,32 @@ var validateCheck = {
     "pwd1" : false,
     "pwd2" : false,
     "name" : false,
-    "phone2" : false,
+    "phone2" : false
 }
 
 //이메일 유효성 검사 + 중복검사 
 $("#email").on("input", function() {
-    var regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/g	;
     var value = $("#email").val();
-
 
 	if(!(value.length>0)){
 		$("#checkEmail").html("&nbsp;");
     } else if(!regExp.test(value)) {
-        $("#checkEmail").text("유효하지 않은 이메일 형식입니다.").css("color", "red");
+        $("#checkEmail").text("유효하지 않은 이메일입니다.").css("color", "red");
         validateCheck.email = false;
     } else {
             //ajax를 이용한 실시간 아이디 중복 검사
             $.ajax({
                 url : "emailDupCheck.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
-                data : {"email" : value}, 
+                data : {"Email" : value}, 
                 type : "post",
                 success : function(result) {
                     if(result == 0) {
                         $("#checkEmail").text("사용 가능한 이메일입니다.").css("color", "green")
-                        validateCheck.id = true;
+                        validateCheck.email = true;
                     } else {
                         $("#checkEmail").text("이미 사용 중인 이메일입니다.").css("color", "red")
-                        validateCheck.id = false;
+                        validateCheck.email = false;
                     }
                 },
                 error: function() {
@@ -111,9 +110,10 @@ $("#email").on("input", function() {
 
 
  //별명 유효성 검사
- $("#name").on("input",function() {
+ $("#name").on("input", function() {
     var regExp = /^[\wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
     var value = $("#name").val();
+
 
    if(!(value.length>0)){
 		$("#checkName").html("&nbsp;");

@@ -39,7 +39,7 @@ public class MemberController extends HttpServlet {
 
 		try {
 
-			//MemberService service = new MemberService();
+			MemberService mService = new MemberService();
 			//String cp = request.getParameter("cp");
 			
 			//회원가입 페이지 이동 Controller ******************************************
@@ -86,7 +86,7 @@ public class MemberController extends HttpServlet {
 				
 				
 				
-					int result = new MemberService().signUp(member, service);
+					int result = mService.signUp(member, service);
 					
 					if(result>0) {
 						swalIcon = "success";
@@ -106,6 +106,25 @@ public class MemberController extends HttpServlet {
 					response.sendRedirect(request.getContextPath());
 					
 			}
+			//이메일 중복검사 Controller **************************************************
+			else if(command.equals("/emailDupCheck.do")) {
+				errorMsg = "아이디 중복검사 중 오류가 발생하였습니다.";
+				
+				String email = request.getParameter("email");
+				
+				int result = mService.emailDupCheck(email);
+				response.getWriter().print(result);
+			}
+			//별명 중복검사 Controller **************************************************
+			else if(command.equals("/nameDupCheck.do")) {
+				errorMsg = "별명 중복 검사 중 오류가 발생하였습니다.";
+			
+				String name = request.getParameter("name");
+				
+				int result = mService.nameDupCheck(name);
+				response.getWriter().print(result);
+			}
+			
 			
 //			로그인 ********************************************
 			else if (command.equals("/login.do")) {

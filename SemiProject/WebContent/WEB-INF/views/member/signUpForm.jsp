@@ -268,7 +268,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<select class="custom-select" id="categoryCode" name="subCode"
 								style="width: 150px;">
 								<option value="10">Contents</option>
-								<option value="20">Foods</option>
+								<option value="20">Food</option>
 								<option value="30">LifeStyle</option>
 								<option value="40">NewsLetter</option>
 							</select> <br>
