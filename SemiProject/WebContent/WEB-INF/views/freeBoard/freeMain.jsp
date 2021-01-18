@@ -47,7 +47,16 @@
 		
 			<div class="free-wrapper">
 					
-				<!-- 검색창 -->
+		
+			
+			
+					<%-- 로그인이 되어있는 경우 --%>
+		 	<c:if test="${!empty loginMember}">
+				<button type="button" class="btn btn-warning float-right" id="insertBtn"
+				 onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
+		 	</c:if>
+		 	
+		 			<!-- 검색창 -->
 			<div class="my-5">
 				
 				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
@@ -62,13 +71,6 @@
 					<button class="btn btn-warning" style="width: 100px; display: inline-block;">검색</button>
 				</form>
 			</div>
-			
-			
-					<%-- 로그인이 되어있는 경우 --%>
-		 	<c:if test="${!empty loginMember}">
-				<button type="button" class="btn btn-warning float-right" id="insertBtn"
-				 onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
-		 	</c:if>
 		
 		
 				<table class="table table-hover my-5" id="free-table">
@@ -108,13 +110,15 @@
 											<%-- 날짜 출력 모양 지정 --%>
 											<fmt:formatDate var="createDate" value="${board.fCreateDate }"  pattern="yyyy-MM-dd"/>                          
 											<fmt:formatDate var="today" value="<%= new java.util.Date()  %>"  pattern="yyyy-MM-dd"/>                          
-												${createDate}
-											 <c:choose>
+											<c:choose>
+												<%-- 글 작성일이 오늘이 아닐 경우 --%>
 												<c:when test="${createDate != today}">
 													${createDate}
 												</c:when>
+												
+												<%-- 글 작성일이 오늘일 경우 --%>
 												<c:otherwise>
-													<fmt:formatDate value="createDate"  pattern="HH:mm"/>                          
+													<fmt:formatDate value="${board.fCreateDate}"  pattern="HH:mm"/>                          
 												</c:otherwise>
 											</c:choose>
 										
@@ -144,7 +148,7 @@
 				</c:when>
 			
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/main.do"/>
+					<c:url var="pageUrl" value="/freeBoard/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
@@ -213,12 +217,8 @@
 						</li>
 						
 					</c:if>
-				
-
 				</ul>
 			</div>
-		
-		
 		
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
@@ -227,31 +227,26 @@
 	<script>
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
 		
+		
+		
 		$("#free-table td").on("click", function(){
 			
-			if(loginMember != null){
-				
-				
+			
+			
+			
 			// 게시글 번호 얻어오기
 			var fBoardNo = $(this).parent().children().eq(0).text();
-	        console.log(fBoardNo);
 			
-			var url = "${contextPath}/freeBoard/main.do?cp=${fPInfo.currentPage}&no=" + fBoardNo + "${searchStr}";
+			var url = "${contextPath}/freeBoard/view.do?cp=${fPInfo.currentPage}&no=" + fBoardNo + "${searchStr}";
+			
 			location.href = url;
 			
-			}else{
-				alert("회원만 열람 가능 합니다. 로그인 후 이용해 주세요.");
-			}
-		
-				
-				
-				
-			}
+			
 			
 		});
 		
 		
-		
+		/* 
 		// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
 		 (function(){
 			var searchKey = "${param.fsk}"; 
@@ -271,7 +266,7 @@
 			// 검색어 입력창에 searcValue 값 출력
 			$("input[name=fsv]").val(searchValue);
 		})();
-		 
+		  */
 		
 		
 		

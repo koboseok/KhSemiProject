@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.freeBoard.model.service.FreeBoardService;
-//import com.kh.semi.freeBoard.model.service.FreeBoardService;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 
@@ -60,10 +59,12 @@ public class FreeController extends HttpServlet {
 				List<FreeBoard> fList = service.selectFBoardList(fPInfo);
 				 
 				
+			
 				
 				
 				path = "/WEB-INF/views/freeBoard/freeMain.jsp";
-				//request.setAttribute("fList", fList);
+				request.setAttribute("fPInfo", fPInfo);
+				request.setAttribute("fList", fList);
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 				
