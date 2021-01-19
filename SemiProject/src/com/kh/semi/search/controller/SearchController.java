@@ -26,7 +26,7 @@ public class SearchController extends HttpServlet {
 		String uri = request.getRequestURI();  // 요청 들어 오는 주소
 		String contextPath = request.getContextPath(); // 
 		
-		String command = uri.substring((contextPath).length());  // freeBoard 뒤만 잘라내기
+		String command = uri;
 
 		
 	
@@ -34,8 +34,8 @@ public class SearchController extends HttpServlet {
 		
 		if(command.equals("freeBoard/search.do")) {
 			
-			String searchKey = request.getParameter("fsk");
-			String searchValue = request.getParameter("fsv");
+			String searchKey = request.getParameter("sk");
+			String searchValue = request.getParameter("sv");
 			String currentPage = request.getParameter("cp");
 
 			// 세개를 전달하기 위한 Map
@@ -53,26 +53,13 @@ public class SearchController extends HttpServlet {
 			// 검색 게시글 목록 조회 
 			 
 			 List<FreeBoard> fList = service.searchFBoardList(map, fPInfo);
-			 
-			 if(fList != null) {
-				 
-				 
-					List<Attachment> fileList = service.searchThumbnailList(map, fPInfo);
-					
-					
-					
-					if(!fileList.isEmpty()) { //조회된 썸네일 목록이 있다면
-						
-						request.setAttribute("fileList", fileList);
-					}
-				}
-				
+			 	
 
 				// 조회된 내용과 PageInfo 객체를 request 객체에 담아서 요청 위임
 				
 				String path = "/WEB-INF/views/freeBoard/freeMain.jsp";
 				
-				request.setAttribute("bList", fList);
+				request.setAttribute("fList", fList);
 				request.setAttribute("fPInfo", fPInfo);
 
 				RequestDispatcher view = request.getRequestDispatcher(path);

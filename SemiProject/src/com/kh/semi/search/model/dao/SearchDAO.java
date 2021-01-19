@@ -92,9 +92,7 @@ public class SearchDAO {
 
 			rset = pstmt.executeQuery();
 
-			fList = new ArrayList<FreeBoard>();
-
-
+			
 			while (rset.next()) {
 				FreeBoard fBoard = new FreeBoard();
 
