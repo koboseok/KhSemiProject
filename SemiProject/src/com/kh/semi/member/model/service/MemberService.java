@@ -11,7 +11,7 @@ import com.kh.semi.member.model.vo.Member;
 public class MemberService {
 
 	private MemberDAO dao = new MemberDAO();
-	
+
 	/** 회원가입 service
 	 * @param member
 	 * @param service
@@ -20,25 +20,28 @@ public class MemberService {
 	 */
 	public int signUp(Member member, Map<String, Object> service) throws Exception {
 		int result = 0;
-		
+
 		Connection conn = getConnection();
-		
+
 		//회원 가입
 		result = dao.signUp(conn, member);
-		
+
 		//가입 성공시 회원 구독 정보 입력 
 		if(result>0) {
-			result = dao.insertMemSub(conn, service, member.getMemNo());
+
+			if(service != null) {
+				result = dao.insertMemSub(conn, service, member.getMemNo());
+			}
 			
 			if(result>0) commit(conn);
 			else rollback(conn);
-		
+
 		} else {
 			result = -1;
 		}
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -49,13 +52,13 @@ public class MemberService {
 	 */
 	public int updatePwd(Member loginMember, String newPwd) throws Exception  {
 		Connection conn = getConnection();
-//		1) 현재 비밀번호가 일치하는지 검사
+		//		1) 현재 비밀번호가 일치하는지 검사
 		int result = dao.checkCurrentPwd(conn, loginMember);
 
-//		2) 현재 비밀번호 일치 시 새 비밀번호로 수정
+		//		2) 현재 비밀번호 일치 시 새 비밀번호로 수정
 		if (result > 0) { // 현재 비밀번호 일치
 
-//			loginMember 비밀번호 필드에 newPwd를 세팅하여 재활용
+			//			loginMember 비밀번호 필드에 newPwd를 세팅하여 재활용
 			loginMember.setMemPwd(newPwd);
 
 			result = dao.updatePwd(conn, loginMember);
@@ -69,11 +72,11 @@ public class MemberService {
 			result = -1;
 
 		}
-		
+
 		close(conn);
-		
+
 		return result;
-//		-1 , 0 , 1
+		//		-1 , 0 , 1
 	}
 
 	/** 회원 탈퇴 Service
@@ -84,10 +87,10 @@ public class MemberService {
 	public int updateStatus(Member loginMember) throws Exception {
 		Connection conn = getConnection();
 
-//		1) 현재 비밀번호가 일치하는지 검사
+		//		1) 현재 비밀번호가 일치하는지 검사
 		int result = dao.checkCurrentPwd(conn, loginMember);
 
-//		2) 현재 비밀번호 일치 시 상태 변경 진행
+		//		2) 현재 비밀번호 일치 시 상태 변경 진행
 		if (result > 0) {
 
 			result = dao.updateStatus(conn, loginMember);
@@ -103,7 +106,7 @@ public class MemberService {
 		close(conn);
 
 		return result;
-	
+
 	}
 
 	/** 로그인 Service
@@ -112,18 +115,18 @@ public class MemberService {
 	 * @throws Exception
 	 */
 	public Member loginMember(Member member) throws Exception {
-//		1) Connection 얻어오기
+		//		1) Connection 얻어오기
 
 		Connection conn = getConnection();
 
-//		2) DAO 메소드를 수행하여 결과 반환 받기
+		//		2) DAO 메소드를 수행하여 결과 반환 받기
 
 		Member loginMember = dao.loginMember(conn, member);
 
-//		3) Connection 반환하기
+		//		3) Connection 반환하기
 		close(conn);
 
-//		4) DAO 수행 결과를 Controller로 반환하기
+		//		4) DAO 수행 결과를 Controller로 반환하기
 
 		return loginMember;
 	}
@@ -137,7 +140,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = dao.emailDupCheck(conn, email);
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -150,7 +153,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = dao.nameDupCheck(conn, name);
 		close(conn);
-		
+
 		return result;
 	}
 
