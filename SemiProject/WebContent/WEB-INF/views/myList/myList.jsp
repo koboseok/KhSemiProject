@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -79,6 +80,9 @@ div.contain  {
 	background : white;
 	border : none;
 }
+#test1 {
+	width : 30%;
+}
 
 </style>
 
@@ -89,132 +93,299 @@ div.contain  {
 
 
 
+						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
 	<div class="container contain" style=" background-color: white;">
 	
 		<div class="row" id="slider-div" style ="height : 300px;" >
+
+
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12" id="test1" width="30%">
-						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
-						<img class="imgMouseover" alt=""
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/netflix.jpg" />
-						<div class="showdocument si slider-div">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${empty loginMember}">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
 
-							NETFLIX
-							<button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png"/></button>
-							<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
-							2021-01-15<br> <br> 금액 : 12,000원
-						</div>
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12" id="test1" width="30%">
-						<img class="imgMouseover" alt="" 
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/wavve.png" />
-						<div class="showdocument">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
 
-							WAVVE
-							<button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png"/></button>
-							<br> <br> 구독기간<br> 시작 : 2020-12-26<br> 종료 :
-							2021-01-25<br> <br> 금액 : 11,000원
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 ">
-				<div class="row">
-					<div class="col-md-12" id="test1" width="30%">
-					 	 <img class="imgMouseover" alt="" 
-							class="img-responsive center-block"
-							src="${ contextPath }/resources/images/watcha.png" /> 
-						<div class="showdocument">
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
 
-								WATCHA <button class="float-right gearBtn"><img class="gear" src="${contextPath }/resources/images/gear.png" /></button><br>
-							<br> 구독기간<br> 시작 : 2021-01-11<br> 종료 : 2021-03-13<br>
-							<br> 금액 : 13,000원
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 ">
-				<div class="row">
-					<div class="col-md-12" id="test1" width="30%">
-						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
-							href="#modal-container-2">
-								<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
-								<pre style="color: white;">구독 서비스 추가</pre>
-						</button>
-						<div class="showdocument">
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
 
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 ">
-				<div class="row">
-					<div class="col-md-12 " id="test1" width="30%">
-						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
-							href="#modal-container-2" >
-							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
-							<pre  style="color: white;" >구독 서비스 추가</pre>
-						</button>
-						<div class="showdocument">
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 ">
-				<div class="row">
-					<div class="col-md-12 " id="test1" width="25%">
-						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
-							href="#modal-container-2" >
-							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
-								<pre  style="color: white;" >구독 서비스 추가</pre>
-						</button>
-						<div class="showdocument">
+							</c:otherwise>
 
-						</div>
+
+						</c:choose>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12 " id="test1" width="25%">
-						<button class="btn addBtn " style="background: forestgreen;" data-toggle="modal"
-							href="#modal-container-2" >
-							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
-								<pre  style="color: white;" >구독 서비스 추가</pre>
-						</button>
-						<div class="showdocument">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
 
-						</div>
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3 ">
 				<div class="row">
-					<div class="col-md-12 " id="test1" width="25%">
-						<button class="btn addBtn "  style="background: forestgreen;" data-toggle="modal"
-							href="#modal-container-2" >
-							<br><img class="add-sub" src="${contextPath }/resources/images/add-sub.png"/>
-								<pre  style="color: white;" >구독 서비스 추가</pre>
-						</button>
-						<div class="showdocument">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
 
-						</div>
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
+
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
+
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
+
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+
+
+						</c:choose>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="row">
+					<div class="col-md-12" id="test1">
+						<c:choose>
+							<c:when test="${!empty loginMember }">
+								<button class="btn addBtn " style="background: forestgreen;"
+									data-toggle="modal" href="#modal-container-2">
+									<br>
+									<img class="add-sub"
+										src="${contextPath }/resources/images/add-sub.png" />
+									<pre style="color: white;">구독 서비스 추가</pre>
+								</button>
+							</c:when>
+
+							<c:otherwise>
+								<img class="imgMouseover" alt=""
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/netflix.jpg" />
+								<div class="showdocument si slider-div">
+
+									NETFLIX
+									<button class="float-right gearBtn">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : 2020-12-16<br> 종료 :
+									2021-01-15<br> <br> 금액 : 12,000원
+								</div>
+
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	
 	

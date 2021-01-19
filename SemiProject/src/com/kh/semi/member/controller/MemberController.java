@@ -139,7 +139,7 @@ public class MemberController extends HttpServlet {
 				String memPwd = request.getParameter("memPwd");
 				String save = request.getParameter("save");
 //				체크 시 on , 아니면 null값으로 넘어온다.
-				System.out.println(memEmail + "/" + memEmail + "/" + save);
+//				System.out.println(memEmail + "/" + memEmail + "/" + save);
 
 //				JDBC 수행
 //				아이디와 비밀번호를 하나의 VO에 담에서 service로 전달
@@ -168,6 +168,9 @@ public class MemberController extends HttpServlet {
 					HttpSession session = request.getSession();
 
 //					6-1. 로그인이 성공 했을때만 Session에 로그인 정보 추가하기
+					
+						
+					
 					if (loginMember != null) {
 
 //						6-2. 30분동안 동작이 없을 경우 Session을 만료 시킨다.
@@ -219,6 +222,16 @@ public class MemberController extends HttpServlet {
 						session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
 
 					}
+					
+					if(loginMember.getMemGrade().equals("B") ) {
+						session.setAttribute("swalIcon", "error");
+						session.setAttribute("swalTitle", "로그인 실패");
+						session.setAttribute("swalText", "불량 회원으로 등록된 아이디 입니다.");
+						
+					}
+					
+					
+					
 
 //					* forward 같은 경우에는 이동하는 페이지로
 //						request, response 객체를 그대로 위임하고 , 주소를 위임 전 주소로 유지한다.

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+
+
+
+<entry key="selectList">
+SELECT MEM_NO , SERV_CODE, SERV_NM , SUB_ST_DT , SUB_END_DT , PRICE  , SERV_IMG
+FROM MEM_SUB
+JOIN SUBSERVICE USING(SERV_CODE)
+WHERE MEM_NO = ?
+
+
+</entry>
+
+</properties>
