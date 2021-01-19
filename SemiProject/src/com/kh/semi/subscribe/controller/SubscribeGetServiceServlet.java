@@ -24,9 +24,9 @@ public class SubscribeGetServiceServlet extends HttpServlet {
 			
 			List<String> service = new SubscribeService().getService(category);
 			//response.getWriter().print(service);
-			
-			Gson gson = new GsonBuilder().create();
-			gson.toJson(service, response.getWriter());
+			System.out.println(service);
+			//Gson gson = new GsonBuilder().create();
+			new Gson().toJson(service, response.getWriter());
 			
 		} catch (Exception e) {
 			
