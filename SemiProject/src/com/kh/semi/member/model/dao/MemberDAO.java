@@ -58,30 +58,6 @@ public class MemberDAO {
 		return result;
 	}
 
-	/**구독서비스 목록 입력 DAO
-	 * @param conn
-	 * @param service
-	 * @param memNo 
-	 * @return result
-	 * @throws Exception
-	 */
-	public int insertMemSub(Connection conn, Map<String, Object> service, int memNo) throws Exception {
-		int result = 0;
-		String query = prop.getProperty("insertMemSub");
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, memNo);
-			
-		} finally {
-
-		}
-
-		return result;
-	}
-
-
-
 	/** 비밀번호 검사 DAO
 	 * @param conn
 	 * @param loginMember
@@ -264,5 +240,70 @@ public class MemberDAO {
 		}
 		return result;
 
+	}
+
+	/** 서비스명으로 서비스 코드를 찾아오는 DAO
+	 * @param conn
+	 * @param serviceName
+	 * @return servCode
+	 * @throws Exception
+	 */
+	public int getServCode(Connection conn, String serviceName) throws Exception {
+		int servCode = 0;
+		String query = prop.getProperty("getServCode");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, serviceName);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				servCode = rset.getInt("SERV_CODE");
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return servCode;
+	}
+
+
+	/**가입 성공시 이메일로 회원 번호를 가져오는 DAO
+	 * @param conn
+	 * @param memEmail
+	 * @return memNo
+	 * @throws Exception
+	 */
+	public int getMemNo(Connection conn, String memEmail) throws Exception {
+		int memNo = 0;
+		String query = prop.getProperty("getMemNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memEmail);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) memNo = rset.getInt(1);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return memNo;
+	}
+
+
+	/** 가입 시 구독 목록 등록 DAO
+	 * @param conn
+	 * @param subData
+	 * @param memNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int setMemSub(Connection conn, Map<String, Object> subData, int memNo) throws Exception {
+
+		
+		return 0;
 	}
 }

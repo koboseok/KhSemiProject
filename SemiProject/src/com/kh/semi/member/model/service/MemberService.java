@@ -14,31 +14,18 @@ public class MemberService {
 
 	/** 회원가입 service
 	 * @param member
-	 * @param service
 	 * @return result
 	 * @throws Exception
 	 */
-	public int signUp(Member member, Map<String, Object> service) throws Exception {
+	public int signUp(Member member) throws Exception {
 		int result = 0;
 
 		Connection conn = getConnection();
 
-		//회원 가입
+		//회원 가입 메소드
 		result = dao.signUp(conn, member);
-
-		//가입 성공시 회원 구독 정보 입력 
-		if(result>0) {
-
-			if(service != null) {
-				result = dao.insertMemSub(conn, service, member.getMemNo());
-			}
-			
-			if(result>0) commit(conn);
-			else rollback(conn);
-
-		} else {
-			result = -1;
-		}
+		
+		if(result>0) commit(conn); else rollback(conn);
 
 		close(conn);
 
@@ -154,6 +141,43 @@ public class MemberService {
 		int result = dao.nameDupCheck(conn, name);
 		close(conn);
 
+		return result;
+	}
+
+	/** 서비스명으로 서비스 코드를 찾아오는 Service
+	 * @param serviceName
+	 * @return servCode
+	 * @throws Exception
+	 */
+	public int getServCode(String serviceName) throws Exception {
+		Connection conn = getConnection();
+		int servCode = dao.getServCode(conn, serviceName);
+		close(conn);
+		return servCode;
+	}
+
+	/** 가입 성공시 이메일로 회원 번호를 가져오는 Service
+	 * @param memEmail
+	 * @return memNo
+	 * @throws Exception
+	 */
+	public int getMemNo(String memEmail) throws Exception {
+		Connection conn = getConnection();
+		int memNo = dao.getMemNo(conn, memEmail);
+		close(conn);
+		return memNo;
+	}
+
+	/**가입 시 구독 목록 등록 Service
+	 * @param subData
+	 * @param memNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int setMemSub(Map<String, Object> subData, int memNo) throws Exception{
+		Connection conn = getConnection();
+		int result = dao.setMemSub(conn, subData, memNo);
+		close(conn);
 		return result;
 	}
 
