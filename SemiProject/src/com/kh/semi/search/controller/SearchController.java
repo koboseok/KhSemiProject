@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 import com.kh.semi.search.model.service.SearchService;
@@ -27,14 +28,6 @@ public class SearchController extends HttpServlet {
 		
 		String command = uri.substring((contextPath).length());  // freeBoard 뒤만 잘라내기
 
-		String path = null;
-		RequestDispatcher view = null;
-		
-		String swalIcon = null;
-		String swalTitle = null;
-		String swalText = null;
-
-		String errorMsg = null;
 		
 	
 	try {
@@ -61,20 +54,41 @@ public class SearchController extends HttpServlet {
 			 
 			 List<FreeBoard> fList = service.searchFBoardList(map, fPInfo);
 			 
-			 System.out.println(fPInfo);
-			 
-			 for(FreeBoard f : fList) {
-				 System.out.println(f);
-			 }
+			 if(fList != null) {
+				 
+				 
+					List<Attachment> fileList = service.searchThumbnailList(map, fPInfo);
+					
+					
+					
+					if(!fileList.isEmpty()) { //조회된 썸네일 목록이 있다면
+						
+						request.setAttribute("fileList", fileList);
+					}
+				}
+				
+
+				// 조회된 내용과 PageInfo 객체를 request 객체에 담아서 요청 위임
+				
+				String path = "/WEB-INF/views/freeBoard/freeMain.jsp";
+				
+				request.setAttribute("bList", fList);
+				request.setAttribute("fPInfo", fPInfo);
+
+				RequestDispatcher view = request.getRequestDispatcher(path);
+				view.forward(request, response);
 			
 		}
 
 	
 	}catch(Exception e) {
+		
 		e.printStackTrace();
-		path = "/WEB-INF/views/common/errorPage.jsp";
-		request.setAttribute("errorMsg", errorMsg);
-		view = request.getRequestDispatcher(path);
+		String path = "/WEB-INF/views/common/errorPage.jsp";
+		
+		request.setAttribute("errorMsg", "검색 과정에서 오류 발생");
+		
+		RequestDispatcher view = request.getRequestDispatcher(path);
 		view.forward(request, response);
 	}
 	

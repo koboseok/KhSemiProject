@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 import com.kh.semi.search.model.dao.SearchDAO;
@@ -104,6 +105,8 @@ public class SearchService {
 		close(conn);
 		return fList;
 	}
+
+
 
 
 }
