@@ -127,10 +127,10 @@ $("#email").on("input", function() {
            success : function(result) {
                if(result == 0) {
                  $("#checkName").text("사용 가능한 별명입니다.").css("color", "green")
-                 validateCheck.id = true;
+                 validateCheck.name = true;
                } else {
                  $("#checkName").text("이미 사용 중인 별명입니다.").css("color", "red")
-                  validateCheck.id = false;
+                  validateCheck.name = false;
                }
            },
            error: function() {

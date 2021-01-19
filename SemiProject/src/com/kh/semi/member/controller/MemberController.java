@@ -74,19 +74,28 @@ public class MemberController extends HttpServlet {
 
 				Member member = new Member(memEmail, memPwd, memName, memPhone);	
 				
-				
-				String serviceName = request.getParameter("serviceName");
-				int serviceCharge = Integer.parseInt(request.getParameter("serviceCharge"));
-				Date paymentDate = Date.valueOf(request.getParameter("paymentDate"));
-				
-				Map<String, Object> service = new HashMap<String, Object>();
-				service.put("serviceName", serviceName);
-				service.put("serviceCharge", serviceCharge);
-				service.put("paymentDate", paymentDate);
-				
-				
-				
-					int result = mService.signUp(member, service);
+				//구독 서비스 등록 (선택)
+	            String serviceName = request.getParameter("serviceName");
+	            int serviceCharge = 0;
+	                  if(request.getParameter("serviceCharge") != "") {
+	                  serviceCharge = Integer.parseInt(request.getParameter("serviceCharge")); }
+	                  
+	            Date paymentDate = null;
+	                  if(request.getParameter("paymentDate") != "") {
+	                     Date.valueOf(request.getParameter("paymentDate"));
+	                  }
+	            
+	            Map<String, Object> service = null;
+
+	            if(serviceCharge != 0) {
+	            service = new HashMap<String, Object>();
+	            service.put("serviceName", serviceName);
+	            service.put("serviceCharge", serviceCharge);
+	            service.put("paymentDate", paymentDate);
+	            }
+	            
+	               int result = mService.signUp(member, service);
+
 					
 					if(result>0) {
 						swalIcon = "success";

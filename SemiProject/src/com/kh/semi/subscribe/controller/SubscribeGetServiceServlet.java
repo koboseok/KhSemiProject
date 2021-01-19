@@ -20,6 +20,7 @@ public class SubscribeGetServiceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String category = request.getParameter("category");
+			System.out.println(category);
 			
 			List<String> service = new SubscribeService().getService(category);
 			//response.getWriter().print(service);
