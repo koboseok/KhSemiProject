@@ -7,9 +7,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
 
 public class MemberDAO {
@@ -294,16 +296,40 @@ public class MemberDAO {
 	}
 
 
-	/** 가입 시 구독 목록 등록 DAO
+
+	/** 가입 시 구독목록 등록 DAO
 	 * @param conn
-	 * @param subData
-	 * @param memNo
+	 * @param list
 	 * @return result
 	 * @throws Exception
 	 */
-	public int setMemSub(Connection conn, Map<String, Object> subData, int memNo) throws Exception {
-
+	public int insertMemSub(Connection conn, List<MemSubscribe> list) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("insertMemSub");
 		
-		return 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			for (MemSubscribe MemSub : list) {
+		        pstmt.setInt(1, MemSub.getMemNo());
+		        pstmt.setInt(2, MemSub.getServCode());
+		        pstmt.setDate(3, MemSub.getServStDate());
+		        pstmt.setInt(4, MemSub.getPrice());
+		        pstmt.addBatch();
+		        pstmt.clearParameters();
+		      }
+
+			int[] resultGroup = pstmt.executeBatch();
+		    pstmt.clearParameters(); 
+
+			for(int i : resultGroup) {
+				result += i;
+			}
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

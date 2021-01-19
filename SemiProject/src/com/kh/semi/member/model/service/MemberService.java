@@ -3,9 +3,11 @@ package com.kh.semi.member.model.service;
 import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Map;
 
 import com.kh.semi.member.model.dao.MemberDAO;
+import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
 
 public class MemberService {
@@ -168,17 +170,37 @@ public class MemberService {
 		return memNo;
 	}
 
-	/**가입 시 구독 목록 등록 Service
+	/**가입 시 구독 목록 등록 Service2
+	 * @param list
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertMemSub(List<MemSubscribe> list) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.insertMemSub(conn, list);
+		
+		if(result>0) commit(conn); 
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/**가입 시 구독 목록 등록 Service1
 	 * @param subData
 	 * @param memNo
 	 * @return result
 	 * @throws Exception
 	 */
-	public int setMemSub(Map<String, Object> subData, int memNo) throws Exception{
+	/*public int setMemSub(Map<String, Object> subData, int memNo) throws Exception{
 		Connection conn = getConnection();
 		int result = dao.setMemSub(conn, subData, memNo);
 		close(conn);
 		return result;
-	}
+	}*/
+	
+	
+	
 
 }
