@@ -201,12 +201,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 										</div>
 										<div class="col-md-3">
 											<input type="text" class="text-sm serviceName" name="serviceName"
-												id="serviceName" placeholder="검색을 눌러주세요." disabled>
+												id="serviceName" placeholder="검색을 눌러주세요." readonly>
 										</div>
 										<div class="col-md-3 offset-md-2">
 											<a class="nav-link" data-toggle="modal" href="#search-modal">
 												<button type="button"
-													class="btn btn-secondary btn-sm btn-block search-select">검색</button>
+													class="btn btn-secondary btn-sm btn-block search-select" 
+													id="search-select">검색</button>
 											</a>
 										</div>
 									</div>
@@ -263,60 +264,26 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				</div>
 
 				<div class="modal-body">
-					<form class="form-addSub" method="POST" action=" # ">
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="categoryCode">카테고리</label></span>
 							<select class="custom-select" id="categoryCode" name="categoryCode"
 								style="width: 150px;">
-								<option>카테고리</option>
+								<option selected>카테고리</option>
 								<option>Contents</option>
 								<option>Food</option>
 								<option>Lifestyle</option>
 								<option>Newsletter</option>
 							</select>
-							
-							<!-- <select class="custom-select" id="categoryCode" name="categoryCode"
-								style="width: 150px;">
-								<option selected>카테고리</option>
-								
-								<c:forEach items="${category}" var="name">
-									<option><c:out value="${name.category}"/></option>
-								</c:forEach>
-							</select> <br>  -->
-
-							<!--<c:if test="${!empty category}">
-								<select name="categoryCode" id="categoryCode" style="width: 150px;"
-									class="custom-select">
-
-									<c:forEach var="testList" items="${category}" varStatus="i">
-
-										<option value="${category}">${category}</option>
-
-									</c:forEach>
-
-								</select>
-
-							</c:if>-->
-
-
-
-
-						</div>
+							</div>
+						
 						<div class="select-modal">
 							<span class="modal-align-box"><label for="subCode">서비스명</label></span>
-							<select class="custom-select" id="subCode" name="subCode"
-								style="width: 150px;">
-								<option value="10">넷플릭스</option>
-								<option value="20">유튜브 프리미엄</option>
-								<option value="30">왓챠</option>
-								<option value="40">쿠팡</option>
-								<option value="50">웨이브</option>
-								<option value="60">기타</option>
+							<select class="custom-select" id="subCode" name="subCode" style="width: 150px;">
+								<option>--</option>
 							</select>
 						</div>
 						<hr>
-						<button class="btn btn-lg btn-warning btn-block" type="submit">ADD</button>
-					</form>
+						<button class="btn btn-lg btn-warning btn-block" type="submit" onclick="inputService();">추가</button>
 				</div>
 			</div>
 		</div>
@@ -337,14 +304,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			//복사된 개체의 input태그 내용 비우기 + id값 변경
 			
 			count = ++count;
-			console.log(count);
 			
 			newForm.find('.serviceName').val("").attr('id', 'serviceName' + count);
 			newForm.find('.serviceCharge').val("").attr('id', 'serviceCharge' + count);
 			newForm.find('.paymentDate').val("").attr('id', 'paymentDate' + count);
 			newForm.find('#searchFT').val(false).attr('id', 'searchFT' + count);
-			
-						
+			newForm.find('#search-modal').attr('id', 'search-modal' + count);
+			newForm.find('#search-select').attr('id', 'search-select' + count);
+
 			//label for이 가리키는 id변경
 			newForm.find('label[for=serviceName]').prop('for', 'serviceName' + count);
 			newForm.find('label[for=serviceCharge]').prop('for', 'serviceCharge' + count);
@@ -365,21 +332,22 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			var el = $(event.target).parent().remove();
     	});
 		
-		//-----------------------------------------------------------
-
-		
+		//서비스 검색하고 input에 입력-----------------------------------------------------------
 		$(document).on("change", "select[name=categoryCode]", function(){
 		
 		var category = $("select[name=categoryCode]>option:selected").val();
-		console.log(category);
 		    $.ajax({
 		        url : "${contextPath}/subscribe/getService.do", 
 		        type : "post",
 		        data : {"category" : category},
 		        dataType : "json",
 		        success : function(subservice) {
-		        	console.log(subservice);
-		        
+		        	$('#subCode').empty();
+		        	
+		        	$.each(subservice, function (key, value) {
+                       $('#subCode').append('<option value="' + value + '">' + value + '</option>');
+                   });
+		        	
 		        },
 		        error: function() {
 		            console.log("서비스 찾기 실패");
@@ -387,6 +355,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 		    });
 		});
+		
+		function inputService() {
+			var value = $("#subCode>option:selected").val();
+			if(count==0) {
+			$('#serviceName').val(value);
+				}
+			$('#serviceName' + count).val(value);
+			$('#search-modal').modal("hide"); 
+		}
 		
 		
 	</script>

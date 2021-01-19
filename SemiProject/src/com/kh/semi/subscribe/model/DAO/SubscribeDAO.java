@@ -44,7 +44,9 @@ public class SubscribeDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, category);
+			pstmt.setString(1, category.toUpperCase());
+			
+			rset = pstmt.executeQuery();
 			
 			service = new ArrayList<String>();
 			while(rset.next()) {

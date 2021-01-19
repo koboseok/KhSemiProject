@@ -72,12 +72,10 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memNo);
-			//임시 중단
+			
 		} finally {
 
 		}
-
-
 
 		return result;
 	}
