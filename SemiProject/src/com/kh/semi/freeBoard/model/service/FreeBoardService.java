@@ -91,54 +91,53 @@ public class FreeBoardService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertBoard(Map<String, Object> map)  throws Exception{
+	public int insertFBoard(Map<String, Object> map)  throws Exception{
 		Connection conn = getConnection();
 
 		int result = 0;
 
 //		1. 게시글 번호 얻어오기
-		int boardNo = dao.selectNextNo(conn);
+		int fBoardNo = dao.selectFNextNo(conn);
 //		다수의 사용자가 사용할 때 충돌현상 방지 ,중복 제거
 //		상세조회 페이지로 이동하는 용도로도 쓰인다 .
 
-		if (boardNo > 0) {
+		if (fBoardNo > 0) {
 //			얻어온 게시글 번호를 map에 추가 (게시글,파일정보 삽입 DAO에서 사용하기 위해
-			map.put("boardNo", boardNo);
+			map.put("fBoardNo", fBoardNo);
 
 //			2. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
-			String boardTitle = (String) map.get("boardTitle");
-			String boardContent = (String) map.get("boardContent");
+			String fBoardTitle = (String) map.get("fBoardTitle");
+			String fBoardContent = (String) map.get("fBoardContent");
 
-			boardTitle = replaceParameter(boardTitle);
-			boardContent = replaceParameter(boardContent);
+			fBoardTitle = replaceParameter(fBoardTitle);
+			fBoardContent = replaceParameter(fBoardContent);
 
 //			3. 글 내용 개행무자 \r\n -> <br> 번경 처리
 
-			boardContent = boardContent.replaceAll("\r\n", "<br>");
+			fBoardContent = fBoardContent.replaceAll("\r\n", "<br>");
 
 //			처리된 내용을 다시 map에 추가
-			map.put("boardTitle", boardTitle);
-			map.put("boardContent", boardContent);
+			map.put("fBoardTitle", fBoardTitle);
+			map.put("fBoardContent", fBoardContent);
 
 			try {
 //				4. 게시글 부분(제목 , 내용 , 카테고리)만 BOARD 테이블에 삽입
-				result = dao.insertBoard(conn, map);
+				result = dao.insertFBoard(conn, map);
 
 //				5. 파일 정보 부분만 ATTACHMENT 테이블에 삽입하는 DAO 호출
-				List<Attachment> fList = (List<Attachment>) map.get("fList");
+				List<Attachment> fileList = (List<Attachment>) map.get("fileList");
 
 //				게시글 부분 삽입 성공 && 파일 정보가 있을 경우(비어있지 않을 경우)
-				if (result > 0 && !fList.isEmpty()) {
+				if (result > 0 && !fileList.isEmpty()) {
 
 					result = 0; // result 재활용 하기위해 0으로 초기화
 
 //					fList의 요소를 하나씩 반복 접근하여
 //					DAO 메소드를 반복 호출해 정보를 삽입한다.
-					for (Attachment at : fList) {
+					for (Attachment at : fileList) {
 
 //						파일 정보가 저장된 Attachment 객체에 해당 파일이 작성된 게시글 번호를 추가 세팅
-						at.setBoardNo(boardNo);
-
+						at.setparentBoardNo(fBoardNo);
 						result = dao.insertAttachment(conn, at);
 
 						if (result == 0) { // 삽입 실패
@@ -154,11 +153,11 @@ public class FreeBoardService {
 			} catch (Exception e) {
 //				4,5번에 대한 추가 작업
 //				게시글 또는 파일 정보 삽입 중 에러 발생 시 서버에 저장된 파일을 삭제하는 작업이 필요
-				List<Attachment> fList = (List<Attachment>) map.get("fList");
+				List<Attachment> fileList = (List<Attachment>) map.get("fileList");
 
-				if (!fList.isEmpty()) {
+				if (!fileList.isEmpty()) {
 
-					for (Attachment at : fList) {
+					for (Attachment at : fileList) {
 
 						String imgPath = at.getImgPath();
 						String imgName = at.getImgName();
@@ -184,7 +183,7 @@ public class FreeBoardService {
 
 //				삽입 성공 시 상세 조회 화면으로 이동해야되기 때문에
 //				글번호를 반환할 수 있도록 result에 boardNo을 대입
-				result = boardNo;
+				result = fBoardNo;
 			} else {
 				rollback(conn);
 			}
@@ -224,14 +223,14 @@ public class FreeBoardService {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectBoardFiles(int boardNo) throws Exception{
+	public List<Attachment> selectBoardFiles(int fBoardNo) throws Exception{
 		Connection conn = getConnection();
 
-		List<Attachment> fList = dao.selectBoardFiles(conn, boardNo);
+		List<Attachment> fileList = dao.selectBoardFiles(conn, fBoardNo);
 
 		close(conn);
 
-		return fList;
+		return fileList;
 	}
 
 	/** 게시글 수정 Service
@@ -239,7 +238,7 @@ public class FreeBoardService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateBoard(Map<String, Object> map) throws Exception{
+	public int updateFBoard(Map<String, Object> map) throws Exception{
 		Connection conn = getConnection();
 //		Service 수행 결과 저장용 변수
 		int result = 0;
@@ -247,34 +246,34 @@ public class FreeBoardService {
 		List<Attachment> deleteFiles = null;
 
 //		1. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
-		String boardTitle = (String) map.get("boardTitle");
-		String boardContent = (String) map.get("boardContent");
+		String fBoardTitle = (String) map.get("fBoardTitle");
+		String fBoardContent = (String) map.get("fBoardContent");
 
-		boardTitle = replaceParameter(boardTitle);
-		boardContent = replaceParameter(boardContent);
+		fBoardTitle = replaceParameter(fBoardTitle);
+		fBoardContent = replaceParameter(fBoardContent);
 
 //		2. 글 내용 개행무자 \r\n -> <br> 번경 처리
 
-		boardContent = boardContent.replaceAll("\r\n", "<br>");
+		fBoardContent = fBoardContent.replaceAll("\r\n", "<br>");
 
 //		처리된 내용을 다시 map에 추가
-		map.put("boardTitle", boardTitle);
-		map.put("boardContent", boardContent);
+		map.put("fBoardTitle", fBoardTitle);
+		map.put("fBoardContent", fBoardContent);
 
 		try {
 //			3. 게시글 부분 수정 DAO 호출
-			result = dao.updateBoard(conn, map);
+			result = dao.updateFBoard(conn, map);
 
 //			4. 게시글 수정 성공하고 fList가 비어있지 않으면ㄴ
 //				파일 정보 수정 DAO 호출
 
 //			수정 화면에서 새로운 이미지가 업로드된 파일 정보만을 담고 있는 List
-			List<Attachment> newFileList = (List<Attachment>) map.get("fList");
+			List<Attachment> newFileList = (List<Attachment>) map.get("fileList");
 
 			if (result > 0 && !newFileList.isEmpty()) {
 
 //				DB에서 해당 게시글의 수정 전 파일 목록을 조회한다.
-				List<Attachment> oldFileList = dao.selectBoardFiles(conn, (int) map.get("boardNo"));
+				List<Attachment> oldFileList = dao.selectBoardFiles(conn, (int) map.get("fBoardNo"));
 
 //				newFileList -> [ 수정된 썸네일 (lv.0)]
 
@@ -333,11 +332,11 @@ public class FreeBoardService {
 		} catch (Exception e) {
 //			게시글 수정 중 실패 또는 오류 발생 시
 //			서버에 미리 저장되어있던 이미지 파일 삭제
-			List<Attachment> fList = (List<Attachment>) map.get("fList");
+			List<Attachment> fileList = (List<Attachment>) map.get("fileList");
 
-			if (!fList.isEmpty()) {
+			if (!fileList.isEmpty()) {
 
-				for (Attachment at : fList) {
+				for (Attachment at : fileList) {
 
 					String ImgPath = at.getImgPath();
 					String imgName = at.getImgName();
@@ -389,11 +388,11 @@ public class FreeBoardService {
 	 * @return FreeBoard
 	 * @throws Exception
 	 */
-	public FreeBoard updateView(int boardNo) throws Exception{
+	public FreeBoard updateView(int fBoardNo) throws Exception{
 		Connection conn = getConnection();
 
 //		이전에 만들어둔 상세조회 DAO 호출
-		FreeBoard board = dao.selectFBoard(conn, boardNo);
+		FreeBoard board = dao.selectFBoard(conn, fBoardNo);
 
 //		textarea  출력을 위한 개행문자 변경
 		board.setfBoardContent(board.getfBoardContent().replaceAll("<br>", "\r\n"));
@@ -406,11 +405,11 @@ public class FreeBoardService {
 	public List<Attachment> selectThumbnailList(FreePageInfo fPInfo) throws Exception {
 		Connection conn = getConnection();
 
-		List<Attachment> fList = dao.selectThumbnailList(conn, fPInfo);
+		List<Attachment> fileList = dao.selectThumbnailList(conn, fPInfo);
 
 		close(conn);
 
-		return fList;
+		return fileList;
 	}
 
 

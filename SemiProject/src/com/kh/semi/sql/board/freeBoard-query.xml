@@ -39,4 +39,17 @@ FR_READ_COUNT = FR_READ_COUNT+1
 WHERE FR_NO =?
 </entry>
 
+
+<!--다음글 조회  -->
+<entry key="selectFNextNo">
+SELECT SEQ_FBNO.NEXTVAL FROM DUAL
+</entry>
+
+<!-- 게시글 삽입 -->
+<entry key="insertFBoard">
+INSERT INTO FREE_BOARD(FR_NO, FR_TITLE, FR_CONTENT, MEM_NO)
+VALUES(?,?,?,?)
+
+</entry>
+
 </properties>
