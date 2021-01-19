@@ -80,12 +80,12 @@ public class MemberController extends HttpServlet {
 				int result = mService.signUp(member);
 
 				if(result>0) {
-					if(request.getParameter("serviceName") != null) {
+					if(request.getParameter("serviceName") != "") {
 						Map<String, Object> subData = new HashMap<String, Object>();
 
-
+						/*
 						//구독 서비스 등록 (선택 + 개수제한 없음)
-
+						//첫 번째 방법
 						//서비스 이름으로 서비스 코드를 찾는 메소드
 						String[] serviceName = request.getParameterValues("serviceName");
 						List<Integer> serviceCode = new ArrayList<Integer>();
@@ -125,12 +125,40 @@ public class MemberController extends HttpServlet {
 						}
 
 						subData.put("servicePayment", servicePayment);
-
 						//이메일로 멤버 번호를 가져오기
 						int memNo = mService.getMemNo(memEmail);
-						
 						//구독 목록 등록하기
 						result = mService.setMemSub(subData, memNo);
+						*/
+						
+						//두 번째 방법
+						List<MemSubscribe> list = new ArrayList<MemSubscribe>();
+						MemSubscribe memSub = null;
+						
+						String[] serviceName = request.getParameterValues("serviceName");
+						String[] serviceCg = request.getParameterValues("serviceCharge");
+						String[] servicePd = request.getParameterValues("paymentDate");
+						
+						//이메일로 멤버 번호를 가져오기
+						int memNo = mService.getMemNo(memEmail);
+						int serviceNo = 0;
+						int serviceCharge = 0;
+						Date servicePayDay = new Date(System.currentTimeMillis());
+						
+						for(int i=0; i<serviceName.length; i++) {
+							serviceNo = mService.getServCode(serviceName[i]);
+							
+							if(serviceCg[i] != "") {
+							serviceCharge = Integer.parseInt(serviceCg[i]); }
+							
+							if(servicePd[i] != "") {
+							servicePayDay = Date.valueOf(request.getParameter("paymentDate")); }
+							
+							memSub = new MemSubscribe(memNo, serviceNo, servicePayDay, serviceCharge);
+							list.add(memSub);
+						}
+						
+						result = mService.insertMemSub(list);
 					}
 				}
 

@@ -53,5 +53,9 @@ SELECT MEM_NO FROM MEMBER
 WHERE MEM_EMAIL = ?
 </entry>
 
-
+<!-- 구독 서비스 등록 -->
+<entry key="insertMemSub">
+INSERT INTO MEM_SUB(MEM_NO, SERV_CODE, SUB_ST_DT, PRICE, SUB_END_DT)
+VALUES (?, ?, ?, ?, (ADD_MONTHS(SYSDATE, 1)-1))
+</entry>
 </properties>
