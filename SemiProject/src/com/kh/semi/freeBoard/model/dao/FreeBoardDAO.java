@@ -206,10 +206,11 @@ public class FreeBoardDAO {
 	 * @return boardNo
 	 * @throws Exception
 	 */
-	public int selectNextNo(Connection conn) throws Exception {
-		int boardNo = 0;
+	public int selectFNextNo(Connection conn) throws Exception {
+		
+		int fBoardNo = 0;
 
-		String query = prop.getProperty("selectNextNo");
+		String query = prop.getProperty("selectFNextNo");
 
 		try {
 
@@ -218,7 +219,7 @@ public class FreeBoardDAO {
 			rset = stmt.executeQuery(query);
 
 			if (rset.next()) {
-				boardNo = rset.getInt(1);
+				fBoardNo = rset.getInt(1);
 			}
 
 		} finally {
@@ -226,7 +227,7 @@ public class FreeBoardDAO {
 			close(stmt);
 		}
 
-		return boardNo;
+		return fBoardNo;
 	}
 
 	/** 게시글 삽입 DAO
@@ -235,20 +236,19 @@ public class FreeBoardDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertBoard(Connection conn, Map<String, Object> map) throws Exception {
+	public int insertFBoard(Connection conn, Map<String, Object> map) throws Exception {
 		int result = 0;
 
-		String query = prop.getProperty("insertBoard");
+		String query = prop.getProperty("insertFBoard");
 
 		try {
 
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setInt(1, (int) map.get("boardNo"));
-			pstmt.setString(2, (String) map.get("boardTitle"));
-			pstmt.setString(3, (String) map.get("boardContent"));
-			pstmt.setInt(4, (int) map.get("boardWriter"));
-			pstmt.setInt(5, (int) map.get("categoryCode"));
+			pstmt.setInt(1, (int) map.get("fBoardNo"));
+			pstmt.setString(2, (String) map.get("fBoardTitle"));
+			pstmt.setString(3, (String) map.get("fBoardContent"));
+			pstmt.setInt(4, (int) map.get("memNo"));
 
 			result = pstmt.executeUpdate();
 
@@ -277,7 +277,7 @@ public class FreeBoardDAO {
 			pstmt.setString(1, at.getImgPath());
 			pstmt.setString(2, at.getImgName());
 			pstmt.setInt(3, at.getImgLevel());
-			pstmt.setInt(4, at.getBoardNo());
+			pstmt.setInt(4, at.getparentBoardNo());
 
 			result = pstmt.executeUpdate();
 
@@ -293,27 +293,27 @@ public class FreeBoardDAO {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectBoardFiles(Connection conn, int boardNo) throws Exception {
-		List<Attachment> fList = null;
+	public List<Attachment> selectBoardFiles(Connection conn, int fBoardNo) throws Exception {
+		List<Attachment> fileList = null;
 
 		String query = prop.getProperty("selectBoardFiles");
 
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setInt(1, boardNo);
+			pstmt.setInt(1, fBoardNo);
 
 			rset = pstmt.executeQuery();
 
-			fList = new ArrayList<Attachment>();
+			fileList = new ArrayList<Attachment>();
 
 			while (rset.next()) {
 
-				Attachment at = new Attachment(rset.getInt("FILE_NO"), rset.getString("FILE_NAME"),
-						rset.getInt("FILE_LEVEL"));
+				Attachment at = new Attachment(rset.getInt("IMG_NO"), rset.getString("IMG_NAME"),
+						rset.getInt("IMG_LEVEL"));
 
-				at.setImgPath(rset.getString("FILE_PATH"));
-				fList.add(at);
+				at.setImgPath(rset.getString("IMG_PATH"));
+				fileList.add(at);
 			}
 
 		} finally {
@@ -322,7 +322,7 @@ public class FreeBoardDAO {
 
 		}
 
-		return fList;
+		return fileList;
 	}
 
 	/** 썸네일 목록 조회 DAO
@@ -332,7 +332,7 @@ public class FreeBoardDAO {
 	 * @throws Exception
 	 */
 	public List<Attachment> selectThumbnailList(Connection conn, FreePageInfo fPInfo) throws Exception {
-		List<Attachment> fList = null;
+		List<Attachment> fileList = null;
 
 		String query = prop.getProperty("selectThumbnailList");
 
@@ -350,14 +350,14 @@ public class FreeBoardDAO {
 			rset = pstmt.executeQuery();
 
 //			조회 결과를 저장할 List 생성
-			fList = new ArrayList<Attachment>();
+			fileList = new ArrayList<Attachment>();
 			while (rset.next()) {
 
 				Attachment at = new Attachment();
-				at.setImgName(rset.getString("FILE_NAME"));
-				at.setBoardNo(rset.getInt("PARENT_BOARD_NO"));
+				at.setImgName(rset.getString("IMG_NAME"));
+				at.setparentBoardNo(rset.getInt("FR_NO"));
 
-				fList.add(at);
+				fileList.add(at);
 			}
 
 		} finally {
@@ -366,7 +366,7 @@ public class FreeBoardDAO {
 
 		}
 
-		return fList;
+		return fileList;
 	}
 	
 	/** 게시글 수정 DAO
@@ -375,10 +375,10 @@ public class FreeBoardDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateBoard(Connection conn, Map<String, Object> map) throws Exception {
+	public int updateFBoard(Connection conn, Map<String, Object> map) throws Exception {
 		int result = 0;
 
-		String query = prop.getProperty("updateBoard");
+		String query = prop.getProperty("updateFBoard");
 
 		try {
 
