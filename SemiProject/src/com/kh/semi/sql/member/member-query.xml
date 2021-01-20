@@ -11,13 +11,6 @@ VALUES(SEQ_MNO.NEXTVAL,
 </entry>
 
 
-<!-- (옮길 수 있음)멤버 구독 목록 입력 -->
-<entry key="insertMemSub">
-INSERT INTO MEM_SUB
-VALUES(?)
-
-</entry>
-
 <!-- 이메일 중복 체크 -->
 <entry key="emailDupCheck">
 SELECT COUNT(*) FROM MEMBER
@@ -56,6 +49,6 @@ WHERE MEM_EMAIL = ?
 <!-- 구독 서비스 등록 -->
 <entry key="insertMemSub">
 INSERT INTO MEM_SUB(MEM_NO, SERV_CODE, SUB_ST_DT, PRICE, SUB_END_DT)
-VALUES (?, ?, ?, ?, (ADD_MONTHS(SYSDATE, 1)-1))
+VALUES (?, ?, ?, ?, (ADD_MONTHS(?, 1)-1))
 </entry>
 </properties>
