@@ -170,7 +170,7 @@ public class MemberController extends HttpServlet {
 						
 					if (loginMember != null) {
 						
-												
+						 						
 //							6-2. 30분동안 동작이 없을 경우 Session을 만료 시킨다.
 							session.setMaxInactiveInterval(60 * 30);
 //							session.setMaxInactiveInterval(60 * 1); // 테스트용 1분 후 만료
@@ -227,19 +227,6 @@ public class MemberController extends HttpServlet {
 					
 					response.sendRedirect(request.getHeader("referer"));
 					
-					
-					
-
-//					* forward 같은 경우에는 이동하는 페이지로
-//						request, response 객체를 그대로 위임하고 , 주소를 위임 전 주소로 유지한다.
-
-//					* redirect는 이전 request, response를 폐기하고 새롭게 만들어서 지정된 주소로 새로운 요청을 보낸다.
-//						응답하는 화면을 만드는것이 아닌 경로를 지정해주는 (방향성을 잡아주는)역할
-//					-> 새롭게 요청을 보내기 때문에 이전 요청 주소가 아닌 새로운 요청 주소가 주소창에 나타난다.
-
-//					redirect 방식을 이용하여 로그인을 요청했던 페이지로 이동
-//					referer : 사이트 방문 흔적
-//					request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
 				
 			}
 			
@@ -250,7 +237,6 @@ public class MemberController extends HttpServlet {
 				
 //				로그아웃 후 메인 또는 로그아웃을 수행한 페이지로 리다이렉트
 				response.sendRedirect(request.getContextPath()); // 메인
-//				response.sendRedirect(request.getHeader("referer")); // 로그아웃을 수행한 페이지
 			}
 			
 			
