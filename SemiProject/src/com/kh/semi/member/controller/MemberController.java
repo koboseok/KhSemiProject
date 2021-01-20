@@ -205,6 +205,7 @@ public class MemberController extends HttpServlet {
 			//			로그인 ********************************************
 			else if (command.equals("/login.do")) {
 
+
 				//				1.POST 방식으로 전달된 데이터의 문자 인코딩 변경
 				//				request.setCharacterEncoding("UTF-8");
 
@@ -237,6 +238,7 @@ public class MemberController extends HttpServlet {
 
 				//					5.응답 데이터 문서 타입 지정
 				response.setContentType("text/html; charset=UTF-8");
+
 
 				//					6.Session 객체를 얻어와 로그인 정보를 추가한다.
 				HttpSession session = request.getSession();
@@ -273,10 +275,12 @@ public class MemberController extends HttpServlet {
 						//							3) 1주일 동안 쿠키가 유효하도록 설정 ( 쿠키 생명 주기 설정 )
 						cookie.setMaxAge(60 * 60 * 24 * 7); // 초 단위 --> 7일로 세팅
 
+
 					} else {
 						//							4) 아이디 저장이 check가 안된 경우 기존에 있던 쿠키 파일 삭제
 						cookie.setMaxAge(0); // 생성과 동시에 삭제
 					}
+
 
 					//						5) 쿠키 유효 디렉토리 지정
 					cookie.setPath(request.getContextPath());
@@ -319,6 +323,7 @@ public class MemberController extends HttpServlet {
 				//					request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
 				response.sendRedirect(request.getHeader("referer"));
 
+
 			}
 
 			//			로그아웃 ***************************************
@@ -328,7 +333,7 @@ public class MemberController extends HttpServlet {
 
 				//				로그아웃 후 메인 또는 로그아웃을 수행한 페이지로 리다이렉트
 				response.sendRedirect(request.getContextPath()); // 메인
-				//				response.sendRedirect(request.getHeader("referer")); // 로그아웃을 수행한 페이지
+
 			}
 
 
