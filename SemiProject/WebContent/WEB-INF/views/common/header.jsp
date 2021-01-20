@@ -102,6 +102,7 @@ li{
 	 	<c:remove var="swalText"/>
 	 </c:if>
 
+
 	<div class="hero_area">
 		<header class="header_section">
 			<div class="container-fluid">
