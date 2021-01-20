@@ -131,8 +131,6 @@ public class MemberController extends HttpServlet {
 //			로그인 ********************************************
 			else if (command.equals("/login.do")) {
 				
-//				1.POST 방식으로 전달된 데이터의 문자 인코딩 변경
-//				request.setCharacterEncoding("UTF-8");
 
 //				2.파라미터를 얻어와 변수에 저장
 				String memEmail = request.getParameter("memEmail");
@@ -170,46 +168,48 @@ public class MemberController extends HttpServlet {
 //					6-1. 로그인이 성공 했을때만 Session에 로그인 정보 추가하기
 					
 						
-					
 					if (loginMember != null) {
-
-//						6-2. 30분동안 동작이 없을 경우 Session을 만료 시킨다.
-						session.setMaxInactiveInterval(60 * 30);
-//						session.setMaxInactiveInterval(60 * 1); // 테스트용 1분 후 만료
+						
+												
+//							6-2. 30분동안 동작이 없을 경우 Session을 만료 시킨다.
+							session.setMaxInactiveInterval(60 * 30);
+//							session.setMaxInactiveInterval(60 * 1); // 테스트용 1분 후 만료
 //													 초단위로 작성해야한다.
 
-//						6-3. Session에 로그인 정보 추가
-						session.setAttribute("loginMember", loginMember);
+//							6-3. Session에 로그인 정보 추가
+							session.setAttribute("loginMember", loginMember);
 
-//						cookie -> 사용자 컴퓨터에 저장된다.
-//						session -> 서버에 저장된다.
-//						서버가  접속한 브라우저 마다 session을 구분하는 방법
-//						-> 해당 브라우저의 쿠키 파일에 session을 구분할 수 있는 
-//							session id를 저장시켜 두었다가 접속 될 때 마다 쿠키에서 자동으로
-//								session id를 얻어간다.
+	//						cookie -> 사용자 컴퓨터에 저장된다.
+	//						session -> 서버에 저장된다.
+	//						서버가  접속한 브라우저 마다 session을 구분하는 방법
+	//						-> 해당 브라우저의 쿠키 파일에 session을 구분할 수 있는 
+	//							session id를 저장시켜 두었다가 접속 될 때 마다 쿠키에서 자동으로
+	//								session id를 얻어간다.
+	
+	//						6_4. 아이디를 쿠키에 저장하기
+	
+	//						2) 쿠키 객체 생성
+							Cookie cookie = new Cookie("saveId", memEmail);
 
-//						6_4. 아이디를 쿠키에 저장하기
+//								1) 아아디 저장 checkbox가 체크 되었는지 확인
+							if (save != null) {
 
-//						2) 쿠키 객체 생성
-						Cookie cookie = new Cookie("saveId", memEmail);
+//								3) 1주일 동안 쿠키가 유효하도록 설정 ( 쿠키 생명 주기 설정 )
+								cookie.setMaxAge(60 * 60 * 24 * 7); // 초 단위 --> 7일로 세팅
 
-//						1) 아아디 저장 checkbox가 체크 되었는지 확인
-						if (save != null) {
+							} else {
+//								4) 아이디 저장이 check가 안된 경우 기존에 있던 쿠키 파일 삭제
+								cookie.setMaxAge(0); // 생성과 동시에 삭제
+							}
 
-//							3) 1주일 동안 쿠키가 유효하도록 설정 ( 쿠키 생명 주기 설정 )
-							cookie.setMaxAge(60 * 60 * 24 * 7); // 초 단위 --> 7일로 세팅
-
-						} else {
-//							4) 아이디 저장이 check가 안된 경우 기존에 있던 쿠키 파일 삭제
-							cookie.setMaxAge(0); // 생성과 동시에 삭제
-						}
-
-//						5) 쿠키 유효 디렉토리 지정
-						cookie.setPath(request.getContextPath());
-//												/wsp
-
-//						6) 생성된 쿠키를 클라이언트로 전달(응답)
-						response.addCookie(cookie);
+//							5) 쿠키 유효 디렉토리 지정
+							cookie.setPath(request.getContextPath());
+//												
+							
+//							6) 생성된 쿠키를 클라이언트로 전달(응답)
+							response.addCookie(cookie);
+						
+						
 
 					} else {
 //						7. 로그인이 실패했을 때 "아이디 또는 비밀번호를 확인해주세요."라고 경고창 띄우기
@@ -219,16 +219,13 @@ public class MemberController extends HttpServlet {
 //						sweet alert 사용하기
 						session.setAttribute("swalIcon", "error");
 						session.setAttribute("swalTitle", "로그인 실패");
-						session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
+						session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요");
 
 					}
 					
-					if(loginMember.getMemGrade().equals("B") ) {
-						session.setAttribute("swalIcon", "error");
-						session.setAttribute("swalTitle", "로그인 실패");
-						session.setAttribute("swalText", "불량 회원으로 등록된 아이디 입니다.");
-						
-					}
+					
+					
+					response.sendRedirect(request.getHeader("referer"));
 					
 					
 					
@@ -243,7 +240,6 @@ public class MemberController extends HttpServlet {
 //					redirect 방식을 이용하여 로그인을 요청했던 페이지로 이동
 //					referer : 사이트 방문 흔적
 //					request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
-					response.sendRedirect(request.getHeader("referer"));
 				
 			}
 			
