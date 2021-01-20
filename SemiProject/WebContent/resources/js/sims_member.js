@@ -127,10 +127,10 @@ $("#email").on("input", function() {
            success : function(result) {
                if(result == 0) {
                  $("#checkName").text("사용 가능한 별명입니다.").css("color", "green")
-                 validateCheck.id = true;
+                 validateCheck.name = true;
                } else {
                  $("#checkName").text("이미 사용 중인 별명입니다.").css("color", "red")
-                  validateCheck.id = false;
+                  validateCheck.name = false;
                }
            },
            error: function() {
@@ -170,19 +170,3 @@ $("#email").on("input", function() {
      }
  }
 
-//모달창 관련 js-----------------------------------------------------------------
-//모달창이 열렸을 때 카테고리 option 가져오기
-$("#serviceName").on("click", function() {
- 	$.ajax({
-           url : "subscribe/getCategory.do", //상대경로 작성. 홈페이지 url의 모양을 떠올려보면 이해가 간다.
-           data : {"category" : value}, 
-           type : "post",
-           success : function(result) {
-               
-        
-           },
-           error: function() {
-           console.log("카테고리 가져오기 실패");
-          }
-       });	
-});

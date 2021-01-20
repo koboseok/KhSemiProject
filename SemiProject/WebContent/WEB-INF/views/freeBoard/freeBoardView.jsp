@@ -115,43 +115,47 @@
 				</p>
 				<br>
 				<hr>
-				<div>
-					<!-- 이미지 출력 -->
-					<%-- 	<c:if test="${!empty  }">  
+			
+			<!-- 이미지 출력 -->
+				<c:if test = "${!empty fileList}">
 				<div class="carousel slide boardImgArea" id="board-image">
-					
+				
 					<!-- 이미지 선택 버튼 -->
 					<ol class="carousel-indicators">
-						<c:forEach var="file" items="" varStatus="">
-							
-							<li data-slide-to="" data-target="#board-image"  
-									<c:if test=""> class="active" </c:if> 
-							>                      
+
+						<c:forEach var="file" items="${fileList}" varStatus="vs">
+						
+							<li data-slide-to="${vs.index}" data-target="#board-image" 
+							<c:if test = "${vs.first}">class ="active"</c:if> 
+							>
 							</li>
 						
 						</c:forEach>
 					</ol>
-					 --%>
-
-					<!-- 출력되는 이미지 -->
+					
+					
+					<!--  출력 되는 이미지 부분 -->
 					<div class="carousel-inner">
-						<%-- 	<c:forEach var="file" items="${fList}" varStatus="vs"> --%>
+						<c:forEach var="file" items="${fileList}" varStatus="vs">
 
-						<div class="carousel-item <c:if test="">active</c:if>">
+							<div
+								class="carousel-item <c:if test="${vs.first}">active</c:if> ">
+								<img class="d-block w-100 boardImg" id="${file.fileNo}"
+									src="${contextPath}/resources/uploadImages/${file.fileName}">
+							</div>
 
-							<img class="d-block w-100 boardImg" id=""
-								src="${contextPath}/resources/uploadImages/">
-						</div>
-
-						<%-- </c:forEach> --%>
-
+						</c:forEach>
+					<!--좌우 화살표 -->
+					
 					</div>
-
-					<!-- 좌우 화살표 -->
-					<!-- <a class="carousel-control-prev" href="#board-image" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> 
-					<a class="carousel-control-next" href="#board-image" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a> -->
+					<a class="carousel-control-prev" href="#board-image"
+						data-slide="prev"><span class="carousel-control-prev-icon"></span>
+						<span class="sr-only">이전</span></a> <a class="carousel-control-next"
+						href="#board-image" data-slide="next"><span
+						class="carousel-control-next-icon"></span> <span class="sr-only">다음</span></a>
 				</div>
-				<%-- </c:if> --%>
+				</c:if>
+			
 
 
 
@@ -172,24 +176,23 @@
 						class="btn btn-danger btn btn-primary float-right">삭제</button>
 						
 					<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
-					<%--  <c:if test="${!empty }">  --%>
+					  <c:if test="${!empty param.sv && !empty param.sk}"> 
 					<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
-					 	<%-- <c:set var="searchStr" value="" />
+					  <c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
 						</c:if>
 
 					<button type="button" id="modifyBnt"
 						class="btn btn-secondary btn btn-primary float-right "
-						onclick="location.href = '${contextPath}/freeBoard/updateForm.do'">수정</button> --%>
+						onclick="location.href = '${contextPath}/freeBoard/updateForm.do'">수정</button>
 				       </c:if> 
 
 
-
 					 		<c:choose>
-						<c:when test="${!empty param.sk && !empty param.sv }">
+						<c:when test="${!empty param.fsk && !empty param.fsv }">
 							<c:url var="goToList" value="../search.do">
 								<c:param name="cp">${param.cp}</c:param>
-								<c:param name="sk">${param.sk}</c:param>
-								<c:param name="sv">${param.sv}</c:param>
+								<c:param name="sk">${param.fsk}</c:param>
+								<c:param name="sv">${param.fsv}</c:param>
 							</c:url>
 						</c:when>
 						

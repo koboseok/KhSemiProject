@@ -45,29 +45,29 @@
 		
 		<h1 style = "color : orange">자유 게시판</h1>
 		
+					<%-- 로그인이 되어있는 경우 --%>
+		 	
+		 	<c:if test ="${!empty loginMember}">
+			<button type="button" class="btn btn-warning float-right" id="insertBtn" onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
+			</c:if>
+		 	
 			<div class="free-wrapper">
 					
 		
 			
 			
-					<%-- 로그인이 되어있는 경우 --%>
-		 	<c:if test="${!empty loginMember}">
-				<button type="button" class="btn btn-warning float-right" id="insertBtn"
-				 onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
-		 	</c:if>
-		 	
 		 			<!-- 검색창 -->
 			<div class="my-5">
 				
-				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
+				<form action="freeBoard/search.do" method="GET" class="text-center" id="searchForm">
 				
-					<select name="fsk" class="form-control" style="width: 100px; display: inline-block;">
+					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
 						<option value="titcont">제목+내용</option>
 						<option value="writer">작성자</option>
 					</select>
-					<input type="text" name="fsv" class="form-control" style="width: 25%; display: inline-block;">
+					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
 					<button class="btn btn-warning" style="width: 100px; display: inline-block;">검색</button>
 				</form>
 			</div>
@@ -97,7 +97,7 @@
 								
 							<c:otherwise>	
 									
-								<c:forEach var="board" items="${fList }">
+								<c:forEach var="board" items="${fList}">
 								
 									<tr>
 										<td>
@@ -140,15 +140,15 @@
 		
 			<c:choose>
 				<%-- 검색으로 만들어진 페이지? --%>
-				<c:when test="${!empty param.fsk && !empty param.fsv}">
-					<c:url var="pageUrl" value="/freeBaord/main.do"/>
+				<c:when test="${!empty param.sk && !empty param.sv}">
+					<c:url var="pageUrl" value="freeBoard/search.do"/>
 					
 				<!-- 	쿼리스트링으로 사용할 내용을 변수에 저장 -->
-					<c:set var="searchStr" value="&fsk=${param.fsk}&fsv=${param.fsv}" />
+					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
 				</c:when>
 			
 				<c:otherwise>
-					<c:url var="pageUrl" value="/freeBoard/main.do"/>
+					<c:url var="pageUrl" value="${contextPath}/freeBoard/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
@@ -247,12 +247,12 @@
 		
 		// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
 		 (function(){
-			var searchKey = "${param.fsk}"; 
+			var searchKey = "${param.sk}"; 
 			
-			var searchValue = "${param.fsv}";
+			var searchValue = "${param.sv}";
 			
 			// 검색창 select의 option을 반복 접근
-			$("select[name=fsk] > option").each(function(index, item){
+			$("select[name=sk] > option").each(function(index, item){
 				// index : 현재 접근중인 요소의 인덱스
 				// item : 현재 접근중인 요소
 							// content            content
@@ -262,7 +262,7 @@
 			});		
 			
 			// 검색어 입력창에 searcValue 값 출력
-			$("input[name=fsv]").val(searchValue);
+			$("input[name=sv]").val(searchValue);
 		})();
 		  
 		

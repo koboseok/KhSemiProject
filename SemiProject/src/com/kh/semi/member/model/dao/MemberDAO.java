@@ -7,9 +7,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
 
 public class MemberDAO {
@@ -57,32 +59,6 @@ public class MemberDAO {
 		}
 		return result;
 	}
-
-	/**구독서비스 목록 입력 DAO
-	 * @param conn
-	 * @param service
-	 * @param memNo 
-	 * @return result
-	 * @throws Exception
-	 */
-	public int insertMemSub(Connection conn, Map<String, Object> service, int memNo) throws Exception {
-		int result = 0;
-		String query = prop.getProperty("insertMemSub");
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, memNo);
-			//임시 중단
-		} finally {
-
-		}
-
-
-
-		return result;
-	}
-
-
 
 	/** 비밀번호 검사 DAO
 	 * @param conn
@@ -266,5 +242,94 @@ public class MemberDAO {
 		}
 		return result;
 
+	}
+
+	/** 서비스명으로 서비스 코드를 찾아오는 DAO
+	 * @param conn
+	 * @param serviceName
+	 * @return servCode
+	 * @throws Exception
+	 */
+	public int getServCode(Connection conn, String serviceName) throws Exception {
+		int servCode = 0;
+		String query = prop.getProperty("getServCode");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, serviceName);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				servCode = rset.getInt("SERV_CODE");
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return servCode;
+	}
+
+
+	/**가입 성공시 이메일로 회원 번호를 가져오는 DAO
+	 * @param conn
+	 * @param memEmail
+	 * @return memNo
+	 * @throws Exception
+	 */
+	public int getMemNo(Connection conn, String memEmail) throws Exception {
+		int memNo = 0;
+		String query = prop.getProperty("getMemNo");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memEmail);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) memNo = rset.getInt(1);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return memNo;
+	}
+
+
+
+	/** 가입 시 구독목록 등록 DAO
+	 * @param conn
+	 * @param list
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertMemSub(Connection conn, List<MemSubscribe> list) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("insertMemSub");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			for (MemSubscribe MemSub : list) {
+		        pstmt.setInt(1, MemSub.getMemNo());
+		        pstmt.setInt(2, MemSub.getServCode());
+		        pstmt.setDate(3, MemSub.getServStDate());
+		        pstmt.setInt(4, MemSub.getPrice());
+		        pstmt.addBatch();
+		        pstmt.clearParameters();
+		      }
+
+			int[] resultGroup = pstmt.executeBatch();
+		    pstmt.clearParameters(); 
+
+			for(int i : resultGroup) {
+				result += i;
+			}
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

@@ -39,8 +39,23 @@ FROM MEMBER
 WHERE MEM_EMAIL = ?
 AND MEM_PWD = ?
 AND MEM_STATUS = 'Y'
-
-
 </entry>
 
+<!-- 서비스 코드 검색 -->
+<entry key="getServCode">
+SELECT SERV_CODE FROM SUBSERVICE
+WHERE SERV_NM = ?
+</entry>
+
+<!-- 회원 번호 검색 -->
+<entry key="getMemNo">
+SELECT MEM_NO FROM MEMBER
+WHERE MEM_EMAIL = ?
+</entry>
+
+<!-- 구독 서비스 등록 -->
+<entry key="insertMemSub">
+INSERT INTO MEM_SUB(MEM_NO, SERV_CODE, SUB_ST_DT, PRICE, SUB_END_DT)
+VALUES (?, ?, ?, ?, (ADD_MONTHS(SYSDATE, 1)-1))
+</entry>
 </properties>
