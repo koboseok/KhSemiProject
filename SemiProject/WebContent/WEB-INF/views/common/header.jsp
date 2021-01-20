@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 
+<!-- css -->
 <script type="text/javascript"src="${ contextPath }/resources/js/bootstrap.js"></script>
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script type="text/javascript" src="${ contextPath }/resources/js/custom.js"></script>
@@ -86,6 +87,7 @@ li{
 
 <body>
 
+<<<<<<< HEAD
 	<c:set var="contextPath" scope="application"
 		value="${ pageContext.servletContext.contextPath }" />
 		
@@ -104,6 +106,23 @@ li{
 	<c:remove var="swalText"/>	
 	</c:if>
 	
+=======
+	<%--
+	 	로그인 실패 등의 서버로부터 전달받은 메세지를 경고창으로 출력하기
+	 	
+	 	1) 서버로부터 전달받은 메세지가 있는지 검사
+	  --%>
+	 <c:if test="${ !empty sessionScope.swalTitle }">
+	 	<script>
+	 		swal({ icon:"${swalIcon}", title:"${swalTitle}", text:"${swalText}"});
+	 	</script>
+	 	<%-- 2) 한번 출력한 메세지를 Session에서 삭제 --%>
+	 	<c:remove var="swalIcon"/>
+	 	<c:remove var="swalTitle"/>
+	 	<c:remove var="swalText"/>
+	 </c:if>
+
+>>>>>>> branch 'master' of https://github.com/koboseok/KhSemiProject.git
 	<div class="hero_area">
 		<header class="header_section">
 			<div class="container-fluid">

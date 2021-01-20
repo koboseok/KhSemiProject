@@ -81,7 +81,57 @@ public class MemberController extends HttpServlet {
 
 				if(result>0) {
 					if(request.getParameter("serviceName") != "") {
+						Map<String, Object> subData = new HashMap<String, Object>();
 
+						/*
+						//구독 서비스 등록 (선택 + 개수제한 없음)
+						//첫 번째 방법
+						//서비스 이름으로 서비스 코드를 찾는 메소드
+						String[] serviceName = request.getParameterValues("serviceName");
+						List<Integer> serviceCode = new ArrayList<Integer>();
+
+						for(int i=0; i<serviceName.length; i++) {
+							if(serviceName[i] != "") {
+								serviceCode.add(mService.getServCode(serviceName[i]));
+							}
+						}
+
+						subData.put("serviceCode", serviceCode);
+
+
+						List<Integer> serviceCharge = new ArrayList<Integer>();
+						String[] serviceCg = request.getParameterValues("serviceCharge");
+
+						for(int i=0; i<serviceCg.length; i++) {
+							if(serviceCg[i] != "") {
+								serviceCharge.add(Integer.parseInt(serviceCg[i])); 
+							} else {
+								serviceCharge.add(0);
+							}
+						}
+
+						subData.put("serviceCharge", serviceCharge);
+
+
+						List<Date> servicePayment = new ArrayList<Date>();
+						String[] servicePd = request.getParameterValues("paymentDate");
+
+						for(int i=0; i<servicePd.length; i++) {
+							if(servicePd[i] != "") {
+								servicePayment.add(Date.valueOf(request.getParameter("paymentDate")));
+							} else {
+								servicePayment.add(new Date(System.currentTimeMillis()));
+							}
+						}
+
+						subData.put("servicePayment", servicePayment);
+						//이메일로 멤버 번호를 가져오기
+						int memNo = mService.getMemNo(memEmail);
+						//구독 목록 등록하기
+						result = mService.setMemSub(subData, memNo);
+						*/
+						
+						//두 번째 방법
 						List<MemSubscribe> list = new ArrayList<MemSubscribe>();
 						MemSubscribe memSub = null;
 						
@@ -91,17 +141,19 @@ public class MemberController extends HttpServlet {
 						
 						//이메일로 멤버 번호를 가져오기
 						int memNo = mService.getMemNo(memEmail);
-						System.out.println(memNo);
 						int serviceNo = 0;
 						int serviceCharge = 0;
 						Date servicePayDay = new Date(System.currentTimeMillis());
 						
 						for(int i=0; i<serviceName.length; i++) {
 							serviceNo = mService.getServCode(serviceName[i]);
+							
 							if(serviceCg[i] != "") {
 							serviceCharge = Integer.parseInt(serviceCg[i]); }
+							
 							if(servicePd[i] != "") {
 							servicePayDay = Date.valueOf(request.getParameter("paymentDate")); }
+							
 							memSub = new MemSubscribe(memNo, serviceNo, servicePayDay, serviceCharge);
 							list.add(memSub);
 						}
@@ -153,6 +205,7 @@ public class MemberController extends HttpServlet {
 			//			로그인 ********************************************
 			else if (command.equals("/login.do")) {
 
+
 				//				1.POST 방식으로 전달된 데이터의 문자 인코딩 변경
 				//				request.setCharacterEncoding("UTF-8");
 
@@ -185,6 +238,7 @@ public class MemberController extends HttpServlet {
 
 				//					5.응답 데이터 문서 타입 지정
 				response.setContentType("text/html; charset=UTF-8");
+
 
 				//					6.Session 객체를 얻어와 로그인 정보를 추가한다.
 				HttpSession session = request.getSession();
@@ -221,10 +275,12 @@ public class MemberController extends HttpServlet {
 						//							3) 1주일 동안 쿠키가 유효하도록 설정 ( 쿠키 생명 주기 설정 )
 						cookie.setMaxAge(60 * 60 * 24 * 7); // 초 단위 --> 7일로 세팅
 
+
 					} else {
 						//							4) 아이디 저장이 check가 안된 경우 기존에 있던 쿠키 파일 삭제
 						cookie.setMaxAge(0); // 생성과 동시에 삭제
 					}
+
 
 					//						5) 쿠키 유효 디렉토리 지정
 					cookie.setPath(request.getContextPath());
@@ -267,6 +323,7 @@ public class MemberController extends HttpServlet {
 				//					request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
 				response.sendRedirect(request.getHeader("referer"));
 
+
 			}
 
 			//			로그아웃 ***************************************
@@ -276,7 +333,7 @@ public class MemberController extends HttpServlet {
 
 				//				로그아웃 후 메인 또는 로그아웃을 수행한 페이지로 리다이렉트
 				response.sendRedirect(request.getContextPath()); // 메인
-				//				response.sendRedirect(request.getHeader("referer")); // 로그아웃을 수행한 페이지
+
 			}
 
 
@@ -426,3 +483,4 @@ public class MemberController extends HttpServlet {
 	}
 
 }
+
