@@ -79,9 +79,9 @@ pre {
 
 
 					<div class="row inner-group">
-						<div class="col-md-2 offset-md-1">
+						<div class="col-md-2 offset-md-1 btn-box">
 
-							<a href="#"> <img
+							<a href="#" class="btn-2"> <img
 								src="${contextPath}/resources/images/ab-1.png" class="ab-img" />
 							</a>
 
