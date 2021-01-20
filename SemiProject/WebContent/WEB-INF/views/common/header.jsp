@@ -86,6 +86,24 @@ li{
 
 <body>
 
+	<c:set var="contextPath" scope="application"
+		value="${ pageContext.servletContext.contextPath }" />
+		
+
+	<c:if test="${!empty sessionScope.swalTitle}">
+		<script>
+		swal({
+			  icon: "${swalIcon}",
+			  title: "${swalTitle}",
+			  text: "${swalText}"
+			});
+		</script>
+
+	<c:remove var="swalIcon"/>	
+	<c:remove var="swalTitle"/>	
+	<c:remove var="swalText"/>	
+	</c:if>
+	
 	<div class="hero_area">
 		<header class="header_section">
 			<div class="container-fluid">
