@@ -82,6 +82,16 @@ li{
 	
 }
 
+.nav-black {
+	color: black !important;
+}
+
+.nav-member {
+    position: relative;
+	left: 780px;
+    bottom: 160px;
+}
+
 </style>
 </head>
 
@@ -118,24 +128,36 @@ li{
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					
-					<ul class="navbar-nav ml-auto" style="margin: 10px;">
+					<ul class="navbar-nav nav-member" style="margin: 10px;">
 						<c:choose>
 							<%-- 로그인이 되어있지 않을때 == session에 loginMember라는 값이 없을 때 --%>
 							<c:when test="${empty sessionScope.loginMember }">
 								<!-- 헤더에 있는 login 버튼 클릭 시 #modal-container-1 이라는 아이디를 가진 요소를 보여지게함.-->
-								<li class="nav-item "><a class="nav-link"
+								<li><a class="nav-black nav-link"
 									data-toggle="modal" href="#modal-container-1">Login</a></li>
-								<li class="nav-item "><a class="nav-link"
+								<a class="nav-link">|</a>
+								<li><a class="nav-black nav-link"
 									href="${contextPath}/member/signUpForm.do">회원가입</a></li>
+							</c:when>
+							<c:when test="${loginMember.getMemGrade().contentEquals('A')}">
+								<li class="active">
+									<a class="nav-link nav-black" 
+									href="${contextPath}/admin/memberList.do">회원관리</a>
+								</li>
+								<a class="nav-link">|</a>
+								<li class="active" ><a class="nav-link nav-black"
+								href="${contextPath}/member/logout.do">Logout</a>
+								</li>
 							</c:when>
 							<%-- 로그인이 되어 있을때 --%>
 							<c:otherwise>
-								<li class="nav-item active">
+								<li class="active">
 									<%-- 로그인 회원의 이름을 가져와 출력 --%> 
-									<a class="nav-link" style="background-color: dimgray;"
-									href="${contextPath}/member/myPage.do">${loginMember.memName }</a>
+									<a class="nav-link nav-black"
+									href="${contextPath}/member/myPage.do">${loginMember.memName} 님</a>
 								</li>
-								<li class="nav-item active" ><a class="nav-link" style="background-color: dimgray;"
+								<a class="nav-link">|</a>
+								<li class="active" ><a class="nav-link nav-black" 
 								href="${contextPath}/member/logout.do">Logout</a>
 								</li>
 							</c:otherwise>
