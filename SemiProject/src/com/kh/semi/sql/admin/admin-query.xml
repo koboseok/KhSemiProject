@@ -3,10 +3,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-<!-- 전체 회원 수 조회-->
+<!-- 일반 회원 수 조회-->
 <entry key="getListCount">
 SELECT COUNT(*) FROM MEMBER
-WHERE MEM_STATUS = 'Y'
+WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'G'
 </entry>
 
 <!-- 회원 목록 조회 -->
@@ -14,9 +14,8 @@ WHERE MEM_STATUS = 'Y'
 SELECT * FROM
 	(SELECT ROWNUM RNUM, V.*
 	FROM
-	(SELECT * FROM MEMBER WHERE MEM_STATUS = 'Y' ORDER BY MEM_NO DESC) V)
-WHERE MEM_GRADE = 'G' AND
-RNUM BETWEEN ? AND ?
+	(SELECT * FROM MEMBER WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'G' ORDER BY MEM_NO DESC) V)
+WHERE RNUM BETWEEN ? AND ?
 </entry>
 
 <!-- 구독서비스 한 줄로 뽑아내는 쿼리문 -->
@@ -36,4 +35,23 @@ WHERE MEM_NO = ?
 INSERT INTO REPORT 
 VALUES(SEQ_RNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
 </entry>
+
+<!-- 불량 회원 수 조회-->
+<entry key="getbPageInfo">
+SELECT COUNT(*) FROM MEMBER
+WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'B'
+</entry>
+
+<!-- 불량회원 목록 조회 -->
+<entry key="selectBmemberList">
+SELECT * FROM
+	(SELECT ROWNUM RNUM, V.*
+	FROM
+	(SELECT REPORT_NO, MEM_NO, MEM_NM, MEM_EMAIL, BOARD_CODE, REPORT_B_C_NO, REPORT_B_NO, REPORT_REASON, REPORT_DT
+    FROM REPORT
+    LEFT JOIN MEMBER USING(MEM_NO)) V)
+WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
 </properties>

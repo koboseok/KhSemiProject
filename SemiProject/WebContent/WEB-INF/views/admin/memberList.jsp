@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>회원 관리</title>
 <style>
 .pagination {
 	justify-content: center;
@@ -95,9 +95,13 @@
 		<h2 class="entry-title text-center py-5">
 			<span id="title-font">회원관리</span>
 		</h2>
-		<button class="btn btn-secondary btn-sm" id="toBlockBtn">불량
+		<button class="btn btn-dark btn-sm" style="width:140px" id="toBlockBtn">불량
 			회원으로 설정</button>
-
+			
+		<a href="blockList.do">	
+		<button class="btn btn-dark btn-sm" style="width:140px" id="toBlockBtn">불량
+			회원 관리</button>
+		</a>	
 		<a data-toggle="modal" href="#report-modal">
 			<button class="btn btn-secondary btn-sm" id="toBlockBtn1"
 				style="display: none"></button>
@@ -221,13 +225,13 @@
 
 		<fmt:parseNumber var="c1"
 			value="${(pInfo.currentPage-1)/pInfo.pageSize}" integerOnly="true" />
-		<fmt:parseNumber var="prev" value="${c1 * 10}" integerOnly="true" />
+		<fmt:parseNumber var="prev" value="${c1 * 5}" integerOnly="true" />
 		<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
 
 
-		<fmt:parseNumber var="c2" value="${(pInfo.currentPage+9) /10}"
+		<fmt:parseNumber var="c2" value="${(pInfo.currentPage+4) /5}"
 			integerOnly="true" />
-		<fmt:parseNumber var="next" value="${c2*10+1}" />
+		<fmt:parseNumber var="next" value="${c2*5+1}" />
 		<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
 
 		<div class="my-5">
@@ -281,7 +285,6 @@
 	      
 	//td가 눌리지 않았을 때 모달창 뜨지 않게 하기
 	$("#toBlockBtn").on("click", function() {
-		console.log($('#selectMember').val());
 		if($('#selectMember').val() == "true") {
 			$('#toBlockBtn1').click();
 		}
