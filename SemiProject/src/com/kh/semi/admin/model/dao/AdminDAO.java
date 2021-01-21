@@ -37,7 +37,7 @@ public class AdminDAO {
 	
 	}
 	
-	/**전체 회원 수 반환 DAO
+	/** 전체 일반 회원 수 계산 DAO
 	 * @param conn
 	 * @return listCount
 	 * @throws Exception
@@ -174,6 +174,74 @@ public class AdminDAO {
 		
 		return result;
 	}
+	
+	/** 전체 불량 회원 수 계산 DAO
+	 * @param conn
+	 * @return bListCount
+	 * @throws Exception
+	 */
+	public int getbPageInfo(Connection conn) throws Exception {
+		int bListCount = 0;
+		String query = prop.getProperty("getbPageInfo");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				bListCount = rset.getInt(1);
+			}
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return bListCount;
+	}
+	
+
+	/**불량회원 목록 조회 dao
+	 * @param conn
+	 * @param pInfo
+	 * @return bmList
+	 * @throws Exception
+	 */
+	public List<Report> selectBmemberList(Connection conn, PageInfo pInfo) throws Exception {
+		List<Report> bmList = null;
+		String query = prop.getProperty("selectBmemberList");
+		
+		try {
+			int startRow = (pInfo.getCurrentPage()-1) * pInfo.getLimit() +1;
+			int endRow = startRow + pInfo.getLimit() -1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			
+			bmList = new ArrayList<Report>();
+			while(rset.next()) {
+				Report report = new Report(rset.getInt("REPORT_NO"),
+										   rset.getString("REPORT_REASON"),
+										   rset.getDate("REPORT_DT"),
+										   rset.getInt("REPORT_B_NO"),
+										   rset.getString("REPORT_B_C_NO"),
+										   rset.getInt("MEM_NO"),
+										   rset.getString("BOARD_CODE"),
+										   rset.getString("MEM_NM"),
+										   rset.getString("MEM_EMAIL"));
+				bmList.add(report);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return bmList;
+	}
+
+
 
 
 

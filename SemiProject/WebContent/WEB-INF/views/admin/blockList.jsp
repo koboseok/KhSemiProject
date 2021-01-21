@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>불량 회원 관리</title>
 <script src="https://kit.fontawesome.com/955b087c12.js"
 	crossorigin="anonymous"></script>
 <style>
@@ -58,10 +58,18 @@ text-align:center;
 	<div class="container my-5">
 
 		<h2 class="entry-title text-center py-5">
-			<span class="title-font">불량회원관리</span>
+			<span id="title-font">불량회원관리</span>
 		</h2>
 
-		<button class="btn btn-secondary btn-sm" id="toBlockBtn">일반회원으로 되돌리기</button>
+		<button class="btn btn-dark btn-sm" style="width:165px" id="toRestoreBtn">일반회원으로 되돌리기</button>
+			
+		<a href="memberList.do">	
+		<button class="btn btn-dark btn-sm" style="width:140px" id="toBlockBtn">일반회원 관리</button>
+		</a>	
+		<a data-toggle="modal" href="#report-modal">
+			<button class="btn btn-secondary btn-sm" id="toRestoreBtn1"
+				style="display: none"></button>
+		</a>
 
 		<div class="list-wrapper">
 			<table class="table table-hover table-striped my-3" id="list-table">
@@ -84,7 +92,7 @@ text-align:center;
 				<tbody>
 					<tr>
 						<td><input type="radio"></td>
-						<td>1</td>
+						<td></td>
 						<td>51</td>
 						<td>badUser01</td>
 						<td>badUser1@naver.com</td>
@@ -202,9 +210,25 @@ text-align:center;
 
 
 	<script>
-	   
+	var selectMemNo;
+	
+	$("#list-table td").on("click", function() {
+		//td를 클릭하면 라디오박스 체크
+		$(this).parent().children().eq(0).children().prop("checked", true);
+		//td를 클릭하면 회원번호 저장
+		selectMemNo = $(this).parent().children().eq(1).text();
+		//td를 클릭하면 불량회원으로 설정 가능하게 함
+		$('#selectMember').prop('value', true);
+     });
 	      
-	      
+	//td가 눌리지 않았을 때 모달창 뜨지 않게 하기
+	$("#toRestoreBtn").on("click", function() {
+		if($('#selectMember').val() == "true") {
+			$('#toRestoreBtn1').click();
+		}
+	});
+
+	
 	</script>
 </body>
 </html>

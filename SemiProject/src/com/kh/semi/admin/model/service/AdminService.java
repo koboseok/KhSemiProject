@@ -13,7 +13,7 @@ public class AdminService {
 
 	private AdminDAO dao = new AdminDAO();
 
-	/**페이징 처리를 위한 계산 Service
+	/**회원 페이징 처리를 위한 계산 Service
 	 * @param cp
 	 * @return pInfo
 	 * @throws Exception
@@ -31,7 +31,7 @@ public class AdminService {
 		return new PageInfo(currentPage, listCount);
 	}
 
-	/**게시글 목록 조회
+	/**회원 목록 조회
 	 * @param pInfo
 	 * @return mList
 	 * @throws Exception
@@ -70,4 +70,40 @@ public class AdminService {
 		
 		return result;
 	}
+	
+	/** 불량회원 페이지 처리를 위한 계산 service
+	 * @param cp
+	 * @return pInfo
+	 * @throws Exception
+	 */
+	public PageInfo getBpageInfo(String cp) throws Exception {
+		Connection conn = getConnection();
+		
+		int currentPage = cp == null? 1: Integer.parseInt(cp);
+		
+		//전체 회원 수 가져오기
+		int bListCount = dao.getbPageInfo(conn);
+		
+		close(conn);
+		
+		return new PageInfo(currentPage, bListCount);
+	}
+	
+
+	/** 불량회원 목록 조회
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Report> selectBmemberList(PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Report> bmList = dao.selectBmemberList(conn, pInfo);
+
+		close(conn);
+		
+		return bmList;
+	}
+
+
 }

@@ -96,7 +96,16 @@ public class AdminController extends HttpServlet {
 			else if(command.equals("/blockList.do")) {
 				errorMsg = "불량 회원 조회 과정에서 오류 발생";
 				
+				//페이징 처리를 위한 값 계산
+				PageInfo pInfo = service.getBpageInfo(cp);
+				
+				//게시글 목록 조회 비즈니스 로직
+				List<Report> bmList = service.selectBmemberList(pInfo);
+				
 				path = "/WEB-INF/views/admin/blockList.jsp";
+				request.setAttribute("bmList", bmList);
+				request.setAttribute("pInfo", pInfo);
+				
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}

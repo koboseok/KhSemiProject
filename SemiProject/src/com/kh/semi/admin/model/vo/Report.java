@@ -10,7 +10,8 @@ public class Report {
 	private String reportBcNo;
 	private int reportMemNo;
 	private String boardCode;
-	
+	private String memNm;
+	private String memEmail;
 	
 	public Report() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +39,24 @@ public class Report {
 		this.reportMemNo = reportMemNo;
 		this.boardCode = boardCode;
 	}
+	
+	
+	
+	public Report(int reportNo, String reportReason, Date reportDt, int reportBNo, String reportBcNo, int reportMemNo,
+			String boardCode, String memNm, String memEmail) {
+		super();
+		this.reportNo = reportNo;
+		this.reportReason = reportReason;
+		this.reportDt = reportDt;
+		this.reportBNo = reportBNo;
+		this.reportBcNo = reportBcNo;
+		this.reportMemNo = reportMemNo;
+		this.boardCode = boardCode;
+		this.memNm = memNm;
+		this.memEmail = memEmail;
+	}
+
+
 
 	public int getReportNo() {
 		return reportNo;
@@ -94,13 +113,31 @@ public class Report {
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
 	}
+	
+	public String getMemNm() {
+		return memNm;
+	}
+
+	public void setMemNm(String memNm) {
+		this.memNm = memNm;
+	}
+
+	public String getMemEmail() {
+		return memEmail;
+	}
+
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
 
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportReason=" + reportReason + ", reportDt=" + reportDt
 				+ ", reportBNo=" + reportBNo + ", reportBcNo=" + reportBcNo + ", reportMemNo=" + reportMemNo
-				+ ", boardCode=" + boardCode + "]";
+				+ ", boardCode=" + boardCode + ", memNm=" + memNm + ", memEmail=" + memEmail + "]";
 	}
+
+
 	
 	
 }
