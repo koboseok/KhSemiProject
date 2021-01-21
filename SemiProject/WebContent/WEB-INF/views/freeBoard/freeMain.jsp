@@ -43,8 +43,8 @@
 
 		<h1 style="color: orange">자유 게시판</h1>
 
-		<%-- 로그인이 되어있는 경우 --%>
 
+		<%-- 로그인이 되어있는 경우 --%>
 		<c:if test="${!empty loginMember}">
 			<button type="button" class="btn btn-warning float-right"
 				id="insertBtn"
@@ -59,7 +59,7 @@
 			<!-- 검색창 -->
 			<div class="my-5">
 
-				<form action="${contextPath}/search.do" method="GET" class="text-center"
+				<form action="/freeBoard/search.do" method="GET" class="text-center"
 					id="searchForm">
 
 					<select name="sk" class="form-control"
@@ -262,7 +262,7 @@
 				// index : 현재 접근중인 요소의 인덱스
 				// item : 현재 접근중인 요소
 							// content            content
-				if( $(item).val() == fsk){
+				if( $(item).val() == sk){
 					$(item).prop("selected", true);
 				}
 			});		

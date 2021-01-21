@@ -237,6 +237,7 @@ public class FreeBoardDAO {
 	 * @throws Exception
 	 */
 	public int insertFBoard(Connection conn, Map<String, Object> map) throws Exception {
+		
 		int result = 0;
 
 		String query = prop.getProperty("insertFBoard");
