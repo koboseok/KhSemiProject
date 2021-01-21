@@ -54,6 +54,8 @@ public class AdminController extends HttpServlet {
 				//게시글 목록 조회 비즈니스 로직
 				List<Member> mList = service.selectMemberList(pInfo);
 				
+				
+				
 				path = "/WEB-INF/views/admin/memberList.jsp";
 				request.setAttribute("mList", mList);
 				request.setAttribute("pInfo", pInfo);
@@ -61,6 +63,7 @@ public class AdminController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			} 
+			
 			//불량 회원 조회 Controller ******************************************
 			else if(command.equals("/blockList.do")) {
 				errorMsg = "불량 회원 조회 과정에서 오류 발생";

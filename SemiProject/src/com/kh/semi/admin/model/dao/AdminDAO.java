@@ -102,4 +102,32 @@ public class AdminDAO {
 		
 		return mList;
 	}
+
+	/** 회원정보에 구독서비스를 합치는 dao 
+	 * @param conn
+	 * @param mList 
+	 * @return mList
+	 * @throws Exception
+	 */
+	public List<Member> addSubList(Connection conn, List<Member> mList) throws Exception {
+		String query = prop.getProperty("addSubList");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			for(Member mem : mList) {
+				pstmt.setInt(1, mem.getMemNo());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					mem.setMemSub(rset.getString(1));
+				}
+			}
+			
+		} finally {
+			close(rset);
+			close(conn);
+		}
+		return mList;
+	}
 }
