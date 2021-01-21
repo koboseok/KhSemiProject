@@ -110,8 +110,9 @@
 					<!-- Date -->
 			
 					<span> 작성일  : <fmt:formatDate value="${fBoard.fCreateDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
-					   &nbsp;|&nbsp; 마지막 수정일 :  <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
-					</span> &nbsp;|&nbsp; <span> 조회수${fBoard.fReadCount }</span>
+					   &nbsp;|&nbsp; 마지막 수정일 :  <fmt:formatDate value="${fBoard.fModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
+					</span> &nbsp;|&nbsp; 
+					<span> 조회수${fBoard.fReadCount}</span>
 				</p>
 				<br>
 				<hr>

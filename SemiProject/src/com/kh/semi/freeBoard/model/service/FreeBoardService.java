@@ -93,6 +93,7 @@ public class FreeBoardService {
 	 * @throws Exception
 	 */
 	public int insertFBoard(Map<String, Object> map)  throws Exception{
+		
 		Connection conn = getConnection();
 
 		int result = 0;
@@ -113,7 +114,7 @@ public class FreeBoardService {
 			fBoardTitle = replaceParameter(fBoardTitle);
 			fBoardContent = replaceParameter(fBoardContent);
 
-			//			3. 글 내용 개행무자 \r\n -> <br> 번경 처리
+			//3. 글 내용 개행무자 \r\n -> <br> 번경 처리
 
 			fBoardContent.replaceAll("\r\n", "<br>");
 

@@ -33,7 +33,8 @@
 			
 			</thead>
 			<tbody>
-				<form action="${contextPath}/freeBoard/insert.do" method="post">
+				<form action="${contextPath}/freeBoard/insert.do" method="post"
+				 enctype="multipart/form-data" role="form" onsubmit="return fBoardValidate();">
 					<div class="contentArea">
 						<tr>
 							<td style="color: gray">제목</td>
@@ -80,7 +81,7 @@
 	</div>
 <script>
 //유효성 검사 
-function boardValidate() {
+function fBoardValidate() {
 	if ($("#freeTitle").val().trim().length == 0) {
 		alert("제목을 입력해 주세요.");
 		$("#freeTitle").focus();
@@ -93,6 +94,8 @@ function boardValidate() {
 		return false;
 	}
 }
+
+
 </script>
 </body>
 </html>

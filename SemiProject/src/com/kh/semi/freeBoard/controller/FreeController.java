@@ -143,7 +143,7 @@ public class FreeController extends HttpServlet {
 //				1-2. 서버에 업로드된 파일을 저장할 경로 지정
 				String root = request.getSession().getServletContext().getRealPath("/");
 //				실제 배포되는 최상위 주소를 가져와라
-				String imgPath = root + "resources/uploadImages/";
+				String imgPath = root + "resources/images/";
 				
 				System.out.println("filePath :" + imgPath);
 				
@@ -231,7 +231,7 @@ public class FreeController extends HttpServlet {
 				}else {
 					swalIcon = "error";
 					swalTitle = "게시글 등록 실패";
-					path = ".do"; // 게시글 목록
+					path = "main.do"; // 게시글 목록
 				}
 				request.getSession().setAttribute("swalIcon", swalIcon);
 				request.getSession().setAttribute("swalTitle", swalTitle);
@@ -283,7 +283,7 @@ public class FreeController extends HttpServlet {
 //				1. MultipartRequest 객체 생성에 필요한 값 설정
 				int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
 				String root = request.getSession().getServletContext().getRealPath("/");
-				String imgPath = root + "resources/uploadImages/";
+				String imgPath = root + "resources/images/";
 				
 //				2. MultipartRequest 객체 생성
 //				-> 생성과 동시에 전달받은 파일이 서버에 저장된다.
@@ -292,7 +292,6 @@ public class FreeController extends HttpServlet {
 //				3. 파일 정보를 제외한 파라미터 얻어오기 
 				String fBoardTitle = mRequest.getParameter("fBoardTitle");
 				String fBoardContent = mRequest.getParameter("fBoardContent");
-				int categoryCode = Integer.parseInt(mRequest.getParameter("categoryCode"));
 				int fBoardNo = Integer.parseInt(mRequest.getParameter("no"));
 				
 //				4. 전달 받은 파일 정보를 List에 저장
@@ -334,7 +333,7 @@ public class FreeController extends HttpServlet {
 				} // end while
 				
 //				5. Session에서 로그인한 회원의 번호를 얻어와 저장
-				int boardWriter = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
+				int memName = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
 				
 //				6. 준비된 값들을 하나의 Map에 저장
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -343,7 +342,7 @@ public class FreeController extends HttpServlet {
 				map.put("fBoardContent" , fBoardContent);
 				map.put("fBoardNo" , fBoardNo);
 				map.put("fileList" , fileList);
-				map.put("memN" , boardWriter);
+				map.put("memName" , memName);
 				
 //				7. 준비된 값을 매개변수로 하여 게시글 수정 Service 호출
 				int result = service.updateFBoard(map);
