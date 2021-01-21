@@ -9,7 +9,7 @@ SELECT COUNT(*) FROM MEMBER
 WHERE MEM_STATUS = 'Y'
 </entry>
 
-<!-- 이따 조인할 애 -->
+<!-- 회원 목록 조회 -->
 <entry key="selectMemberList">
 SELECT * FROM
 	(SELECT ROWNUM RNUM, V.*
@@ -19,9 +19,21 @@ WHERE MEM_GRADE = 'G' AND
 RNUM BETWEEN ? AND ?
 </entry>
 
+<!-- 구독서비스 한 줄로 뽑아내는 쿼리문 -->
 <entry key="addSubList">
-SELECT LISTAGG(SERV_NM, ', ') WITHIN GROUP (ORDER BY SERV_NM) FROM ADMIN_VIEW WHERE MEM_NO = ?
-
+SELECT LISTAGG(SERV_NM, ', ') WITHIN GROUP (ORDER BY SERV_NM) 
+FROM ADMIN_VIEW WHERE MEM_NO = ?
 </entry>
 
+<!-- 정지회원으로 전환 -->
+<entry key="updateGradeB">
+UPDATE MEMBER SET MEM_GRADE = 'B' 
+WHERE MEM_NO = ?
+</entry>
+
+<!-- 신고 내용 입력 -->
+<entry key="reportMember">
+INSERT INTO REPORT 
+VALUES(SEQ_RNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
+</entry>
 </properties>
