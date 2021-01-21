@@ -5,11 +5,13 @@ import static com.kh.semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FRAttachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 import com.kh.semi.search.model.dao.SearchDAO;
+
 
 import sun.font.CreatedFontTracker;
 
@@ -67,7 +69,7 @@ public class SearchService {
 	 * @param map
 	 * @return
 	 */
-	private String createCondition(HashMap<String, Object> map) {
+	private String createCondition(Map<String, Object> map) {
 
 
 		String condition = null;
@@ -105,6 +107,48 @@ public class SearchService {
 		return condition;
 	}
 
+	
+	
+	/** 검색 게시글 목록 리스트 조회 Service
+	 * @param map
+	 * @param pInfo 
+	 * @return bList
+	 * @throws Exception
+	 */
+	public List<FreeBoard> searchBoardList(Map<String, Object> map, FreePageInfo fPInfo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<FreeBoard> fList = dao.searchFBoardList(conn, fPInfo, condition);
+		
+		close(conn);
+		
+		return fList;
+	}
+	
+	
+	/** 검색이 적용된 썸네일 목록 조회 Service
+	 * @param map
+	 * @param fPInfo
+	 * @return fPList
+	 * @throws Exception
+	 */
+	public List<FRAttachment> searchThumbnailList(Map<String, Object> map, FreePageInfo fPInfo) throws Exception{
+		
+		
+		Connection conn = getConnection();
+		
+		// 검색에 사용됳 SQL 조건문 생성
+		String condition = createCondition(map);
+		
+		List<FRAttachment> fileList = dao.searchThumbnailList(conn, fPInfo, condition);
+		
+		close(conn);
+		
+		return fileList;
+	}
 	
 	
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FRAttachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 import com.kh.semi.search.model.service.SearchService;
@@ -23,21 +23,15 @@ public class SearchController extends HttpServlet {
        
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response, Object cp) throws ServletException, IOException {
-		String uri = request.getRequestURI();  // 요청 들어 오는 주소
-		String contextPath = request.getContextPath(); // 
-		
-		String command = uri;
-
+	
+		String searchKey = request.getParameter("sk");
+		String searchValue = request.getParameter("sv");
+		String currentPage = request.getParameter("cp");
 		
 	
 	try {
 		
-		if(command.equals("freeBoard/search.do")) {
-			
-			String searchKey = request.getParameter("sk");
-			String searchValue = request.getParameter("sv");
-			String currentPage = request.getParameter("cp");
-
+		SearchService service = new SearchService();
 			// 세개를 전달하기 위한 Map
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -45,7 +39,6 @@ public class SearchController extends HttpServlet {
 			map.put("searchValue", searchValue); 
 			map.put("currentPage", cp); 
 			
-			SearchService service = new SearchService();
 			
 			// fPInfo 얻어오기
 			 FreePageInfo fPInfo = service.getPageInfo(map);
@@ -54,6 +47,18 @@ public class SearchController extends HttpServlet {
 			 
 			 List<FreeBoard> fList = service.searchFBoardList(map, fPInfo);
 			 	
+			 
+			 
+			 if(fList != null) {
+			
+				 List<FRAttachment> fileList = service.searchThumbnailList(map, fPInfo);
+					
+					
+				 if(!fList.isEmpty()) { // 조회된 썸네일 목록이 있다면
+						request.setAttribute("fList", fList);
+					}
+					
+				}
 
 				// 조회된 내용과 PageInfo 객체를 request 객체에 담아서 요청 위임
 				
@@ -65,7 +70,7 @@ public class SearchController extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			
-		}
+		
 
 	
 	}catch(Exception e) {

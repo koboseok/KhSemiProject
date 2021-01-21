@@ -2,6 +2,7 @@ package com.kh.semi.search.model.dao;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kh.semi.freeBoard.model.vo.FRAttachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
+
 
 public class SearchDAO {
 	
@@ -118,6 +121,66 @@ public class SearchDAO {
 		
 		return fList;
 	}
-	
+	/** 검색이 적용된 썸네일 목록 조회DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<FRAttachment> searchThumbnailList(Connection conn, FreePageInfo fPInfo, String condition)throws Exception {
+		
+		List<FRAttachment> fileList = null;
+		
+		
+		String query = 
+				"SELECT FILE_NAME, PARENT_BOARD_NO FROM ATTACHMENT " + 
+				"WHERE PARENT_BOARD_NO IN (" + 
+				"    SELECT BOARD_NO FROM " + 
+				"    (SELECT ROWNUM RNUM, V.* FROM " + 
+				"            (SELECT BOARD_NO  FROM V_BOARD " + 
+				"            WHERE BOARD_STATUS='Y' " + 
+				"            AND " + condition + 
+				"            ORDER BY BOARD_NO DESC ) V) " + 
+				"    WHERE RNUM BETWEEN ? AND ?" + 
+				") " + 
+				"AND FILE_LEVEL = 0";
+		
+		try {
+
+			// 위치홀더에 들어갈 시작행, 끝행 번호 계산
+			
+			int startRow = (fPInfo.getCurrentPage() -1) * fPInfo.getLimit() + 1;
+			int endRow = startRow + fPInfo.getLimit() -1;
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			// 조회 결과를 저장할 List 생성
+			fileList = new ArrayList<FRAttachment>();
+			
+			
+			while(rset.next()) {
+				FRAttachment at = new FRAttachment();
+				at.setImgName(rset.getString("FILE_NAME"));
+				at.setparentBoardNo(rset.getInt("PARENT_BOARD_NO"));
+				
+				fileList.add(at);
+			}
+			
+		}finally{
+			
+			close(rset);
+			close(pstmt);
+		}
+			
+		
+		return fileList;
+	}
 	
 }
