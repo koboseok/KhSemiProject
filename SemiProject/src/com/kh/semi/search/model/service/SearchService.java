@@ -47,23 +47,6 @@ public class SearchService {
 
 		return new FreePageInfo((int)map.get("currentPage"), fListCount);
 	}
-	/** 검색 게시물 목록 조회
-	 * @param map
-	 * @param fPInfo 
-	 * @return fList
-	 * @throws Exception
-	 */
-	public List<FreeBoard> searchFBoardList(HashMap<String, Object> map, FreePageInfo fPInfo)throws Exception {
-		
-		Connection conn = getConnection();
-		
-		String condition = createCondition(map);
-		
-		List<FreeBoard> fList = dao.searchFBoardList(conn, fPInfo, condition);	
-		
-		close(conn);
-		return fList;
-	}
 
 	/** 검색 조건에 따라 조건문을 조합  
 	 * @param map
@@ -107,6 +90,23 @@ public class SearchService {
 		return condition;
 	}
 
+	/** 검색 게시물 목록 조회
+	 * @param map
+	 * @param fPInfo 
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<FreeBoard> searchFBoardList(Map<String, Object> map, FreePageInfo fPInfo)throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<FreeBoard> fList = dao.searchFBoardList(conn, fPInfo, condition);	
+		
+		close(conn);
+		return fList;
+	}
 	
 	
 	/** 검색 게시글 목록 리스트 조회 Service

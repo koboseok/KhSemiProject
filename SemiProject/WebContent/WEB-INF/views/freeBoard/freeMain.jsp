@@ -1,7 +1,7 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>자유 게시판</title>
 <style>
-
 .pagination {
 	justify-content: center;
 }
@@ -24,202 +23,209 @@
 
 #free-table td {
 	text-align: center;
-	 vertical-align: middle;
-  /* vertical-align : inline, inline-block 요소에만 적용 가능(td는 inline-block)*/
+	vertical-align: middle;
+	/* vertical-align : inline, inline-block 요소에만 적용 가능(td는 inline-block)*/
 }
 
-.free-wrapper{
+.free-wrapper {
 	min-height: 540px;
 }
 
-#free-table td:hover{
-	cursor : pointer;
+#free-table td:hover {
+	cursor: pointer;
 }
-
 </style>
 
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container my-5">
-		
-		<h1 style = "color : orange">자유 게시판</h1>
-		
-					<%-- 로그인이 되어있는 경우 --%>
-		 	
-		 	<c:if test ="${!empty loginMember}">
-			<button type="button" class="btn btn-warning float-right" id="insertBtn" onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
-			</c:if>
-		 	
-			<div class="free-wrapper">
-					
-		
-			
-			
-		 			<!-- 검색창 -->
+
+		<h1 style="color: orange">자유 게시판</h1>
+
+		<%-- 로그인이 되어있는 경우 --%>
+
+		<c:if test="${!empty loginMember}">
+			<button type="button" class="btn btn-warning float-right"
+				id="insertBtn"
+				onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
+		</c:if>
+
+		<div class="free-wrapper">
+
+
+
+
+			<!-- 검색창 -->
 			<div class="my-5">
-				
-				<form action="freeBoard/search.do" method="GET" class="text-center" id="searchForm">
-				
-					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+
+				<form action="${contextPath}/search.do" method="GET" class="text-center"
+					id="searchForm">
+
+					<select name="sk" class="form-control"
+						style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
 						<option value="titcont">제목+내용</option>
 						<option value="writer">작성자</option>
-					</select>
-					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-					<button class="btn btn-warning" style="width: 100px; display: inline-block;">검색</button>
+					</select> <input type="text" name="sv" class="form-control"
+						style="width: 25%; display: inline-block;">
+					<button class="btn btn-warning"
+						style="width: 100px; display: inline-block;">검색</button>
 				</form>
 			</div>
-		
-		
-				<table class="table table-hover my-5" id="free-table">
-					<thead>
-						<tr>
-							<th>글번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>조회수</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					
-					<%-- 게시글 목록 출력 --%>
-					<tbody>
-					
-						<c:choose>
-							<c:when test="${empty fList}">
+
+
+			<table class="table table-hover my-5" id="free-table">
+				<thead>
+					<tr>
+						<th>글번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>조회수</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+
+				<%-- 게시글 목록 출력 --%>
+				<tbody>
+
+					<c:choose>
+						<c:when test="${empty fList}">
+							<tr>
+								<td colspan="5">존재하는 게시글이 없습니다.</td>
+							</tr>
+						</c:when>
+
+
+						<c:otherwise>
+
+							<c:forEach var="fBoard" items="${fList}">
+
 								<tr>
-									<td colspan="5">존재하는 게시글이 없습니다.</td>
-								</tr>
-							</c:when> 
-								
-								
-							<c:otherwise>	
-									
-								<c:forEach var="board" items="${fList}">
-								
-									<tr>
-										<td>
-										${board.fBoardNo }
-										</td>
-										<td>${board.fBoardTitle }</td>
-										<td>${board.memName }</td>
-										<td>${board.fReadCount }</td>
-										<td>
-											<%-- 날짜 출력 모양 지정 --%>
-											<fmt:formatDate var="createDate" value="${board.fCreateDate }"  pattern="yyyy-MM-dd"/>                          
-											<fmt:formatDate var="today" value="<%= new java.util.Date()  %>"  pattern="yyyy-MM-dd"/>                          
-											<c:choose>
-												<%-- 글 작성일이 오늘이 아닐 경우 --%>
-												<c:when test="${createDate != today}">
+									<td>${fBoard.fBoardNo }</td>
+									<td class="boardTitle">
+										<%-- 썸네일 출력 --%> <c:forEach var="thumbnail" items="${fileList}">
+
+											<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모 게시글 번호가 일치 하는 썸내일 정보가 있다면 --%>
+											<c:if test="${fBoard.fBoardNo == thumbnail.fBoardNo}">
+												<img
+													src="${contextPath}/resources/uploadImages/${thumbnail.imgName}">
+											</c:if>
+
+										</c:forEach> ${fBoard.fBoardTitle}
+									</td>
+									<td>${fBoard.memName }</td>
+									<td>${fBoard.fReadCount }</td>
+									<td>
+										<%-- 날짜 출력 모양 지정 --%> <fmt:formatDate var="createDate"
+											value="${fBoard.fCreateDate }" pattern="yyyy-MM-dd" /> <fmt:formatDate
+											var="today" value="<%= new java.util.Date()  %>"
+											pattern="yyyy-MM-dd" /> <c:choose>
+											<%-- 글 작성일이 오늘이 아닐 경우 --%>
+											<c:when test="${createDate != today}">
 													${createDate}
 												</c:when>
-												
-												<%-- 글 작성일이 오늘일 경우 --%>
-												<c:otherwise>
-													<fmt:formatDate value="${board.fCreateDate}"  pattern="HH:mm"/>                          
-												</c:otherwise>
-											</c:choose>
-										
-										</td>
-										
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-				</table>
-				
-			
-			</div>
-		
-			
-		 	
-			<!-- -------------------- Pagination -------------------- -->
-		
-			<c:choose>
-				<%-- 검색으로 만들어진 페이지? --%>
-				<c:when test="${!empty param.sk && !empty param.sv}">
-					<c:url var="pageUrl" value="freeBoard/search.do"/>
-					
+
+											<%-- 글 작성일이 오늘일 경우 --%>
+											<c:otherwise>
+												<fmt:formatDate value="${fboard.fCreateDate}"
+													pattern="HH:mm" />
+											</c:otherwise>
+										</c:choose>
+
+									</td>
+
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+
+
+		</div>
+
+
+
+		<!-- -------------------- Pagination -------------------- -->
+
+		<c:choose>
+			<%-- 검색으로 만들어진 페이지? --%>
+			<c:when test="${!empty param.sk && !empty param.sv}">
+				<c:url var="pageUrl" value="/search.do" />
+
 				<!-- 	쿼리스트링으로 사용할 내용을 변수에 저장 -->
-					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
-				</c:when>
-			
-				<c:otherwise>
-					<c:url var="pageUrl" value="${contextPath}/freeBoard/main.do"/>
-				</c:otherwise>
-			</c:choose>
-			
-			
-			
-		
-			<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
-			<c:set var="lastPage" value="${pageUrl}?cp=${fPInfo.maxPage}${searchStr}"/>
-			
-		
-			<fmt:parseNumber var="c1" value="${(fPInfo.currentPage - 1) / 10 }"  integerOnly="true" />
-			<fmt:parseNumber var="prev" value="${ c1 * 10 }"  integerOnly="true" />
-			<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
-			
-			
-			<fmt:parseNumber var="c2" value="${(fPInfo.currentPage + 9) / 10 }" integerOnly="true" />
-			<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
-			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
-			
-			
-			<div class="my-5">
-				<ul class="pagination">
-				
-					<%--<< < --%>
-					<c:if test="${fPInfo.currentPage > 10}">
-						<li> 
-							<a class="page-link" href="${firstPage}">&lt;&lt;</a>
-						</li>
-						
-						<li> 
-							<a class="page-link" href="${prevPage}">&lt;</a>
-						</li>
-					</c:if>
-					
-					  
-					 
-					 
-					 
-					 
-					<!-- 페이지 목록 -->
-			 		<c:forEach var="page" begin="${fPInfo.startPage}" end="${fPInfo.endPage}" >
-						<c:choose>
-							<c:when test="${fPInfo.currentPage == page }">
-								<li>
-									<a class="page-link">${page}</a>
-								</li>
-							</c:when>
-						
-							<c:otherwise>
-								<li>	
-									<a class="page-link" href="${pageUrl}?cp=${page}${searchStr}">${page}</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					
-					
-					<%--> >> --%>
-					 <c:if test="${next <= fPInfo.maxPage}">
-						<li> 
-							<a class="page-link" href="${nextPage}">&gt;</a>
-						</li>
-						
-						<li> 
-							<a class="page-link" href="${lastPage}">&gt;&gt;</a>
-						</li>
-						
-					</c:if>
-				</ul>
-			</div>
-		
+				<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
+			</c:when>
+
+			<c:otherwise>
+				<c:url var="pageUrl" value="/freeBoard/main.do" />
+			</c:otherwise>
+		</c:choose>
+
+
+
+
+		<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}" />
+		<c:set var="lastPage"
+			value="${pageUrl}?cp=${fPInfo.maxPage}${searchStr}" />
+
+
+		<fmt:parseNumber var="c1" value="${(fPInfo.currentPage - 1) / 10 }"
+			integerOnly="true" />
+		<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+		<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
+
+
+		<fmt:parseNumber var="c2" value="${(fPInfo.currentPage + 9) / 10 }"
+			integerOnly="true" />
+		<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }"
+			integerOnly="true" />
+		<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
+
+
+		<div class="my-5">
+			<ul class="pagination">
+
+				<%--<< < --%>
+				<c:if test="${fPInfo.currentPage > 10}">
+					<li><a class="page-link" href="${firstPage}">&lt;&lt;</a></li>
+
+					<li><a class="page-link" href="${prevPage}">&lt;</a></li>
+				</c:if>
+
+
+
+
+
+
+				<!-- 페이지 목록 -->
+				<c:forEach var="page" begin="${fPInfo.startPage}"
+					end="${fPInfo.endPage}">
+					<c:choose>
+						<c:when test="${fPInfo.currentPage == page }">
+							<li><a class="page-link">${page}</a></li>
+						</c:when>
+
+						<c:otherwise>
+							<li><a class="page-link"
+								href="${pageUrl}?cp=${page}${searchStr}">${page}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+
+				<%--> >> --%>
+				<c:if test="${next <= fPInfo.maxPage}">
+					<li><a class="page-link" href="${nextPage}">&gt;</a></li>
+
+					<li><a class="page-link" href="${lastPage}">&gt;&gt;</a></li>
+
+				</c:if>
+			</ul>
+		</div>
+
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
