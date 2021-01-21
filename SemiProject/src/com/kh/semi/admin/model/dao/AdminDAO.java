@@ -1,8 +1,9 @@
 package com.kh.semi.admin.model.dao;
-import static com.kh.semi.common.JDBCTemplate.*;
+import static com.kh.semi.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,14 +13,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.admin.model.vo.PageInfo;
+import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.vo.Member;
-
-import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Properties;
 
 public class AdminDAO {
 
@@ -130,4 +125,57 @@ public class AdminDAO {
 		}
 		return mList;
 	}
+
+	/** 정지회원으로 전환 DAO
+	 * @param conn
+	 * @param object
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateGradeB(Connection conn, int memNo) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("updateGradeB");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			result = pstmt.executeUpdate();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	/** 신고 내용 입력 dao
+	 * @param conn
+	 * @param report
+	 * @return
+	 * @throws Exception
+	 */
+	public int reportMember(Connection conn, Report report) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("reportMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, report.getReportReason());
+			pstmt.setDate(2, report.getReportDt());
+			pstmt.setInt(3, report.getReportBNo());
+			pstmt.setString(4, report.getReportBcNo());
+			pstmt.setInt(5, report.getReportMemNo());
+			pstmt.setString(6, report.getBoardCode());
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
 }

@@ -72,8 +72,8 @@ text-align:center;
 						<th>회원번호</th>
 						<th>닉네임</th>
 						<th>이메일</th>
-						<th>전화번호</th>
 						<th>신고테이블</th>
+						<th>게시글/댓글</th>
 						<th>신고글번호</th>
 						<th>신고사유</th>
 						<th>신고날짜</th>

@@ -1,11 +1,8 @@
 package com.kh.semi.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
+import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.semi.admin.model.service.AdminService;
 import com.kh.semi.admin.model.vo.PageInfo;
+import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.vo.Member;
 
 
@@ -54,8 +53,6 @@ public class AdminController extends HttpServlet {
 				//게시글 목록 조회 비즈니스 로직
 				List<Member> mList = service.selectMemberList(pInfo);
 				
-				
-				
 				path = "/WEB-INF/views/admin/memberList.jsp";
 				request.setAttribute("mList", mList);
 				request.setAttribute("pInfo", pInfo);
@@ -63,6 +60,37 @@ public class AdminController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			} 
+			//정지 회원으로 전환 + 신고 내용 입력 Controller ******************************************
+			if(command.equals("/reportMember.do")) {
+				errorMsg = "회원 등급 변경 과정에서 오류 발생";
+				String reportReason = request.getParameter("reportReason");
+				Date reportDate = Date.valueOf(request.getParameter("reportDate"));
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+				String boardCm = request.getParameter("boardCm");
+				int selectMemNo = Integer.parseInt(request.getParameter("selectMemNo"));
+				String boardCode = request.getParameter("boardCode");
+				
+				
+				Report report = new Report(reportReason, reportDate, boardNo, boardCm,
+						selectMemNo, boardCode);
+				
+				int result = service.reportMember(report);
+			
+				if(result>0) {
+					swalIcon = "success";
+					swalTitle = "회원번호 " + boardNo + "번 회원의 등급이 변경되었습니다.";
+				} else {
+					swalIcon = "error";
+					swalTitle = "에러 발생! 다시 시도해 주세요.";
+				}
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(request.getHeader("referer"));
+			}
+			
 			
 			//불량 회원 조회 Controller ******************************************
 			else if(command.equals("/blockList.do")) {
