@@ -315,16 +315,23 @@ public class MemberDAO {
 		        pstmt.setInt(2, MemSub.getServCode());
 		        pstmt.setDate(3, MemSub.getServStDate());
 		        pstmt.setInt(4, MemSub.getPrice());
+		        pstmt.setDate(5, MemSub.getServStDate());
 		        pstmt.addBatch();
 		        pstmt.clearParameters();
 		      }
 
-			int[] resultGroup = pstmt.executeBatch();
+			int[] resultGroup = pstmt.executeBatch(); // 성공 행 개수 , 성공은 했는데 몇개인지 모름 (-2), 실패 (-3)
 		    pstmt.clearParameters(); 
 
 			for(int i : resultGroup) {
 				result += i;
 			}
+			
+			if(result / (-2) == list.size()) {
+				result = 1;
+			}
+			
+			System.out.println(result);
 			
 		} finally {
 			close(pstmt);

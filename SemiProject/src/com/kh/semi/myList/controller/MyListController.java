@@ -40,7 +40,6 @@ public class MyListController extends HttpServlet {
 
 		String errorMsg = null;
 
-		HttpSession session = request.getSession();
 		try {
 			
 			MyListService service = new MyListService();
@@ -51,9 +50,17 @@ public class MyListController extends HttpServlet {
 			if(command.equals("/myList.do")) {
 				errorMsg = "마이리스트 조회 과정에서 오류 발생";
 				
+				HttpSession session = request.getSession();
 				
+
+
+				int memNo = ((Member)session.getAttribute("loginMember")).getMemNo();
+
 				
+				List<MyList> list = service.selectList(memNo);
+				System.out.println(list);
 				
+
 //				로그인이 되어있지 않을때
 				if(loginMember == null) {
 					
@@ -93,7 +100,13 @@ public class MyListController extends HttpServlet {
 					path = "/WEB-INF/views/myList/myList.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
+
+				request.setAttribute("list", list);
+
 				
+				path = "/WEB-INF/views/myList/myList.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
 			} 
 			
 //			구독 리스트 추가 ***************************

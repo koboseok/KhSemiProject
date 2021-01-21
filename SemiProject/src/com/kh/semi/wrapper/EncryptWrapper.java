@@ -24,11 +24,11 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		String encPwd = null; // 암호화가 적용된 비밀번호를 저장할 변수
 		
 		switch(name) {
-		case "memberPwd" : 		// 로그인 시 비밀번호 name 속성 값
+		case "memPwd" : 		// 로그인 시 비밀번호 name 속성 값
 		case "pwd1" : 			// 회원가입 시 비밀번호 name 속성 값
 		case "currentPwd" :		// 비밀번호 변경 시 현재 비밀번호 name 속성 값
 		case "newPwd1" : 		// 비밀번호 변경 시 새 비밀번호 name 속성 값
-		case "loginMember.getMemberPwd" :
+		case "loginMember.getMemPwd" :
 			
 			encPwd = getSha512(super.getParameter(name)); // 암호화
 			break;
@@ -66,10 +66,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 //		java.util.Base64 인코더를 이용해서 암호화된 바이트 배열을 인코딩 후 문자열로 반환
 		
 		encPwd = Base64.getEncoder().encodeToString(md.digest());
-		
-		System.out.println("암호화 전 : " + pwd);
-		System.out.println("암호화 후 : " + encPwd);
-		
 		
 		return encPwd;
 	
