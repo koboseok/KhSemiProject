@@ -71,10 +71,7 @@ div.contain  {
 	margin-left : 35px;
 }
 
-/* div button{
-	background : forestgreen;
-}
- */
+
  
 .gearBtn{
 	background : white;
@@ -83,6 +80,26 @@ div.contain  {
 #test1 {
 	width : 30%;
 }
+
+#div1 {
+	margin:auto;
+	margin-top : 100px;
+	margin-bottom : 100px;
+	padding:100px;
+	width : 700px;
+	height : 300px;
+	text-align : center;
+	background : darkorange;
+	border-radius : 20px;
+}
+
+#pre1{
+	font-size : 20px;
+	
+	color : lightyellow;
+	font-family : fantasy;
+}
+
 
 </style>
 
@@ -95,59 +112,63 @@ div.contain  {
 
 						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
 
-	<div class="container contain" style="background-color: white;">
-		<div class="row" id="slider-div" style="height: 300px;">
-			<c:if test="${!empty loginMember }">
-			<!-- 포문 시작-->
-			<!-- 리스트 사이즈가 1 이상이경우 -->
-			<c:forEach var="item" items="${list}">
-				<div class="col-md-3 ">
-					<div class="row">
-						<div class="col-md-12" id="test1">
-							<img class="imgMouseover" alt="${item.servNm }"
-								class="img-responsive center-block"
-								src="${ contextPath }/resources/images/${item.servImg}" />
-							<div class="showdocument si slider-div">
+	<c:if test="${empty loginMember }">
+		<div id="div1"><pre id="pre1">로그인 후 이용이 가능합니다. 
+	<a class="nav-black nav-link"
+		href="${contextPath}/member/signUpForm.do">회원가입 페이지로 이동</a>회원가입  하쉴 ??</pre></div>
+	</c:if>
 
-								${item.servNm }
-								<button class="float-right gearBtn">
-									<img class="gear"
-										src="${contextPath }/resources/images/gear.png" />
-								</button>
-								<br> <br> 구독기간<br> 시작 : ${item.startDt}<br>
-								종료 : ${item.endDt}<br> <br> 금액 : ${item.price } 원
+	<!-- if문 시작 로그인이 되어있을 경우 -->
+	<c:if test="${!empty loginMember }"> -
+		<div class="container contain" style="background-color: white;">
+			<div class="row" id="slider-div" style="height: 300px; ">
+			
+				<!-- 포문 시작-->
+				<!-- 리스트 사이즈가 1 이상이경우 -->
+				<c:if test="${!empty list }"> 
+				<c:forEach var="item" items="${list}">
+					<div class="col-md-3 ">
+						<div class="row">
+							<div class="col-md-12" id="test1">
+								<img class="imgMouseover" alt="${item.servNm }"
+									class="img-responsive center-block"
+									src="${ contextPath }/resources/images/${item.servImg}" />
+								<div class="showdocument si slider-div">
+
+									${item.servNm }
+									<button class="float-right gearBtn" href="">
+										<img class="gear"
+											src="${contextPath }/resources/images/gear.png" />
+									</button>
+									<br> <br> 구독기간<br> 시작 : ${item.startDt}<br>
+									종료 : ${item.endDt}<br> <br> 금액 : ${item.price } 원
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-			</c:if>
-			<!-- // 포문 끝 -->
-			<!-- //리스트 사이즈가 1 이상이경우 -->
-			<div class="col-md-3 ">
-				<div class="row">
-					<div class="col-md-12" id="test1">
-						<button class="btn addBtn " style="background: forestgreen;"
-							data-toggle="modal" href="#modal-container-2">
-							<br> <img class="add-sub"
-								src="${contextPath }/resources/images/add-sub.png" />
-							<pre style="color: white;">구독 서비스 추가</pre>
-						</button>
+				</c:forEach>
+				<!-- // 포문 끝 -->
+				<!-- //리스트 사이즈가 1 이상이경우 -->
+				</c:if> 
+				<div class="col-md-3 ">
+					<div class="row">
+						<div class="col-md-12" id="test1">
+							<button class="btn addBtn " style="background: forestgreen;"
+								data-toggle="modal" href="#modal-container-2">
+								<br> <img class="add-sub"
+									src="${contextPath }/resources/images/add-sub.png" />
+								<pre style="color: white;">구독 서비스 추가</pre>
+							</button>
+						</div>
 					</div>
 				</div>
+			
 			</div>
-			
-			
-
 		</div>
-	</div>
-
-
-
-
-
-
-
+	 </c:if> 
+	<!--// if 종료 -->
+	
+	
 	<c:if test = "${!empty list }">
 		<div class="container contain">
 			<div class="row">
@@ -241,12 +262,17 @@ div.contain  {
 	
 	 <script>
 	 $(function(){
+		 	var inf = ${empty list and list.size() < 4 ? false : true};
+		 	
+		 	
+		 
 			$('#slider-div').slick({
 				slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
-				infinite : true, 	//무한 반복 옵션	 
-
-				slidesToShow : "${ list.size() == 0 ? 1 : list.size() < 4 ? list.size() : 4  }",		// 한 화면에 보여질 컨텐츠 개수
-				// list.size보다 4 미만일 경우 list.size() , list.size가 4 이상일 경우  4 , list.size가 0일 경우 1 
+				infinite : inf, 	//무한 반복 옵션	 
+				//"${empty list ? false : true}"
+				slidesToShow :"<c:if test='${empty list}'> 1 </c:if>  <c:if test = '${list.size() == 1}'> 2 </c:if>  <c:if test = '${list.size() == 2}'> 3 </c:if>  <c:if test = '${list.size() == 3}'> 4 </c:if>  <c:if test = '${list.size() >= 4}'> 4 </c:if>" , 
+					//"${ empty list ? 1 : !empty list and list.size() < 4 ? list.size() : 4  }",		// 한 화면에 보여질 컨텐츠 개수
+				//list.size가 0일 경우 1 , list.size보다 4 미만일 경우 list.size() , list.size가 4 이상일 경우  4 , list.size가 0일 경우 1 
 
 				slidesToScroll : 4,		//스크롤 한번에 움직일 컨텐츠 개수
 				speed : 100,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
@@ -256,8 +282,8 @@ div.contain  {
 				autoplaySpeed : 10000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
 				pauseOnHover : true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
 				vertical : false,		// 세로 방향 슬라이드 옵션
-				prevArrow : "<button type='button' class='slick-prev '>Previous</button>",		// 이전 화살표 모양 설정
-				nextArrow : "<button type='button' class='slick-next '>Next</button>",		// 다음 화살표 모양 설정
+				//prevArrow : "<button type='button' class='slick-prev '>Previous</button>",		// 이전 화살표 모양 설정
+				//nextArrow : "<button type='button' class='slick-next '>Next</button>",		// 다음 화살표 모양 설정
 				dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
 				draggable : true, 	//드래그 가능 여부 
 				
@@ -266,20 +292,21 @@ div.contain  {
 						breakpoint: 960, //화면 사이즈 960px
 						settings: {
 							//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-							slidesToShow:3 
+							slidesToShow:3
 						} 
 					},
 					{ 
 						breakpoint: 768, //화면 사이즈 768px
 						settings: {	
-							//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-							slidesToShow:2 
+							slidesToShow:2
 						} 
 					}
-				]
+				] 
 
 			});
 		})
+		
+		function init() {console.log("${ empty list ? 1 : !empty list and list.size() < 4 ? list.size() : 4  }")} init();
     </script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
