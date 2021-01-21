@@ -12,8 +12,7 @@
 
 <style>
 
-
-a {
+#serviceFormWrapper a {
 	width: 80px;
 	margin: 0;
 	padding: 0 !important;

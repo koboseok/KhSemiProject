@@ -38,6 +38,7 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		List<Member> mList = dao.selectMemberList(conn, pInfo);
+		mList = dao.addSubList(conn, mList);
 		
 		close(conn);
 		

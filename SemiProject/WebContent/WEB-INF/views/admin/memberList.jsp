@@ -106,12 +106,7 @@
 						<th>이메일</th>
 						<th>닉네임</th>
 						<th>전화번호</th>
-						<th>구독서비스1</th>
-						<th>구독서비스2</th>
-						<th>구독서비스3</th>
-						<th>구독서비스4</th>
-						<th>구독서비스5</th>
-
+						<th>구독 중인 서비스 목록</th>
 					</tr>
 				</thead>
 
@@ -129,14 +124,10 @@
 								<tr>
 									<td><input type="radio"></td>
 									<td>${member.memNo}</td>
-									<td>${member.memName}</td>
 									<td>${member.memEmail}</td>
+									<td>${member.memName}</td>
 									<td>${member.memPhone}</td>
-									<td>${member.memSub1}</td>
-									<td>${member.memSub2}</td>
-									<td>${member.memSub3}</td>
-									<td>${member.memSub4}</td>
-									<td>${member.memSub5}</td>
+									<td>${member.memSub}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

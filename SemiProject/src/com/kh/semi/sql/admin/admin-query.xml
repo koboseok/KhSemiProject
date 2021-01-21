@@ -19,4 +19,9 @@ WHERE MEM_GRADE = 'G' AND
 RNUM BETWEEN ? AND ?
 </entry>
 
+<entry key="addSubList">
+SELECT LISTAGG(SERV_NM, ', ') WITHIN GROUP (ORDER BY SERV_NM) FROM ADMIN_VIEW WHERE MEM_NO = ?
+
+</entry>
+
 </properties>
