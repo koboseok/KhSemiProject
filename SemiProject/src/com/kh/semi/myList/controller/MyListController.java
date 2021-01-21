@@ -2,6 +2,7 @@ package com.kh.semi.myList.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,6 +41,7 @@ public class MyListController extends HttpServlet {
 
 		String errorMsg = null;
 
+		HttpSession session = request.getSession();
 		try {
 			
 			MyListService service = new MyListService();
@@ -50,15 +52,12 @@ public class MyListController extends HttpServlet {
 			if(command.equals("/myList.do")) {
 				errorMsg = "마이리스트 조회 과정에서 오류 발생";
 				
-				HttpSession session = request.getSession();
-				
-
-
-				int memNo = ((Member)session.getAttribute("loginMember")).getMemNo();
-
-				
-				List<MyList> list = service.selectList(memNo);
-				System.out.println(list);
+//
+//				int memNo = ((Member)session.getAttribute("loginMember")).getMemNo();
+//
+//				
+				List<MyList> list = null;
+//				System.out.println(list);
 				
 
 //				로그인이 되어있지 않을때
@@ -74,7 +73,7 @@ public class MyListController extends HttpServlet {
 					
 					int memNo = loginMember.getMemNo();
 					
-					List<MyList> list = service.selectList(memNo);
+					list = service.selectList(memNo);
 //					System.out.println(list);
 					
 					int sum = 0;
@@ -87,8 +86,6 @@ public class MyListController extends HttpServlet {
 					request.setAttribute("list", list);
 					request.setAttribute("sum", sum);
 					
-					temp = sum;
-					sum = 0;
 					request.setAttribute("temp", temp);
 					
 				}
@@ -97,11 +94,8 @@ public class MyListController extends HttpServlet {
 					session.setAttribute("swalTitle", swalTitle);
 					session.setAttribute("swalText", swalText);
 					
-					path = "/WEB-INF/views/myList/myList.jsp";
-					view = request.getRequestDispatcher(path);
-					view.forward(request, response);
+				
 
-				request.setAttribute("list", list);
 
 				
 				path = "/WEB-INF/views/myList/myList.jsp";
@@ -126,9 +120,9 @@ public class MyListController extends HttpServlet {
 				addList.setStartDt(serviceSt);
 				addList.setMemNo(memNo);
 				
+				int result = service.insertMyList(addList);
 				System.out.println(addList);
 				
-				int result = service.insertMyList(addList);
 				
 //				추가 성공 시
 				if (result > 0) {
