@@ -74,12 +74,12 @@ public class FRAttachment {
 		this.imgPath = imgPath;
 	}
 
-	public int getparentBoardNo() {
+	public int getfBoardNo() {
 		return fBoardNo;
 	}
 
-	public void setparentBoardNo(int boardNo) {
-		this.fBoardNo = boardNo;
+	public void setfBoardNo(int fBoardNo) {
+		this.fBoardNo = fBoardNo;
 	}
 
 	@Override

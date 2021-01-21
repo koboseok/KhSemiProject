@@ -134,17 +134,17 @@ public class SearchDAO {
 		
 		
 		String query = 
-				"SELECT FILE_NAME, PARENT_BOARD_NO FROM ATTACHMENT " + 
-				"WHERE PARENT_BOARD_NO IN (" + 
-				"    SELECT BOARD_NO FROM " + 
+				"SELECT FR_IMG_NM, FR_NO FROM FREE_BOARD_IMG " + 
+				"WHERE FR_NO IN (" + 
+				"    SELECT FR_NO FROM " + 
 				"    (SELECT ROWNUM RNUM, V.* FROM " + 
-				"            (SELECT BOARD_NO  FROM V_BOARD " + 
-				"            WHERE BOARD_STATUS='Y' " + 
+				"            (SELECT FR_NO  FROM F_VIEW " + 
+				"            WHERE FR_FL='N' " + 
 				"            AND " + condition + 
-				"            ORDER BY BOARD_NO DESC ) V) " + 
+				"            ORDER BY FR_NO DESC ) V) " + 
 				"    WHERE RNUM BETWEEN ? AND ?" + 
 				") " + 
-				"AND FILE_LEVEL = 0";
+				"AND FR_IMG_LV = 0";
 		
 		try {
 
@@ -167,8 +167,8 @@ public class SearchDAO {
 			
 			while(rset.next()) {
 				FRAttachment at = new FRAttachment();
-				at.setImgName(rset.getString("FILE_NAME"));
-				at.setparentBoardNo(rset.getInt("PARENT_BOARD_NO"));
+				at.setImgName(rset.getString("FR_IMG_NM"));
+				at.setfBoardNo(rset.getInt("FR_NO"));
 				
 				fileList.add(at);
 			}

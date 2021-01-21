@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.semi.freeBoard.model.service.FreeBoardService;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
-import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FRAttachment;
 import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -53,8 +53,6 @@ public class FreeController extends HttpServlet {
 			// 현재 페이지 얻어오기(currentPage)
 			String cp = request.getParameter("cp");
 			
-			
-			
 			// 게시글 목록 조회(메인)==================================================
 			if(command.equals("/main.do")) {
 				errorMsg = "게시판 목록 조회 과정에서 오류 발생";
@@ -69,7 +67,7 @@ public class FreeController extends HttpServlet {
 //				해당 게시글 목록 요소에 작성된 썸네일 이미지 목록 얻어오는 서비스 진행
 				if(fList != null) {
 //				썸네일 이미지 목록 조회 서비스 호출
-				List<Attachment> tList = service.selectThumbnailList(fPInfo);
+				List<FRAttachment> tList = service.selectThumbnailList(fPInfo);
 //				글번호가 매개변수로 전달돼야한다.
 				
 //				썸네일 이미지 목록이 비어있지 않은 경우
@@ -99,7 +97,6 @@ public class FreeController extends HttpServlet {
 			    int fBoardNo = Integer.parseInt(request.getParameter("no"));
 				
 			    // 상세조회 비즈니스 로직
-			    
 			    FreeBoard fBoard = service.selectFBoard(fBoardNo);
 			    
 			    if(fBoard != null) {
@@ -164,7 +161,7 @@ public class FreeController extends HttpServlet {
 //				별도의 List에 모두 저장하기
 				
 //				2-1. 파일 정보를 모두 저장할 List 객체 생성
-				List<Attachment> fileList = new ArrayList<Attachment>();
+				List<FRAttachment> fileList = new ArrayList<FRAttachment>();
 				
 //				2-2. MultipartRequest에서 업로드된 파일의 name 속성값 모두 반환 받기
 				Enumeration<String> files = multiRequest.getFileNames();
@@ -185,7 +182,7 @@ public class FreeController extends HttpServlet {
 					if(multiRequest.getFilesystemName(name) != null) {
 						
 //						Attachment 객체에 파일 정보 저장
-						Attachment temp = new Attachment();
+						FRAttachment temp = new FRAttachment();
 						
 						temp.setImgName(multiRequest.getFilesystemName(name));
 						temp.setImgPath(imgPath);
@@ -234,11 +231,10 @@ public class FreeController extends HttpServlet {
 				}else {
 					swalIcon = "error";
 					swalTitle = "게시글 등록 실패";
-					path = "list.do"; // 게시글 목록
+					path = ".do"; // 게시글 목록
 				}
 				request.getSession().setAttribute("swalIcon", swalIcon);
 				request.getSession().setAttribute("swalTitle", swalTitle);
-				
 				response.sendRedirect(path);
 				
 				
@@ -252,12 +248,12 @@ public class FreeController extends HttpServlet {
 				
 				int fBoardNo = Integer.parseInt(request.getParameter("no"));
 				
-				FreeBoard freeBoard = service.updateView(fBoardNo);
+				FreeBoard freeBoard = service.updateFView(fBoardNo);
 				
 //				업데이트 화면 출력용 게시글 조회가 성공한 경우
 				if(freeBoard != null) {
 //					해당 게시글에 작성된 이미지(파일) 목록 정보 조회
-					List<Attachment> fileList = service.selectBoardFiles(fBoardNo);
+					List<FRAttachment> fileList = service.selectBoardFiles(fBoardNo);
 					
 					if(!fileList.isEmpty()) {
 						request.setAttribute("fileList", fileList);
@@ -300,7 +296,7 @@ public class FreeController extends HttpServlet {
 				int fBoardNo = Integer.parseInt(mRequest.getParameter("no"));
 				
 //				4. 전달 받은 파일 정보를 List에 저장
-				List<Attachment> fileList = new ArrayList<Attachment>();
+				List<FRAttachment> fileList = new ArrayList<FRAttachment>();
 				
 				Enumeration<String> files = mRequest.getFileNames();
 //				input type = "file"인 모든 요소의 name 속성값을 받환받아 files에 저장
@@ -313,7 +309,7 @@ public class FreeController extends HttpServlet {
 //					현재 name 속성이 일치하는 요소로 업로드된 파일이 있다면
 					if(mRequest.getFilesystemName(name) != null ) {
 						
-						Attachment temp = new Attachment();
+						FRAttachment temp = new FRAttachment();
 						
 //						변경된 파일 이름 temp에 저장
 						temp.setImgName(mRequest.getFilesystemName(name));
@@ -322,7 +318,7 @@ public class FreeController extends HttpServlet {
 						temp.setImgPath(imgPath);
 						
 //						해당 게시글 번호 temp에 저장
-						temp.setparentBoardNo(fBoardNo);
+						temp.setfBoardNo(fBoardNo);
 						
 //						파일 레벨 temp에 저장
 						switch(name) {
@@ -345,10 +341,9 @@ public class FreeController extends HttpServlet {
 				
 				map.put("fBoardTitle" , fBoardTitle);
 				map.put("fBoardContent" , fBoardContent);
-				map.put("categoryCode" , categoryCode);
 				map.put("fBoardNo" , fBoardNo);
 				map.put("fileList" , fileList);
-				map.put("boardWriter" , boardWriter);
+				map.put("memN" , boardWriter);
 				
 //				7. 준비된 값을 매개변수로 하여 게시글 수정 Service 호출
 				int result = service.updateFBoard(map);

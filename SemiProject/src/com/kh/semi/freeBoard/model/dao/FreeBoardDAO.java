@@ -3,6 +3,7 @@ package com.kh.semi.freeBoard.model.dao;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
-import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FRAttachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.freeBoard.model.vo.FreePageInfo;
 
@@ -42,7 +43,6 @@ public class FreeBoardDAO {
 
 	/**
 	 * 자유 게시판 글 수 반환DAO
-	 * 
 	 * @param conn
 	 * @return fListCount
 	 * @throws Exception
@@ -244,11 +244,10 @@ public class FreeBoardDAO {
 		try {
 
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setInt(1, (int) map.get("fBoardNo"));
 			pstmt.setString(2, (String) map.get("fBoardTitle"));
 			pstmt.setString(3, (String) map.get("fBoardContent"));
-			pstmt.setInt(4, (int) map.get("memNo"));
+			pstmt.setString(4, (String) map.get("memName"));
 
 			result = pstmt.executeUpdate();
 
@@ -266,18 +265,17 @@ public class FreeBoardDAO {
 	 * @return result 
 	 * @throws Exception
 	 */
-	public int insertAttachment(Connection conn, Attachment at) throws Exception {
+	public int insertAttachment(Connection conn, FRAttachment at) throws Exception {
 		int result = 0;
 
 		String query = prop.getProperty("insertAttachment");
 
 		try {
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setString(1, at.getImgPath());
 			pstmt.setString(2, at.getImgName());
 			pstmt.setInt(3, at.getImgLevel());
-			pstmt.setInt(4, at.getparentBoardNo());
+			pstmt.setInt(4, at.getfBoardNo());
 
 			result = pstmt.executeUpdate();
 
@@ -293,8 +291,8 @@ public class FreeBoardDAO {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectBoardFiles(Connection conn, int fBoardNo) throws Exception {
-		List<Attachment> fileList = null;
+	public List<FRAttachment> selectFBoardFiles(Connection conn, int fBoardNo) throws Exception {
+		List<FRAttachment> fileList = null;
 
 		String query = prop.getProperty("selectBoardFiles");
 
@@ -305,14 +303,14 @@ public class FreeBoardDAO {
 
 			rset = pstmt.executeQuery();
 
-			fileList = new ArrayList<Attachment>();
+			fileList = new ArrayList<FRAttachment>();
 
 			while (rset.next()) {
 
-				Attachment at = new Attachment(rset.getInt("IMG_NO"), rset.getString("IMG_NAME"),
-						rset.getInt("IMG_LEVEL"));
+				FRAttachment at = new FRAttachment(rset.getInt("FR_IMG_NO"), rset.getString("FR_IMG_NM"),
+						rset.getInt("FR_IMG_LV"));
 
-				at.setImgPath(rset.getString("IMG_PATH"));
+				at.setImgPath(rset.getString("FR_PATH"));
 				fileList.add(at);
 			}
 
@@ -331,8 +329,8 @@ public class FreeBoardDAO {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectThumbnailList(Connection conn, FreePageInfo fPInfo) throws Exception {
-		List<Attachment> fileList = null;
+	public List<FRAttachment> selectThumbnailList(Connection conn, FreePageInfo fPInfo) throws Exception {
+		List<FRAttachment> fileList = null;
 
 		String query = prop.getProperty("selectThumbnailList");
 
@@ -350,12 +348,12 @@ public class FreeBoardDAO {
 			rset = pstmt.executeQuery();
 
 //			조회 결과를 저장할 List 생성
-			fileList = new ArrayList<Attachment>();
+			fileList = new ArrayList<FRAttachment>();
 			while (rset.next()) {
 
-				Attachment at = new Attachment();
-				at.setImgName(rset.getString("IMG_NAME"));
-				at.setparentBoardNo(rset.getInt("FR_NO"));
+				FRAttachment at = new FRAttachment();
+				at.setImgName(rset.getString("FR_IMG_NM"));
+				at.setfBoardNo(rset.getInt("FR_NO"));
 
 				fileList.add(at);
 			}
@@ -384,10 +382,9 @@ public class FreeBoardDAO {
 
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, (String) map.get("boardTitle"));
-			pstmt.setString(2, (String) map.get("boardContent"));
-			pstmt.setInt(3, (int) map.get("categoryCode"));
-			pstmt.setInt(4, (int) map.get("boardNo"));
+			pstmt.setString(1, (String) map.get("fBoardTitle"));
+			pstmt.setString(2, (String) map.get("fBoardContent"));
+			pstmt.setInt(3, (int) map.get("fBoardNo"));
 
 			result = pstmt.executeUpdate();
 
@@ -406,7 +403,7 @@ public class FreeBoardDAO {
 	 * @return result 
 	 * @throws Exception
 	 */
-	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+	public int updateAttachment(Connection conn, FRAttachment newFile) throws Exception {
 		int result = 0;
 
 		String query = prop.getProperty("updateAttachment");
@@ -424,7 +421,39 @@ public class FreeBoardDAO {
 		return result;
 	}
 
-	
+	/** 게시물 삭제 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteFBoard(Connection conn, int fBoardNo) throws Exception {
+		
+		int result = 0;
+		
+		String query = prop.getProperty("deleteFBoard");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, fBoardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			
+			close(pstmt);
+			
+			
+		}
+		
+		
+		
+		
+		return result;
+	}
+
 
 }
 
