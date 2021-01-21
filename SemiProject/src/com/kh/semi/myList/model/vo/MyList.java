@@ -1,6 +1,6 @@
 package com.kh.semi.myList.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MyList {
 	private int memNo;
@@ -10,10 +10,26 @@ public class MyList {
 	private Date endDt;
 	private int price;
 	private String servImg;
+	private String startDt2;
 	
 	public MyList() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public MyList(int memNo, String servCode, String servNm, Date startDt, Date endDt, int price, String servImg,
+			String startDt2) {
+		super();
+		this.memNo = memNo;
+		this.servCode = servCode;
+		this.servNm = servNm;
+		this.startDt = startDt;
+		this.endDt = endDt;
+		this.price = price;
+		this.servImg = servImg;
+		this.startDt2 = startDt2;
+	}
+
 
 	public MyList(int memNo, String servCode, String servNm, Date startDt, Date endDt, int price, String servImg) {
 		super();
@@ -25,6 +41,17 @@ public class MyList {
 		this.price = price;
 		this.servImg = servImg;
 	}
+	
+
+	public String getStartDt2() {
+		return startDt2;
+	}
+
+
+	public void setStartDt2(String startDt2) {
+		this.startDt2 = startDt2;
+	}
+
 
 	public int getMemNo() {
 		return memNo;

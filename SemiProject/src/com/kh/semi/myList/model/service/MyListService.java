@@ -27,4 +27,22 @@ public class MyListService {
 		return list;
 	}
 
+	/** 마이 리스트 추가
+	 * @param addList
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertMyList(MyList addList) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.insertMyList(conn, addList);
+		
+		if(result > 0) 	commit(conn);
+		else			rollback(conn);
+		
+		return result;
+	}
+
+	
+
 }

@@ -71,6 +71,35 @@ public class MyListDAO {
 		
 		return list;
 	}
+
+	/** 마이 리스트 추가
+	 * @param conn
+	 * @param addList
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertMyList(Connection conn, MyList addList) throws Exception{
+		
+		int result = 0;
+
+		String query = prop.getProperty("insertMyList");
+		try {
+			pstmt =conn.prepareStatement(query);
+			
+			pstmt.setInt(1, addList.getMemNo());
+			pstmt.setString(2, addList.getServCode());
+			pstmt.setDate(3, addList.getStartDt());
+			pstmt.setInt(4, addList.getPrice());
+			pstmt.setDate(5,addList.getStartDt());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
