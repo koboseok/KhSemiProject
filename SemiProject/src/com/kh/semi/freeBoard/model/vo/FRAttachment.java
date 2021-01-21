@@ -2,21 +2,20 @@ package com.kh.semi.freeBoard.model.vo;
 
 import java.util.Date;
 
-public class Attachment {
+public class FRAttachment {
 	private int imgNo;
 	private String imgName;
 	private int imgLevel;
 	private Date imgDt;
 	private String imgPath;
-	private int boardNo;
+	private int fBoardNo;
 	
-	public Attachment() {
-		// TODO Auto-generated constructor stub
+	public FRAttachment() {
 	}
 
 	
 	
-	public Attachment(int imgNo, String imgName, int imgLevel) {
+	public FRAttachment(int imgNo, String imgName, int imgLevel) {
 		super();
 		this.imgNo = imgNo;
 		this.imgName = imgName;
@@ -25,14 +24,14 @@ public class Attachment {
 
 
 
-	public Attachment(int imgNo, String imgName, int imgLevel, Date imgDt, String imgPath, int boardNo) {
+	public FRAttachment(int imgNo, String imgName, int imgLevel, Date imgDt, String imgPath, int boardNo) {
 		super();
 		this.imgNo = imgNo;
 		this.imgName = imgName;
 		this.imgLevel = imgLevel;
 		this.imgDt = imgDt;
 		this.imgPath = imgPath;
-		this.boardNo = boardNo;
+		this.fBoardNo = fBoardNo;
 	}
 
 	public int getImgNo() {
@@ -75,18 +74,18 @@ public class Attachment {
 		this.imgPath = imgPath;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
+	public int getparentBoardNo() {
+		return fBoardNo;
 	}
 
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
+	public void setparentBoardNo(int boardNo) {
+		this.fBoardNo = boardNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Attachment [imgNo=" + imgNo + ", imgName=" + imgName + ", imgLevel=" + imgLevel + ", imgDt=" + imgDt
-				+ ", imgPath=" + imgPath + ", boardNo=" + boardNo + "]";
+				+ ", imgPath=" + imgPath + ", boardNo=" + fBoardNo + "]";
 	}
 	
 	
