@@ -76,7 +76,6 @@
 								<c:forEach var="board" items="${bList}">
 									<tr>
 										<td>${board.boardNo}</td>
-										<td>${board.categoryName}</td>
 										
 										<td class="boardTitle">
 											
@@ -97,7 +96,7 @@
 										
 										
 										
-										<td>${board.memberId}</td>
+										<td>${board.memName}</td>
 										<td>${board.readCount}</td>
 										<td>
 											<%-- 날짜 출력 모양 지정 --%>

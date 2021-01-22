@@ -26,7 +26,7 @@ AND BOARD_STATUS = 'Y'
 
 <!-- 조회수 증가  -->
 <entry key="increaseReadCount">
-UPDATE BOARD SET
+UPDATE F_BOARD SET
 READ_COUNT = READ_COUNT+1
 WHERE BOARD_NO =?
 </entry>
@@ -47,7 +47,7 @@ VALUES(?, ?, ?, ?)
 <!-- 파일 정보 삽입 -->
 <entry key="insertAttachment">
 INSERT INTO F_ATTACHMENT
-VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?)
+VALUES(SEQ_FFNO.NEXTVAL, ?, ?, ?, ?)
 </entry>
 
 

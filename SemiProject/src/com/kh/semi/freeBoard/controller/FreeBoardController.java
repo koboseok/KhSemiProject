@@ -147,9 +147,8 @@ public class FreeBoardController extends HttpServlet {
 				
 
 				
-
-				MultipartRequest multiRequest = new MultipartRequest(request, filePath,  maxSize, 
-																		"UTF-8",new MyFileRenamePolicy());
+MultipartRequest multiRequest
+= new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 
 				
 				// 파일 저장

@@ -99,6 +99,7 @@ public class FreeBoardService {
 	 * @throws Exception
 	 */
 	public int insertBoard(Map<String, Object> map) throws Exception {
+	
 		Connection conn = getConnection();
 
 		int result = 0;
