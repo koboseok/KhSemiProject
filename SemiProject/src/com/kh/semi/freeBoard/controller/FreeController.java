@@ -137,7 +137,7 @@ public class FreeController extends HttpServlet {
 				
 				String root = request.getSession().getServletContext().getRealPath("/");
 				
-				String imgPath = root + "resources/images/";
+				String imgPath = root + "resources/uploadImages/";
 				
 				System.out.println("imgPath :" + imgPath);
 				
@@ -200,6 +200,7 @@ public class FreeController extends HttpServlet {
 				map.put("fBoardContent" , fBoardContent);
 				map.put("memNo" ,memNo);
 				 
+				System.out.println(map);
 //				4. 게시글 등록 비즈니스 로직 수행 후 결과 반환받기
 				int result = service.insertFBoard(map);
 				
