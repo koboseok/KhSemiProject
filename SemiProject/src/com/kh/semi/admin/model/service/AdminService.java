@@ -31,7 +31,7 @@ public class AdminService {
 		return new PageInfo(currentPage, listCount);
 	}
 
-	/**회원 목록 조회
+	/**회원 목록 조회 service
 	 * @param pInfo
 	 * @return mList
 	 * @throws Exception
@@ -85,12 +85,11 @@ public class AdminService {
 		int bListCount = dao.getbPageInfo(conn);
 		
 		close(conn);
-		
 		return new PageInfo(currentPage, bListCount);
 	}
 	
 
-	/** 불량회원 목록 조회
+	/** 불량회원 목록 조회 service
 	 * @param pInfo
 	 * @return
 	 * @throws Exception
@@ -99,10 +98,27 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		List<Report> bmList = dao.selectBmemberList(conn, pInfo);
-
+		
 		close(conn);
 		
 		return bmList;
+	}
+
+	/**일반 회원으로 전환 service
+	 * @param memNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int convertMember(int memNo) throws Exception {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		result = dao.convertMember(conn, memNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		return result;
 	}
 
 

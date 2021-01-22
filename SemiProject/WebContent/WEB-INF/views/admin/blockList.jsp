@@ -10,7 +10,6 @@
 <script src="https://kit.fontawesome.com/955b087c12.js"
 	crossorigin="anonymous"></script>
 <style>
-
 .pagination {
 	justify-content: center;
 }
@@ -48,7 +47,7 @@
 }
 
 td {
-text-align:center;
+	text-align: center;
 }
 </style>
 
@@ -61,16 +60,19 @@ text-align:center;
 			<span id="title-font">불량회원관리</span>
 		</h2>
 
-		<button class="btn btn-dark btn-sm" style="width:165px" id="toRestoreBtn">일반회원으로 되돌리기</button>
-			
-		<a href="memberList.do">	
-		<button class="btn btn-dark btn-sm" style="width:140px" id="toBlockBtn">일반회원 관리</button>
-		</a>	
-		<a data-toggle="modal" href="#report-modal">
+		<button class="btn btn-dark btn-sm" style="width: 165px"
+			id="toRestoreBtn">일반회원으로 되돌리기</button>
+		<a href="${contextPath}/admin/memberList.do">
+			<button class="btn btn-dark btn-sm" style="width: 140px"
+				id="MemberBtn">일반회원 관리</button>
+		</a>
+		<input type="hidden" name="selectMember" id="selectMember"
+			value="false"> <a href="convertMember.do">
 			<button class="btn btn-secondary btn-sm" id="toRestoreBtn1"
 				style="display: none"></button>
 		</a>
-
+		
+		
 		<div class="list-wrapper">
 			<table class="table table-hover table-striped my-3" id="list-table">
 				<thead>
@@ -90,90 +92,91 @@ text-align:center;
 
 				<%-- 게시글 목록 출력 --%>
 				<tbody>
-					<tr>
-						<td><input type="radio"></td>
-						<td></td>
-						<td>51</td>
-						<td>badUser01</td>
-						<td>badUser1@naver.com</td>
-						<td>010-0000-0000</td>
-						<td>자유게시판</td>
-						<td>3110</td>
-						<td>욕설/도배/소액사기</td>
-						<td>2021-01-13</td>
 
-					</tr>
-					<%-- <c:choose>
-						<c:when test="${empty mList}">
+					<c:choose>
+						<c:when test="${empty bmList}">
 							<tr>
 								<td colspan="10">존재하는 회원이 없습니다.</td>
 							</tr>
 						</c:when>
-						조회된 게시글 목록이 있을 때
 						<c:otherwise>
-							<c:forEach var="board" items="">--%>
-
-					<%--</c:forEach>
+							<c:forEach var="bMember" items="${bmList}">
+								<tr>
+									<td><input type="radio" name="selectMem"></td>
+									<td>${bMember.reportNo}</td>
+									<td>${bMember.reportMemNo}</td>
+									<td>${bMember.memNm}</td>
+									<td>${bMember.memEmail}</td>
+									<td><c:choose>
+											<c:when test="${bMember.boardCode == 'F'}">
+											자유 게시판
+											</c:when>
+											<c:when test="${bMember.boardCode == 'J'}">
+											공동구매 게시판
+											</c:when>
+											<c:when test="${bMember.boardCode == 'P'}">
+											건의 게시판
+											</c:when>
+											<c:otherwise>
+											한 줄 평가
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td><c:choose>
+											<c:when test="${bMember.reportBcNo == 'B'}">
+											게시글
+											</c:when>
+											<c:otherwise>
+											댓글
+											</c:otherwise>
+									</c:choose></td>
+									<td>${bMember.reportBNo}</td>
+									<td>${bMember.reportReason}</td>
+									<td>${bMember.reportDt}</td>
+								</tr>
+							</c:forEach>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 				</tbody>
 			</table>
 		</div>
 
-
-
-		<%-- 			<%---------------------- Pagination ----------------------
-			페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장
+			
 			<c:choose>
-				검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지일 때
 				<c:when test="${!empty param.sk && !empty param.sv}">
 					<c:url var="pageUrl" value="/search.do"/>
-					쿼리스트링으로 사용할 내용을 변수에 저장
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
 				</c:when>
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/list.do"/>
+					<c:url var="pageUrl" value="/admin/blockList.do"/>
 				</c:otherwise>
 			</c:choose>
 			
 
-			<!-- 화살표에 들어갈 주소를 변수로 생성 -->		
-			
-			검색을 안 했을 때 : /board/list.do?cp=1
-			검색을 했을 때 : /search.do?cp=1&sk=title&sv=49	
 			<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
 			<c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
 			
-			EL을 사용한 숫자 연산의 단점: 연산이 자료형의 영향을 받지 않는다.
-			<fmt:parseNumber> : 숫자 형태를 지정하여 변수 선언 
-				integerOnly="true" : 정수로만 숫자 표현 (소수점 버림)
 			
 			<fmt:parseNumber var="c1" value="${(pInfo.currentPage-1)/pInfo.pageSize}" integerOnly="true"/>
-			<fmt:parseNumber var="prev" value="${c1 * 10}" integerOnly="true"/>
+			<fmt:parseNumber var="prev" value="${c1 * 5}" integerOnly="true"/>
 			<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}"/>
-			
-			prevPage 0이 나와도 괜찮은 이유: 10페이지 초과인 경우에 if가 걸려있어서
-			
-			<fmt:parseNumber var="c2" value="${(pInfo.currentPage+9) /10}" integerOnly="true"/>
-			<fmt:parseNumber var="next" value="${c2*10+1}"/>
+						
+			<fmt:parseNumber var="c2" value="${(pInfo.currentPage+4) /5}" integerOnly="true"/>
+			<fmt:parseNumber var="next" value="${c2*5+1}"/>
 			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}"/>
 			
 			<div class="my-5">
-				<ul class="pagination">
-				현재 페이지가 10페이지 초과인 경우
-				
-					<c:if test="${pInfo.currentPage>10}">
-						<li> 첫 페이지로 이동 (<<)
+				<ul class="pagination">				
+					<c:if test="${pInfo.currentPage>5}">
+						<li> 
 							<a class="page-link" href="${firstPage}">&lt;&lt;</a>
 						</li>
-						<li> 이전 페이지의 가장 마지막 번호로 이동 (<)
+						<li> 
 							<a class="page-link" href="${prevPage}">&lt;</a>
 						</li>
 					</c:if>
 
-				<!-- 페이지 목록 -->
-				현재 페이지 == 이동페이지 같을 때 a태그의 href 속성을 없앰
-					<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+				<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
 						<c:choose>
 							<c:when test="${pInfo.currentPage==page}">
 								<li> 
@@ -190,45 +193,52 @@ text-align:center;
 					</c:forEach>
 
 
-				다음 페이지가 마지막 페이지 이하인 경우
-					<c:if test="${next <= pInfo.maxPage}">
-						<li> 다음 페이지로 이동 (>)
+				<c:if test="${next <= pInfo.maxPage}">
+						<li> 
 							<a class="page-link" href="${nextPage}">&gt;</a>
 						</li>
-						<li> 마지막 페이지로 이동 (>>)
+						<li> 
 							<a class="page-link" href="${lastPage}">&gt;&gt;</a>
 						</li>
 					</c:if>
 				</ul>
 			</div>
 		
-		 --%>
-		<!-- 검색창 -->
+		
 		<div class="my-5"></div>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
 	<script>
-	var selectMemNo;
-	
-	$("#list-table td").on("click", function() {
-		//td를 클릭하면 라디오박스 체크
-		$(this).parent().children().eq(0).children().prop("checked", true);
-		//td를 클릭하면 회원번호 저장
-		selectMemNo = $(this).parent().children().eq(1).text();
-		//td를 클릭하면 불량회원으로 설정 가능하게 함
-		$('#selectMember').prop('value', true);
-     });
-	      
-	//td가 눌리지 않았을 때 모달창 뜨지 않게 하기
-	$("#toRestoreBtn").on("click", function() {
-		if($('#selectMember').val() == "true") {
-			$('#toRestoreBtn1').click();
-		}
-	});
+		var selectMemNo;
 
-	
+		$("#list-table td").on("click", function() {
+			//td를 클릭하면 라디오박스 체크
+			$(this).parent().children().eq(0).children().prop("checked", true);
+			//td를 클릭하면 회원번호 저장
+			selectMemNo = $(this).parent().children().eq(2).text();
+			console.log(selectMemNo);
+			//td를 클릭하면 불량회원으로 설정 가능하게 함
+			$('#selectMember').prop('value', true);
+		});
+
+		//td가 눌리지 않았을 때 모달창 뜨지 않게 하기 + confirm창으로 등급 변경을 확인
+		$("#toRestoreBtn").on("click", function() {
+			if($('#selectMember').val() == "true") {
+				var result = window.confirm("회원번호 " + selectMemNo + "번을 일반 회원으로 되돌리시겠습니까?");
+				if(result) {
+					$.ajax({
+						url : "convertMember.do",
+						data : {"selectMemNo" : selectMemNo},
+						type : "post",
+						error : console.log("ajax로 parameter를 넘기는 과정에서 오류 발생")
+					})
+					//$('#toRestoreBtn1').click();
+				}	
+			}
+		});
+		
 	</script>
 </body>
 </html>

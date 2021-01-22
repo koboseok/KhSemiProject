@@ -78,7 +78,7 @@ public class AdminController extends HttpServlet {
 			
 				if(result>0) {
 					swalIcon = "success";
-					swalTitle = "회원번호 " + boardNo + "번 회원의 등급이 변경되었습니다.";
+					swalText = "MemberNo." + boardNo + " 회원의 계정이 정지되었습니다.";
 				} else {
 					swalIcon = "error";
 					swalTitle = "에러 발생! 다시 시도해 주세요.";
@@ -92,7 +92,7 @@ public class AdminController extends HttpServlet {
 			}
 			
 			
-			//불량 회원 조회 Controller ******************************************
+			//정지 회원 조회 Controller ******************************************
 			else if(command.equals("/blockList.do")) {
 				errorMsg = "불량 회원 조회 과정에서 오류 발생";
 				
@@ -109,7 +109,30 @@ public class AdminController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
+			//일반 회원으로 전환 Controller ******************************************
+			else if(command.equals("/convertMember.do")) {
+				errorMsg = "일반 회원으로 전환하는 과정에서 오류 발생";
+				
+				int memNo = Integer.parseInt(request.getParameter("selectMemNo"));
+				int result = service.convertMember(memNo);
+				
+				if(result>0) {
+					swalIcon = "success";
+					swalTitle = "일반 회원으로 전환 완료";
+				} else {
+					swalIcon = "error";
+					swalTitle = "일반 회원으로 전환 실패";
+				}
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(request.getHeader("referer"));
 
+			}
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			path = "/WEB-INF/views/common/errorPage.jsp";
