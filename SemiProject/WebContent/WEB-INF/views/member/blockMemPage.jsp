@@ -8,7 +8,7 @@
 <style>
 .lgimg {
 	width: 500px;
-	height: 200px;
+	height: 300px;
 }
 
 pre {
@@ -54,13 +54,14 @@ pre {
 			<div class="col-md-8 offset-md-2">
 				<div class="jumbotron">
 					<div class="text-center py-3">
-						<img src="${contextPath}/resources/images/Oops!-logo.png" />
+						<img src="${contextPath}/resources/images/Oops!-logo.png" class="lgimg" />
 
 					</div>
 					<p class="text-center">
 						<strong>신고 누적으로 정지된 아이디입니다.</strong>
 					</p>
-					<pre>
+					<pre class="text-center">
+					
 정지 일자 : ${report.reportReason}
 정지 사유 : ${report.reportReason}
 문의 밎 해제 요청은 양식을 첨부하시어
