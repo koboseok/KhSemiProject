@@ -99,7 +99,7 @@ public class FreeBoardDAO {
 			while (rset.next()) {
 
 				Board board = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_TITLE"),
-						rset.getString("BOARD_WRITER"), rset.getInt("READ_COUNT"), rset.getTimestamp("BOARD_CREATE_DT"));
+						rset.getString("MEM_NM"), rset.getInt("READ_COUNT"), rset.getTimestamp("BOARD_CREATE_DT"));
 
 				bList.add(board);
 
@@ -140,7 +140,7 @@ public class FreeBoardDAO {
 				board.setBoardNo(rset.getInt("BOARD_NO"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardContent(rset.getString("BOARD_CONTENT"));
-				board.setMemName(rset.getString("BOARD_WRITER"));
+				board.setMemName(rset.getString("MEM_NM"));
 				board.setReadCount(rset.getInt("READ_COUNT"));
 				board.setBoardCreateDate(rset.getTimestamp("BOARD_CREATE_DT"));
 				board.setBoardModifyDate(rset.getTimestamp("BOARD_MODIFY_DT"));

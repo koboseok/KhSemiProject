@@ -45,14 +45,13 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container my-5">
 		
-		<h1>게시판</h1>
+		<h1>자유 게시판</h1>
 		
 			<div class="list-wrapper">
 				<table class="table table-hover table-striped my-5" id="list-table">
 					<thead>
 						<tr>
 							<th>글번호</th>
-							<th>카테고리</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>조회수</th>
