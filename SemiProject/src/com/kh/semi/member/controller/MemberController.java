@@ -148,8 +148,14 @@ public class MemberController extends HttpServlet {
 				int result = mService.nameDupCheck(name);
 				response.getWriter().print(result);
 			}
-
-
+			//정지회원 페이지 Controller **************************************************
+			else if(command.equals("/blockMemPage.do")) {
+				errorMsg = "정지 회원 페이지 출력 중 오류가 발생했습니다.";
+				
+				path="/WEB-INF/views/member/blcoMemPage.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
 
 
 			//			로그인 ********************************************
