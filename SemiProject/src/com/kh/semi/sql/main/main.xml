@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectPopTop">
+		SELECT *
+		FROM (SELECT SERV_NM, SERV_CATEGORY, SERV_IMG, AVG(SERV_POINT)
+		FROM SUBSERVICE_RE JOIN SUBSERVICE ON (SERV_CODE = SERVICE_CODE)
+		GROUP BY SERV_NM,SERV_CATEGORY, SERV_IMG
+		ORDER BY AVG(SERV_POINT) DESC)
+		WHERE SERV_CATEGORY=? AND ROWNUM<![CDATA[<=]]>5
+	</entry>
+
+
+</properties>

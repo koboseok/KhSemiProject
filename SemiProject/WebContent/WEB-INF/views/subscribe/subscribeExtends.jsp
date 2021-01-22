@@ -34,7 +34,8 @@ ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	display: inline-block; margin-block-start : 1em;
+	display: inline-block;
+	margin-block-start: 1em;
 	margin-block-end: 1em;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
@@ -84,8 +85,8 @@ a {
 }
 
 .banner2 {
-	display:inline-block;
-	width:100%;
+	display: inline-block;
+	width: 100%;
 }
 
 .banner2 li {
@@ -128,14 +129,14 @@ a {
 	margin: 45px 45px 150px;
 }
 
-.banner2 li:hover{
-       cursor:pointer;
-       transform:scale(1.2); 
-       -o-transform:scale(1.2); 
-       -moz-transform:scale(1.2);
-       -webkit-transform:scale(1.2);
-       transition: transform .35s
-    }  
+.banner2 li:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+	-o-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	transition: transform .35s
+}
 </style>
 </head>
 <body>
@@ -150,19 +151,18 @@ a {
 				<div class="title_box">
 					<p class="main_title">CONTENTS</p>
 				</div>
+
+
+
 				<ul class="banner2">
-					<li><a href="${contextPath}/subscribe/info"><img
-							src="${contextPath}/resources/images/ex.jpg" class="w100" alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/ex.jpg" class="w100"></a>
-						<p>Example</p></li>
+
+
+					<c:forEach var="conSubscribe" items="${exList}">
+						<li><img
+							src="${contextPath}/resources/images/${conSubscribe.subImage}"
+							class="w100" alt="" />
+							<p>${conSubscribe.subName}</p>
+					</c:forEach>
 				</ul>
 			</div>
 
@@ -174,12 +174,20 @@ a {
 
 
 
+	<script>
+		$(".banner2 li *").on("click", function() {
+			var subName = $(this).parent().children().eq(1).text();
+			console.log(subName);
+
+			location.href = "${contextPath}/subscribe/info.do?name=" + subName;
+		});
+	</script>
 
 
 
 
 
 
-	
+
 </body>
 </html>

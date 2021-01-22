@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,13 +89,14 @@ a {
 
 .banner2 {
 	width: 100%;
+	padding-right: 5px;
 }
 
 .banner2 li {
 	position: relative;
 	float: left;
-	width: 325px;
-	height: 200px;
+	width: 24%;
+	height: 20%;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	box-shadow: 2px 2px 2px #ccc;
@@ -104,19 +107,6 @@ a {
 	content: "";
 	display: block;
 	clear: both;
-}
-
-.hot {
-	background: green;
-	color: white;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 25px;
-	font-size: 2pt;
-	line-height: 20px;
-	height: 20px;
-	text-align: center;
 }
 
 .banner2 li p {
@@ -131,11 +121,16 @@ a {
 
 .banner2 li:hover {
 	cursor: pointer;
-	transform: scale(1.2);
-	-o-transform: scale(1.2);
-	-moz-transform: scale(1.2);
-	-webkit-transform: scale(1.2);
+	transform: scale(1.1);
+	-o-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
 	transition: transform .35s
+}
+
+.title_box span:hover {
+	cursor: pointer;
+	color: green;
 }
 </style>
 </head>
@@ -151,50 +146,33 @@ a {
 			<div class="middle_top">
 				<div class="title_box">
 					<p class="main_title">CONTENTS</p>
-					<span> <a href="${contextPath}/subscribe/extends">더보기</a>
-					</span>
+					<span>더보기 </span>
 				</div>
 				<ul class="banner2">
-					<li><a href="${contextPath}/subscribe/info"><img
-							src="${loginMember.memEmail}" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
+					<c:forEach var="subscribe" items="${conList}">
+						<li><img
+							src="${contextPath}/resources/images/${subscribe.subImage}"
+							class="w100" alt="" />
+							<p>${subscribe.subName }</p></li>
+					</c:forEach>
 				</ul>
 			</div>
 
 			<br> <br>
 
 
-
 			<div class="middle_top">
 				<div class="title_box">
 					<p class="main_title">LIFE STYLE</p>
-					<span> <a href="">더보기</a>
-					</span>
+					<span>더보기 </span>
 				</div>
 				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
+					<c:forEach var="subscribe" items="${lifeList}">
+						<li><img
+							src="${contextPath}/resources/images/${subscribe.subImage}"
+							class="w100" alt="" />
+							<p>${subscribe.subName }</p></li>
+					</c:forEach>
 				</ul>
 			</div>
 
@@ -204,24 +182,15 @@ a {
 			<div class="middle_top">
 				<div class="title_box">
 					<p class="main_title">NEWS LETTER</p>
-					<span> <a href="">더보기</a>
-					</span>
+					<span>더보기 </span>
 				</div>
 				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-
+					<c:forEach var="subscribe" items="${newsList}">
+						<li><img
+							src="${contextPath}/resources/images/${subscribe.subImage}"
+							class="w100" alt="" />
+							<p>${subscribe.subName }</p></li>
+					</c:forEach>
 				</ul>
 			</div>
 
@@ -232,24 +201,15 @@ a {
 			<div class="middle_top">
 				<div class="title_box">
 					<p class="main_title">FOOD</p>
-					<span> <a href="">더보기</a>
-					</span>
+					<span>더보기 </span>
 				</div>
 				<ul class="banner2">
-					<li><a href=""><img
-							src="${contextPath}/resources/images/example.jpg" class="w100"
-							alt="" /></a>
-						<p>Example</p> <span class="hot">HOT</span></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-					<li><a href=""> <img
-							src="${contextPath}/resources/images/example.jpg" class="w100"></a>
-						<p>Example</p></li>
-
+					<c:forEach var="subscribe" items="${foodList}">
+						<li><img
+							src="${contextPath}/resources/images/${subscribe.subImage}"
+							class="w100" alt="" />
+							<p>${subscribe.subName }</p></li>
+					</c:forEach>
 				</ul>
 			</div>
 
@@ -266,8 +226,23 @@ a {
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
+	<script>
+		$(".banner2 li *").on("click", function() {
+			var subName = $(this).parent().children().eq(1).text();
+			console.log(subName);
 
+			location.href = "${contextPath}/subscribe/info.do?name="+subName;
+		});
 
+		
+		
+		$(".title_box span*").on("click", function() {
+			var conName = $(this).parent().children().eq(0).text();
+			console.log(conName);
+
+			location.href = "${contextPath}/subscribe/extends.do?cname="+conName;
+		});
+	</script>
 
 
 
