@@ -2,6 +2,8 @@ package com.kh.semi.freeBoard.controller;
 
 import java.io.IOException;
 
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.semi.jointBoard.model.service.JointBoardService;
-import com.kh.semi.jointBoard.model.vo.Attachment;
-import com.kh.semi.jointBoard.model.vo.Board;
-import com.kh.semi.jointBoard.model.vo.PageInfo;
+import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeBoard.model.vo.PageInfo;
 import com.kh.semi.common.MyFileRenamePolicy;
+import com.kh.semi.freeBoard.model.service.FreeBoardService;
 import com.kh.semi.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -49,7 +51,7 @@ public class FreeBoardController extends HttpServlet {
 		String errorMsg = null;
 
 		try {
-			JointBoardService service = new JointBoardService();
+			FreeBoardService service = new FreeBoardService();
 
 
 			String cp = request.getParameter("cp");
