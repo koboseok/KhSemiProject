@@ -49,13 +49,13 @@
 						<tr>
 							<td style="color: gray">제목</td>
 							<td><input type=text id="freeTitle" class="form-control"
-								name=title size=70 placeholder="제목을 입력해 주세요"></td>
+								name=fBaordTitle size=70 placeholder="제목을 입력해 주세요"></td>
 						</tr>
 
 						<tr>
 							<td style="color: gray">내용</td>
 							<td><textarea id="freeContent" class="form-control"
-									name=content cols=80 rows=10 placeholder="내용을 작성해 주세요"></textarea></td>
+									name=fBoardContent cols=80 rows=10 placeholder="내용을 작성해 주세요"></textarea></td>
 						</tr>
 					</div>
 			</tbody>
