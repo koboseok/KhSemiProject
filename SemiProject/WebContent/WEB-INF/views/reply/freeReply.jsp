@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유 게시판 댓글</title>
+<title>자유게시판 댓글</title>
 </head>
 <style>
 /*댓글*/
