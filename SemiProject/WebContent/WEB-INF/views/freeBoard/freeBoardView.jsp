@@ -82,16 +82,13 @@
 		<div>
 
 			<div id="board-area">
-
-				<!-- Category -->
-				<h6 class="mt-4">카테고리 : [${board.categoryName }]</h6>
 				
 				<!-- Title -->
 				<h3 class="mt-4">${board.boardTitle }</h3>
 
 				<!-- Writer -->
 				<p class="lead">
-					작성자 : ${board.memberId }
+					작성자 : ${board.memName }
 				</p>
 
 				<hr>
@@ -157,7 +154,7 @@
 				<div>
 				
 					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
-					<c:if test="${!empty loginMember && (board.memberId == loginMember.memberId) }">
+					<c:if test="${!empty loginMember && (board.memName == loginMember.memName) }">
 						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button> 
 						<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>				
 						<c:if test="${!empty param.sv && !empty param.sk}">

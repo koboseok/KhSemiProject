@@ -76,7 +76,6 @@
 								<c:forEach var="board" items="${bList}">
 									<tr>
 										<td>${board.boardNo}</td>
-										<td>${board.categoryName}</td>
 										
 										<td class="boardTitle">
 											
@@ -97,7 +96,7 @@
 										
 										
 										
-										<td>${board.memberId}</td>
+										<td>${board.memName}</td>
 										<td>${board.readCount}</td>
 										<td>
 											<%-- 날짜 출력 모양 지정 --%>
@@ -132,7 +131,7 @@
 			<%-- 로그인이 되어있는 경우 --%>
 			<c:if test="${!empty loginMember }">
 				<button type="button" class="btn btn-primary float-right" id="insertBtn"
-				 onclick="location.href = '${contextPath}/board/insertForm.do'">글쓰기</button>
+				 onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">글쓰기</button>
 			</c:if>
 			
 			
@@ -149,7 +148,7 @@
 				</c:when>
 			
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/list.do"/>
+					<c:url var="pageUrl" value="/freeBoard/list.do"/>
 				</c:otherwise>
 			</c:choose>
 			
@@ -258,7 +257,7 @@
 			var boardNo = $(this).parent().children().eq(0).text();
 			//console.log(boardNo);
 			
-			var url = "${contextPath}/board/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+			var url = "${contextPath}/freeBoard/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
 			
 			location.href = url;
 			

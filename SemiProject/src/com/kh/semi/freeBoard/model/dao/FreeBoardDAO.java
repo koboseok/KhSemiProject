@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.kh.semi.jointBoard.model.vo.Attachment;
-import com.kh.semi.jointBoard.model.vo.Board;
-import com.kh.semi.jointBoard.model.vo.PageInfo;
+import com.kh.semi.freeBoard.model.vo.FreeAttachment;
+import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeBoard.model.vo.FreePageInfo;
+
+
 
 public class FreeBoardDAO {
-
+	
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rset = null;
@@ -26,7 +28,7 @@ public class FreeBoardDAO {
 
 //	기본 생성자 구문
 	public FreeBoardDAO() {
-		String fileName = FreeBoardDAO.class.getResource("/com/kh/semi/sql/board/jointBoard-query.xml").getPath();
+		String fileName = FreeBoardDAO.class.getResource("/com/kh/semi/sql/board/freeBoard-query.xml").getPath();
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -74,7 +76,7 @@ public class FreeBoardDAO {
 	 * @return bList
 	 * @throws Exception
 	 */
-	public List<Board> selectBoardList(Connection conn, PageInfo pInfo) throws Exception {
+	public List<Board> selectBoardList(Connection conn, FreePageInfo pInfo) throws Exception {
 		List<Board> bList = null;
 
 		String query = prop.getProperty("selectBoardList");
@@ -96,8 +98,7 @@ public class FreeBoardDAO {
 			while (rset.next()) {
 
 				Board board = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_TITLE"),
-						rset.getString("MEMBER_ID"), rset.getInt("READ_COUNT"), rset.getString("CATEGORY_NM"),
-						rset.getTimestamp("BOARD_CREATE_DT"));
+						rset.getString("BOARD_WRITER"), rset.getInt("READ_COUNT"), rset.getTimestamp("BOARD_CREATE_DT"));
 
 				bList.add(board);
 
@@ -138,11 +139,10 @@ public class FreeBoardDAO {
 				board.setBoardNo(rset.getInt("BOARD_NO"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardContent(rset.getString("BOARD_CONTENT"));
-				board.setMemberId(rset.getString("MEMBER_ID"));
+				board.setMemName(rset.getString("BOARD_WRITER"));
 				board.setReadCount(rset.getInt("READ_COUNT"));
 				board.setBoardCreateDate(rset.getTimestamp("BOARD_CREATE_DT"));
 				board.setBoardModifyDate(rset.getTimestamp("BOARD_MODIFY_DT"));
-				board.setCategoryName(rset.getString("CATEGORY_NM"));
 
 			}
 
@@ -235,7 +235,6 @@ public class FreeBoardDAO {
 			pstmt.setString(2, (String) map.get("boardTitle"));
 			pstmt.setString(3, (String) map.get("boardContent"));
 			pstmt.setInt(4, (int) map.get("boardWriter"));
-			pstmt.setInt(5, (int) map.get("categoryCode"));
 
 			result = pstmt.executeUpdate();
 
@@ -255,7 +254,7 @@ public class FreeBoardDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertAttachment(Connection conn, Attachment at) throws Exception {
+	public int insertAttachment(Connection conn, FreeAttachment at) throws Exception {
 
 		int result = 0;
 
@@ -285,9 +284,9 @@ public class FreeBoardDAO {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectBoardFiles(Connection conn, int boardNo) throws Exception {
+	public List<FreeAttachment> selectBoardFiles(Connection conn, int boardNo) throws Exception {
 
-		List<Attachment> fList = null;
+		List<FreeAttachment> fList = null;
 
 		String query = prop.getProperty("selectBoardFiles");
 
@@ -298,11 +297,11 @@ public class FreeBoardDAO {
 
 			rset = pstmt.executeQuery();
 
-			fList = new ArrayList<Attachment>();
+			fList = new ArrayList<FreeAttachment>();
 
 			while (rset.next()) {
 
-				Attachment at = new Attachment(rset.getInt("FILE_NO"), rset.getString("FILE_NAME"),
+				FreeAttachment at = new FreeAttachment(rset.getInt("FILE_NO"), rset.getString("FILE_NAME"),
 						rset.getInt("FILE_LEVEL"));
 
 				at.setFilePath(rset.getString("FILE_PATH"));
@@ -326,9 +325,9 @@ public class FreeBoardDAO {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<Attachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception {
+	public List<FreeAttachment> selectThumbnailList(Connection conn, FreePageInfo pInfo) throws Exception {
 
-		List<Attachment> fList = null;
+		List<FreeAttachment> fList = null;
 
 		String query = prop.getProperty("selectThumbnailList");
 
@@ -346,10 +345,10 @@ public class FreeBoardDAO {
 			rset = pstmt.executeQuery();
 
 //			조회 결과를 저장할 List 생성
-			fList = new ArrayList<Attachment>();
+			fList = new ArrayList<FreeAttachment>();
 			while (rset.next()) {
 
-				Attachment at = new Attachment();
+				FreeAttachment at = new FreeAttachment();
 				at.setFileName(rset.getString("FILE_NAME"));
 				at.setParentBoardNo(rset.getInt("PARENT_BOARD_NO"));
 
@@ -382,11 +381,9 @@ public class FreeBoardDAO {
 		try {
 
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setString(1, (String) map.get("boardTitle"));
 			pstmt.setString(2, (String) map.get("boardContent"));
-			pstmt.setInt(3, (int) map.get("categoryCode"));
-			pstmt.setInt(4, (int) map.get("boardNo"));
+			pstmt.setInt(3, (int) map.get("boardNo"));
 
 			result = pstmt.executeUpdate();
 
@@ -407,7 +404,7 @@ public class FreeBoardDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+	public int updateAttachment(Connection conn, FreeAttachment newFile) throws Exception {
 
 		int result = 0;
 
