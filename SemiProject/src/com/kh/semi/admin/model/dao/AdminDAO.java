@@ -241,6 +241,27 @@ public class AdminDAO {
 		return bmList;
 	}
 
+	/**일반 회원으로 전환 dao
+	 * @param conn
+	 * @param memNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int convertMember(Connection conn, int memNo) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("convertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 
 
