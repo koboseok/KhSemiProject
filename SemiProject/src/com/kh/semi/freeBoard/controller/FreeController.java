@@ -259,46 +259,43 @@ public class FreeController extends HttpServlet {
 			else if (command.equals("/update.do")) {
 				errorMsg = "게시글 수정 과정에서 오류 발생";
 				
-//				1. MultipartRequest 객체 생성에 필요한 값 설정
-				int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
+
+				int maxSize = 20 * 1024 * 1024; 
 				String root = request.getSession().getServletContext().getRealPath("/");
 				String imgPath = root + "resources/images/";
 				
-//				2. MultipartRequest 객체 생성
-//				-> 생성과 동시에 전달받은 파일이 서버에 저장된다.
+
 				MultipartRequest mRequest = new MultipartRequest(request, imgPath , maxSize , "UTF-8",
 																			new MyFileRenamePolicy());
-//				3. 파일 정보를 제외한 파라미터 얻어오기 
+
 				String fBoardTitle = mRequest.getParameter("fBoardTitle");
 				String fBoardContent = mRequest.getParameter("fBoardContent");
 				int fBoardNo = Integer.parseInt(mRequest.getParameter("no"));
 				
-//				4. 전달 받은 파일 정보를 List에 저장
+
 				List<FRAttachment> fileList = new ArrayList<FRAttachment>();
 				
 				Enumeration<String> files = mRequest.getFileNames();
-//				input type = "file"인 모든 요소의 name 속성값을 받환받아 files에 저장
+
 				
 				while(files.hasMoreElements()) {
 					
-//					현재 접근중인 name 속성 값을 변수에 저장한다.
+
 					String name = files.nextElement();
 					
-//					현재 name 속성이 일치하는 요소로 업로드된 파일이 있다면
+
 					if(mRequest.getFilesystemName(name) != null ) {
 						
 						FRAttachment temp = new FRAttachment();
 						
-//						변경된 파일 이름 temp에 저장
+
 						temp.setImgName(mRequest.getFilesystemName(name));
 						
-//						지정한 파일 경로 temp에 저장
+
 						temp.setImgPath(imgPath);
 						
-//						해당 게시글 번호 temp에 저장
 						temp.setfBoardNo(fBoardNo);
 						
-//						파일 레벨 temp에 저장
 						switch(name) {
 						case "img0" : temp.setImgLevel(0); break;
 						case "img1" : temp.setImgLevel(1); break;
@@ -306,7 +303,6 @@ public class FreeController extends HttpServlet {
 						case "img3" : temp.setImgLevel(3); break;
 						
 						}
-//						temp를 fList에 추가
 						fileList.add(temp);
 					}
 				} // end while
@@ -314,7 +310,6 @@ public class FreeController extends HttpServlet {
 //				5. Session에서 로그인한 회원의 번호를 얻어와 저장
 				int memName = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
 				
-//				6. 준비된 값들을 하나의 Map에 저장
 				Map<String, Object> map = new HashMap<String, Object>();
 				
 				map.put("fBoardTitle" , fBoardTitle);
