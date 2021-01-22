@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,48 +20,43 @@
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <body>
-	<div align="center">
-		<table class="board">
-			<thead>
-				<tr>
-					<td colspan="2">
-
-
-
-						<h1>자유 게시판 등록</h1>
-					</td>
-				</tr>
-
-			</thead>
-			<tbody>
-				<form action="${contextPath}/freeBoard/insert.do" method="post"
-					enctype="multipart/form-data" role="form"
-					onsubmit="return fBoardValidate();">
-					<div class="contentArea">
-					
+		<div align="center">
+		<form action="${contextPath}/freeBoard/insert.do" method="post"
+			enctype="multipart/form-data" role="form"
+			onsubmit="return fBoardValidate();">
+			
+			<table class="board">
+				<thead>
 					<tr>
-							<td style="color: gray"><label class="input-group-addon mr-3 insert-label">작성자</label></td>
-							<td style="color: gray" ><h5 class="my-0" id="writer">${loginMember.memName}</h5></td>
+						<td colspan="2">
+							<h1 style="margin-bottom: 50px; margin-top: 50px;">자유 게시판 등록</h1>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+						<tr>
+							<td style="color: gray"><label
+								class="input-group-addon mr-3 insert-label">작성자</label></td>
+							<td style="color: gray"><h5 class="my-0" id="writer">${loginMember.memName}</h5></td>
 						</tr>
 						<tr>
-							<td style="color: gray" ><label class="input-group-addon mr-3 insert-label">작성일</label></td>
-							<td style="color: gray" ><h5 class="my-0" id="today"></h5></td>
+							<td style="color: gray"><label
+								class="input-group-addon mr-3 insert-label">작성일</label></td>
+							<td style="color: gray"><h5 class="my-0" id="today"></h5></td>
 						</tr>
 						<tr>
 							<td style="color: gray">제목</td>
 							<td><input type=text id="freeTitle" class="form-control"
-								name=fBaordTitle size=70 placeholder="제목을 입력해 주세요"></td>
+								name="fBoardTitle" size=70 placeholder="제목을 입력해 주세요"></td>
 						</tr>
 
 						<tr>
 							<td style="color: gray">내용</td>
 							<td><textarea id="freeContent" class="form-control"
-									name=fBoardContent cols=80 rows=10 placeholder="내용을 작성해 주세요"></textarea></td>
+									name="fBoardContent" cols=80 rows=10 placeholder="내용을 작성해 주세요"></textarea></td>
 						</tr>
-					</div>
-			</tbody>
-			<tfoot>
-				<ul id="fileArea">
+				</tbody>
+				<tfoot>
 					<tr>
 						<td></td>
 						<td><input type="file" id="img0" name="img0"></td>
@@ -76,49 +72,53 @@
 					<tr>
 						<td></td>
 						<td><input type="file" id="img3" name="img3"></td>
-				</ul>
-			</tfoot>
-
-		</table>
-		<div id="buttonArea">
-			<tr>
-				<td>
-					<button type="submit" class="btn btn-warning">등록</button>
-					<button type="button" class="btn btn-secondary">취소</button>
-				</td>
-			</tr>
-		</div>
+					</tr>
+				
+					
+				</tfoot>
+				<tr>
+					<td style="position: relative;left: 610px;">
+						<button type="submit" class="btn btn-warning" >등록</button>
+						<button type="button" class="btn btn-secondary">취소</button>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
+
+
+
+
+
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
-//유효성 검사 
-function fBoardValidate() {
-	if ($("#freeTitle").val().trim().length == 0) {
-		alert("제목을 입력해 주세요.");
-		$("#freeTitle").focus();
-		return false;
-	}
 
-	if ($("#freeContent").val().trim().length == 0) {
-		alert("내용을 입력해 주세요.");
-		$("#freeContent").focus();
-		return false;
-	}
-}
+		//유효성 검사 
+		function fBoardValidate() {
+			if ($("#freeTitle").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#freeTitle").focus();
+				return false;
+			}
 
-(function printToday(){
-	// 오늘 날짜 출력 
-		var today = new Date();
-	var month = (today.getMonth()+1);
-	var date = today.getDate();
+			if ($("#freeContent").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#freeContent").focus();
+				return false;
+			}
+		}
 
-	var str = today.getFullYear() + "-"
-    		+ (month < 10 ? "0"+month : month) + "-"
-    		+ (date < 10 ? "0"+date : date);
-	$("#today").html(str);
-})();
+		(function printToday() {
+			// 오늘 날짜 출력 
+			var today = new Date();
+			var month = (today.getMonth() + 1);
+			var date = today.getDate();
 
-
-</script>
+			var str = today.getFullYear() + "-"
+					+ (month < 10 ? "0" + month : month) + "-"
+					+ (date < 10 ? "0" + date : date);
+			$("#today").html(str);
+		})();
+	</script>
 </body>
 </html>
