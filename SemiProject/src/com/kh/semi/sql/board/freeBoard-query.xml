@@ -51,7 +51,6 @@ INSERT INTO FREE_BOARD (FR_NO, FR_TITLE, FR_CONTENT, MEM_NO)
 VALUES(?,?,?,?)
 </entry>
 
-
 <!--파일 정보 삽입 -->
 <entry key="insertAttachment">
 INSERT INTO FREE_BOARD_IMG
