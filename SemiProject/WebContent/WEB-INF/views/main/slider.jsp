@@ -39,7 +39,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" />
+										<img src="${contextPath}/resources/images/youtube.jpg" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -62,7 +62,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-bookcrew.png" alt="" />
+										<img src="${contextPath}/resources/images/bookcrew.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -87,7 +87,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-greencar.png" alt="" />
+										<img src="${contextPath}/resources/images/greencar.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">

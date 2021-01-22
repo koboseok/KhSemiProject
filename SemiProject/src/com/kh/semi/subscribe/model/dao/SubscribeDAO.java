@@ -1,4 +1,4 @@
-package com.kh.semi.subscribe.model.DAO;
+package com.kh.semi.subscribe.model.dao;
 import static com.kh.semi.common.JDBCTemplate.*;
 
 

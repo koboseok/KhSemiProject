@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +54,7 @@ ul {
 	font-weight: bold;
 }
 
-.pop_section .main_container {	
+.pop_section .main_container {
 	text-align: center;
 }
 
@@ -65,7 +67,6 @@ ul {
 	display: inline-block;
 	width: 50%;
 }
-
 </style>
 
 </head>
@@ -78,54 +79,38 @@ ul {
 			<p>찾고있는 구독서비스가 있다면 이 곳에서 찾아보세요!</p>
 		</div>
 		<ul class="list">
-			<li><a href="">CONTENTS</a></li>
-			<li><a href="">LIFE STYLE</a></li>
-			<li><a href="">NEWS LETTER</a></li>
-			<li><a href="">FOOD</a></li>
+			<li>CONTENTS</li>
+			<li>LIFE STYLE</li>
+			<li>NEWS LETTER</li>
+			<li>FOOD</li>
 		</ul>
 		<div class="main_container layout_padding">
 
-			<p>CONTENTS</p>
 			<div class="content-top">
-				<div class="img-box b-1">
-					<img src="resources/images/ex.jpg" alt="">
-					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
+				<c:forEach var="subscribe" items="${popTopList}">
+					<div class="img-box b-1">
+						<img src="${contextPath}/resources/images/${subscribe.subImage}"
+							alt="">
+						<div class="btn-box">
+							<a href="" class="btn-2"> </a>
+						</div>
 					</div>
-				</div>
-				<div class="img-box b-1">
-					<img src="resources/images/ex.jpg" alt="">
-					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
-					</div>
-				</div>
-				<div class="img-box b-1">
-					<img src="resources/images/ex.jpg" alt="">
-					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
-					</div>
-				</div>
-			</div>
-			<div class="content-bottom">
-
-				<div class="img-box b-1">
-					<img src="resources/images/ex.jpg" alt="">
-					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
-					</div>
-				</div>
-				<div class="img-box b-1">
-					<img src="resources/images/ex.jpg" alt="">
-					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 
 
 
+
+	<script>
+		$(".pop_section .list li*").on("click", function() {
+			var popName = $(this).parent().children().eq(0).text();
+			console.log(popName);
+
+			location.href = "${contextPath}/main/pop.do?name="+popName;
+		});
+	</script>
 
 
 

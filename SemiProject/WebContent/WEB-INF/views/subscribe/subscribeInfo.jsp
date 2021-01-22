@@ -73,6 +73,7 @@
 	height: 350px;
 	background-color: #2f2f2f;
 	color: white;
+	padding-left: 25px;
 }
 
 .middle-right-2 {
@@ -80,6 +81,8 @@
 	margin-top: 10px;
 	width: 100%;
 	height: 140px;
+	background-color: #2f2f2f;
+	color: white;
 }
 
 .middle-right-2 .star {
@@ -96,7 +99,7 @@
 	height: 100%;
 }
 
-img {
+#sub-img {
 	display: block;
 	width: 75%;
 	height: 50%;
@@ -105,7 +108,9 @@ img {
 
 #content {
 	text-align: center;
+	margin-top: 50px;
 }
+
 </style>
 </head>
 <body>
@@ -114,28 +119,28 @@ img {
 	<div class="info">
 
 		<div class="top">
-			<span>구독 서비스 명</span>
+			<span>${subscribe.subName}</span>
 		</div>
 
 		<div class="middle">
 
 			<div class="middle-left">
 				<span> <a href=""><img
-						src="${contextPath}/resources/images/example.jpg"></a>
+						src="${contextPath}/resources/images/${subscribe.subImage}" id="sub-img"></a>
 				</span>
 			</div>
 
 			<div class="middle-right">
 
 				<div class="middle-right-1">
-					<span>구독 서비스 설명</span>
+					<span>${subscribe.subContent}</span>
 				</div>
 				<div class="middle-right-2">
 					<div class="star">
-						<p id="content">별점</p>
+						<p id="content">사용자 평점 : ${replyInfo.point}</p>
 					</div>
 					<div class="user">
-						<p id="content">이용자 수</p>
+						<p id="content">서비스 사용자 수 : ${replyInfo.memberNo}</p>
 					</div>
 				</div>
 			</div>
@@ -147,8 +152,7 @@ img {
 	</div>
 
 
-	<jsp:include page="../common/subscribe-reply.jsp"></jsp:include>
-
+	<jsp:include page="../subscribe/subscribe-reply.jsp"></jsp:include>
 
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>

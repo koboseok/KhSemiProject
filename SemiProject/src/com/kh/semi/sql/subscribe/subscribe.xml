@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectConList">
+		SELECT SERV_NM, SERV_IMG
+		FROM (SELECT * FROM SUBSERVICE ORDER BY
+		SERV_CODE DESC)
+		WHERE SERV_CATEGORY = 'CONTENTS' AND ROWNUM <![CDATA[<=]]>4
+	</entry>
+
+	<entry key="selectLifeList">
+		SELECT SERV_NM, SERV_IMG
+		FROM (SELECT * FROM SUBSERVICE ORDER BY
+		SERV_CODE DESC)
+		WHERE SERV_CATEGORY = 'LIFE STYLE' AND ROWNUM <![CDATA[<=]]>4
+	</entry>
+
+	<entry key="selectNewsList">
+		SELECT SERV_NM, SERV_IMG
+		FROM (SELECT * FROM SUBSERVICE ORDER BY
+		SERV_CODE DESC)
+		WHERE SERV_CATEGORY = 'NEWS LETTER' AND ROWNUM <![CDATA[<=]]>4
+	</entry>
+
+	<entry key="selectFoodList">
+		SELECT SERV_NM, SERV_IMG
+		FROM (SELECT * FROM SUBSERVICE ORDER BY
+		SERV_CODE DESC)
+		WHERE SERV_CATEGORY = 'FOOD' AND ROWNUM <![CDATA[<=]]>4
+	</entry>
+
+	<entry key="selectInfo">
+		SELECT SERV_NM, SERV_IMG, SERV_CATEGORY, SERV_CONTENT
+		FROM SUBSERVICE
+		WHERE SERV_NM = ?
+	</entry>
+
+
+	<entry key="selectReplyInfo">
+		SELECT ROUND(AVG(SERV_POINT),2), COUNT(*) MEM_NO
+		FROM
+		SUBSERVICE_RE
+		JOIN SUBSERVICE ON (SERV_CODE = SERVICE_CODE)
+		WHERE
+		SERV_NM = ?
+	</entry>
+
+	<entry key="extendSubscribe">
+		SELECT SERV_CODE, SERV_NM, SERV_IMG
+		FROM SUBSERVICE
+		WHERE SERV_CATEGORY = ?
+		ORDER BY SERV_CODE DESC
+	</entry>
+
+
+
+
+</properties>
