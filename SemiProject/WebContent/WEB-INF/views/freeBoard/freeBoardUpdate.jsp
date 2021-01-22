@@ -51,7 +51,7 @@
 
 			<div class="form-inline mb-2">
 				<label class="input-group-addon mr-3 insert-label">작성자</label>
-				<h5 class="my-0" id="writer">${board.memberId }</h5>
+				<h5 class="my-0" id="writer">${board.memName}</h5>
 			</div>
 
 
@@ -95,7 +95,7 @@
 				<div>
 					<label for="content">내용</label>
 				</div>
-				<textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;">${board.boardContent }</textarea>
+				<textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;">${board.boardContent}</textarea>
 			</div>
 
 

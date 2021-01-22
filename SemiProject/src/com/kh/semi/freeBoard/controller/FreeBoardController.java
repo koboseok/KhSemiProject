@@ -220,6 +220,7 @@ public class FreeBoardController extends HttpServlet {
 					swalIcon = "success";
 					swalTitle = "게시글 등록 성공";
 					path = "view.do?cp=1&no=" + result;
+					
 				}else {
 					swalIcon = "error";
 					swalTitle = "게시글 등록에 싫패했습니다.";

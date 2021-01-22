@@ -88,7 +88,7 @@
 
 				<!-- Writer -->
 				<p class="lead">
-					작성자 : ${board.memName }
+					작성자 : ${board.memName}
 				</p>
 
 				<hr>
@@ -203,6 +203,23 @@
 	
 	
 	<script>
+	
+
+	 // 삭제 버튼
+	$("#deleteBtn").on("click",function(){
+		
+		//window.confirm(확인 취소 버튼 나오는 alert)
+		if(confirm("게시물을 삭제 하시겠습니까?")){
+			
+			//주소창을 나타내는 객체
+			location.href = "delete.do?no=${board.boardNo}";
+										// board 라는 객체에서 boardNo 얻어옴
+		}
+		
+		
+		
+	});
+	
 		
 	</script>
 </body>

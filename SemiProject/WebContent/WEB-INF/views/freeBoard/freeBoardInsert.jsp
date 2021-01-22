@@ -107,6 +107,7 @@
 		
 		
 	<script>
+	
 		(function printToday(){
 			// 오늘 날짜 출력 
 	 		var today = new Date();
@@ -119,6 +120,7 @@
 			$("#today").html(str);
 		})();
 
+		
 		// 유효성 검사 
 		function boardValidate() {
 			if ($("#boardTitle").val().trim().length == 0) {
