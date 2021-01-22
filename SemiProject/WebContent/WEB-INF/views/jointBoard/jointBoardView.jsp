@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공동 구매 게시판</title>
+<title>게시글</title>
 <style>
 #board-area {
 	min-height: 700px;
@@ -65,26 +64,27 @@
 	text-align: center;
 }
 
+.rWriter {
+	margin-right: 30px;
+}
+
+.rDate {
+	font-size: 0.7em;
+	color: gray;
+}
+
 #replyListArea {
 	list-style-type: none;
 }
 
-.wdr {
-	font-size: 0.9em;
+.board-dateArea {
+	font-size: 14px;
 }
-
-
-
-
-
 
 /* 이미지 선택 색 변경*/
 .carousel-indicators>li {
 	background-color: #ccc !important;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -93,67 +93,72 @@
 
 		<div>
 
-			<h1 style="color: orange">공동 구매 게시판</h1>
-
 			<div id="board-area">
 
-				<!--Board No.-->
-				<br>
-				<h5 style="color:gray ">No.</h5>
-				<br>
-				<h6 style="color: goldenrod ">카테고리</h6>
+				<!-- Category -->
+				<h6 class="mt-4">카테고리 : [${board.categoryName}]</h6>
+
 				<!-- Title -->
-				<h2>제목</h2>
+				<h3 class="mt-4">${board.boardTitle}</h3>
 
-				<br>
 				<!-- Writer -->
-				<p class="wdr" style="color:gray ">
-					작성자 &nbsp;|&nbsp;
-					<!-- Date -->
+				<p class="lead">작성자 : ${board.memberId}</p>
 
-					<span> 작성일 <%--  <fmt:formatDate value="" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> --%>
-						<%-- <br> 마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>  --%>
-					</span> &nbsp;|&nbsp; <span>조회수</span>
-				</p>
-				<br>
 				<hr>
-				<div>
-					<!-- 이미지 출력 -->
-					<%-- 	<c:if test="${!empty  }">  
-				<div class="carousel slide boardImgArea" id="board-image">
-					
-					<!-- 이미지 선택 버튼 -->
-					<ol class="carousel-indicators">
-						<c:forEach var="file" items="" varStatus="">
-							
-							<li data-slide-to="" data-target="#board-image"  
-									<c:if test=""> class="active" </c:if> 
-							>                      
-							</li>
-						
-						</c:forEach>
-					</ol>
-					 --%>
 
-					<!-- 출력되는 이미지 -->
-					<div class="carousel-inner">
-						<%-- 	<c:forEach var="file" items="${fList}" varStatus="vs"> --%>
+				<!-- Date -->
+				<p>
+					<span class="board-dateArea"> 작성일 : <fmt:formatDate
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> <br>
+						마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
+							pattern="yyyy년 MM월 dd일" />
+					</span> <span class="float-right">조회수 ${board.readCount } </span>
+				</p>
 
-						<div class="carousel-item <c:if test="">active</c:if>">
+				<hr>
 
-							<img class="d-block w-100 boardImg" id=""
-								src="${contextPath}/resources/uploadImages/">
+
+
+
+				<!-- 이미지 출력 -->
+				<c:if test="${!empty fList}">
+					<div class="carousel slide boardImgArea" id="board-images">
+
+						<!-- 이미지 선택 버튼 -->
+						<ol class="carousel-indicators">
+							<c:forEach var="file" items="${fList}" varStatus="vs">
+								<li data-target="#board-images" data-slide-to="${vs.index}"
+									<c:if test="${vs.first }">class="active"</c:if>>
+									<%-- 첫번째 바퀴라면 class="active"라는 속성은 추가하겠다. --%>
+								</li>
+							</c:forEach>
+						</ol>
+
+						<!-- 출력되는 이미지 -->
+						<div class="carousel-inner">
+							<c:forEach var="file" items="${fList}" varStatus="vs">
+
+								<div
+									class="carousel-item <c:if test="${vs.first}">active</c:if>">
+									<%-- 처음 만들어지는 캐러셀에 active 클래스를 넣어라 --%>
+									<img class="d-block w-100 boardImg" id="${file.fileNo}"
+										src="${contextPath}/resources/uploadImages/${file.fileName}">
+
+								</div>
+
+							</c:forEach>
+
 						</div>
-
-						<%-- </c:forEach> --%>
-
+						<a class="carousel-control-prev" href="#board-images"
+							data-slide="prev"><span class="carousel-control-prev-icon"></span>
+							<span class="sr-only">Previous</span></a> <a
+							class="carousel-control-next" href="#board-images"
+							data-slide="next"><span class="carousel-control-next-icon"></span>
+							<span class="sr-only">Next</span></a>
 					</div>
+				</c:if>
 
-					<!-- 좌우 화살표 -->
-					<!-- <a class="carousel-control-prev" href="#board-image" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> 
-					<a class="carousel-control-next" href="#board-image" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a> -->
-				</div>
-				<%-- </c:if> --%>
+
 
 
 
@@ -164,57 +169,82 @@
 				<hr>
 
 
+				<div>
 
-				<div class = "buttonArea">
 					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
-					<%-- <c:if test="${!empty  }"> --%>
-					<button id="deleteBtn"
-						class="btn btn-danger btn btn-primary float-right">삭제</button>
-					<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
-					<%-- <c:if test="${!empty }"> --%>
-					<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
-					<%-- 	<c:set var="searchStr" value="" />
-						</c:if>		 --%>
+					<c:if
+						test="${!empty loginMember && (board.memberId == loginMember.memberId)}">
+						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button>
 
-					<button type="button" id="modifyBnt"
-						class="btn btn-secondary btn btn-primary float-right "
-						onclick="location.href = '${contextPath}/jointBoard/updateForm.do'">수정</button>
-					<%-- 	</c:if> --%>
+						<%-- 검색이 없으면
+					상세조회 -> 수정버튼클릭 -> 수정화면 -> 수정성공 -> 상세조회 --%>
+						<%-- ?cp-1&no=505 --%>
+
+						<%-- 검색이 있으면
+					검색 -> 검색목록 -> 상세조회 -> 수정버튼클릭 -> 수정화면 -> 수정성공 -> 상세조회 --%>
+						<%-- ?cp-1&no=505&sk=title&sv=파일 --%>
+
+						<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+						<c:if test="${!empty param.sv && !empty param.sk }">
+							<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+
+							<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
+						</c:if>
 
 
+						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}"
+							class="btn btn-primary float-right ml-1 mr-1">수정</a>
+					</c:if>
 
-					<%-- 		<c:choose>
+
+					<%--
+						상대경로 작성법
+						- 앞에 아무것도 없을 때 : 현재위치 (주소 제일 마지막 / 뒷부분)
+						- ../ : 현재 위치에서 한단계 상위 (주소 제일 마지막 / 보다 왼쪽으로 한칸 앞 /)
+					 --%>
+
+					<c:choose>
 						<c:when test="${!empty param.sk && !empty param.sv }">
 							<c:url var="goToList" value="../search.do">
-								<c:param name="cp">${param.cp}</c:param>
-								<c:param name="sk">${param.sk}</c:param>
-								<c:param name="sv">${param.sv}</c:param>
+								<c:param name="cp">${param.cp }</c:param>
+								<c:param name="sk">${param.sk }</c:param>
+								<c:param name="sv">${param.sv }</c:param>
 							</c:url>
+
 						</c:when>
-						
+
 						<c:otherwise>
 							<c:url var="goToList" value="list.do">
-								<c:param name="cp">${param.cp}</c:param>
+								<c:param name="cp">${param.cp }</c:param>
 							</c:url>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 
 
-					<button type="button" id="listBtn"
-						class="btn btn-warning btn btn-primary float-right"
-						onclick="location.href = '${contextPath}/jointBoard/list.do'">목록으로</button>
 
+					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
 				</div>
+				
+				<%-- <jsp:include page="../reply/jointReply.jsp"></jsp:include> --%>
+				
 			</div>
+
+
+
 		</div>
-
 	</div>
-
-
-<jsp:include page="../reply/jointReply.jsp"></jsp:include>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
 	<script>
+	// 삭제 버튼 이벤트
+	$("#deleteBtn").on("click" , function(){
+		if(confirm("정말 삭제 하시겠습니까 ? ")){
+			location.href = "delete.do?no=${board.boardNo}";
+			
+		}
+		
+	});
 		
 	</script>
 </body>
