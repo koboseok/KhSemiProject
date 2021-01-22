@@ -248,7 +248,7 @@ public class FreeBoardDAO {
 			pstmt.setInt(1, (int) map.get("fBoardNo"));
 			pstmt.setString(2, (String) map.get("fBoardTitle"));
 			pstmt.setString(3, (String) map.get("fBoardContent"));
-			pstmt.setString(4, (String) map.get("memName"));
+			pstmt.setInt(4, (int) map.get("memNo"));
 
 			result = pstmt.executeUpdate();
 
