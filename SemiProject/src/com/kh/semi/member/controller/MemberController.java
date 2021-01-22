@@ -152,7 +152,7 @@ public class MemberController extends HttpServlet {
 			else if(command.equals("/blockMemPage.do")) {
 				errorMsg = "정지 회원 페이지 출력 중 오류가 발생했습니다.";
 				
-				path="/WEB-INF/views/member/blcoMemPage.jsp";
+				path="/WEB-INF/views/member/blockMemPage.jsp";
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
