@@ -32,6 +32,15 @@
 			<tbody>
 				<form action="${contextPath}/freeBoard/update.do" method="post">
 					<div class="contentArea">
+					
+						<tr>
+							<td style="color: gray"><label class="input-group-addon mr-3 insert-label">작성자</label></td>
+							<td style="color: gray" ><h5 class="my-0" id="writer">${loginMember.memName}</h5></td>
+						</tr>
+						<tr>
+							<td style="color: gray" ><label class="input-group-addon mr-3 insert-label">작성일</label></td>
+							<td style="color: gray" ><h5 class="my-0" id="today"></h5></td>
+						</tr>
 						<tr>
 							<td style="color: gray">제목</td>
 							<td><input type=text id = "freeTitle" class="form-control" name=title size=70
@@ -76,6 +85,8 @@
 		</form>
 	</div>
 <script>
+
+
 
 </script>
 </body>
