@@ -26,7 +26,7 @@ import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet("/board/*")
+@WebServlet("/jointBoard/*")
 public class JointBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,7 +37,7 @@ public class JointBoardController extends HttpServlet {
 //		공통적인 사용을 위한  변수 선언
 		String uri = request.getRequestURI();			// /wsp/borad/list.do
 		String contextPath = request.getContextPath();	// /wsp
-		String command = uri.substring((contextPath + "/board").length() );
+		String command = uri.substring((contextPath + "/jointBoard").length() );
 		
 		String path = null;
 		RequestDispatcher view = null;
@@ -56,7 +56,7 @@ public class JointBoardController extends HttpServlet {
 			
 			
 //			********** 게시글 목록 조회 **********
-			if(command.equals("/list.do")) {
+			if(command.equals("/main.do")) {
 				errorMsg = "게시판 목록 조회 과정에서 오류 발생";
 				
 //				1. 페이징 처리를 위한 값 계산 Service 호출
@@ -91,7 +91,7 @@ public class JointBoardController extends HttpServlet {
 				}
 				
 				
-				path = "/WEB-INF/views/board/boardList.jsp";
+				path = "/WEB-INF/views/jointBoard/jointMain.jsp";
 				
 				request.setAttribute("bList", bList);
 				request.setAttribute("pInfo", pInfo);
@@ -123,7 +123,7 @@ public class JointBoardController extends HttpServlet {
 					}
 					
 					
-					path = "/WEB-INF/views/board/boardView.jsp";
+					path = "/WEB-INF/views/jointBoard/jointBoardView.jsp";
 					request.setAttribute("board", board);
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
@@ -132,14 +132,14 @@ public class JointBoardController extends HttpServlet {
 					
 					request.getSession().setAttribute("swalIcon", "error");
 					request.getSession().setAttribute("swalTitle", "게시글 상세 조회 실패");
-					response.sendRedirect("list.do?cp=1");
+					response.sendRedirect("main.do?cp=1");
 				}
 				
 			}
 			
 //			********** 게시글 작성 화면 전환 Controller **********
 			else if (command.equals("/insertForm.do")) {
-				path = "/WEB-INF/views/board/boardInsert.jsp";
+				path = "/WEB-INF/views/jointBoard/jointBoardInsert.jsp";
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
@@ -251,7 +251,7 @@ public class JointBoardController extends HttpServlet {
 				}else {
 					swalIcon = "error";
 					swalTitle = "게시글 등록 실패";
-					path = "list.do"; // 게시글 목록
+					path = "main.do"; // 게시글 목록
 				}
 				request.getSession().setAttribute("swalIcon", swalIcon);
 				request.getSession().setAttribute("swalTitle", swalTitle);
@@ -282,7 +282,7 @@ public class JointBoardController extends HttpServlet {
 					
 					request.setAttribute("board" , board);
 					
-					path = "/WEB-INF/views/board/boardUpdate.jsp";
+					path = "/WEB-INF/views/jointBoard/jointBoardUpdate.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 					
@@ -411,7 +411,7 @@ public class JointBoardController extends HttpServlet {
 				if(result > 0) {
 					swalIcon = "success";
 					swalTitle = "게시글 삭제 성공";
-					path = "list.do"; // 게시글 목록
+					path = "main.do"; // 게시글 목록
 				}else {
 					swalIcon = "error";
 					swalTitle = "게시글 삭제 실패";

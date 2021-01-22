@@ -26,7 +26,7 @@ public class JointBoardDAO {
 
 //	기본 생성자 구문
 	public JointBoardDAO() {
-		String fileName = JointBoardDAO.class.getResource("/com/kh/semi/sql/board/jointBoard-query.xml").getPath();
+		String fileName = JointBoardDAO.class.getResource("/com/kh/semi/sql/board/freeBoard-query.xml").getPath();
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -93,15 +93,16 @@ public class JointBoardDAO {
 
 			bList = new ArrayList<Board>();
 
-			while (rset.next()) {
-
-				Board board = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_TITLE"),
-						rset.getString("MEMBER_ID"), rset.getInt("READ_COUNT"), rset.getString("CATEGORY_NM"),
-						rset.getTimestamp("BOARD_CREATE_DT"));
-
+			while(rset.next()) {
+				Board board = new Board(rset.getInt("BOARD_NO"),
+									rset.getString("BOARD_TITLE"),
+									rset.getString("MEMBER_ID"),
+									rset.getInt("READ_COUNT"),
+									rset.getString("CATEGORY_NM"),
+									rset.getTimestamp("BOARD_CREATE_DT"));
 				bList.add(board);
-
 			}
+			
 
 		} finally {
 			close(rset);
