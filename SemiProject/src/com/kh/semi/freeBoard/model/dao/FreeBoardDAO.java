@@ -253,7 +253,7 @@ public class FreeBoardDAO {
 			result = pstmt.executeUpdate();
 
 		} finally {
-			close(rset);
+			
 			close(pstmt);
 
 		}

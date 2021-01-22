@@ -155,6 +155,7 @@ public class FreeBoardService {
 			} catch (Exception e) {
 				//				4,5번에 대한 추가 작업
 				//				게시글 또는 파일 정보 삽입 중 에러 발생 시 서버에 저장된 파일을 삭제하는 작업이 필요
+				e.printStackTrace();
 				List<FRAttachment> fileList = (List<FRAttachment>) map.get("fileList");
 
 				if (!fileList.isEmpty()) {
