@@ -43,6 +43,32 @@ public class MyListService {
 		return result;
 	}
 
+	/** 마이 리스트 삭제
+	 * @param delMyList
+	 * @return
+	 */
+	public int deleteMyList(int memNo , String servCode) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.deleteMyList(conn, memNo, servCode);
+		
+		if(result > 0) 	commit(conn);
+		else			rollback(conn);
+		
+		return result;
+	}
+
+	public int updateMyList(MyList updateList , String servCode) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.updateMyList(conn, updateList , servCode);
+		
+		if(result > 0) 	commit(conn);
+		else			rollback(conn);
+		
+		return result;
+	}
+
 	
 
 }

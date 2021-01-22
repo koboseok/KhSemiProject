@@ -100,6 +100,60 @@ public class MyListDAO {
 		}
 		return result;
 	}
+
+	/** 마이 리스트 삭제 
+	 * @param conn
+	 * @param delMyList
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteMyList(Connection conn, int memNo , String ServCode) throws Exception {
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMyList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, ServCode);
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int updateMyList(Connection conn, MyList updateList , String servCode) throws Exception{
+		int result = 0;
+
+		String query = prop.getProperty("updateMyList");
+		try {
+			pstmt =conn.prepareStatement(query);
+			
+			pstmt.setString(1, updateList.getServCode());
+			pstmt.setDate(2, updateList.getStartDt());
+			pstmt.setInt(3, updateList.getPrice());
+			pstmt.setDate(4,updateList.getStartDt());
+			pstmt.setInt(5, updateList.getMemNo());
+			pstmt.setString(6, servCode);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

@@ -109,7 +109,6 @@ public class MyListController extends HttpServlet {
 				String servCode = request.getParameter("servCode");
 				int servPrice = Integer.parseInt(request.getParameter("servPrice"));
 				String startDt = request.getParameter("startDt");
-				
 				Date serviceSt = Date.valueOf(request.getParameter("startDt")); 
 				int memNo = loginMember.getMemNo();
 				
@@ -133,6 +132,81 @@ public class MyListController extends HttpServlet {
 				}else {
 					swalIcon = "error";
 					swalTitle = "마이 리스트 추가 실패 ..";
+					swalText = "건의 게시판에 문의 바랍니다.";
+				}
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				session.setAttribute("swalText", swalText);
+				
+				response.sendRedirect("myList.do");
+			}
+			
+//			마이리스트 삭제 ****************************************************
+			else if (command.equals("/delMyList.do")) {
+				errorMsg = "마이리스트 삭제 과정에서 오류 발생";
+				
+				int memNo = loginMember.getMemNo();
+				
+				String servCode = request.getParameter("servCode");
+				System.out.println(servCode);
+				
+				
+				
+
+				
+				int result = service.deleteMyList(memNo,servCode);
+				
+				
+//				삭제 성공 시
+				if (result > 0) {
+					swalIcon =  "success";
+					swalTitle = "구독 리스트 삭제 성공 !!";
+					swalText = "마이 리스트의 목록이 삭제 되었습니다 .";
+				}else {
+					swalIcon = "error";
+					swalTitle = "마이 리스트 삭제 실패 ..";
+					swalText = "건의 게시판에 문의 바랍니다.";
+				}
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				session.setAttribute("swalText", swalText);
+				
+				response.sendRedirect("myList.do");
+				
+			}
+			
+//			마이 리스트 수정 *************************************
+			else if (command.equals("/updateList.do")) {
+				errorMsg = "마이리스트 수정 과정에서 오류 발생";
+				String updateServCode = request.getParameter("updateServCode");
+				int servPrice = Integer.parseInt(request.getParameter("updateServPrice"));
+				String updateStartDt = request.getParameter("updateStartDt");
+				Date serviceSt = Date.valueOf(request.getParameter("updateStartDt")); 
+				
+				String servCode = request.getParameter("servCode2");
+				
+				
+				int memNo = loginMember.getMemNo();
+				MyList updateList = new MyList();
+				
+				updateList.setServCode(updateServCode);
+				updateList.setPrice(servPrice);
+				updateList.setStartDt(serviceSt);
+				updateList.setMemNo(memNo);
+				
+				int result = service.updateMyList(updateList,servCode);
+//				System.out.println(addList);
+				
+				
+//				추가 성공 시
+				if (result > 0) {
+					swalIcon =  "success";
+					swalTitle = "구독 리스트 수정 성공 !!";
+					swalText = "마이 리스트가 수정 되었습니다 .";
+					
+				}else {
+					swalIcon = "error";
+					swalTitle = "마이 리스트 수정 실패 ..";
 					swalText = "건의 게시판에 문의 바랍니다.";
 				}
 				session.setAttribute("swalIcon", swalIcon);
