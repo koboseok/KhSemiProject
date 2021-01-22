@@ -2,7 +2,7 @@ package com.kh.semi.freeBoard.model.vo;
 
 import java.util.Date;
 
-public class FRAttachment {
+public class Attachment {
 	private int imgNo;
 	private String imgName;
 	private int imgLevel;
@@ -10,12 +10,12 @@ public class FRAttachment {
 	private String imgPath;
 	private int fBoardNo;
 	
-	public FRAttachment() {
+	public Attachment() {
 	}
 
 	
 	
-	public FRAttachment(int imgNo, String imgName, int imgLevel) {
+	public Attachment(int imgNo, String imgName, int imgLevel) {
 		super();
 		this.imgNo = imgNo;
 		this.imgName = imgName;
@@ -24,7 +24,7 @@ public class FRAttachment {
 
 
 
-	public FRAttachment(int imgNo, String imgName, int imgLevel, Date imgDt, String imgPath, int boardNo) {
+	public Attachment(int imgNo, String imgName, int imgLevel, Date imgDt, String imgPath, int boardNo) {
 		super();
 		this.imgNo = imgNo;
 		this.imgName = imgName;
