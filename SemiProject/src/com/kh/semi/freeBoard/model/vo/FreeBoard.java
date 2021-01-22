@@ -1,195 +1,132 @@
-package com.kh.semi.freeBoard.model.vo;
+package com.kh.wsp.board.model.vo;
 
 import java.sql.Timestamp;
 
-public class FreeBoard {
+public class Board {
+	private int boardNo;
+	private String boardTitle;
+	private String boardContent;
+	private String memberId;
+	private int readCount;
+	private String categoryName;
+	private Timestamp boardCreateDate;
+	private Timestamp boardModifyDate;
+	private String boardStatus;
 	
-	private int fBoardNo;
-	private String fBoardTitle;
-	private String fBoardContent;
-	private Timestamp fCreateDate;
-	private Timestamp fModifyDate;
-	private int fReadCount;
-	private char fBoardFL;
-	private int memNo;
-	private String memName;
-	private String memGrade;
-	private String boardCode;
-	
-	
-
-	public FreeBoard() {
-		
+	public Board() {
 	}
+	
 
-
-
-	public FreeBoard(int fBoardNo, String fBoardTitle, String fBoardContent, Timestamp fCreateDate,
-			Timestamp fModifyDate, int fReadCount, char fBoardFL, int memNo, String memName, String memGrade,
-			String boardCode) {
+	public Board(int boardNo, String boardTitle, String memberId, int readCount, String categoryName,
+			Timestamp boardCreateDate) {
 		super();
-		this.fBoardNo = fBoardNo;
-		this.fBoardTitle = fBoardTitle;
-		this.fBoardContent = fBoardContent;
-		this.fCreateDate = fCreateDate;
-		this.fModifyDate = fModifyDate;
-		this.fReadCount = fReadCount;
-		this.fBoardFL = fBoardFL;
-		this.memNo = memNo;
-		this.memName = memName;
-		this.memGrade = memGrade;
-		this.boardCode = boardCode;
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.memberId = memberId;
+		this.readCount = readCount;
+		this.categoryName = categoryName;
+		this.boardCreateDate = boardCreateDate;
 	}
 
 
 
-	public int getfBoardNo() {
-		return fBoardNo;
+	public Board(int boardNo, String boardTitle, String boardContent, String memberId, int readCount,
+			String categoryName, Timestamp boardCreateDate, Timestamp boardModifyDate, String boardStatus) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.memberId = memberId;
+		this.readCount = readCount;
+		this.categoryName = categoryName;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardStatus = boardStatus;
 	}
 
-
-
-	public void setfBoardNo(int fBoardNo) {
-		this.fBoardNo = fBoardNo;
+	public int getBoardNo() {
+		return boardNo;
 	}
 
-
-
-	public String getfBoardTitle() {
-		return fBoardTitle;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 
-
-
-	public void setfBoardTitle(String fBoardTitle) {
-		this.fBoardTitle = fBoardTitle;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
 
-
-
-	public String getfBoardContent() {
-		return fBoardContent;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
-
-
-	public void setfBoardContent(String fBoardContent) {
-		this.fBoardContent = fBoardContent;
+	public String getBoardContent() {
+		return boardContent;
 	}
 
-
-
-	public Timestamp getfCreateDate() {
-		return fCreateDate;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
 
-
-
-	public void setfCreateDate(Timestamp fCreateDate) {
-		this.fCreateDate = fCreateDate;
+	public String getMemberId() {
+		return memberId;
 	}
 
-
-
-	public Timestamp getfModifyDate() {
-		return fModifyDate;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-
-
-	public void setfModifyDate(Timestamp fModifyDate) {
-		this.fModifyDate = fModifyDate;
+	public int getReadCount() {
+		return readCount;
 	}
 
-
-
-	public int getfReadCount() {
-		return fReadCount;
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
 	}
 
-
-
-	public void setfReadCount(int fReadCount) {
-		this.fReadCount = fReadCount;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-
-
-	public char getfBoardFL() {
-		return fBoardFL;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-
-
-	public void setfBoardFL(char fBoardFL) {
-		this.fBoardFL = fBoardFL;
+	public Timestamp getBoardCreateDate() {
+		return boardCreateDate;
 	}
 
-
-
-	public int getMemNo() {
-		return memNo;
+	public void setBoardCreateDate(Timestamp boardCreateDate) {
+		this.boardCreateDate = boardCreateDate;
 	}
 
-
-
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
+	public Timestamp getBoardModifyDate() {
+		return boardModifyDate;
 	}
 
-
-
-	public String getMemName() {
-		return memName;
+	public void setBoardModifyDate(Timestamp boardModifyDate) {
+		this.boardModifyDate = boardModifyDate;
 	}
 
-
-
-	public void setMemName(String memName) {
-		this.memName = memName;
+	public String getBoardStatus() {
+		return boardStatus;
 	}
 
-
-
-	public String getMemGrade() {
-		return memGrade;
+	public void setBoardStatus(String boardStatus) {
+		this.boardStatus = boardStatus;
 	}
-
-
-
-	public void setMemGrade(String memGrade) {
-		this.memGrade = memGrade;
-	}
-
-
-
-	public String getBoardCode() {
-		return boardCode;
-	}
-
-
-
-	public void setBoardCode(String boardCode) {
-		this.boardCode = boardCode;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "FreeBoard [fBoardNo=" + fBoardNo + ", fBoardTitle=" + fBoardTitle + ", fBoardContent=" + fBoardContent
-				+ ", fCreateDate=" + fCreateDate + ", fModifyDate=" + fModifyDate + ", fReadCount=" + fReadCount
-				+ ", fBoardFL=" + fBoardFL + ", memNo=" + memNo + ", memName=" + memName + ", memGrade=" + memGrade
-				+ ", boardCode=" + boardCode + "]";
+		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", memberId=" + memberId + ", readCount=" + readCount + ", categoryName=" + categoryName
+				+ ", boardCreateDate=" + boardCreateDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus="
+				+ boardStatus + "]";
 	}
 	
-
-
+	
+	
+	
+	
+	
 }
-
-
-
-
-
-
-

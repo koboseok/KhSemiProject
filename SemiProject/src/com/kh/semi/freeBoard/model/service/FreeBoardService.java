@@ -1,8 +1,6 @@
+package com.kh.wsp.board.model.service;
 
-package com.kh.semi.freeBoard.model.service;
-
-import static com.kh.semi.common.JDBCTemplate.*;
-
+import static com.kh.wsp.common.JDBCTemplate.*;
 
 import java.io.File;
 import java.sql.Connection;
@@ -10,215 +8,217 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
-import com.kh.semi.freeBoard.model.vo.FRAttachment;
-import com.kh.semi.freeBoard.model.vo.FreeBoard;
-import com.kh.semi.freeBoard.model.vo.FreePageInfo;
+import com.kh.wsp.board.model.dao.BoardDAO;
+import com.kh.wsp.board.model.exception.FileInsertFailedException;
+import com.kh.wsp.board.model.vo.Attachment;
+import com.kh.wsp.board.model.vo.Board;
+import com.kh.wsp.board.model.vo.PageInfo;
 
-import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
+public class BoardService {
+	
+	private BoardDAO dao = new BoardDAO();
 
-
-public class FreeBoardService {
-
-	private FreeBoardDAO dao = new FreeBoardDAO();
-
-	/**
-	 * 페이징 처리 Service (값 계산하기)
-	 * 
+	/** 페이징 처리를 위한 값 계산 Service
 	 * @param cp
-	 * @return fPInfo
+	 * @return pInfo
 	 * @throws Exception
 	 */
-
-	public FreePageInfo getFreePageInfo(String cp) throws Exception {
-
+	public PageInfo getPageInfo(String cp) throws Exception{
 		Connection conn = getConnection();
-
+		
+		// cp가 null일 경우
 		int currentPage = cp == null ? 1 : Integer.parseInt(cp);
-
-		// db에서 전체 게시글 수를 조회하여 반환 받기
-		int fListCount = dao.getfListCount(conn);
-
+		
+		// DB에서 전체 게시글 수를 조회하여 반환 받기
+		int listCount = dao.getListCount(conn);
+		
 		close(conn);
-
-		// 현재 페이지, 전체 게시글 수 이용해여 FreePageInfo 객체 생성 // FreePageInfo에 두개의 값 전달
-		return new FreePageInfo(currentPage, fListCount);
+		
+		// 얻어온 현재 페이지와, DB에서 조회한 전체 게시글 수를 이용하여
+		// PageInfo 객체를 생성함
+		return new PageInfo(currentPage, listCount);
 	}
 
-	/** 목록 조회 Service
-	 * @param fPInfo
-	 * @return fLsit
+	
+	
+	/** 게시글 목록 조회
+	 * @param pInfo
+	 * @return bList
+	 * @throws Exception
 	 */
-	public List<FreeBoard> selectFBoardList(FreePageInfo fPInfo) throws Exception {
-
+	public List<Board> selectBoardList(PageInfo pInfo) throws Exception {
 		Connection conn = getConnection();
-		List<FreeBoard> fList = dao.selectFBoardList(conn, fPInfo);
-
+		
+		List<Board> bList = dao.selectBoardList(conn, pInfo);
+		
 		close(conn);
-		return fList;
+		return bList;
 	}
 
-	/** 게시물 상세 조회
-	 * @param fBoard
-	 * @return
+
+
+	/** 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
 	 */
-	public FreeBoard selectFBoard(int fBoardNo)throws Exception {
-		Connection conn =getConnection();
-
-		FreeBoard fBoard = dao.selectFBoard(conn, fBoardNo);
-
-		if(fBoard != null) {
-			int result = dao.increaseReadCount(conn,fBoardNo); 
-
+	public Board selectBoard(int boardNo) throws Exception{
+		
+		Connection conn = getConnection();
+		Board board = dao.selectBoard(conn, boardNo);
+		
+		if(board != null) { // DB에서 조회 성공 시
+			
+			// 조회수 증가
+			int result = dao.increaseReadCount(conn, boardNo);
+			
 			if(result > 0) {
 				commit(conn);
-
-				fBoard.setfReadCount(fBoard.getfReadCount() + 1);
-			}else	{		
-				rollback(conn);	
+				
+				// 반환되는 Board 데이터에는 조회수가 증가되어 있지 않기 때문에 
+				// 조회수를 1 증가 시켜줌
+				board.setReadCount( board.getReadCount() + 1 );
+				
 			}
+			else {
+				rollback(conn);
+			}
+			
 		}
-
-
+		
+		
 		close(conn);
-
-
-
-		return fBoard;
+		return board;
 	}
 
-	/** 게시글 등록 Service
+
+
+	/** 게시글 등록 Service (게시글 + 파일)
 	 * @param map
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertFBoard(Map<String, Object> map)  throws Exception{
+	public int insertBoard(Map<String, Object> map) throws Exception{
 		
 		Connection conn = getConnection();
-
+		
 		int result = 0;
-
-		//		1. 게시글 번호 얻어오기
-		int fBoardNo = dao.selectFNextNo(conn);
-		//		다수의 사용자가 사용할 때 충돌현상 방지 ,중복 제거
-		//		상세조회 페이지로 이동하는 용도로도 쓰인다 .
-
-		if (fBoardNo > 0) {
-			//			얻어온 게시글 번호를 map에 추가 (게시글,파일정보 삽입 DAO에서 사용하기 위해
-			map.put("fBoardNo", fBoardNo);
-
-			//			2. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
-			String fBoardTitle = (String) map.get("fBoardTitle");
-			String fBoardContent = (String) map.get("fBoardContent");
-
-			fBoardTitle = replaceParameter(fBoardTitle);
-			fBoardContent = replaceParameter(fBoardContent);
-
-			//3. 글 내용 개행무자 \r\n -> <br> 번경 처리
-
-			fBoardContent.replaceAll("\r\n", "<br>");
-
-			//			처리된 내용을 다시 map에 추가
-			map.put("fBoardTitle", fBoardTitle);
-			map.put("fBoardContent", fBoardContent);
-
+		
+		// 1. 게시글 번호 얻어오기
+		int boardNo = dao.selectNextNo(conn);
+		
+		if(boardNo > 0) {
+			// 얻어온 게시글 번호를 map에 추가(게시글, 파일정보 삽입 DAO에서 사용하기 위해)
+			map.put("boardNo", boardNo);
+			
+			// 2. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
+			String boardTitle = (String)map.get("boardTitle");
+			String boardContent = (String)map.get("boardContent");
+			
+			boardTitle = replaceParameter(boardTitle);
+			boardContent = replaceParameter(boardContent);
+			
+			// 3. 글 내용 개행문자 \r\n -> <br> 변경 처리
+			boardContent = boardContent.replaceAll("\r\n", "<br>");
+			
+			// 처리된 내용을 다시 map에 추가
+			map.put("boardTitle", boardTitle);
+			map.put("boardContent", boardContent);
+			
+			
 			try {
-				//				4. 게시글 부분(제목 , 내용 , 카테고리)만 BOARD 테이블에 삽입
-				result = dao.insertFBoard(conn, map);
-
-				//				5. 파일 정보 부분만 ATTACHMENT 테이블에 삽입하는 DAO 호출
-				List<FRAttachment> fileList = (List<FRAttachment>) map.get("fileList");
-
-				//				게시글 부분 삽입 성공 && 파일 정보가 있을 경우(비어있지 않을 경우)
-				if (result > 0 && !fileList.isEmpty()) {
-
-					result = 0; // result 재활용 하기위해 0으로 초기화
-
-					//					fList의 요소를 하나씩 반복 접근하여
-					//					DAO 메소드를 반복 호출해 정보를 삽입한다.
-					for (FRAttachment at : fileList) {
-
-						//						파일 정보가 저장된 Attachment 객체에 해당 파일이 작성된 게시글 번호를 추가 세팅
-						at.setfBoardNo(fBoardNo);
+				// 4. 게시글 부분(제목, 내용, 카테고리)만 BOARD 테이블에 삽입하는 DAO 호출
+				result = dao.insertBoard(conn, map);
+				
+				// 5. 파일 정보 부분만 ATTACHMENT 테이블에 삽입하는 DAO 호출
+				List<Attachment> fList = (List<Attachment>)map.get("fList");
+				
+				// 게시글 부분 삽입 성공 && 파일 정보가 있을 경우
+				if(result > 0 && !fList.isEmpty()) {
+					result = 0; // result 재활용을 위해 0으로 초기화
+					
+					// fList의 요소를 하나씩 반복 접근하여
+					// DAO 메소드를 반복 호출해 정보를 삽입함.
+					for(Attachment at : fList) {
+						
+						at.setParentBoardNo(boardNo);
+						
 						result = dao.insertAttachment(conn, at);
-
-						if (result == 0) { // 삽입 실패
-							//							break; // 보류
-
-							//							강제로 예외 발생 
+						
+						if(result == 0) { // 파일 정보 삽입 실패
+							//break; // 보류
+							
+							// 강제로 예외 발생
 							throw new FileInsertFailedException("파일 정보 삽입 실패");
-
 						}
 					}
 				}
-
-			} catch (Exception e) {
-				//				4,5번에 대한 추가 작업
-				//				게시글 또는 파일 정보 삽입 중 에러 발생 시 서버에 저장된 파일을 삭제하는 작업이 필요
-				e.printStackTrace();
-				List<FRAttachment> fileList = (List<FRAttachment>) map.get("fileList");
-
-				if (!fileList.isEmpty()) {
-
-					for (FRAttachment at : fileList) {
-
-						String imgPath = at.getImgPath();
-						String imgName = at.getImgName();
-
-						File deleteFile = new File(imgPath + imgName);
-						//						C:\workspace\5_WebServer\wsp\WebContent\resources/uploadImages/파일명
-
-						if (deleteFile.exists()) { // 해당 경로에 해당 파일이 존재하면
-
+			
+			}catch (Exception e) {
+				// 4,5 번에 대한 추가 작업
+				// 게시글 또는 파일 정보 삽입 중 에러 발생 시
+				// 서버에 저장된 파일을 삭제하는 작업이 필요.
+				
+				List<Attachment> fList = (List<Attachment>)map.get("fList");
+				
+				if(!fList.isEmpty()) {
+					for(Attachment at : fList ) {
+						
+						String filePath = at.getFilePath();
+						String fileName = at.getFileName();
+						
+						File deleteFile = new File(filePath + fileName);
+						
+						if(deleteFile.exists()) { 
+							// 해당 경로에 해당 파일이 존재하면
 							deleteFile.delete(); // 해당 파일 삭제
-
 						}
 					}
 				}
-				//				에러 페이지가 보여질 수 있도록 catch한 Exception을 Controller로 던져 준다.
+				
+				// 에러페이지 보여질 수 있도록 catch한 Exception을 Controller로 던져줌
 				throw e;
-
-			} // end catch
-
-			//			6. 트랜잭션 처리
-			if (result > 0) {
+				
+			}// end catch
+			
+			
+			// 6. 트랜잭션 처리
+			if(result > 0) {
 				commit(conn);
-
-				//				삽입 성공 시 상세 조회 화면으로 이동해야되기 때문에
-				//				글번호를 반환할 수 있도록 result에 boardNo을 대입
-				result = fBoardNo;
-			} else {
+				
+				// 삽입 성공 시 상세 조회 화면으로 이동해야되기 때문에
+				// 글번호를 반환할 수 있도록 result에 boardNo를 대입
+				result = boardNo;
+				
+			}else {
 				rollback(conn);
 			}
 		}
-
-		//		7. 커넥션 반환
+		
+		// 7. 커넥션 반환
 		close(conn);
-
-		//		8. 결과값 리턴
+		
+		// 8. 결과 반환
 		return result;
 	}
 
-	//	크로스 사이트 스크립팅 
-	//	웹 애플리케이션에서 많이 나타나는 보안 취약점 중 하나로
-	//	웹 사이트 관리자가 아닌 사용자가 웹페이지에 악성 스크립트를 삽입할 수 있는 취약점
 
-	//	크로스 사이트 스크립팅 방지 메소드
+	
+	
+	
+	// 크로스 사이트 스크립팅 방지 메소드
 	private String replaceParameter(String param) {
-
 		String result = param;
-
-		if (param != null) {
+		if(param != null) {
 			result = result.replaceAll("&", "&amp;");
 			result = result.replaceAll("<", "&lt;");
 			result = result.replaceAll(">", "&gt;");
 			result = result.replaceAll("\"", "&quot;");
-
 		}
-
+		
 		return result;
-
 	}
+
 
 
 	/** 게시글에 포함된 이미지 목록 조회 Service
@@ -226,55 +226,54 @@ public class FreeBoardService {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<FRAttachment> selectBoardFiles(int fBoardNo) throws Exception{
-		
+	public List<Attachment> selectBoardFiles(int boardNo) throws Exception{
 		Connection conn = getConnection();
-
-		List<FRAttachment> fileList = dao.selectFBoardFiles(conn, fBoardNo);
-
+		
+		List<Attachment> fList = dao.selectBoardFiles(conn, boardNo);
+		
 		close(conn);
-
-		return fileList;
+		
+		return fList;
 	}
-	
+
+
+
 	/** 썸네일 목록 조회 Service
-	 * @param pInfo 
+	 * @param pInfo
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<FRAttachment> selectThumbnailList(FreePageInfo fPInfo)throws Exception {
-
+	public List<Attachment> selectThumbnailList(PageInfo pInfo) throws Exception{
 		Connection conn = getConnection();
-
-		List<FRAttachment> fList = dao.selectThumbnailList(conn,fPInfo);
-
+				
+		List<Attachment> fList = dao.selectThumbnailList(conn, pInfo);
+		
 		close(conn);
-
-
-
+		
 		return fList;
 	}
-	
+
+
+
 	/** 게시글 수정 화면 출력용 Service
 	 * @param boardNo
-	 * @return
+	 * @return board
 	 * @throws Exception
 	 */
-	public FreeBoard updateFView(int fBoardNo)throws Exception {
-
+	public Board updateView(int boardNo) throws Exception{
 		Connection conn = getConnection();
-
-		// 이전에 만들어준 상세조회 DAO 호출
-		FreeBoard fBoard = dao.selectFBoard(conn, fBoardNo);
-
-
-		//textarea  출력을 위한 개행문자 변경
-		fBoard.setfBoardContent(fBoard.getfBoardContent().replace("<br>", "\r\n"));
-
+		
+		// 이전에 만들어둔 상세조회 DAO 호출
+		Board board = dao.selectBoard(conn, boardNo);
+		
+		// textarea 출력을 위한 개행문자 변경
+		board.setBoardContent( board.getBoardContent().replaceAll("<br>", "\r\n")  );
+		
 		close(conn);
-
-		return fBoard;
+		
+		return board;
 	}
+
 
 
 	/** 게시글 수정 Service
@@ -282,183 +281,155 @@ public class FreeBoardService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateFBoard(Map<String, Object> map) throws Exception{
+	public int updateBoard(Map<String, Object> map) throws Exception{
 		Connection conn = getConnection();
-		//		Service 수행 결과 저장용 변수
-		int result = 0;
-		//		삭제할 파일 정보 저장용 변수 선언
-		List<FRAttachment> deleteFiles = null;
-
-		//		1. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
-		String fBoardTitle = (String) map.get("fBoardTitle");
-		String fBoardContent = (String) map.get("fBoardContent");
-
-		fBoardTitle = replaceParameter(fBoardTitle);
-		fBoardContent = replaceParameter(fBoardContent);
-
-		//		2. 글 내용 개행무자 \r\n -> <br> 번경 처리
-
-		fBoardContent = fBoardContent.replaceAll("\r\n", "<br>");
-
-		//		처리된 내용을 다시 map에 추가
-		map.put("fBoardTitle", fBoardTitle);
-		map.put("fBoardContent", fBoardContent);
-
+		
+		int result = 0; // service 수행 결과 저장 변수
+		List<Attachment> deleteFiles = null; // 삭제할 파일 정보 저장 변수 선언
+		
+		// 1. 글 제목/내용 크로스 사이트 스크립팅 방지 처리
+		String boardTitle = (String)map.get("boardTitle");
+		String boardContent = (String)map.get("boardContent");
+		
+		boardTitle = replaceParameter(boardTitle);
+		boardContent = replaceParameter(boardContent);
+		
+		// 2. 글 내용 개행문자 \r\n -> <br> 변경 처리
+		boardContent = boardContent.replaceAll("\r\n", "<br>");
+		
+		// 처리된 내용을 다시 map에 추가
+		map.put("boardTitle", boardTitle);
+		map.put("boardContent", boardContent);
+		
+		
 		try {
-			//			3. 게시글 부분 수정 DAO 호출
-			result = dao.updateFBoard(conn, map);
-
-			//			4. 게시글 수정 성공하고 fList가 비어있지 않으면ㄴ
-			//				파일 정보 수정 DAO 호출
-
-			//			수정 화면에서 새로운 이미지가 업로드된 파일 정보만을 담고 있는 List
-			List<FRAttachment> newFileList = (List<FRAttachment>) map.get("fileList");
-
-			if (result > 0 && !newFileList.isEmpty()) {
-
-				//				DB에서 해당 게시글의 수정 전 파일 목록을 조회한다.
-				List<FRAttachment> oldFileList = dao.selectFBoardFiles(conn, (int) map.get("fBoardNo"));
-
-				//				newFileList -> [ 수정된 썸네일 (lv.0)]
-
-				//				oldFileList -> 썸네일(lv.0) , 이미지1(lv.1) , 이미지2(lv.2)
-
-				//				기존 썸네일(lv.0) ->  수정된 썸네일 (lv.0)로 변경
-				//				-> DB에서 기존 썸네일의 데이터를 수정된 썸네일로 변경 -> DB에서 기존 썸네일 정보가 사라진다.
-
+			// 3. 게시글 부분 수정 DAO 호출
+			result = dao.updateBoard(conn, map);
+			
+			// 4. 게시글 수정 성공하고 fList가 비어있지 않으면 
+			//    파일 정보 수정 DAO 호출
+			
+			// 수정 화면에서 새로운 이미지가 업로드된 파일 정보만을 담고 있는 List
+			List<Attachment> newFileList = (List<Attachment>)map.get("fList");
+			
+			if( result > 0  &&  !newFileList.isEmpty()  ) {
+				
+				// DB에서 해당 게시글의 수정 전 파일 목록을 조회함.
+				List<Attachment> oldFileList 
+					= dao.selectBoardFiles(conn, (int)map.get("boardNo"));
+				
+				// newFileList -> 수정된썸네일(lv.0)
+				// oldFileList -> 썸네일(lv.0), 이미지1(lv.1), 이미지2(lv.2)
+				// 기존 썸네일(lv.0) -> 수정된썸네일(lv.0) 로 변경됨
+				// --> DB에서 기존 썸네일의 데이터를 수정된 썸네일로 변경
+				//   --> DB에서 기존 썸네일 정보가 사라짐.
+				
 				result = 0; // result 재활용
-				deleteFiles = new ArrayList<FRAttachment>(); // 삭제될 파일 정보 저장 List
-
-				//				새로운 이미지 정보 반복 접근
-				for (FRAttachment newFile : newFileList) {
-
-					//					flag가 false인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되는 경우 -> update 진행
-					//					flag가 true인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되지 않은 경우 -> insert 진행
+				deleteFiles = new ArrayList<Attachment>(); // 삭제될 파일 정보 저장 List
+				
+				// 새로운 이미지 정보 반복 접근
+				for(Attachment newFile : newFileList) {
+					
+					// flag가 false인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되는 경우 -> update
+					// flag가 true인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되지 않는 경우 -> insert
 					boolean flag = true;
-
-					//					기존 이미지 정보 반복 접근
-					for (FRAttachment oldFile : oldFileList) {
-
-						//						새로운 이미지와 기존 이미지의 파일 레벨이 동일한 파일이 있다면
-						if (newFile.getImgLevel() == oldFile.getImgLevel()) {
-
+					
+					
+					// 기존 이미지 정보 반복 접근
+					for(Attachment oldFile : oldFileList) {
+						// 새로운 이미지와 기존 이미지의 파일레벨이 동일한 파일이 있다면
+						if(newFile.getFileLevel() == oldFile.getFileLevel()) {
+							
+							// 기존 파일을 삭제 List에 추가
 							deleteFiles.add(oldFile);
-
-							//							새 이미지 정보에 이전 파일 번호를 추가 -> 파일번호를 이용한 수정 진행 
-							newFile.setImgNo(oldFile.getImgNo());
-
+							
+							// 새 이미지 정보에 이전 파일 번호를 추가 -> 파일 번호를 이용한 수정 진행
+							newFile.setFileNo( oldFile.getFileNo()  );
+							
 							flag = false;
-
+							
 							break;
 						}
 					}
-
-					//					flag 값에 따라 파일정보 insert 또는 update 수행
-					if (flag) {
-
+					
+					
+					// flag 값에 따라 파일정보 insert 또는 update 수행
+					if(flag) {
 						result = dao.insertAttachment(conn, newFile);
-
-					} else {
+					}else {
 						result = dao.updateAttachment(conn, newFile);
-
 					}
-					System.out.println("result : " + result);
-
-					//					파일 정보 삽입 또는 수정 중 실패 시 
-					if (result == 0) {
-						//						강제로 사용자 정의 예외 발생
+					
+					
+					// 파일 정보 삽입 또는 수정 중 실패 시
+					if(result == 0) {
+						// 강제로 사용자 정의 예외 발생
 						throw new FileInsertFailedException("파일 정보 삽입 또는 수정 실패");
 					}
 				}
-
 			}
-
-		} catch (Exception e) {
-			//			게시글 수정 중 실패 또는 오류 발생 시
-			//			서버에 미리 저장되어있던 이미지 파일 삭제
-			List<FRAttachment> fileList = (List<FRAttachment>) map.get("fileList");
-
-			if (!fileList.isEmpty()) {
-
-				for (FRAttachment at : fileList) {
-
-					String ImgPath = at.getImgPath();
-					String imgName = at.getImgName();
-
-					File deleteFile = new File(ImgPath + imgName);
-					//					C:\workspace\5_WebServer\wsp\WebContent\resources/uploadImages/파일명
-
-					if (deleteFile.exists()) { // 해당 경로에 해당 파일이 존재하면
-
+			
+			
+		}catch (Exception e) {
+			// 게시글 수정 중 실패 또는 오류 발생 시
+			// 서버에 미리 저장되어있던 이미지 파일 삭제
+			List<Attachment> fList = (List<Attachment>)map.get("fList");
+			
+			if(!fList.isEmpty()) {
+				for(Attachment at : fList ) {
+					
+					String filePath = at.getFilePath();
+					String fileName = at.getFileName();
+					
+					File deleteFile = new File(filePath + fileName);
+					
+					if(deleteFile.exists()) { 
+						// 해당 경로에 해당 파일이 존재하면
 						deleteFile.delete(); // 해당 파일 삭제
-
 					}
 				}
 			}
-			//			에러 페이지가 보여질 수 있도록 catch한 Exception을 Controller로 던져 준다.
+			
+			// 에러페이지 보여질 수 있도록 catch한 Exception을 Controller로 던져줌
 			throw e;
 		}
-
-		//		5. 트랜잭션 처리 및 삭제 목록에 있는 파일 삭제 
-		if (result > 0) {
-			commit(conn);
-
-			if (deleteFiles != null) {
-				//		 	DB 정보와 맞지 않는 파일 (deleteFiles) 삭제 진행
-				for (FRAttachment at : deleteFiles) {
-
-					String imgPath = at.getImgPath();
-					String imgName = at.getImgName();
-
-					File deleteFile = new File(imgPath + imgName);
-
-					if (deleteFile.exists()) {
-
-						deleteFile.delete();
-					}
-
-				}
-			}
-		} else {
-			rollback(conn);
-		}
-
-		close(conn);
-
-		return result;
-	}
-
-	/** 게시글 삭제 Service
-	 * @param boardNo
-	 * @return result
-	 * @throws Exception
-	 */
-	public int deleteFView(int fBoardNo) throws Exception {
-
-		
-		Connection conn = getConnection();
-
-	
-		int result = dao.deleteFBoard(conn, fBoardNo);
 		
 		
+		// 5. 트랜잭션 처리 및 삭제 목록에 있는 파일 삭제
 		if(result > 0) {
 			commit(conn);
+			
+			
+			if(deleteFiles != null) {
+				
+				// DB 정보와 맞지 않는 파일 (deleteFiles) 삭제 진행
+				for(Attachment at : deleteFiles) {
+					System.out.println(at);
+					
+					String filePath = at.getFilePath();
+					String fileName = at.getFileName();
+					
+					File deleteFile = new File(filePath + fileName);
+					
+					if(deleteFile.exists()) {
+						deleteFile.delete();
+					}
+				}
+				
+			}
+	
 		}else {
 			rollback(conn);
 		}
-
-
+		
 		close(conn);
-
+		
 		return result;
-	
-	
 	}
+	
+	
+	
 
+	
+	
 }
-
-
-
-
-
