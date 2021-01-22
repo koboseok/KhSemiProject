@@ -36,7 +36,41 @@ div.contain  {
 	display: none;
 }
 
+/* .gear:hover  {
+	display:none;
+}
 
+.gear:hover .delBtn{
+	display : black;
+	position: absolute;
+}
+
+.delBtn {
+	display:none;
+	position: absolute;
+}
+.setBtn{
+	display:none;
+	position: absolute;
+} */
+
+/* div.setting:hover .gear{
+	display: none;
+}
+div.setting:hover .setting-btn{
+	display : block ;
+	
+}
+ */
+
+.setting-btn{
+	position: relative;
+    left: 150px;
+    top: -30px;
+    width: 50px;
+    display: none;
+    
+}
 
 .showdocument {
 	width: 200px;
@@ -58,10 +92,21 @@ div.contain  {
 	heigth: 400px;
 }
 .imgMouseover{
-	width : 500%;
+	width : 400%;
 	 
 }
+.setting{
+	width : 25px;
+	height : 25px;
+}
+
+
+
 .gear{
+	width : 25px;
+	height : 25px;
+}
+.can{
 	width : 25px;
 	height : 25px;
 }
@@ -73,7 +118,15 @@ div.contain  {
 
 
  
-.gearBtn{
+.gearBtn {
+	background : white;
+	border : none;
+}
+.delBtn {
+	background : white;
+	border : none;
+}
+.setBtn{
 	background : white;
 	border : none;
 }
@@ -110,7 +163,7 @@ div.contain  {
 
 
 
-						<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
+	<!-- img 요소의 class 값에 img-responsive를 추가하면, 이미지의 가로 크기가 부모 요소의 가로 크기를 넘지 못합니다.  -->
 
 	<c:if test="${empty loginMember }">
 		<div id="div1"><pre id="pre1">로그인 후 이용이 가능합니다. 
@@ -135,11 +188,17 @@ div.contain  {
 									src="${ contextPath }/resources/images/${item.servImg}" />
 								<div class="showdocument si slider-div">
 
-									${item.servNm }
-									<button class="float-right gearBtn" href="">
-										<img class="gear"
-											src="${contextPath }/resources/images/gear.png" />
+									${item.servNm }(${item.servCode })
+									
+									<button class=" float-right delBtn del" name="delMylist" data-toggle="modal" href="#modal-container-3"
+												onclick="delMyList(${item.servCode});" >
+										<img class="can" src="${contextPath }/resources/images/trash-can.png" />
 									</button>
+									<button class=" float-right gearBtn" data-toggle="modal" href="#modal-container-4"
+												>
+										<img class="gear" src="${contextPath }/resources/images/gear.png" />
+									</button>
+									
 									<br> <br> 구독기간<br> 시작 : ${item.startDt}<br>
 									종료 : ${item.endDt}<br> <br> 금액 : ${item.price } 원
 								</div>
@@ -253,6 +312,96 @@ div.contain  {
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="modal-container-3" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel" style="text-align: center;">정말 삭제 하시겠습니까 ?</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form class="form-signin" method="POST"
+								action="${ contextPath }/myList/delMyList.do">
+				
+								<input type="text" id="servCode1" name="servCode">
+								<button class="btn  btn-warning btn-block" type="submit">삭제</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger"
+								data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	<%-- 구독 목록 재설정 --%>
+	<%-- <div class="modal fade" id="modal-container-4" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title" id="modalLabel">UPDATE SUBSCRIBE</h4>
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<form class="form-addSub" method="POST"
+						action="${contextPath}/myList/updateList.do">
+						<label>구독 서비스</label> <select class="custom-select" id="updateServCode"
+							name="updateServCode" style="width: 200px;">
+							<option value="1">라프텔</option>
+							<option value="2">웨이브</option>
+							<option value="3">유튜브 프리미엄</option>
+							<option value="4">티빙</option>
+							<option value="5">넷플릭스</option>
+							<option value="6">나물투데이</option>
+							<option value="7">더브레드블루</option>
+							<option value="8">맘마레시피</option>
+							<option value="9">빈브라더스</option>
+							<option value="10">술담화</option>
+							<option value="11">꾸까</option>
+							<option value="12">네이버플러스</option>
+							<option value="13">로켓와우</option>
+							<option value="14">먼슬리 코스메틱스</option>
+							<option value="15">미하이삭스</option>
+							<option value="16">뉴닉</option>
+							<option value="17">미라클레터</option>
+							<option value="18">북크루</option>
+							<option value="19">어피티</option>
+							<option value="20">에그브렉</option>
+						</select>
+
+						el 식은 null포인터 예외를 나타내지않고 빈문자열을 출력한다.
+						<br> <br> 금액 <br> <input type="number"
+							class="form-control" id="updateServPrice" name="updateServPrice"
+							placeholder="금액 "> <br> 구독 시작일 <br> <input
+							type="date" class="form-control" id="updateStartDt" name="updateStartDt"
+							placeholder="구독 시작일"> <br>
+						
+
+
+							<input type="hidden" id="servCode2" name="servCode2">
+						<button class="btn btn-lg btn-warning btn-block" type="submit">UPDATE</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div> --%>
 
 
 
@@ -306,7 +455,15 @@ div.contain  {
 			});
 		})
 		
-		function init() {console.log("${ empty list ? 1 : !empty list and list.size() < 4 ? list.size() : 4  }")} init();
+		// function init() {console.log("${ empty list ? 1 : !empty list and list.size() < 4 ? list.size() : 4  }")} init();
+		
+		function delMyList(servCode1) {
+			$("#servCode1").val(servCode1);
+		}
+		/* function updateMyList(servCode2) {
+			console.log(servCode2);
+			$("#servCode2").val(servCode2);
+		} */
     </script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 

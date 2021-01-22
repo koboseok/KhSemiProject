@@ -5,7 +5,7 @@
 
 
 
-
+<!-- 마이 리스트 조회 -->
 <entry key="selectList">
 SELECT MEM_NO , SERV_CODE, SERV_NM , SUB_ST_DT , SUB_END_DT , PRICE  , SERV_IMG
 FROM MEM_SUB
@@ -16,10 +16,26 @@ WHERE MEM_NO = ?
 </entry>
 
 
-<!-- 구독 서비스 등록 -->
+<!-- 마이리스트 구독 서비스 등록 -->
 <entry key="insertMyList">
 INSERT INTO MEM_SUB(MEM_NO, SERV_CODE, SUB_ST_DT, PRICE, SUB_END_DT)
 VALUES (?, ?, ?, ?, (ADD_MONTHS(?, 1)-1))
 </entry>
+<!-- 마이 리스트 삭제  --> 
+<entry key="deleteMyList">
 
+DELETE FROM MEM_SUB
+WHERE MEM_NO = ? AND SERV_CODE = ?
+
+</entry>
+
+<entry key="updateMyList">
+UPDATE MEM_SUB SET
+	SERV_CODE =  ? ,
+	SUB_ST_DT = ? ,
+	PRICE =  ? ,
+	SUB_END_DT =  ADD_MONTHS(?,1)-1
+WHERE MEM_NO = ?
+AND SERV_CODE = ?
+</entry>
 </properties>
