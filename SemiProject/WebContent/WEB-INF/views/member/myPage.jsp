@@ -13,6 +13,11 @@
 		-webkit-appearance: none;
 		margin: 0;
 	}
+	
+.btn {
+	position: relative;
+    left: 650px;
+}
 </style>
 </head>
 <body>
@@ -141,8 +146,8 @@
 							</div>
 						</div>  --%>
 	
-						<hr class="mb-4">
-						<button class="btn btn-warning btn-lg btn-block" type="submit">수정</button>
+						
+						<button class=" btn btn-warning  " type="submit">수정</button>
 					</form>
 				</div>
 			</div>

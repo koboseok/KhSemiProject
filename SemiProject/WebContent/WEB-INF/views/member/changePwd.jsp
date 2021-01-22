@@ -8,7 +8,15 @@
 </head>
 <style>
 	#content-main{
-	height: 830px;}
+	height: 830px;
+	margin-top: 100px;
+    margin-bottom: 400px;
+	}
+	
+	.btn {
+	position: relative;
+    left: 600px;
+}
 </style>
 <body>
 	<div class="container" id="content-main">
@@ -67,7 +75,7 @@
 						</div>
 						
 						<hr class="mb-4">
-						<button class="btn btn-warning btn-lg btn-block" type="submit">변경하기</button>
+						<button class="btn btn-warning " type="submit">변경하기</button>
 					</form>
 				</div>
 			</div>
@@ -76,7 +84,7 @@
 	
 	
 	
-	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script src="${contextPath}/resources/js/sims_member.js"></script>
 
 </body>

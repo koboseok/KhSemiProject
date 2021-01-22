@@ -9,6 +9,13 @@
 <style>
 #content-main {
 	height: 830px;
+	margin-top: 100px;
+    margin-bottom: 400px;
+}
+
+.btn {
+	position: relative;
+    left: 620px;
 }
 </style>
 <body>
@@ -95,7 +102,7 @@
 						</div>
 
 						<hr class="mb-4">
-						<button class="btn btn-warning btn-lg btn-block" id="btn"
+						<button class="btn btn-warning" id="btn"
 							type="submit" style= "margin : 30px;">탈퇴</button>
 					</form>
 				</div>
@@ -115,8 +122,8 @@
 	
 
 
-	
-	<script src="${contextPath}/resources/js/wsp_member.js"></script>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script src="${contextPath}/resources/js/sims_member.js"></script>
 
 </body>
 </html>

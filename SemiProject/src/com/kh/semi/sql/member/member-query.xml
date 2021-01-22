@@ -32,6 +32,7 @@ FROM MEMBER
 WHERE MEM_EMAIL = ?
 AND MEM_PWD = ?
 AND MEM_STATUS = 'Y'
+
 </entry>
 
 <!-- 서비스 코드 검색 -->

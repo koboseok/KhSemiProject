@@ -156,7 +156,7 @@ a {
 				</div>
 				<ul class="banner2">
 					<li><a href="${contextPath}/subscribe/info"><img
-							src="${loginMember.memberId}" class="w100"
+							src="${loginMember.memEmail}" class="w100"
 							alt="" /></a>
 						<p>Example</p> <span class="hot">HOT</span></li>
 					<li><a href=""> <img
