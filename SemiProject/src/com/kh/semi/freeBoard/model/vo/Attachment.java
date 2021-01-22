@@ -1,92 +1,98 @@
 package com.kh.semi.freeBoard.model.vo;
 
-import java.util.Date;
-
 public class Attachment {
-	private int imgNo;
-	private String imgName;
-	private int imgLevel;
-	private Date imgDt;
-	private String imgPath;
-	private int fBoardNo;
+	private int fileNo;
+	private String filePath;
+	private String fileName;
+	private int fileLevel;
+	private int parentBoardNo;
 	
-	public Attachment() {
-	}
+	
+	public Attachment() {}
+	
+	
+	
 
+//	게시글에 포함된 이미지 목록 조회용
 	
-	
-	public Attachment(int imgNo, String imgName, int imgLevel) {
+	public Attachment(int fileNo, String fileName, int fileLevel) {
 		super();
-		this.imgNo = imgNo;
-		this.imgName = imgName;
-		this.imgLevel = imgLevel;
+		this.fileNo = fileNo;
+		this.fileName = fileName;
+		this.fileLevel = fileLevel;
 	}
 
 
 
-	public Attachment(int imgNo, String imgName, int imgLevel, Date imgDt, String imgPath, int boardNo) {
+
+
+	public Attachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
 		super();
-		this.imgNo = imgNo;
-		this.imgName = imgName;
-		this.imgLevel = imgLevel;
-		this.imgDt = imgDt;
-		this.imgPath = imgPath;
-		this.fBoardNo = fBoardNo;
+		this.fileNo = fileNo;
+		this.filePath = filePath;
+		this.fileName = fileName;
+		this.fileLevel = fileLevel;
+		this.parentBoardNo = parentBoardNo;
 	}
 
-	public int getImgNo() {
-		return imgNo;
+
+	public int getFileNo() {
+		return fileNo;
 	}
 
-	public void setImgNo(int imgNo) {
-		this.imgNo = imgNo;
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
 	}
 
-	public String getImgName() {
-		return imgName;
+
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
-	public int getImgLevel() {
-		return imgLevel;
+
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setImgLevel(int imgLevel) {
-		this.imgLevel = imgLevel;
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	public Date getImgDt() {
-		return imgDt;
+
+	public int getFileLevel() {
+		return fileLevel;
 	}
 
-	public void setImgDt(Date imgDt) {
-		this.imgDt = imgDt;
+
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
 	}
 
-	public String getImgPath() {
-		return imgPath;
+
+	public int getParentBoardNo() {
+		return parentBoardNo;
 	}
 
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+
+	public void setParentBoardNo(int parentBoardNo) {
+		this.parentBoardNo = parentBoardNo;
 	}
 
-	public int getfBoardNo() {
-		return fBoardNo;
-	}
-
-	public void setfBoardNo(int fBoardNo) {
-		this.fBoardNo = fBoardNo;
-	}
 
 	@Override
 	public String toString() {
-		return "Attachment [imgNo=" + imgNo + ", imgName=" + imgName + ", imgLevel=" + imgLevel + ", imgDt=" + imgDt
-				+ ", imgPath=" + imgPath + ", boardNo=" + fBoardNo + "]";
+		return "Attachment [fileNo=" + fileNo + ", filePath=" + filePath + ", fileName=" + fileName + ", fileLevel="
+				+ fileLevel + ", parentBoardNo=" + parentBoardNo + "]";
 	}
 	
 	
+	
+
 }

@@ -2,22 +2,24 @@ package com.kh.semi.freeBoard.model.service;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.semi.jointBoard.model.dao.JointBoardDAO;
-import com.kh.semi.jointBoard.model.exception.FileInsertFailedException;
-import com.kh.semi.jointBoard.model.vo.Attachment;
-import com.kh.semi.jointBoard.model.vo.Board;
-import com.kh.semi.jointBoard.model.vo.PageInfo;
+import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
+
+import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
+import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeBoard.model.vo.PageInfo;
 
 
 public class FreeBoardService {
 
-	private JointBoardDAO dao = new JointBoardDAO();
+	private FreeBoardDAO dao = new FreeBoardDAO();
 
 	/**
 	 * 페이징 처리 Service
