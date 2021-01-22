@@ -76,8 +76,8 @@ public class MyListController extends HttpServlet {
 					list = service.selectList(memNo);
 //					System.out.println(list);
 					
-					int sum = 0;
-					int temp = 0;
+					int sum = 0; // 이번달 
+					int temp = 0; // 이전달 
 					
 					for (MyList myList : list ) {
 						

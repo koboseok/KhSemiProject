@@ -201,9 +201,9 @@ public class MemberController extends HttpServlet {
 
 				//					6-1. 로그인이 성공 했을때만 Session에 로그인 정보 추가하기
 
+				
 
-
-				if (loginMember != null) {
+				if (loginMember != null && !loginMember.getMemGrade().equals("B")) {
 
 					//						6-2. 30분동안 동작이 없을 경우 Session을 만료 시킨다.
 					session.setMaxInactiveInterval(60 * 30);
@@ -254,29 +254,34 @@ public class MemberController extends HttpServlet {
 					session.setAttribute("swalIcon", "error");
 					session.setAttribute("swalTitle", "로그인 실패");
 					session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
-
 				}
-
 				if(loginMember.getMemGrade().equals("B") ) {
+					
+					
 					session.setAttribute("swalIcon", "error");
 					session.setAttribute("swalTitle", "로그인 실패");
 					session.setAttribute("swalText", "불량 회원으로 등록된 아이디 입니다.");
-
+					
+					
+					
+					
 				}
+				
 
 
 
 
-				//					* forward 같은 경우에는 이동하는 페이지로
-				//						request, response 객체를 그대로 위임하고 , 주소를 위임 전 주소로 유지한다.
 
-				//					* redirect는 이전 request, response를 폐기하고 새롭게 만들어서 지정된 주소로 새로운 요청을 보낸다.
+				//* forward 같은 경우에는 이동하는 페이지로
+				//request, response 객체를 그대로 위임하고 , 주소를 위임 전 주소로 유지한다.
+
+				//* redirect는 이전 request, response를 폐기하고 새롭게 만들어서 지정된 주소로 새로운 요청을 보낸다.
 				//						응답하는 화면을 만드는것이 아닌 경로를 지정해주는 (방향성을 잡아주는)역할
-				//					-> 새롭게 요청을 보내기 때문에 이전 요청 주소가 아닌 새로운 요청 주소가 주소창에 나타난다.
+				//-> 새롭게 요청을 보내기 때문에 이전 요청 주소가 아닌 새로운 요청 주소가 주소창에 나타난다.
 
-				//					redirect 방식을 이용하여 로그인을 요청했던 페이지로 이동
-				//					referer : 사이트 방문 흔적
-				//					request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
+				//redirect 방식을 이용하여 로그인을 요청했던 페이지로 이동
+				//referer : 사이트 방문 흔적
+				//request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
 				response.sendRedirect(request.getHeader("referer"));
 
 
