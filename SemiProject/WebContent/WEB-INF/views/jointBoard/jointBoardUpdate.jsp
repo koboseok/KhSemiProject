@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,113 +8,119 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
-    .insert-label {
-      display: inline-block;
-      width: 80px;
-      line-height: 40px
-    }
-    
-    .boardImg{
-       cursor : pointer;
-    }
+.insert-label {
+	display: inline-block;
+	width: 80px;
+	line-height: 40px
+}
+
+.boardImg {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
-   <jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 
-   <div class="container my-5">
+	<div class="container my-5">
 
-      <h3>게시글 수정</h3>
-      <hr>
-      
-      <c:if test="${!empty param.sk && !empty param.sv}">
-         <c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
-      </c:if>
-      
-      <form action="update.do?cp=${param.cp}&no=${param.no}${searchStr}" method="post" 
-           enctype="multipart/form-data" role="form" onsubmit="return updateValidate();">
+		<h3>비공개 건의 게시판- 수정</h3>
+		<hr>
 
-         <div class="mb-2">
-            <label class="input-group-addon mr-3 insert-label">카테고리</label> 
-            <select   class="custom-select" id="categoryCode" name="categoryCode" style="width: 150px;">
-               <option value="10">운동</option>
-               <option value="20">영화</option>
-               <option value="30">음악</option>
-               <option value="40">요리</option>
-               <option value="50">게임</option>
-               <option value="60">기타</option>
-            </select>
-         </div>
-         <div class="form-inline mb-2">
-            <label class="input-group-addon mr-3 insert-label">제목</label> 
-            <input type="text" class="form-control" id="boardTitle" name="boardTitle" size="70" value="${board.boardTitle }">
-         </div>
+		<c:if test="${!empty param.sk && !empty param.sv}">
+			<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
+		</c:if>
 
-         <div class="form-inline mb-2">
-            <label class="input-group-addon mr-3 insert-label">작성자</label>
-            <h5 class="my-0" id="writer">${board.memberId }</h5>
-         </div>
+		<form action="update.do?cp=${param.cp}&no=${param.no}${searchStr}"
+			method="post" enctype="multipart/form-data" role="form"
+			onsubmit="return updateValidate();">
 
+			<div class="mb-2">
+				<label class="input-group-addon mr-3 insert-label">카테고리</label> <select
+					class="custom-select" id="categoryCode" name="categoryCode"
+					style="width: 150px;">
+					<option value="10">LifeStyle</option>
+					<option value="20">Food</option>
+					<option value="30">Contents</option>
+					<option value="40">Newsletter</option>
+				</select>
+			</div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">제목</label> <input
+					type="text" class="form-control" id="boardTitle" name="boardTitle"
+					size="70" value="${board.boardTitle }">
+			</div>
 
-         <div class="form-inline mb-2">
-            <label class="input-group-addon mr-3 insert-label">작성일</label> <fmt:formatDate value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
-         </div>
-         <hr>
-
-         <div class="form-inline mb-2">
-            <label class="input-group-addon mr-3 insert-label">썸네일</label>
-            <div class="boardImg" id="titleImgArea">
-               <img id="titleImg" width="200" height="200">
-            </div>
-            	<button type="button" id = "del1">삭제</button>
-         </div>
-
-         <div class="form-inline mb-2">
-            <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
-            <div class="mr-2 boardImg" id="contentImgArea1">
-               <img id="contentImg1" width="150" height="150">
-            </div>
-
-            <div class="mr-2 boardImg" id="contentImgArea2">
-               <img id="contentImg2" width="150" height="150">
-            </div>
-
-            <div class="mr-2 boardImg" id="contentImgArea3">
-               <img id="contentImg3" width="150" height="150">
-            </div>
-         </div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성자</label>
+				<h5 class="my-0" id="writer">${board.memName }</h5>
+			</div>
 
 
-         <!-- 파일 업로드 하는 부분 -->
-         <div id="fileArea">
-            <input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
-            <input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
-            <input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
-            <input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
-         </div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성일</label>
+				<fmt:formatDate value="${board.boardCreateDate }"
+					pattern="yyyy년 MM월 dd일 HH:mm:ss" />
+			</div>
+			<hr>
 
-         <div class="form-group">
-            <div>
-               <label for="content">내용</label>
-            </div>
-            <textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;">${board.boardContent }</textarea>
-         </div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">썸네일</label>
+				<div class="boardImg" id="titleImgArea">
+					<img id="titleImg" width="200" height="200">
+				</div>
+				<button type="button" id="del1">삭제</button>
+			</div>
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">업로드<br>이미지
+				</label>
+				<div class="mr-2 boardImg" id="contentImgArea1">
+					<img id="contentImg1" width="150" height="150">
+				</div>
+
+				<div class="mr-2 boardImg" id="contentImgArea2">
+					<img id="contentImg2" width="150" height="150">
+				</div>
+
+				<div class="mr-2 boardImg" id="contentImgArea3">
+					<img id="contentImg3" width="150" height="150">
+				</div>
+			</div>
 
 
-         <hr class="mb-4">
+			<!-- 파일 업로드 하는 부분 -->
+			<div id="fileArea">
+				<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
+				<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)">
+				<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)">
+				<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+			</div>
 
-         <div class="text-center">
-            <button type="submit" class="btn btn-primary">수정</button>
-            <button type="button" class="btn btn-primary" onclick="location.href='${header.referer}'">이전으로</button>
-         </div>
+			<div class="form-group">
+				<div>
+					<label for="content">내용</label>
+				</div>
+				<textarea class="form-control" id="boardContent" name="boardContent"
+					rows="15" style="resize: none;">${board.boardContent }</textarea>
+			</div>
 
-      </form>
-   </div>
 
-   <jsp:include page="../common/footer.jsp"></jsp:include>
-      
-      
-   <script>
+			<hr class="mb-4">
+
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary">수정</button>
+				<button type="button" class="btn btn-primary"
+					onclick="location.href='${header.referer}'">이전으로</button>
+			</div>
+
+		</form>
+	</div>
+
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+
+
+	<script>
 
       // 유효성 검사 
       function updateValidate() {
@@ -192,6 +199,6 @@
       } */
    
    </script>
-   
+
 </body>
 </html>

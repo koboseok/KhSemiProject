@@ -22,30 +22,19 @@
 
 		<div class="container my-5">
 
-			<h3>게시글 등록</h3>
+			<h3>비공개 건의 게시판 - 작성</h3>
 			<hr>
-			<!-- 파일 업로드를 위한 라이브러리 cos.jar 라이브러리 다운로드(http://www.servlets.com/) -->
-			
-			<!-- 
-				- enctype : form 태그 데이터가 서버로 제출 될 때 인코딩 되는 방법을 지정. (POST 방식일 때만 사용 가능)
-				- application/x-www-form-urlencoded : 모든 문자를 서버로 전송하기 전에 인코딩 (form태그 기본값) -> 모든 자료형 String
-				- multipart/form-data : 모든 문자를 인코딩 하지 않음.(원본 데이터가 유지되어 이미지, 파일등을 서버로 전송 할 수 있음.) 
-			-->
-				  <%--- enctype="multipart/form-data" : 텍스트가 아닌 다른 여러개의 데이터  형식을 전달하겠다.
-				  		enctype을 사용하기 위해서는 method="post" 방식이 필수 ! get은 안된다. 
-				  --%>
-			<form action="${contextPath}/board/insert.do" method="post" 
+			<form action="${contextPath}/jointBoard/insert.do" method="post" 
 				  enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
 
 				<div class="mb-2">
 					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
 					<select	class="custom-select" id="categoryCode" name="categoryCode" style="width: 150px;">
-						<option value="10">운동</option>
-						<option value="20">영화</option>
-						<option value="30">음악</option>
-						<option value="40">요리</option>
-						<option value="50">게임</option>
-						<option value="60">기타</option>
+						<option value="10">LifeStyle</option>
+						<option value="20">Food</option>
+						<option value="30">Contents</option>
+						<option value="40">Newsletter</option>
+			
 					</select>
 				</div>
 				<div class="form-inline mb-2">
@@ -55,7 +44,7 @@
 
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">작성자</label>
-					<h5 class="my-0" id="writer">${loginMember.memberId }</h5>
+					<h5 class="my-0" id="writer">${loginMember.memName}</h5>
 				</div>
 
 
