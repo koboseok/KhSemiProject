@@ -66,7 +66,7 @@ public class FreeBoardSearchService {
 						+ "OR BOARD_CONTENT LIKE '%' || '" + searchValue + "' || '%') ";
 			break;
 		case "writer" : 
-			condition = " MEMBER_ID LIKE '%' || '" + searchValue + "' || '%' ";
+			condition = " MEM_NM LIKE '%' || '" + searchValue + "' || '%' ";
 			break;		
 
 		}

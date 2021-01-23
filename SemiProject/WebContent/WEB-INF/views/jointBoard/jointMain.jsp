@@ -42,10 +42,8 @@
 
 }
 
-/* 세로 가운데 정렬*/
 #list-table td{
   vertical-align: middle;
-  /* vertical-align : inline, inline-block 요소에만 적용 가능(td는 inline-block)*/
 	
 }
 
@@ -145,9 +143,8 @@
 			<c:choose>
 				<%-- 검색 내용이 파라미터에(주소창) 존재 할 때 == 검색을 통해 만들어진 페이지 인가 ?  --%>
 				<c:when test="${!empty param.sk && !empty param.sv }">
-					<c:url var="pageUrl" value="/search.do"/>
+					<c:url var="pageUrl" value="/jointboard/jointBoardSearch.do"/>
 					
-					<%-- 쿼리스트링으로 사용할 내용을 변수에 저장 --%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
 				</c:when>
 				
@@ -156,28 +153,12 @@
 				</c:otherwise>
 			</c:choose>
 			
-			
-			
-			
-			
+
 			<!-- 화살표에 들어갈 주소를 변수로 생성 -->
 			
-			<%-- EL은 널포인터 익셉션을 발생하지 않는다. 이를 이용하여 코드를 재사용
-			
-				검색을 안했을 때 : /board/list.do?cp=1(null)
-				검색을 했을 때 : /search.do?cp=1&sk=title&sv=49
-				
-			 --%>
 			<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
 			<c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
-			<%-- EL을 이용한 숫자 연산의 단점 
-				- 연산이 자료형에 영향을 받지 않는다.
-				ex) int 5 / int 2 == 2.5
-					           자바에서는 == 2
-				이를 대체하기 위해 
-				<fmt:parseNumber> : 숫자 형태를 지정하여 변수 선언
-				속성으로 integerOnly = "true" : 정수로만 숫자 표현(소수점 버림처리)
-			 --%>
+			
 			 <fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true"/>
 			 <fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true"/>
 			 <c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}"/>
@@ -239,7 +220,7 @@
 		
 				<!-- 검색창 -->
 			<div class="my-5">
-				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
+				<form action="${contextPath }/jointBoard/jointBoardSearch.do" method="GET" class="text-center" id="searchForm">
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
