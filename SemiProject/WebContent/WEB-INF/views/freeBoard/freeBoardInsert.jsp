@@ -108,86 +108,88 @@
 		
 	<script>
 	
-		(function printToday(){
-			// 오늘 날짜 출력 
-	 		var today = new Date();
-			var month = (today.getMonth()+1);
-			var date = today.getDate();
-	
-	  	var str = today.getFullYear() + "-"
-	        		+ (month < 10 ? "0"+month : month) + "-"
-	        		+ (date < 10 ? "0"+date : date);
-			$("#today").html(str);
-		})();
+	(function printToday(){
+		// 오늘 날짜 출력 
+ 		var today = new Date();
+		var month = (today.getMonth()+1);
+		var date = today.getDate();
 
-		
-		// 유효성 검사 
-		function boardValidate() {
-			if ($("#boardTitle").val().trim().length == 0) {
-				alert("제목을 입력해 주세요.");
-				$("#boardTitle").focus();
-				return false;
-			}
+  	var str = today.getFullYear() + "-"
+        		+ (month < 10 ? "0"+month : month) + "-"
+        		+ (date < 10 ? "0"+date : date);
+		$("#today").html(str);
+	})();
 
-			if ($("#boardContent").val().trim().length == 0) {
-				alert("내용을 입력해 주세요.");
-				$("#boardContent").focus();
-				return false;
-			}
+	// 유효성 검사 
+	function boardValidate() {
+		if ($("#boardTitle").val().trim().length == 0) {
+			alert("제목을 입력해 주세요.");
+			$("#boardTitle").focus();
+			return false;
 		}
+
+		if ($("#boardContent").val().trim().length == 0) {
+			alert("내용을 입력해 주세요.");
+			$("#boardContent").focus();
+			return false;
+		}
+	}
+	
+	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+	$(function() {
+		$("#fileArea").hide(); //#fileArea 요소를 숨긴다.
 		
-		// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
-		$(function(){
-			$("#fileArea").hide(); // #fileArea 요소를 숨김.		
+		
+		$(".boardImg").on("click",function(){ // 이미지 영역이 클릭 되었을때
 			
-			$(".boardImg").on("click", function(){ // 이미지 영역이 클릭 되었을 때
-				
-				// 클릭한 이미지 영역 인덱스 얻어오기
-				var index = $(".boardImg").index(this);
-						// -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
-						
-				//console.log(index);
-				
-				// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
-				$("#img" + index).click();
-			});
-			
+		// 클릭한 이미지 영역 인덱스 얻어오기 
+		var index = $(".boardImg").index(this);
+		
+		// console.log(index);
+		
+		// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+		$("#img" + index).click();
+		
 		});
-		 
 		
 		
-	  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-	  function LoadImg(value, num) {
-		  // value.files : 파일이 업로드되어 있으면 true
-		  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+	});
+	 
+  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+  function LoadImg(value, num) {
+	  // value.files : 파일이  업로드되어 있으면 true
+	  // value.files[0] : 여러 파일 중 0번 인덱스 (첫번째 파일)가 업로드 되어있으면 true 
+	  if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
 		  
-			if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
-				
-				var reader = new FileReader();
- 
+		var reader = new FileReader();
+		// 자바스크립트 FileReader (업로드 파일을 읽어들이는 객체)
+        // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을
+        // 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+        
+        reader.readAsDataURL(value.files[0]);
+    	// FileReader.readAsDataURL()
+      	// 지정된의 내용을 읽기 시작합니다.
+      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
       	
       	reader.onload = function(e){
-        	// FileReader.onload
-					// load 이벤트의 핸들러. 
-					// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
-      		
-					// 읽어들인 내용(이미지 파일)을 화면에 출력
-					
-					$(".boardImg").eq(num).children("img").attr("src", e.target.result);
-					// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
-					
-      	}
-      	
-				
-				
-			}
-		  
-		  
-		  
-		  
-		  
-		}
+      	// FileReader.onload
+		// load 이벤트의 핸들러. 
+		// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
 		
+		//읽어들인 내용(이미지 파일)을 화면에 출력
+		
+		$(".boardImg").eq(num).children("img").attr("src", e.target.result);
+      	// e.target.result : 이벤트가 발생한 요소의 결과
+      	// --> 파일 읽기 동작을 성공한 요소가 읽어들인 파일
+
+      	}
+
+
+	  }
+	  
+
+	}
+	
 	</script>
 </body>
 </html>
