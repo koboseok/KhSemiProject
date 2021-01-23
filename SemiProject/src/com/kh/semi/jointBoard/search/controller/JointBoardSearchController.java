@@ -25,51 +25,42 @@ public class JointBoardSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchKey = request.getParameter("sk");
 		String searchValue = request.getParameter("sv");
-		//pagenation을 누를 때마다 currentPage를 얻어오도록 하는 코드
 		String cp = request.getParameter("cp");
 		
 		try {
 			JointBoardSearchService service = new JointBoardSearchService();
-			
-			
+
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("searchKey", searchKey);
 			map.put("searchValue", searchValue);
 			map.put("currentPage", cp);
-			
-			
-			//검색된 내용에 대한 페이징 처리를 위해 데이터를 계산하고 저장하는 객체 PageInfo 얻어오기
+
 			PageInfo pInfo = service.getPageInfo(map);
 			
 			//검색 게시글 목록 조회
 			List<Board> bList = service.searchBoardList(map, pInfo);
 			
-			//결과 확인
-			/*
 			System.out.println(pInfo);
 			for(Board b : bList) {
 				System.out.println(b);
 			}
-			*/
-			
-			//검색 게시글 목록 조회 성공시 썸네일 목록 조회 수행
+
+		
 			if(bList!=null) {
 				List<Attachment> fList = service.searchThumbnailList(map, pInfo);
 				
-				if(!fList.isEmpty()) { //조회된 썸네일 목록이 있다면
+				if(!fList.isEmpty()) { 
 					request.setAttribute("fList", fList);
 				}
 			}
+
 			
-			
-			//조회된 내용과 pageInfo객체를 request 객체에 담아서 요청 위임
-			String path = "/WEB-INF/views/board/boardList.jsp";
+			String path = "/WEB-INF/views/jointBoard/jointMain.jsp";
 			request.setAttribute("bList", bList);
 			request.setAttribute("pInfo", pInfo);
 			
 			RequestDispatcher view = request.getRequestDispatcher(path);
 			view.forward(request, response);
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
