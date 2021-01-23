@@ -193,6 +193,8 @@
 					
 					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
 				</div>
+				
+				<jsp:include page="freeReply.jsp"></jsp:include>
 			</div>
 
 
