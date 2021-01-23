@@ -66,9 +66,6 @@ li {
 ul li:hover #inner-ul{
 	display: inline-block;
 }
-li{
-	display: inline-block;
-}
 #inner-li{
 	margin : 10px;
 	padding : 5px;
@@ -91,6 +88,9 @@ li{
 	left: 600px;
     bottom: 160px;
 }
+
+#inner-ul li {
+display: inline-block;}
 
 </style>
 </head>
