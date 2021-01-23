@@ -96,6 +96,39 @@ AND MEM_NO = ?
 </entry>
 
 
+<!-- 프리보드 조회 -->
+
+<entry key="selectfBoardList">
+
+SELECT BOARD_NO ,BOARD_TITLE , MEM_NM , READ_COUNT ,BOARD_CREATE_DT
+FROM F_BOARD
+JOIN MEMBER ON(BOARD_WRITER = MEM_NO)
+WHERE BOARD_WRITER = ?
+</entry>
+
+<!-- 공동구매 게시판 조회 -->
+
+<entry key="selectjBoardList">
+
+SELECT BOARD_NO ,BOARD_TITLE , MEM_NM , READ_COUNT ,BOARD_CREATE_DT ,JT_CT_NM
+FROM J_BOARD
+JOIN MEMBER ON(BOARD_WRITER = MEM_NO)
+JOIN J_CATEGORY ON (CATEGORY_CODE = JT_CT_NO)
+WHERE BOARD_WRITER = ?
+
+</entry>
+
+<!-- 비공개 건의 게시판 조회 -->
+<entry key="selectpBoardList">
+
+SELECT BOARD_NO ,BOARD_TITLE , MEM_NM , READ_COUNT ,BOARD_CREATE_DT ,PRIV_CT_NM
+FROM P_BOARD
+JOIN MEMBER ON(BOARD_WRITER = MEM_NO)
+JOIN P_CATEGORY ON (CATEGORY_CODE = PRIV_CT_NO)
+WHERE BOARD_WRITER = ?
+
+</entry>
+
 
 
 </properties>

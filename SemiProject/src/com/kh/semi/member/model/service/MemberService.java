@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.semi.admin.model.vo.Report;
+import com.kh.semi.freeBoard.model.vo.Board;
 import com.kh.semi.member.model.dao.MemberDAO;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
@@ -215,5 +216,53 @@ public class MemberService {
 		else			rollback(conn);
 		
 		return result;
+	}
+
+	/** 자유게시판 조회
+	 * @param memNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Board> selectfBoardList(int memNo) throws Exception {
+		Connection conn = getConnection();
+
+		//		2) DAO 메소드를 수행하여 결과 반환 받기
+
+		List<Board> fList = dao.selectfBoardList(conn,memNo);
+
+		//		3) Connection 반환하기
+		close(conn);
+
+		//		4) DAO 수행 결과를 Controller로 반환하기
+
+		return fList;
+	}
+
+	public List<com.kh.semi.jointBoard.model.vo.Board> selectjBoardList(int memNo) throws Exception {
+		Connection conn = getConnection();
+
+		//		2) DAO 메소드를 수행하여 결과 반환 받기
+
+		List<com.kh.semi.jointBoard.model.vo.Board> jList = dao.selectjBoardList(conn,memNo);
+
+		//		3) Connection 반환하기
+		close(conn);
+
+		//		4) DAO 수행 결과를 Controller로 반환하기
+		return jList;
+	}
+
+	public List<com.kh.semi.privateBoard.model.vo.Board> selectpBoardList(int memNo) throws Exception {
+		Connection conn = getConnection();
+
+		//		2) DAO 메소드를 수행하여 결과 반환 받기
+
+		List<com.kh.semi.privateBoard.model.vo.Board> pList = dao.selectpBoardList(conn,memNo);
+
+		//		3) Connection 반환하기
+		close(conn);
+
+		//		4) DAO 수행 결과를 Controller로 반환하기
+		return pList;
 	}
 }

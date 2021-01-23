@@ -7,11 +7,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.admin.model.vo.Report;
+import com.kh.semi.freeBoard.model.vo.Board;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
 
@@ -398,6 +400,101 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+
+	public List<Board> selectfBoardList(Connection conn, int memNo) throws Exception{
+		
+		List<Board> fList = null;
+		
+		
+		String query = prop.getProperty("selectfBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Board>() ;
+			
+			while(rset.next()) {
+				fList.add(new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_TITLE"),
+						rset.getString("MEM_NM"), rset.getInt("READ_COUNT"), rset.getTimestamp("BOARD_CREATE_DT")));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+			
+		}
+		return fList;
+	}
+
+
+	public List<com.kh.semi.jointBoard.model.vo.Board> selectjBoardList(Connection conn, int memNo) throws Exception{
+		
+		List<com.kh.semi.jointBoard.model.vo.Board> jList = null;
+		
+		
+		String query = prop.getProperty("selectjBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			jList = new ArrayList<com.kh.semi.jointBoard.model.vo.Board>() ;
+			
+			while(rset.next()) {
+				jList.add(new com.kh.semi.jointBoard.model.vo.Board(rset.getInt("BOARD_NO"), 
+						rset.getString("BOARD_TITLE"), rset.getString("MEM_NM"),
+						rset.getInt("READ_COUNT"), rset.getString("JT_CT_NM"), rset.getTimestamp("BOARD_CREATE_DT")));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+			
+		}
+		
+		
+		return jList;
+	}
+
+
+	public List<com.kh.semi.privateBoard.model.vo.Board> selectpBoardList(Connection conn, int memNo) throws Exception {
+		
+		List<com.kh.semi.privateBoard.model.vo.Board> pList = null;
+		
+		String query = prop.getProperty("selectpBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			pList = new ArrayList<com.kh.semi.privateBoard.model.vo.Board>() ;
+			
+			while(rset.next()) {
+				pList.add(new com.kh.semi.privateBoard.model.vo.Board(rset.getInt("BOARD_NO"), 
+						rset.getString("BOARD_TITLE"), rset.getString("MEM_NM"), rset.getInt("READ_COUNT"),
+						rset.getString("PRIV_CT_NM"), rset.getTimestamp("BOARD_CREATE_DT")));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+			
+		}
+		
+		
+		return pList;
 	}
 	
 	
