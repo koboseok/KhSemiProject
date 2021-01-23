@@ -121,5 +121,69 @@ public class AdminService {
 		return result;
 	}
 
+	/**검색 결과 페이징 처리 Service
+	 * @param map
+	 * @return PInfo
+	 * @throws Exception
+	 */
+	public PageInfo getSearchPageInfo(Map<String, Object> map) throws Exception {
+		Connection conn = getConnection();
+		
+		map.put("currentPage", (map.get("currentPage")==null) ? 1 
+				: Integer.parseInt((String)map.get("currentPage")));
+		String condition = createCondition(map);
+		
+		int listCount = dao.getSearchListCount(conn, condition);
+		
+		close(conn);
+		
+		return new PageInfo((int)map.get("currentPage"), listCount);
+	}
+
+	/**검색 조건에 따라 SQL문에 사용될 조건문을 조합하는 메소드
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	private String createCondition(Map<String, Object> map) throws Exception {
+		String condition = null;
+		
+		String searchKey = (String)map.get("searchKey");
+		String searchValue = (String)map.get("searchValue");
+		
+		
+		switch(searchKey) {
+		case "memNo" : 
+			condition = " MEM_NO LIKE '%' || '" + searchValue + "' || '%' ";
+			break;
+		case "memEmail" : 
+			condition = " MEM_EMAIL LIKE '%' || '" + searchValue + "' || '%' ";
+			break;
+		case "memName" : 
+			condition = " MEM_NM LIKE '%' || '" + searchValue + "' || '%' ";
+		}
+		return condition;
+
+	}
+
+	/**검색 회원 목록 조회 service
+	 * @param map
+	 * @param pInfo
+	 * @return 
+	 * @throws Exception
+	 */
+	public List<Member> searchMemberList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Member> mList = dao.searchMemberList(conn, pInfo, condition);
+		mList = dao.addSubList(conn, mList);
+		
+		return mList;
+	}
+
+
+
 
 }

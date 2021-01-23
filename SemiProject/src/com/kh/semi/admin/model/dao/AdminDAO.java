@@ -1,5 +1,5 @@
 package com.kh.semi.admin.model.dao;
-import static com.kh.semi.common.JDBCTemplate.close;
+import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -16,27 +16,28 @@ import com.kh.semi.admin.model.vo.PageInfo;
 import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.vo.Member;
 
+
 public class AdminDAO {
 
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rset = null;
-	
+
 	private Properties prop = null;
-	
+
 	public AdminDAO() {
 		String fileName = AdminDAO.class.getResource("/com/kh/semi/sql/admin/admin-query.xml").getPath();
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream(fileName));
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-	
-	
+
+
 	}
-	
+
 	/** 전체 일반 회원 수 계산 DAO
 	 * @param conn
 	 * @return listCount
@@ -45,7 +46,7 @@ public class AdminDAO {
 	public int getListCount(Connection conn) throws Exception {
 		int listCount = 0;
 		String query = prop.getProperty("getListCount");
-		
+
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -56,7 +57,7 @@ public class AdminDAO {
 			close(rset);
 			close(stmt);
 		}
-	
+
 		return listCount;
 	}
 
@@ -69,32 +70,32 @@ public class AdminDAO {
 	public List<Member> selectMemberList(Connection conn, PageInfo pInfo) throws Exception {
 		List<Member> mList = null;
 		String query = prop.getProperty("selectMemberList");
-		
+
 		try {
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
 			int endRow = startRow + pInfo.getLimit()-1;
-			
+
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			
+
 			rset = pstmt.executeQuery();
 			mList = new ArrayList<Member>();
-			
+
 			while(rset.next()) {
 				Member member = new Member(rset.getInt("MEM_NO"),
-											rset.getString("MEM_EMAIL"),
-											rset.getString("MEM_NM"),
-											rset.getString("MEM_PHONE"));
+						rset.getString("MEM_EMAIL"),
+						rset.getString("MEM_NM"),
+						rset.getString("MEM_PHONE"));
 				mList.add(member);
 			}
-			
+
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
+
 		return mList;
 	}
 
@@ -106,11 +107,11 @@ public class AdminDAO {
 	 */
 	public List<Member> addSubList(Connection conn, List<Member> mList) throws Exception {
 		String query = prop.getProperty("addSubList");
-		
+
 		try {
-			
+
 			pstmt = conn.prepareStatement(query);
-			
+
 			for(Member mem : mList) {
 				pstmt.setInt(1, mem.getMemNo());
 				rset = pstmt.executeQuery();
@@ -118,7 +119,7 @@ public class AdminDAO {
 					mem.setMemSub(rset.getString(1));
 				}
 			}
-			
+
 		} finally {
 			close(rset);
 			close(conn);
@@ -135,7 +136,7 @@ public class AdminDAO {
 	public int updateGradeB(Connection conn, int memNo) throws Exception {
 		int result = 0;
 		String query = prop.getProperty("updateGradeB");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memNo);
@@ -145,9 +146,9 @@ public class AdminDAO {
 		}
 		return result;
 	}
-	
-	
-	
+
+
+
 	/** 신고 내용 입력 dao
 	 * @param conn
 	 * @param report
@@ -157,7 +158,7 @@ public class AdminDAO {
 	public int reportMember(Connection conn, Report report) throws Exception {
 		int result = 0;
 		String query = prop.getProperty("reportMember");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, report.getReportReason());
@@ -166,15 +167,15 @@ public class AdminDAO {
 			pstmt.setString(4, report.getReportBcNo());
 			pstmt.setInt(5, report.getReportMemNo());
 			pstmt.setString(6, report.getBoardCode());
-			
+
 			result = pstmt.executeUpdate();
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-	
+
 	/** 전체 불량 회원 수 계산 DAO
 	 * @param conn
 	 * @return bListCount
@@ -183,23 +184,23 @@ public class AdminDAO {
 	public int getbPageInfo(Connection conn) throws Exception {
 		int bListCount = 0;
 		String query = prop.getProperty("getbPageInfo");
-		
+
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
-			
+
 			if(rset.next()) {
 				bListCount = rset.getInt(1);
 			}
-			
+
 		}finally {
 			close(rset);
 			close(stmt);
 		}
-		
+
 		return bListCount;
 	}
-	
+
 
 	/**불량회원 목록 조회 dao
 	 * @param conn
@@ -210,34 +211,34 @@ public class AdminDAO {
 	public List<Report> selectBmemberList(Connection conn, PageInfo pInfo) throws Exception {
 		List<Report> bmList = null;
 		String query = prop.getProperty("selectBmemberList");
-		
+
 		try {
 			int startRow = (pInfo.getCurrentPage()-1) * pInfo.getLimit() +1;
 			int endRow = startRow + pInfo.getLimit() -1;
-			
+
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
-			
+
 			bmList = new ArrayList<Report>();
 			while(rset.next()) {
 				Report report = new Report(rset.getInt("REPORT_NO"),
-										   rset.getString("REPORT_REASON"),
-										   rset.getDate("REPORT_DT"),
-										   rset.getInt("REPORT_B_NO"),
-										   rset.getString("REPORT_B_C_NO"),
-										   rset.getInt("MEM_NO"),
-										   rset.getString("BOARD_CODE"),
-										   rset.getString("MEM_NM"),
-										   rset.getString("MEM_EMAIL"));
+						rset.getString("REPORT_REASON"),
+						rset.getDate("REPORT_DT"),
+						rset.getInt("REPORT_B_NO"),
+						rset.getString("REPORT_B_C_NO"),
+						rset.getInt("MEM_NO"),
+						rset.getString("BOARD_CODE"),
+						rset.getString("MEM_NM"),
+						rset.getString("MEM_EMAIL"));
 				bmList.add(report);
 			}
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return bmList;
 	}
 
@@ -250,7 +251,7 @@ public class AdminDAO {
 	public int convertMember(Connection conn, int memNo) throws Exception {
 		int result = 0;
 		String query = prop.getProperty("convertMember");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memNo);
@@ -258,13 +259,78 @@ public class AdminDAO {
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
+	/**검색 조건을 만족하는 회원 수 가져오는 DAO 
+	 * @param conn
+	 * @param condition
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int getSearchListCount(Connection conn, String condition) throws Exception {
+		int listCount = 0;
 
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'G' AND " + condition;
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
 
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
 
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return listCount;
+
+	}
+
+	/**검색 회원 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return mList
+	 * @throws Exception
+	 */
+	public List<Member> searchMemberList(Connection conn, PageInfo pInfo, String condition) throws Exception {
+		List<Member> mList = null;
+		String query = "SELECT * FROM " +
+				"(SELECT ROWNUM RNUM, V.*" +
+				" FROM" +
+				"(SELECT * FROM MEMBER WHERE " + condition + 
+				" AND MEM_STATUS = 'Y' AND MEM_GRADE = 'G' ORDER BY MEM_NO DESC) V)" +
+				" WHERE RNUM BETWEEN ? AND ?";
+
+		try {
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
+			int endRow = startRow + pInfo.getLimit()-1;
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			mList = new ArrayList<Member>();
+
+			while(rset.next()) {
+				Member member = new Member(rset.getInt("MEM_NO"),
+						rset.getString("MEM_EMAIL"),
+						rset.getString("MEM_NM"),
+						rset.getString("MEM_PHONE"));
+				mList.add(member);
+			}
+		} finally {
+			close(rset);
+		}
+
+		return mList;
+	}
 
 
 }

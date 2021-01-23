@@ -2,7 +2,9 @@ package com.kh.semi.admin.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -118,7 +120,29 @@ public class AdminController extends HttpServlet {
 				
 				response.getWriter().print(result);
 			}
+			//검색 Controller ******************************************
+			else if(command.equals("/memberSearch.do")) {
+				errorMsg = "회원 검색 과정에서 오류 발생";
+				
+				String searchKey = request.getParameter("sk");
+				String searchValue = request.getParameter("sv");
+				cp = request.getParameter("cp");
+				
+				Map<String, Object> map = new HashMap<String,Object>();
+				map.put("searchKey", searchKey);
+				map.put("searchValue", searchValue);
+				map.put("currentPage", cp);
+				
+				PageInfo pInfo = service.getSearchPageInfo(map);
+				List<Member> mList = service.searchMemberList(map, pInfo);
 			
+				path = "/WEB-INF/views/admin/memberList.jsp";
+				request.setAttribute("mList", mList);
+				request.setAttribute("pInfo", pInfo);
+				
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			path = "/WEB-INF/views/common/errorPage.jsp";
