@@ -103,7 +103,7 @@
 											
 											${board.boardTitle}
 										</td>
-										<td>${board.memberId}</td>
+										<td>${board.memName}</td>
 										<td>${board.readCount}</td>
 										<td>
 											<%-- 날짜 출력 모양 지정 --%>
@@ -135,7 +135,7 @@
 			<c:if test="${!empty loginMember }">
 			
 			<button type="button" class="btn btn-primary float-right" id="insertBtn" 
-								onclick="location.href = '${contextPath}/board/insertForm.do'">글쓰기</button>
+								onclick="location.href = '${contextPath}/jointBoard/insertForm.do'">글쓰기</button>
 			
 			</c:if>
 			
@@ -152,7 +152,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/list.do"/>
+					<c:url var="pageUrl" value="/jointBoard/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
@@ -263,7 +263,7 @@
 			var boardNo = $(this).parent().children().eq(0).text();
 			// console.log(boardNo);
 			
-			var url = "${contextPath}/board/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+			var url = "${contextPath}/jointBoard/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
 			
 			location.href = url;
 			

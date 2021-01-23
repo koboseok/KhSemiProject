@@ -102,7 +102,7 @@
 				<h3 class="mt-4">${board.boardTitle}</h3>
 
 				<!-- Writer -->
-				<p class="lead">작성자 : ${board.memberId}</p>
+				<p class="lead">작성자 : ${board.memName}</p>
 
 				<hr>
 
@@ -173,7 +173,7 @@
 
 					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
 					<c:if
-						test="${!empty loginMember && (board.memberId == loginMember.memberId)}">
+						test="${!empty loginMember && (board.memName == loginMember.memName)}">
 						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button>
 
 						<%-- 검색이 없으면
