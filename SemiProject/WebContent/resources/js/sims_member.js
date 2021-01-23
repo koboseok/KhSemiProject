@@ -170,3 +170,84 @@ $("#email").on("input", function() {
      }
  }
 
+
+// 회원 정보 수정 --------------------------------------------------------------------------
+
+// 회원 정보 수정 유효성 검사 
+function memberUpdateValidate() {
+
+    // 각 유효성 검사를 저장할 객체
+    var updateCheck = {
+        "phone2": false,
+        "email": false
+    };
+    var regExp1 = /^\d{3,4}$/; // 숫자 3~4 글자
+    var regExp2 = /^\d{4,4}$/; // 숫자 4 글자
+    var regExp3 = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
+
+    // 전화번호 유효성 검사 
+    var p2 = $("#phone2").val();
+    var p3 = $("#phone3").val();
+
+    if (!regExp1.test(p2) || !regExp2.test(p3))
+        updateCheck.phone2 = false;
+    else
+        updateCheck.phone2 = true;
+
+    // 이메일 유효성 검사 
+    if (!regExp3.test($("#email").val()))
+        updateCheck.email = false;
+    else
+        updateCheck.email = true;
+
+    // updateCheck 내부에 저장된 값 검사
+    for(var key in updateCheck){
+        
+        if(!updateCheck[key]){
+            swal("일부 값이 유효하지 않습니다.");
+            return false;
+        }
+    }
+
+
+}
+
+
+
+// 비밀번호 수정 -------------------------------------------------------------------------------
+
+function pwdValidate(){
+
+    var regExp = /^[a-zA-Z\d]{6,12}$/;
+
+    if( !regExp.test( $("#newPwd1").val() )  ){
+
+        swal("비밀번호 형식이 유효하지 않습니다.");
+        $("#newPwd1").focus();
+        return false;
+
+    }
+    // 새로운 비밀번호와 확인이 일치하지 않을 때
+    if( $("#newPwd1").val() != $("#newPwd2").val() ){
+        swal("새로운 비밀번호가 일치하지 않습니다.");
+
+        $("#newPwd1").focus();
+        $("#newPwd1").val("");
+        $("#newPwd2").val("");
+
+        return false;
+    }
+}
+
+// 회원 탈퇴 약관 동의 체크 확인 --------------------------------------------------------------
+
+function secessionValidate() {
+    if(!$("#agree").prop("checked")) {
+        // #agree 체크박스가 체크되어 있지 않다면
+        swal("약관에 동의해 주세요.")
+        return false;
+    } else {
+        return confirm("정말로 탈퇴 하시겠습니까?");
+    }
+}
+

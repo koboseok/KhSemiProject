@@ -195,7 +195,7 @@ div.setting:hover .setting-btn{
 										<img class="can" src="${contextPath }/resources/images/trash-can.png" />
 									</button>
 									<button class=" float-right gearBtn" data-toggle="modal" href="#modal-container-4"
-												>
+												onclick="updateMyList(${item.servCode});">
 										<img class="gear" src="${contextPath }/resources/images/gear.png" />
 									</button>
 									
@@ -269,11 +269,11 @@ div.setting:hover .setting-btn{
 					<form class="form-addSub" method="POST" action="${contextPath}/myList/addList.do">
 						<label>구독 서비스</label> <select class="custom-select" id="servCode"
 							name="servCode" style="width: 200px;">
-							<option value="1">라프텔</option>
-							<option value="2">웨이브</option>
+							<option value="1">넷플릭스</option>
+							<option value="2">라프텔</option>
 							<option value="3">유튜브 프리미엄</option>
-							<option value="4">티빙</option>
-							<option value="5">넷플릭스</option>
+							<option value="4">웨이브</option>
+							<option value="5">티빙</option>
 							<option value="6">나물투데이</option>
 							<option value="7">더브레드블루</option>
 							<option value="8">맘마레시피</option>
@@ -320,30 +320,29 @@ div.setting:hover .setting-btn{
 					<div class="modal-content">
 
 						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel" style="text-align: center;">정말 삭제 하시겠습니까 ?</h5>
+							<h5 class="modal-title" id="myModalLabel" style="text-align: center;">DELETE</h5>
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
-
+						<h4  style=" margin:20px;">정말 삭제하시겠습니까 ?</h4>
 						<div class="modal-body">
 							<form class="form-signin" method="POST"
 								action="${ contextPath }/myList/delMyList.do">
 				
-								<input type="text" id="servCode1" name="servCode">
-								<button class="btn  btn-warning btn-block" type="submit">삭제</button>
-							</form>
+								<input type="hidden" id="servCode1" name="servCode1">
+								<button class="btn  btn-warning" type="submit">삭제</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger"
-								data-dismiss="modal">취소</button>
+						<div >
 						</div>
 					</div>
 				</div>
 			</div>
 
 	<%-- 구독 목록 재설정 --%>
-	<%-- <div class="modal fade" id="modal-container-4" role="dialog"
+	<div class="modal fade" id="modal-container-4" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 
@@ -361,11 +360,11 @@ div.setting:hover .setting-btn{
 						action="${contextPath}/myList/updateList.do">
 						<label>구독 서비스</label> <select class="custom-select" id="updateServCode"
 							name="updateServCode" style="width: 200px;">
-							<option value="1">라프텔</option>
-							<option value="2">웨이브</option>
+							<option value="1">넷플릭스</option>
+							<option value="2">라프텔</option>
 							<option value="3">유튜브 프리미엄</option>
-							<option value="4">티빙</option>
-							<option value="5">넷플릭스</option>
+							<option value="4">웨이브</option>
+							<option value="5">티빙</option>
 							<option value="6">나물투데이</option>
 							<option value="7">더브레드블루</option>
 							<option value="8">맘마레시피</option>
@@ -383,7 +382,7 @@ div.setting:hover .setting-btn{
 							<option value="20">에그브렉</option>
 						</select>
 
-						el 식은 null포인터 예외를 나타내지않고 빈문자열을 출력한다.
+						
 						<br> <br> 금액 <br> <input type="number"
 							class="form-control" id="updateServPrice" name="updateServPrice"
 							placeholder="금액 "> <br> 구독 시작일 <br> <input
@@ -401,7 +400,7 @@ div.setting:hover .setting-btn{
 				</div>
 			</div>
 		</div>
-	</div> --%>
+	</div> 
 
 
 
@@ -460,10 +459,10 @@ div.setting:hover .setting-btn{
 		function delMyList(servCode1) {
 			$("#servCode1").val(servCode1);
 		}
-		/* function updateMyList(servCode2) {
+		 function updateMyList(servCode2) {
 			console.log(servCode2);
 			$("#servCode2").val(servCode2);
-		} */
+		} 
     </script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
