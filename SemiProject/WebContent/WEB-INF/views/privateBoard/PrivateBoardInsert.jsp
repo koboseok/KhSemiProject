@@ -33,18 +33,17 @@
 				- multipart/form-data : 모든 문자를 인코딩 하지 않음.(원본 데이터가 유지되어 이미지, 파일등을 서버로 전송 할 수 있음.) 
 				-> "다양한 형태로 전달될테니까 텍스트로 취급하지 말아라 (post)" -> 길이가 길기 때문
 			-->
-			<form action="${contextPath}/board/insert.do" method="post" 
+			<form action="${contextPath}/privateBoard/insert.do" method="post" 
 				  enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
 
 				<div class="mb-2">
 					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
 					<select	class="custom-select" id="categoryCode" name="categoryCode" style="width: 150px;">
-						<option value="10">운동</option>
-						<option value="20">영화</option>
-						<option value="30">음악</option>
-						<option value="40">요리</option>
-						<option value="50">게임</option>
-						<option value="60">기타</option>
+						<option value="10">신고</option>
+						<option value="20">요청</option>
+						<option value="30">오류</option>
+						<option value="40">문의</option>
+		
 					</select>
 				</div>
 				<div class="form-inline mb-2">
@@ -54,7 +53,7 @@
 
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">작성자</label>
-					<h5 class="my-0" id="writer">${loginMember.memberId }</h5>
+					<h5 class="my-0" id="writer">${loginMember.memName }</h5>
 				</div>
 
 
