@@ -116,22 +116,8 @@ public class AdminController extends HttpServlet {
 				int memNo = Integer.parseInt(request.getParameter("selectMemNo"));
 				int result = service.convertMember(memNo);
 				
-				if(result>0) {
-					swalIcon = "success";
-					swalTitle = "일반 회원으로 전환 완료";
-				} else {
-					swalIcon = "error";
-					swalTitle = "일반 회원으로 전환 실패";
-				}
-				
-				HttpSession session = request.getSession();
-				session.setAttribute("swalIcon", swalIcon);
-				session.setAttribute("swalTitle", swalTitle);
-				
-				response.sendRedirect(request.getHeader("referer"));
-
+				response.getWriter().print(result);
 			}
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

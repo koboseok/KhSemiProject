@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
 
@@ -338,5 +339,34 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+
+	/** 정지회원 사유 출력 DAO
+	 * @param conn
+	 * @param memNo
+	 * @return report
+	 * @throws Exception
+	 */
+	public Report getReportReason(Connection conn, int memNo) throws Exception {
+		Report report = new Report();
+		String query = prop.getProperty("getReportReason");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				report.setReportDt(rset.getDate(1));
+				report.setReportReason(rset.getString(2));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return report;
 	}
 }

@@ -17,6 +17,14 @@ public class Report {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Report(String reportReason, Date reportDt) {
+		super();
+		this.reportReason = reportReason;
+		this.reportDt = reportDt;
+	}
+
+
+
 	public Report(String reportReason, Date reportDt, int reportBNo, String reportBcNo, int reportMemNo,
 			String boardCode) {
 		super();

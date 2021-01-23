@@ -88,7 +88,7 @@ li{
 
 .nav-member {
     position: relative;
-	left: 780px;
+	left: 600px;
     bottom: 160px;
 }
 
@@ -139,6 +139,7 @@ li{
 								<li><a class="nav-black nav-link"
 									href="${contextPath}/member/signUpForm.do">회원가입</a></li>
 							</c:when>
+							
 							<c:when test="${loginMember.getMemGrade().contentEquals('A')}">
 								<li class="active">
 									<a class="nav-link nav-black" 

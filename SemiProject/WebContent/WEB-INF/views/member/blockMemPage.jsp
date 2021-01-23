@@ -44,6 +44,8 @@ pre {
 .inner-group {
 	height: 200px;
 }
+
+
 </style>
 </head>
 <body>
@@ -60,12 +62,14 @@ pre {
 					<p class="text-center">
 						<strong>신고 누적으로 정지된 아이디입니다.</strong>
 					</p>
-					<pre class="text-center">
-					
-정지 일자 : ${report.reportReason}
+					<p class="text-center" style="color:red; font-size:1.2rem; background-color:white;">
+정지 일자 : ${report.reportDt} / 
 정지 사유 : ${report.reportReason}
+					</p>
+					<pre class="text-center">
 문의 밎 해제 요청은 양식을 첨부하시어
 admin@sims.com으로 보내주세요.
+
 
 					</pre>
 				</div>
