@@ -433,7 +433,7 @@ public class JointBoardDAO {
 
 		String query = prop.getProperty("deleteBoard");
 
-		try {
+		try {  
 
 			pstmt = conn.prepareStatement(query);
 

@@ -8,7 +8,7 @@
 <entry key="getListCount">
 SELECT COUNT(*) FROM J_BOARD
 WHERE BOARD_STATUS = 'Y'
-</entry>
+</entry>  
 
 <!-- 지정된 페이지 게시글 목록 조회  -->
 <entry key="selectBoardList">

@@ -178,7 +178,7 @@ public class JointBoardService {
 
 							deleteFile.delete(); // 해당 파일 삭제
 
-						}
+						}  
 					}
 				}
 //				에러 페이지가 보여질 수 있도록 catch한 Exception을 Controller로 던져 준다.
