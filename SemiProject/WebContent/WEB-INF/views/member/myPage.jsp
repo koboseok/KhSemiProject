@@ -50,27 +50,29 @@
 						<!-- 아이디 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
-								<h6>이메일</h6>
+								<h6 id="title-font">이메일</h6>
 							</div>
 							<div class="col-md-6">
-								<h5 id="id">${loginMember.memEmail } </h5>
+								<input type="email" class="form-control" id="email" name="email" 
+											value="${ loginMember.memEmail } ">
+								
 							</div>
 						</div>
 	
 						<!-- 이름 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
-								<h6>별명</h6>
+								<h6 id="title-font">별명</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control name" id="name" value="${ loginMember.memName }">
+								<input type="text" class="form-control name" id="name" name="name"value="${ loginMember.memName }">
 							</div>
 						</div>
 	
 						<!-- 전화번호 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
-								<label for="phone1">전화번호</label>
+								<label for="phone1" id="title-font">전화번호</label>
 							</div>
 							<!-- 전화번호1 -->
 							<div class="col-md-3">

@@ -25,7 +25,7 @@ WHERE MEM_NM = ?
 AND MEM_STATUS = 'Y'
 </entry>
 
-
+<!--  로그인 맴버 조회 -->
 <entry key="loginMember">
 SELECT MEM_NO , MEM_EMAIL , MEM_NM , MEM_PHONE , MEM_GRADE , MEM_STATUS, MEM_CHECK , MEM_ENROLL_DATE
 FROM MEMBER
@@ -57,5 +57,45 @@ VALUES (?, ?, ?, ?, (ADD_MONTHS(?, 1)-1))
 SELECT REPORT_DT, REPORT_REASON FROM REPORT
 WHERE MEM_NO = ?
 </entry>
+
+
+
+<!-- 회원정보수정 -->
+<entry key="updateMember">
+
+UPDATE MEMBER SET
+MEM_NM =  ?,
+MEM_PHONE =  ?
+WHERE MEM_NO = ?
+
+
+
+</entry>
+
+<!-- 현재 비밀번호 확인 -->
+<entry key="checkCurrentPwd">
+SELECT COUNT(*) FROM MEMBER
+WHERE MEM_NO = ?
+AND MEM_PWD = ?
+
+</entry>
+<!--  비밀번호 변경 -->
+<entry key="updatePwd">
+UPDATE MEMBER SET
+MEM_PWD = ?
+WHERE MEM_NO = ?
+</entry>
+
+<!-- 회원탈퇴 -->
+<entry key="updateStatus">
+UPDATE MEMBER SET
+MEM_STATUS = 'N'
+WHERE MEM_PWD = ?
+AND MEM_NO = ?
+ 
+</entry>
+
+
+
 
 </properties>
