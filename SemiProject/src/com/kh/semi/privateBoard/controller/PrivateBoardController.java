@@ -92,7 +92,7 @@ public class PrivateBoardController extends HttpServlet {
 				}
 				
 				
-				path = "/WEB-INF/views/privateBoard/privateMain.jsp";
+				path = "/WEB-INF/views/privateBoard/PrivateMain.jsp";
 				
 				request.setAttribute("bList", bList);
 				request.setAttribute("pInfo", pInfo);
@@ -124,7 +124,7 @@ public class PrivateBoardController extends HttpServlet {
 					}
 					
 					
-					path = "/WEB-INF/views/privateBoard/privateBoardView.jsp";
+					path = "/WEB-INF/views/privateBoard/PrivateBoardView.jsp";
 					request.setAttribute("board", board);
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
@@ -140,7 +140,7 @@ public class PrivateBoardController extends HttpServlet {
 			
 //			********** 게시글 작성 화면 전환 Controller **********
 			else if (command.equals("/insertForm.do")) {
-				path = "/WEB-INF/views/privateBoard/privateBoardInsert.jsp";
+				path = "/WEB-INF/views/privateBoard/PrivateBoardInsert.jsp";
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
@@ -283,7 +283,7 @@ public class PrivateBoardController extends HttpServlet {
 					
 					request.setAttribute("board" , board);
 					
-					path = "/WEB-INF/views/privateBoard/privateBoardUpdate.jsp";
+					path = "/WEB-INF/views/privateBoard/PrivateBoardUpdate.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 					
