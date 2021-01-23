@@ -7,7 +7,7 @@ public class Board {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private String memberId;
+	private String memName;
 	private int readCount;
 	private String categoryName;
 	private Timestamp boardCreateDate;
@@ -20,36 +20,33 @@ public class Board {
 	}
 
 
-	public Board(int boardNo, String boardTitle, String boardContent, String memberId, int readCount,
+	
+	public Board(int boardNo, String boardTitle, String memName, int readCount, String categoryName,
+			Timestamp boardCreateDate) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.memName = memName;
+		this.readCount = readCount;
+		this.categoryName = categoryName;
+		this.boardCreateDate = boardCreateDate;
+	}
+
+
+
+	public Board(int boardNo, String boardTitle, String boardContent, String memName, int readCount,
 			String categoryName, Timestamp boardCreateDate, Timestamp boardModifyDate, String boardStatus) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
-		this.memberId = memberId;
+		this.memName = memName;
 		this.readCount = readCount;
 		this.categoryName = categoryName;
 		this.boardCreateDate = boardCreateDate;
 		this.boardModifyDate = boardModifyDate;
 		this.boardStatus = boardStatus;
-		
 	}
-	
-//	게시글 목록 조회용 VO
-	public Board(int boardNo, String boardTitle, String memberId, int readCount, String categoryName,
-			Timestamp boardCreateDate) {
-		super();
-		this.boardNo = boardNo;
-		this.boardTitle = boardTitle;
-		this.memberId = memberId;
-		this.readCount = readCount;
-		this.categoryName = categoryName;
-		this.boardCreateDate = boardCreateDate;
-	}
-	
-	
-	
-	
 
 
 	public int getBoardNo() {
@@ -82,13 +79,13 @@ public class Board {
 	}
 
 
-	public String getMemberId() {
-		return memberId;
+	public String getMemName() {
+		return memName;
 	}
 
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 
 
@@ -145,11 +142,12 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", memberId=" + memberId + ", readCount=" + readCount + ", categoryName=" + categoryName
+				+ ", memName=" + memName + ", readCount=" + readCount + ", categoryName=" + categoryName
 				+ ", boardCreateDate=" + boardCreateDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus="
 				+ boardStatus + "]";
 	}
-	
+
+
 	
 	
 

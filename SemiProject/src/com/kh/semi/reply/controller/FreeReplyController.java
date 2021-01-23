@@ -15,7 +15,7 @@ import com.kh.semi.reply.model.service.FreeReplyService;
 import com.kh.semi.reply.model.vo.FreeReply;
 
 
-@WebServlet("/reply/*")
+@WebServlet("/freeBoard/reply/*")
 public class FreeReplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
