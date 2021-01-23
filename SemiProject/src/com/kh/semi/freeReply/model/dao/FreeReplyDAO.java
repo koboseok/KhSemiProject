@@ -1,4 +1,4 @@
-package com.kh.semi.reply.model.dao;
+package com.kh.semi.freeReply.model.dao;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
-import com.kh.semi.reply.model.vo.FreeReply;
+import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeReply.model.vo.FreeReply;
 import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
 public class FreeReplyDAO {
@@ -23,7 +23,7 @@ public class FreeReplyDAO {
    private Properties prop;
    
    public FreeReplyDAO() {
-       String fileName = FreeBoardDAO.class.getResource("/com/kh/semi/sql/reply/reply-query.xml").getPath();
+       String fileName = Board.class.getResource("/com/kh/wsp/sql/reply/FreeReply-query.xml").getPath();
          try {
             prop = new Properties();
             prop.loadFromXML(new FileInputStream(fileName)); 
@@ -38,54 +38,52 @@ public class FreeReplyDAO {
     * @return rList
     * @throws Exception
     */
-   public List<FreeReply> selectFList(Connection conn, int fBoardNo) throws Exception {
-      List<FreeReply> fReplyList = null;
-      String query = prop.getProperty("selectFList");
+   public List<FreeReply> selectList(Connection conn, int parentBoardNo) throws Exception {
+      List<FreeReply> rList = null;
+      String query = prop.getProperty("selectList");
       
       try {
          pstmt = conn.prepareStatement(query);
-         pstmt.setInt(1, fBoardNo);
+         pstmt.setInt(1, parentBoardNo);
          
          rset = pstmt.executeQuery();
          
-         fReplyList = new ArrayList<FreeReply>();
+         rList = new ArrayList<FreeReply>();
          
          while(rset.next()) {
             FreeReply reply = new FreeReply();
-            reply.setfReplyNo(rset.getInt("FR_RE_NO"));
-            reply.setfReplyContent(rset.getString("FR_RE_CONTENT"));
-            reply.setfReplyCreateDate(rset.getTimestamp("FR_RE_DT"));
+            reply.setReplyNo(rset.getInt("REPLY_NO"));
+            reply.setReplyContent(rset.getString("REPLY_CONTENT"));
+            reply.setReplyCreateDate(rset.getTimestamp("REPLY_CREATE_DT"));
             reply.setMemName(rset.getString("MEM_NM"));
             
-            fReplyList.add(reply);
+            rList.add(reply);
          }
       } finally {
          close(rset);
          close(pstmt);
       }
       
-      return fReplyList;
+      return rList;
    }
 
-   
-   /** 댓글 작성 
- * @param conn
- * @param fReply
- * @return
- * @throws Exception
- */
-public int insertFReply(Connection conn, FreeReply fReply) throws Exception{
-     
-	   int result = 0;
+   /** 
+    * @param conn
+    * @param reply
+    * @return result
+    * @throws Exception
+    */
+   public int insertReply(Connection conn, FreeReply reply) throws Exception{
+      int result = 0;
       
-      String query = prop.getProperty("insertFReply");
+      String query = prop.getProperty("insertReply");
       
       try {
          pstmt = conn.prepareStatement(query);
          
-         pstmt.setString(1, fReply.getfReplyContent());
-         pstmt.setString(2, fReply.getMemName());
-         pstmt.setInt(3, fReply.getfBoardNo());
+         pstmt.setString(1, reply.getReplyContent());
+         pstmt.setString(2, reply.getMemName());
+         pstmt.setInt(3, reply.getParentBoardNo());
          
          result = pstmt.executeUpdate();
       } finally {
@@ -94,19 +92,24 @@ public int insertFReply(Connection conn, FreeReply fReply) throws Exception{
       return result;
    }
 
-/** 댓글 수정 DAO*/
-public int updateFReply(Connection conn, FreeReply fReply)throws Exception {
+/** 댓글 수정 DAO
+ * @param conn
+ * @param reply
+ * @return result
+ * @throws Exception
+ */
+public int updateReply(Connection conn, FreeReply reply)throws Exception {
 	
 	int result = 0;
 	
-	String query = prop.getProperty("updateFReply");
+	String query = prop.getProperty("updateReply");
 	
 	try {
 		
 		pstmt =conn.prepareStatement(query);
 		
-		pstmt.setString(1, fReply.getfReplyContent());
-		pstmt.setInt(2, fReply.getfReplyNo());
+		pstmt.setString(1, reply.getReplyContent());
+		pstmt.setInt(2, reply.getReplyNo());
 		
 		result = pstmt.executeUpdate();
 		
@@ -118,8 +121,13 @@ public int updateFReply(Connection conn, FreeReply fReply)throws Exception {
 	return result;
 }
 
-/** 댓글 삭제(상태 변경) DAO*/
-public int updateReplyStatus(Connection conn, int fReplyNo)throws Exception {
+/** 댓글 삭제(상태 변경) DAO
+ * @param conn
+ * @param replyNo
+ * @return result
+ * @throws Exception
+ */
+public int updateReplyStatus(Connection conn, int replyNo)throws Exception {
 
 	int result = 0;
 	
@@ -128,7 +136,7 @@ public int updateReplyStatus(Connection conn, int fReplyNo)throws Exception {
 	try {
 		
 		pstmt = conn.prepareStatement(query);
-		pstmt.setInt(1, fReplyNo);
+		pstmt.setInt(1, replyNo);
 		
 		result = pstmt.executeUpdate();
 		

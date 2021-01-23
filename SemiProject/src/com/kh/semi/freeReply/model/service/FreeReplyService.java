@@ -1,12 +1,14 @@
-package com.kh.semi.reply.model.service;
+package com.kh.semi.freeReply.model.service;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
 
-import com.kh.semi.reply.model.dao.FreeReplyDAO;
-import com.kh.semi.reply.model.vo.FreeReply;
+import com.kh.semi.freeReply.model.dao.FreeReplyDAO;
+import com.kh.semi.freeReply.model.vo.FreeReply;
+
+
 
 
 
@@ -19,15 +21,15 @@ public class FreeReplyService {
 	 * @return rList
 	 * @throws Exception
 	 */
-	public List<FreeReply> selectFList(int fBoardNo) throws Exception  {
+	public List<FreeReply> selectList(int parentBoardNo) throws Exception  {
 		
 		Connection conn = getConnection();
 		
-		List<FreeReply> fReplyList = dao.selectFList(conn, fBoardNo);
+		List<FreeReply> rList = dao.selectList(conn, parentBoardNo);
 		
 		close(conn);
 		
-		return fReplyList;
+		return rList;
 	}
 
 	/** 댓글 작성 Service
@@ -35,27 +37,26 @@ public class FreeReplyService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertFReply(FreeReply fReply)throws Exception {
-		
+	public int insertReply(FreeReply reply)throws Exception {
 		Connection conn = getConnection();
 		
 		// 크로스 사이트 스크립팅 방지 처리
-		String fReplyContent = fReply.getfReplyContent();
+		String replyContent = reply.getReplyContent();
 		
 		
-		fReplyContent = replaceParameter(fReplyContent);
+		replyContent = replaceParameter(replyContent);
 		
 		
 		// 개행 문자 변환 처리 
 		// ajax 통신 시 textarea의 개행 뭄ㄴ자가 \n 하나만 넘어옴.
 		// \n --> <br> 
-		fReplyContent = fReplyContent.replaceAll("\n", "<br>");
+		replyContent = replyContent.replaceAll("\n", "<br>");
 		
 		
 		// 변경된 replyContent를 다시 reply에 세팅
-		fReply.setfReplyContent(fReplyContent);
+		reply.setReplyContent(replyContent);
 		
-		int result = dao.insertFReply(conn, fReply);
+		int result = dao.insertReply(conn, reply);
 		
 		// 트렌젝션
 		
@@ -90,35 +91,32 @@ public class FreeReplyService {
 		 * @return result
 		 * @throws Exception
 		 */
-		public int updateFReply(FreeReply fReply)throws Exception {
+		public int updateReply(FreeReply reply)throws Exception {
 
 			Connection conn = getConnection();
 			
 			
 			// 크로스 사이트 스크립팅 방지 처리
-			String fReplyContent = fReply.getfReplyContent();
+			String replyContent = reply.getReplyContent();
 			
 			
-			fReplyContent = replaceParameter(fReplyContent);
+			replyContent = replaceParameter(replyContent);
 			
 			
 			// 개행 문자 변환 처리 
 			// ajax 통신 시 textarea의 개행 뭄ㄴ자가 \n 하나만 넘어옴.
 			// \n --> <br> 
-			fReplyContent = fReplyContent.replaceAll("\n", "<br>");
+			replyContent = replyContent.replaceAll("\n", "<br>");
 			
 			
 			// 변경된 replyContent를 다시 reply에 세팅
-			fReply.setfReplyContent(fReplyContent);
+			reply.setReplyContent(replyContent);
 			
-			int result = dao.updateFReply(conn, fReply);
-
+			int result = dao.updateReply(conn, reply);
+			
 			if(result > 0) {
-				
 				commit(conn);
-				
 			}else {
-				
 			rollback(conn);	
 			}
 			
@@ -132,11 +130,11 @@ public class FreeReplyService {
 		 * @return result
 		 * @throws Exception
 		 */
-		public int updateReplyStatus(int fReplyNo)throws Exception {
+		public int updateReplyStatus(int replyNo)throws Exception {
 			
 			Connection conn = getConnection();
 			
-			int result = dao.updateReplyStatus(conn, fReplyNo);
+			int result = dao.updateReplyStatus(conn, replyNo);
 			
 			if(result > 0) {
 				commit(conn);
