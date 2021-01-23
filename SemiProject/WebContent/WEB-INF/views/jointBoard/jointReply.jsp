@@ -358,8 +358,8 @@ function deleteReply(replyNo){
 					swal({"icon" : "success" , "title" : "댓글 삭제 성공"});
 				}
 				
-				
 			}, error : function(){
+				
 				console.log("ajax 통신 실패");
 			}
 		});

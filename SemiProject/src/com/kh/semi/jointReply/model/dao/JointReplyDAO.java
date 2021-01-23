@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.jointBoard.model.vo.Board;
 import com.kh.semi.jointReply.model.vo.JointReply;
 import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
@@ -23,7 +23,7 @@ public class JointReplyDAO {
    private Properties prop;
    
    public JointReplyDAO() {
-       String fileName = Board.class.getResource("/com/kh/semi/sql/reply/FreeReply-query.xml").getPath();
+       String fileName = Board.class.getResource("/com/kh/semi/sql/reply/JointReply-query.xml").getPath();
          try {
             prop = new Properties();
             prop.loadFromXML(new FileInputStream(fileName)); 
@@ -127,6 +127,7 @@ public int updateReply(Connection conn, JointReply reply)throws Exception {
  * @return result
  * @throws Exception
  */
+
 public int updateReplyStatus(Connection conn, int replyNo)throws Exception {
 
 	int result = 0;

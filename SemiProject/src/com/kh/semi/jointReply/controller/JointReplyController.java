@@ -26,7 +26,7 @@ public class JointReplyController extends HttpServlet {
 	
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
-		String command = uri.substring((contextPath+"/freeReply").length());
+		String command = uri.substring((contextPath+"/jointReply").length());
 		
 		
 		try {
