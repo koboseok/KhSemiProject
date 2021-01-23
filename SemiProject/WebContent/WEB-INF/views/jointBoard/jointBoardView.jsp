@@ -214,7 +214,7 @@
 						</c:when>
 
 						<c:otherwise>
-							<c:url var="goToList" value="list.do">
+							<c:url var="goToList" value="main.do">
 								<c:param name="cp">${param.cp }</c:param>
 							</c:url>
 						</c:otherwise>
