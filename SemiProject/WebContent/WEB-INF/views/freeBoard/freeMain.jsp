@@ -140,7 +140,7 @@
 			<c:choose>
 				<%-- 검색 내용이 파라미터에 존재할 때   ==  검색을 통해 만들어진 페이지인가?  --%>
 				<c:when test="${!empty param.sk && !empty param.sv }">
-					<c:url var="pageUrl" value="/search.do"/>
+					<c:url var="pageUrl" value="/freeboard/freeBoardSearch.do"/>
 					
 					<%-- 쿼리스트링으로 사용할 내용을 변수에 저장 --%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
@@ -231,7 +231,7 @@
 			<!-- 검색창 -->
 			<div class="my-5">
 				
-				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
+				<form action="${contextPath }/freeBoard/freeBoardSearch.do" method="GET" class="text-center" id="searchForm">
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>

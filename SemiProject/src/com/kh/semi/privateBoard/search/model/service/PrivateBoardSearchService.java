@@ -1,0 +1,134 @@
+package com.kh.semi.privateBoard.search.model.service;
+import static com.kh.semi.common.JDBCTemplate.close;
+import static com.kh.semi.common.JDBCTemplate.getConnection;
+
+import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
+
+import com.kh.semi.privateBoard.model.vo.Attachment;
+import com.kh.semi.privateBoard.model.vo.Board;
+import com.kh.semi.privateBoard.model.vo.PageInfo;
+import com.kh.semi.privateBoard.search.model.dao.PrivateBoardSearchDAO;
+
+public class PrivateBoardSearchService {
+	private PrivateBoardSearchDAO dao = new PrivateBoardSearchDAO();
+
+	/**검색 내용이 포함된 페이징 처리 정보 생성 Service
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public PageInfo getPageInfo(Map<String, Object> map) throws Exception {
+		Connection conn = getConnection();
+		
+		//얻어온 파라미터 cp가 null이면 1, 아니면 int형으로 파싱
+		map.put("currentPage", 
+				(map.get("currentPage") == null) ? 1
+						: Integer.parseInt((String)map.get("currentPage")));
+		
+		//검색 조건에 따른 SQL조건문을 조합하는 메소드 호출
+		String condition = createCondition(map);
+		
+		
+		//DB에서 조건을 만족하는 게시글의 수를 조회하기
+		int listCount = dao.getListCount(conn, condition);
+		
+		//커넥션 반환
+		close(conn);
+		
+		//pageInfo 객체를 생성하여 반환
+		return new PageInfo((int)map.get("currentPage"), listCount);
+	}
+
+	/**검색 조건에 따라 SQL에 사용될 조건문을 조합하는 메소드
+	 * @param map
+	 * @return
+	 */
+	private String createCondition(Map<String, Object> map) {
+		
+		String condition = null;
+		
+		String searchKey = (String)map.get("searchKey");
+		String searchValue = (String)map.get("searchValue");
+		
+		//검색 조건(searchKey)에 따라 SQL조합
+		switch(searchKey) {
+		case "title" : 
+			condition = " BOARD_TITLE LIKE '%' || '" + searchValue + "' || '%' ";
+			break;
+			//" BOARD_TITLE LIKE '%49%' "
+		case "content" : 
+			condition = " BOARD_CONTENT LIKE '%' || '" + searchValue + "' || '%' ";
+			break;
+			//" BOARD_CONTENT LIKE '%49%' "
+		case "titcont" : 
+			condition = " (BOARD_TITLE LIKE '%' || '" + searchValue + "' || '%' "
+						+ "OR BOARD_CONTENT LIKE '%' || '" + searchValue + "' || '%') ";
+			break;
+		case "writer" : 
+			condition = " MEMBER_ID LIKE '%' || '" + searchValue + "' || '%' ";
+			break;		
+
+		}
+		return condition;
+	}
+/*
+
+	public List<Board> searchBoardList(Map<String, Object> map) throws Exception {
+		Connection conn = getConnection();
+				
+		String condition = createCondition(map);
+		
+		List<Board> bList = dao.searchBoardList(conn, map, condition);
+		
+		close(conn);
+		
+		return bList;
+	}
+	*/
+	
+	/** 검색 게시글 목록 리스트 조회 Service
+	    * @param map
+	    * @param pInfo 
+	    * @return bList
+	    * @throws Exception
+	    */
+	   public List<Board> searchBoardList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+	      
+	      Connection conn = getConnection();
+	      
+	      String condition = createCondition(map);
+	      
+	      List<Board> bList = dao.searchBoardList(conn, pInfo, condition);
+	      
+	      close(conn);
+	      
+	      
+	      return bList;
+	   }
+
+	/**검색이 적용될 썸네일 목록 조회 service
+	 * @param map
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Attachment> searchThumbnailList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		//검색에 사용될 SQL조건문 생성
+		String condition = createCondition(map);
+		
+		List<Attachment> fList = dao.searchThumbnailList(conn, pInfo, condition);
+		
+		close(conn);
+		
+		return fList;
+	}
+	
+	
+	
+}
+
+
