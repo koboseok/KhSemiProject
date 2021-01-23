@@ -200,7 +200,7 @@ $("#addReply").on("click", function(){
       }else{ // 로그인도 되어있고, 댓글도 작성되어 있는 경우
          
          // 회원 번호를 얻어와서 변수에 저장
-         var replyWriter = "${loginMember.memberNo}";
+         var replyWriter = "${loginMember.memNo}";
          
          $.ajax({
             url : "${contextPath}/freeReply/insertReply.do",
