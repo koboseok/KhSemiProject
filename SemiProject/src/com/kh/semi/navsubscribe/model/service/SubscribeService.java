@@ -5,9 +5,9 @@ import static com.kh.semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
-import com.kh.semi.subscribereply.model.vo.Reply;
 import com.kh.semi.navsubscribe.model.dao.SubscribeDAO;
 import com.kh.semi.navsubscribe.model.vo.Subscribe;
+import com.kh.semi.subscribereply.model.vo.SubscribeReply;
 
 public class SubscribeService {
 
@@ -65,10 +65,10 @@ public class SubscribeService {
 	}
 
 
-	public Reply selectReplyInfo(String reply) throws Exception {
+	public SubscribeReply selectReplyInfo(String reply) throws Exception {
 		Connection conn = getConnection();
 
-		Reply replyInfo = dao.selectReplyInfo(conn, reply);
+		SubscribeReply replyInfo = dao.selectReplyInfo(conn, reply);
 
 		close(conn);
 

@@ -17,7 +17,7 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <style>
 .info {
@@ -111,6 +111,38 @@
 	margin-top: 50px;
 }
 
+.replyWrite>table {
+	width: 90%;
+	align: center;
+}
+
+#replyContentArea {
+	width: 90%;
+}
+
+#replyContentArea>textarea {
+	resize: none;
+	width: 100%;
+}
+
+#replyBtnArea {
+	width: 100px;
+	text-align: center;
+}
+
+.rWriter {
+	margin-right: 30px;
+}
+
+.rDate {
+	font-size: 0.7em;
+	color: gray;
+}
+
+#replyListArea {
+	list-style-type: none;
+}
+
 </style>
 </head>
 <body>
@@ -150,9 +182,11 @@
 
 
 	</div>
-
-
+	
+	
 	<jsp:include page="../subscribe/subscribe-reply.jsp"></jsp:include>
+
+
 
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
