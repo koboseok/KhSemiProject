@@ -4,7 +4,7 @@ import static com.kh.semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
-import com.kh.semi.subscribe.model.DAO.SubscribeDAO;
+import com.kh.semi.subscribe.model.dao.SubscribeDAO;
 
 public class SubscribeService {
 

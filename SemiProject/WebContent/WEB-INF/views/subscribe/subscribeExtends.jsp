@@ -92,9 +92,9 @@ a {
 .banner2 li {
 	position: relative;
 	float: left;
-	width: 315px;
-	height: 200px;
-	margin-right: 20px;
+	width: 24%;
+	height: 20%;
+	margin-right: 10px;
 	margin-bottom: 10px;
 	box-shadow: 2px 2px 2px #ccc;
 	box-sizing: border-box;
@@ -131,10 +131,10 @@ a {
 
 .banner2 li:hover {
 	cursor: pointer;
-	transform: scale(1.2);
-	-o-transform: scale(1.2);
-	-moz-transform: scale(1.2);
-	-webkit-transform: scale(1.2);
+	transform: scale(1.1);
+	-o-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
 	transition: transform .35s
 }
 </style>

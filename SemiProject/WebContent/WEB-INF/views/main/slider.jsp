@@ -39,7 +39,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/youtube.jpg" alt="" />
+										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -62,7 +62,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/bookcrew.png" alt="" />
+										<img src="${contextPath}/resources/images/main-bookcrew.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -76,7 +76,7 @@
 										남긴 뒤죽박죽 손메모에 담긴 생각, 목표, 열정, 계획...<br>
 										이제, 작가와 직접 만나 인생의 단편으로 영원히 남기세요. <br>
 										북크루에서 작가와 마주할 수 있게 됩니다.</p>
-										<a href=""> 바로 가기 </a>
+										
 									</div>
 								</div>
 							</div>
@@ -87,7 +87,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/greencar.png" alt="" />
+										<img src="${contextPath}/resources/images/main-greencar.png" alt="" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -100,7 +100,7 @@
 										24시간  쉽고 편하게, 스마트 카셰어링 그린카! <br>
 										신규 가입하면 3시간 무료!<br>
 										2020 K-BPI 카셰어링 부문,5년 연속 1위 수상</p>
-										<a href=""> 바로 가기 </a>
+										
 									</div>
 								</div>
 							</div>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.main.model.service.MainService;
-import com.kh.semi.subscribe.model.vo.Subscribe;
+import com.kh.semi.navsubscribe.model.vo.Subscribe;
 
 
 @WebServlet("/main/*")

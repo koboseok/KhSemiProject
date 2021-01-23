@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.semi.main.model.dao.MainDAO;
-import com.kh.semi.subscribe.model.vo.Subscribe;
+import com.kh.semi.navsubscribe.model.vo.Subscribe;
 public class MainDAO {
 	
 //	자주사용하는 JDBC 참조 변수 미리 선언 

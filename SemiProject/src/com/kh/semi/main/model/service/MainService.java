@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.semi.main.model.dao.MainDAO;
-import com.kh.semi.subscribe.model.vo.Subscribe;
+import com.kh.semi.navsubscribe.model.vo.Subscribe;
 
 
 public class MainService {
