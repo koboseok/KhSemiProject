@@ -36,7 +36,7 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 	text-align: center;
 }
 
-#list-table td:not(:nth-of-type(3)) {
+#list-table td:not(:nth-of-type(6)) {
 	text-align: center;
 }
 
@@ -219,7 +219,7 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 
 		<c:choose>
 			<c:when test="${!empty param.sk && !empty param.sv}">
-				<c:url var="pageUrl" value="/search.do" />
+				<c:url var="pageUrl" value="/admin/memberSearch.do" />
 				<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
 			</c:when>
 			<c:otherwise>
@@ -278,7 +278,22 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 
 
 		<!-- 검색창 -->
-		<div class="my-5"></div>
+		<div class="my-5">
+					<div class="my-5">
+				<form action="${contextPath}/admin/memberSearch.do" method="GET" class="text-center" id="searchForm">
+					<select name="sk" class="form-control" style="width: 120px; display: inline-block;">
+						<option value="memNo">회원번호</option>
+						<option value="memEmail">이메일</option>
+						<option value="memName">닉네임</option>
+					</select>
+					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
+					<button class="form-control btn btn-dark" style="width: 100px; display: inline-block;">검색</button>
+				</form>
+			</div>
+
+		</div>
+		
+	
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
