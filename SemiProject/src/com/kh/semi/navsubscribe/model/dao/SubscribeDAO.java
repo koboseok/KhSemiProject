@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.kh.semi.subscribereply.model.vo.Reply;
 import com.kh.semi.navsubscribe.model.dao.SubscribeDAO;
 import com.kh.semi.navsubscribe.model.vo.Subscribe;
+import com.kh.semi.subscribereply.model.vo.SubscribeReply;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -210,8 +210,8 @@ public class SubscribeDAO {
 		return exList;
 	}
 
-	public Reply selectReplyInfo(Connection conn, String reply) throws Exception {
-		Reply replyInfo = null;
+	public SubscribeReply selectReplyInfo(Connection conn, String reply) throws Exception {
+		SubscribeReply replyInfo = null;
 
 		String query = prop.getProperty("selectReplyInfo");
 
@@ -222,7 +222,7 @@ public class SubscribeDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				replyInfo = new Reply();
+				replyInfo = new SubscribeReply();
 				replyInfo.setPoint(rset.getFloat("ROUND(AVG(SERV_POINT),2)"));
 				replyInfo.setMemberNo(rset.getInt("MEM_NO"));
 			}

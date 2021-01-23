@@ -17,6 +17,7 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 .pop_section .main_container .img-box img {
 	width: 400px;
@@ -104,7 +105,7 @@ ul {
 
 
 	<script>
-		$(".pop_section .list li*").on("click", function() {
+		$(".list li*").on("click", function() {
 			var popName = $(this).parent().children().eq(0).text();
 			console.log(popName);
 

@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.subscribereply.model.vo.Reply;
 import com.kh.semi.navsubscribe.model.service.SubscribeService;
 import com.kh.semi.navsubscribe.model.vo.Subscribe;
+import com.kh.semi.subscribereply.model.vo.SubscribeReply;
 
 @WebServlet("/subscribe/*")
 public class SubscribeController extends HttpServlet {
@@ -79,7 +79,7 @@ public class SubscribeController extends HttpServlet {
 				Subscribe subscribe = service.selectInfo(subName);
 
 				String reply = request.getParameter("name");
-				Reply replyInfo = service.selectReplyInfo(reply);
+				SubscribeReply replyInfo = service.selectReplyInfo(reply);
 
 				path = "/WEB-INF/views/subscribe/subscribeInfo.jsp";
 
