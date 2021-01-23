@@ -100,7 +100,7 @@ public class PrivateBoardDAO {
 									rset.getString("BOARD_TITLE"),
 									rset.getString("MEM_NM"),
 									rset.getInt("READ_COUNT"),
-									rset.getString("JT_CT_NM"),
+									rset.getString("PRIV_CT_NM"),
 									rset.getTimestamp("BOARD_CREATE_DT"));
 				bList.add(board);
 			}
@@ -145,7 +145,7 @@ public class PrivateBoardDAO {
 				board.setReadCount(rset.getInt("READ_COUNT"));
 				board.setBoardCreateDate(rset.getTimestamp("BOARD_CREATE_DT"));
 				board.setBoardModifyDate(rset.getTimestamp("BOARD_MODIFY_DT"));
-				board.setCategoryName(rset.getString("JT_CT_NM"));
+				board.setCategoryName(rset.getString("PRIV_CT_NM"));
 
 			}
 
