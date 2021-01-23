@@ -119,39 +119,40 @@
 				<hr>
 				<!-- 이미지 출력 -->
 				<div class="carousel slide boardImgArea" id="board-image">
-				<c:if test="${!empty fList}">
-					<!-- 이미지 선택 버튼 -->
-					<ol class="carousel-indicators">
-						<c:forEach var="file" items="${fList}" varStatus="vs">
+					<c:if test="${!empty fList}">
+						<!-- 이미지 선택 버튼 -->
+						<ol class="carousel-indicators">
+							<c:forEach var="file" items="${fList}" varStatus="vs">
 
-							<li data-slide-to="${vs.index }" data-target="#board-image"
-								<c:if test="${vs.first}"> class="active" </c:if>></li>
+								<li data-slide-to="${vs.index }" data-target="#board-image"
+									<c:if test="${vs.first}"> class="active" </c:if>></li>
 
-						</c:forEach>
-					</ol>
+							</c:forEach>
+						</ol>
 
 
-					<!-- 출력되는 이미지 -->
-					<div class="carousel-inner">
-						<c:forEach var="file" items="${fList}" varStatus="vs">
+						<!-- 출력되는 이미지 -->
+						<div class="carousel-inner">
+							<c:forEach var="file" items="${fList}" varStatus="vs">
 
-							<div class="carousel-item <c:if test="${vs.first}">active</c:if>">
+								<div
+									class="carousel-item <c:if test="${vs.first}">active</c:if>">
 
-								<img class="d-block w-100 boardImg" id="${file.fileNo}"
-									src="${contextPath}/resources/uploadImages/${file.fileName}">
-							</div>
+									<img class="d-block w-100 boardImg" id="${file.fileNo}"
+										src="${contextPath}/resources/uploadImages/${file.fileName}">
+								</div>
 
-						</c:forEach>
+							</c:forEach>
 
-					</div>
+						</div>
 
-					<!-- 좌우 화살표 -->
-					<a class="carousel-control-prev" href="#board-image"
-						data-slide="prev"><span class="carousel-control-prev-icon"></span>
-						<span class="sr-only">Previous</span></a> <a
-						class="carousel-control-next" href="#board-image"
-						data-slide="next"><span class="carousel-control-next-icon"></span>
-						<span class="sr-only">Next</span></a>
+						<!-- 좌우 화살표 -->
+						<a class="carousel-control-prev" href="#board-image"
+							data-slide="prev"><span class="carousel-control-prev-icon"></span>
+							<span class="sr-only">Previous</span></a>
+						<a class="carousel-control-next" href="#board-image"
+							data-slide="next"><span class="carousel-control-next-icon"></span>
+							<span class="sr-only">Next</span></a>
 				</div>
 				</c:if>
 
@@ -170,14 +171,15 @@
 					<c:if
 						test="${!empty loginMember && (board.memName == loginMember.memName)}">
 						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button>
-						
+
 						<%--게시글 수정 후 상세조회 페이지로 돌아오기 위한 url조합 --%>
 						<c:if test="${!empty param.sv && !empty param.sk}">
 							<%--검색을 통해 들어온 상세조회 페이지인 경우--%>
 							<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
 
 						</c:if>
-						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}" class="btn btn-primary float-right ml-1 mr-1">수정</a>
+						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}"
+							class="btn btn-primary float-right ml-1 mr-1">수정</a>
 					</c:if>
 
 
@@ -204,20 +206,21 @@
 
 					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
 				</div>
-				
-	
+
 			</div>
+				<jsp:include page="privateReply.jsp"></jsp:include>
 
 
 
 		</div>
+		
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
-
+	
 
 	<script>
 		$("#deleteBtn").on("click", function() {
-			if(confirm("정말 삭제하시겠습니까?")) {
+			if (confirm("정말 삭제하시겠습니까?")) {
 				location.href = "delete.do?no=${board.boardNo}";
 			}
 		})
