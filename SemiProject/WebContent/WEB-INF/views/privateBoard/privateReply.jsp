@@ -111,7 +111,7 @@
 </div>
 
 <script>
-var loginMemberId = "${loginMember.memberId}";
+var loginMemName = "${loginMember.memName}";
 var parentBoardNo = ${board.boardNo};
 
 // 페이지 로딩 완료 시 댓글 목록 호출
@@ -124,7 +124,7 @@ $(function(){
 function selectReplyList(){
  
    $.ajax({
-      url : "${contextPath}/reply/selectList.do",
+      url : "${contextPath}/privateReply/selectList.do",
       data : {"parentBoardNo" : parentBoardNo},
       type : "post",
       dataType : "JSON",
@@ -135,7 +135,7 @@ function selectReplyList(){
          
          $.each(rList, function(index, item){
             var li = $("<li>").addClass("reply-row");
-            var rWriter = $("<p>").addClass("rWriter").text(item.memberId);
+            var rWriter = $("<p>").addClass("rWriter").text(item.memName);
             var rDate = $("<p>").addClass("rDate").text("작성일 : " + item.replyCreateDate);
          
             var div = $("<div>");
@@ -147,7 +147,7 @@ function selectReplyList(){
             
                
                // 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
-            if(item.memberId == loginMemberId){
+            if(item.memName == loginMemName){
                
                      // 수정, 삭제 버튼 영역
                   var replyBtnArea = $("<div>").addClass("replyBtnArea");
@@ -188,7 +188,7 @@ $("#addReply").on("click", function(){
    var replyContent = $("#replyContent").val().trim();
    
    // 로그인이 되어있지 않은 경우 == loginMemberId 전역변수에 저장된 값이 ""일 경우
-   if(loginMemberId == ""){
+   if(loginMemName == ""){
       alert("로그인 후 이용해주세요.");
       
    }else{ // 로그인이 되어있는 경우 
@@ -200,10 +200,10 @@ $("#addReply").on("click", function(){
       }else{ // 로그인도 되어있고, 댓글도 작성되어 있는 경우
          
          // 회원 번호를 얻어와서 변수에 저장
-         var replyWriter = "${loginMember.memberNo}";
+         var replyWriter = "${loginMember.memNo}";
          
          $.ajax({
-            url : "${contextPath}/reply/insertReply.do",
+            url : "${contextPath}/privateReply/insertReply.do",
             data : {"replyWriter" : replyWriter,
                         "replyContent" : replyContent,
                         "parentBoardNo" : parentBoardNo },
@@ -305,7 +305,7 @@ function updateReply(replyNo, el){
 	var replyContent = $(el).parent().prev().val();
 	
 	$.ajax({
- 		url : "${contextPath}/reply/updateReply.do",
+ 		url : "${contextPath}/privateReply/updateReply.do",
 		type : "post",
 		data : {"replyNo" : replyNo, "replyContent" : replyContent},
 		success : function(result){
@@ -346,7 +346,7 @@ function updateCancel(el){
 function deleteReply(replyNo){
 
 	if(confirm("정말로 삭제하시겠습니까?")){
-		var url = "${contextPath}/reply/deleteReply.do";
+		var url = "${contextPath}/privateReply/deleteReply.do";
 		
 		$.ajax({
 			url : url,

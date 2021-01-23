@@ -1,4 +1,4 @@
-package com.kh.semi.freeReply.model.dao;
+package com.kh.semi.jointReply.model.dao;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.vo.Board;
-import com.kh.semi.freeReply.model.vo.FreeReply;
+import com.kh.semi.jointReply.model.vo.JointReply;
 import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
-public class FreeReplyDAO {
+public class JointReplyDAO {
    private Statement stmt = null;
    private PreparedStatement pstmt = null;
    private ResultSet rset = null;
    
    private Properties prop;
    
-   public FreeReplyDAO() {
-       String fileName = Board.class.getResource("/com/kh/wsp/sql/reply/FreeReply-query.xml").getPath();
+   public JointReplyDAO() {
+       String fileName = Board.class.getResource("/com/kh/semi/sql/reply/FreeReply-query.xml").getPath();
          try {
             prop = new Properties();
             prop.loadFromXML(new FileInputStream(fileName)); 
@@ -38,8 +38,8 @@ public class FreeReplyDAO {
     * @return rList
     * @throws Exception
     */
-   public List<FreeReply> selectList(Connection conn, int parentBoardNo) throws Exception {
-      List<FreeReply> rList = null;
+   public List<JointReply> selectList(Connection conn, int parentBoardNo) throws Exception {
+      List<JointReply> rList = null;
       String query = prop.getProperty("selectList");
       
       try {
@@ -48,10 +48,10 @@ public class FreeReplyDAO {
          
          rset = pstmt.executeQuery();
          
-         rList = new ArrayList<FreeReply>();
+         rList = new ArrayList<JointReply>();
          
          while(rset.next()) {
-            FreeReply reply = new FreeReply();
+            JointReply reply = new JointReply();
             reply.setReplyNo(rset.getInt("REPLY_NO"));
             reply.setReplyContent(rset.getString("REPLY_CONTENT"));
             reply.setReplyCreateDate(rset.getTimestamp("REPLY_CREATE_DT"));
@@ -73,7 +73,7 @@ public class FreeReplyDAO {
     * @return result
     * @throws Exception
     */
-   public int insertReply(Connection conn, FreeReply reply) throws Exception{
+   public int insertReply(Connection conn, JointReply reply) throws Exception{
       int result = 0;
       
       String query = prop.getProperty("insertReply");
@@ -98,7 +98,7 @@ public class FreeReplyDAO {
  * @return result
  * @throws Exception
  */
-public int updateReply(Connection conn, FreeReply reply)throws Exception {
+public int updateReply(Connection conn, JointReply reply)throws Exception {
 	
 	int result = 0;
 	
