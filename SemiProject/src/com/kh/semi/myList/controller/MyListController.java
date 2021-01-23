@@ -147,7 +147,7 @@ public class MyListController extends HttpServlet {
 				
 				int memNo = loginMember.getMemNo();
 				
-				String servCode = request.getParameter("servCode");
+				String servCode = request.getParameter("servCode1");
 				System.out.println(servCode);
 				
 				

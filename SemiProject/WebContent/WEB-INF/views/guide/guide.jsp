@@ -66,19 +66,19 @@
 
     <div class="guide-name" >BOARD GUIDE</div>
     <p class="contents" style="text-align: left;">자유게시판 , 공동 구매 게시판 , 비공개 건의 게시판이 준비되어 있는데요 .<br>
-		자유게시판 :
-		말 그대로 자유롭게 유저들과 소통하는 자리를 마련했고 , <br>
-		공동 구매 게시판 :
+		
+		자유롭게 유저들과 소통하는 자리를 마련했고 , <br>
+		
 		 넷플릭스와 같이 한번에 N명까지의 서비스 이용이 가능한 경우 <br>
 		같이 구매를 진행하여 돈을 절약하는 효과를 기대하고 있습니다 .<br>
-		비공개 건의 게시판 :
+		
 		관리자와 편하게 소통할 수 있는 자리를 마련했으며 , <br>
-		사용자가 언제든지 불편하거나 , 무언가 더  개선되었으면 좋겠다.등 의견을 낼수 있고,<br>
-		회원 중 심하게 물의를 일으키는 회원을 신고하여 불량회원으로 관리할 수 있도록 <br>처리하겠습니다.</p>
+		사용자가 언제든지 불편하거나 , 개선점 등을  의견을 낼수 있고,<br>
+		회원 중 심하게 물의를 일으키는 회원을 신고하여 불량회원으로 처리하겠습니다.</p>
 
     <div class="guide-name">WHAT CONTENTS DO YO HAVE ON SIMS</div>
     <p class="contents"><br><br>SUBSCRIBE 페이지를 보면 알 수 있겠죠 ? 
-						한번 SIMS 구경 해 보실래요 ?<br><a class="nav-link" href="${contextPath}/subscribe/main">
+						한번 SIMS 구경 해 보실래요 ?<br><a class="nav-link" href="${contextPath}/subscribe/main.do">
 										SUBSCRIBE로 이동 </a>
 						</p>
     
