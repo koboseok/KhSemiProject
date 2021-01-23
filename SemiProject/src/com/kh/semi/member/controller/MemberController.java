@@ -1,6 +1,7 @@
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.semi.admin.model.vo.Report;
+import com.kh.semi.freeBoard.model.vo.Board;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
@@ -505,6 +507,23 @@ public class MemberController extends HttpServlet {
 			
 			//내 글 조회 페이지 Controller **************************************************
 				else if(command.equals("/boardList.do")) {
+					errorMsg = "내 게시글 조회 중 오류 발생";
+					
+					HttpSession session = request.getSession();
+					Member loginMember = (Member)session.getAttribute("loginMember");
+					
+					int memNo = loginMember.getMemNo();
+					
+					List<Board> fList = new MemberService().selectfBoardList(memNo);
+					
+					List<com.kh.semi.jointBoard.model.vo.Board> jList = new MemberService().selectjBoardList(memNo);
+					
+					List<com.kh.semi.privateBoard.model.vo.Board> pList = new MemberService().selectpBoardList(memNo);
+					
+					request.setAttribute("fList", fList);
+					request.setAttribute("jList", jList);
+					request.setAttribute("pList", pList);
+					
 					
 					path="/WEB-INF/views/member/boardList.jsp";
 					view = request.getRequestDispatcher(path);
@@ -512,6 +531,11 @@ public class MemberController extends HttpServlet {
 				}
 			//내 뎃글 조회 페이지 Controller **************************************************
 				else if(command.equals("/ReplyList.do")) {
+					errorMsg = "내 댓글 조회 중 오류 발생";
+					
+					
+					
+					
 					
 					path="/WEB-INF/views/member/ReplyList.jsp";
 					view = request.getRequestDispatcher(path);

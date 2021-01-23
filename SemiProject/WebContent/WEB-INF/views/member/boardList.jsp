@@ -57,7 +57,6 @@
 							<thead>
 								<tr>
 									<th>글번호</th>
-									<th>카테고리</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>조회수</th>
@@ -66,46 +65,20 @@
 							</thead>
 							<tbody>
 								<c:choose>
-									<c:when test="${empty bList}">
+									<c:when test="${empty fList}">
 										<tr>
 											<td colspan="6">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${bList}">
+										<c:forEach var="board" items="${fList}">
 											<tr>
 												<td>${board.boardNo}</td>
-												<td>${board.categoryName}</td>
-												<td class="boardTitle">
-													<%--썸네일 출력--%> <c:forEach var="thumbnail" items="${fList}">
-														<%--현재 출력하려는 게시글 번호와 썸네일 목록 중 게시글 번호가 일치하는 썸네일 정보가 있다면--%>
-														<c:if test="${board.boardNo == thumbnail.parentBoardNo}">
-															<img
-																src="${contextPath}/resources/uploadImages/${thumbnail.fileName}">
-														</c:if>
-													</c:forEach> ${board.boardTitle}
-												</td>
+												<td>${board.boardTitle}</td>
 												<td>${board.memName}</td>
 												<td>${board.readCount}</td>
-												<td>
-													<%--날짜 출력 모양 지정--%> <fmt:formatDate var="createDate"
-														value="${board.boardCreateDate}" pattern="yyyy-MM-dd" /> <fmt:formatDate
-														var="today" value="<%=new java.util.Date()%>"
-														pattern="yyyy-MM-dd" /> <c:choose>
-														<%--글 작성일이 오늘이 아닌 경우 --%>
-														<c:when test="${createDate != today}">
-												${createDate}
-												</c:when>
-
-														<%--글 작성일이 오늘인 경우 --%>
-														<c:otherwise>
-															<fmt:formatDate value="${board.boardCreateDate}"
-																pattern="HH:mm" />
-															<%--var가 없어서 바로 출력 --%>
-														</c:otherwise>
-													</c:choose>
-												</td>
+												<td><fmt:formatDate value="${board.boardCreateDate }" pattern="yyyy-MM-dd HH:mm"/></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -135,46 +108,21 @@
 							
 							<tbody>
 								<c:choose>
-									<c:when test="${empty bList}">
+									<c:when test="${empty jList}">
 										<tr>
 											<td colspan="6">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${bList}">
+										<c:forEach var="board" items="${jList}">
 											<tr>
 												<td>${board.boardNo}</td>
 												<td>${board.categoryName}</td>
-												<td class="boardTitle">
-													<%--썸네일 출력--%> <c:forEach var="thumbnail" items="${fList}">
-														<%--현재 출력하려는 게시글 번호와 썸네일 목록 중 게시글 번호가 일치하는 썸네일 정보가 있다면--%>
-														<c:if test="${board.boardNo == thumbnail.parentBoardNo}">
-															<img
-																src="${contextPath}/resources/uploadImages/${thumbnail.fileName}">
-														</c:if>
-													</c:forEach> ${board.boardTitle}
-												</td>
+												<td >${board.boardTitle}</td>
 												<td>${board.memName}</td>
 												<td>${board.readCount}</td>
-												<td>
-													<%--날짜 출력 모양 지정--%> <fmt:formatDate var="createDate"
-														value="${board.boardCreateDate}" pattern="yyyy-MM-dd" /> <fmt:formatDate
-														var="today" value="<%=new java.util.Date()%>"
-														pattern="yyyy-MM-dd" /> <c:choose>
-														<%--글 작성일이 오늘이 아닌 경우 --%>
-														<c:when test="${createDate != today}">
-												${createDate}
-												</c:when>
-
-														<%--글 작성일이 오늘인 경우 --%>
-														<c:otherwise>
-															<fmt:formatDate value="${board.boardCreateDate}"
-																pattern="HH:mm" />
-															<%--var가 없어서 바로 출력 --%>
-														</c:otherwise>
-													</c:choose>
-												</td>
+												<td><fmt:formatDate value="${board.boardCreateDate }" pattern=" yyyy-MM-dd  HH:mm"/></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -204,45 +152,22 @@
 							
 							<tbody>
 								<c:choose>
-									<c:when test="${empty bList}">
+									<c:when test="${empty pList}">
 										<tr>
 											<td colspan="6">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${bList}">
+										<c:forEach var="board" items="${pList}">
 											<tr>
 												<td>${board.boardNo}</td>
 												<td>${board.categoryName}</td>
-												<td class="boardTitle">
-													<%--썸네일 출력--%> <c:forEach var="thumbnail" items="${fList}">
-														<%--현재 출력하려는 게시글 번호와 썸네일 목록 중 게시글 번호가 일치하는 썸네일 정보가 있다면--%>
-														<c:if test="${board.boardNo == thumbnail.parentBoardNo}">
-															<img
-																src="${contextPath}/resources/uploadImages/${thumbnail.fileName}">
-														</c:if>
-													</c:forEach> ${board.boardTitle}
-												</td>
+												<td >${board.boardTitle}</td>
 												<td>${board.memName}</td>
 												<td>${board.readCount}</td>
 												<td>
-													<%--날짜 출력 모양 지정--%> <fmt:formatDate var="createDate"
-														value="${board.boardCreateDate}" pattern="yyyy-MM-dd" /> <fmt:formatDate
-														var="today" value="<%=new java.util.Date()%>"
-														pattern="yyyy-MM-dd" /> <c:choose>
-														<%--글 작성일이 오늘이 아닌 경우 --%>
-														<c:when test="${createDate != today}">
-												${createDate}
-												</c:when>
-
-														<%--글 작성일이 오늘인 경우 --%>
-														<c:otherwise>
-															<fmt:formatDate value="${board.boardCreateDate}"
-																pattern="HH:mm" />
-															<%--var가 없어서 바로 출력 --%>
-														</c:otherwise>
-													</c:choose>
+												<fmt:formatDate value="${board.boardCreateDate }" pattern="yyyy-MM-dd HH:mm"/>
 												</td>
 											</tr>
 										</c:forEach>
