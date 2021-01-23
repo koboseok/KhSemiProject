@@ -14,6 +14,11 @@
 		margin: 0;
 	}
 	
+.lgImg {
+	width: 500px;
+	height: 160px;
+}
+
 .btn {
 	position: relative;
     left: 650px;
@@ -28,7 +33,9 @@
 		
 		<c:set var="phone" value="${fn:split(loginMember.memPhone,'-') }"/>
 		
-		<h1 style="text-align: center; margin:100px;">MY PAGE</h1>
+		<div class="text-center py-5">
+			<img src="${contextPath}/resources/images/My Page-logo.png" class="lgImg"/>
+		</div>
 
 		<div class="row my-5">
 			<jsp:include page="sideMenu.jsp"></jsp:include>		
@@ -36,7 +43,7 @@
 				
 				
 			<div class="col-sm-8">
-				<h3>내 정보</h3>
+				<h3 id="title-font">내 정보</h3>
 				<hr>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateMember.do" onsubmit="return memberUpdateValidate();" class="form-horizontal" role="form">
@@ -90,63 +97,11 @@
 							</div>
 						</div>
 	
-						
 						<br>
-	
-					
-	
 	
 						<!-- 관심분야 -->
 						<hr class="mb-4">
-					<%-- 	<div class="row">
-							<div class="col-md-3">
-								<label>관심 분야</label>
-							</div>
-							
-							<div class="col-md-9 custom-control custom-checkbox">
-							
-								<div class="form-check form-check-inline">
-									<input type="checkbox" class="form-check-input custom-control-input"
-										name="memberInterest" id="sports" value="운동">
-									<label class="form-check-label custom-control-label" for="sports">운동</label>
-								</div>
-								
-								<div class="form-check form-check-inline">
-									<input type="checkbox" class="form-check-input custom-control-input"
-										name="memberInterest" id="movie" value="영화">
-									<label class="form-check-label custom-control-label" for="movie">영화</label>
-								</div>
-								
-								<div class="form-check form-check-inline">
-									<input type="checkbox" class="form-check-input custom-control-input" 
-										name="memberInterest" id="music" value="음악">
-									<label class="form-check-label custom-control-label" for="music">음악</label>
-								</div>
-								<br>
-								
-								<div class="form-check form-check-inline">
-									<input type="checkbox" name="memberInterest" id="cooking"
-										value="요리" class="form-check-input custom-control-input">
-									<label class="form-check-label custom-control-label"
-										for="cooking">요리</label>
-								</div>
-								
-								<div class="form-check form-check-inline">
-									<input type="checkbox"  class="form-check-input custom-control-input" 
-										name="memberInterest" id="game" value="게임">
-									<label class="form-check-label custom-control-label" for="game">게임</label>
-								</div>
-								
-								<div class="form-check form-check-inline">
-									<input type="checkbox" class="form-check-input custom-control-input" 
-										name="memberInterest" id="etc" value="기타"> 
-									<label class="form-check-label custom-control-label" for="etc">기타</label>
-								</div>
-								
-							</div>
-						</div>  --%>
-	
-						
+
 						<button class=" btn btn-warning  " type="submit">수정</button>
 					</form>
 				</div>
