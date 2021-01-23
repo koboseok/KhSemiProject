@@ -27,7 +27,7 @@ public class JointBoardSearchDAO {
 	public int getListCount(Connection conn, String condition) throws Exception {
 		int listCount = 0;
 
-		String query = "SELECT COUNT(*) FROM V_BOARD WHERE BOARD_STATUS = 'Y' AND " + condition;
+		String query = "SELECT COUNT(*) FROM J_VIEW WHERE BOARD_STATUS = 'Y' AND " + condition;
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -58,14 +58,13 @@ public class JointBoardSearchDAO {
 				"SELECT * FROM" + 
 						"    (SELECT ROWNUM RNUM , V.*" + 
 						"    FROM" + 
-						"        (SELECT * FROM V_BOARD " + 
+						"        (SELECT * FROM J_VIEW " + 
 						"        WHERE " + condition +
 						"        AND BOARD_STATUS = 'Y' ORDER BY BOARD_NO DESC) V )" + 
 						"WHERE RNUM BETWEEN ? AND ?";
 
 		try {
-			//sql구문 조건절에 대입할 변수 생성
-			//500개를 전부 들고 오는 게 아니라 나올 값을(1~10) 뽑아옴
+			
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
 			int endRow = startRow + pInfo.getLimit()-1;
 
@@ -80,9 +79,9 @@ public class JointBoardSearchDAO {
 			while(rset.next()) {
 				Board board = new Board(rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
-						rset.getString("MEMBER_ID"),
+						rset.getString("MEM_NM"),
 						rset.getInt("READ_COUNT"),
-						rset.getString("CATEGORY_NM"),
+						rset.getString("JT_CT_NM"),
 						rset.getTimestamp("BOARD_CREATE_DT"));
 
 				bList.add(board);
@@ -109,11 +108,11 @@ public class JointBoardSearchDAO {
 		List<Attachment> fList = null;
 		//앞에서 했던 sql문과 같은데, and조건에 condition이 붙었다.
 		String query = 
-				"SELECT FILE_NAME, PARENT_BOARD_NO FROM ATTACHMENT " + 
+				"SELECT FILE_NAME, PARENT_BOARD_NO FROM J_ATTACHMENT " + 
 						"WHERE PARENT_BOARD_NO IN (" + 
 						"    SELECT BOARD_NO FROM " + 
 						"    (SELECT ROWNUM RNUM, V.* FROM " + 
-						"            (SELECT BOARD_NO  FROM V_BOARD " + 
+						"            (SELECT BOARD_NO  FROM J_VIEW " + 
 						"            WHERE BOARD_STATUS='Y' " + 
 						"            AND " + condition + 
 						"            ORDER BY BOARD_NO DESC ) V) " + 
@@ -122,7 +121,6 @@ public class JointBoardSearchDAO {
 						"AND FILE_LEVEL = 0";
 
 		try {
-			//위치홀더에 들어갈 시작 행, 끝 행 번호 계산
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() +1;
 			int endRow = startRow + pInfo.getLimit() -1;
 
@@ -132,7 +130,6 @@ public class JointBoardSearchDAO {
 
 			rset = pstmt.executeQuery();
 
-			//조회 결과를 저장할 List생성
 			fList = new ArrayList<Attachment>();
 			while(rset.next()) {
 				Attachment at = new Attachment();
