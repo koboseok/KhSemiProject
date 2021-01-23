@@ -17,7 +17,7 @@ import com.kh.semi.privateBoard.model.vo.Board;
 import com.kh.semi.privateBoard.model.vo.PageInfo;
 import com.kh.semi.privateBoard.search.model.service.PrivateBoardSearchService;
 
-@WebServlet("/privateBoardSearch.do")
+@WebServlet("/privateBoard/privateBoardSearch.do")
 public class PrivateBoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,6 @@ public class PrivateBoardSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchKey = request.getParameter("sk");
 		String searchValue = request.getParameter("sv");
-		//pagenation을 누를 때마다 currentPage를 얻어오도록 하는 코드
 		String cp = request.getParameter("cp");
 		
 		try {
@@ -36,7 +35,6 @@ public class PrivateBoardSearchController extends HttpServlet {
 			map.put("searchKey", searchKey);
 			map.put("searchValue", searchValue);
 			map.put("currentPage", cp);
-			
 			
 			//검색된 내용에 대한 페이징 처리를 위해 데이터를 계산하고 저장하는 객체 PageInfo 얻어오기
 			PageInfo pInfo = service.getPageInfo(map);
@@ -63,7 +61,7 @@ public class PrivateBoardSearchController extends HttpServlet {
 			
 			
 			//조회된 내용과 pageInfo객체를 request 객체에 담아서 요청 위임
-			String path = "/WEB-INF/views/board/boardList.jsp";
+			String path = "/WEB-INF/views/privateBoard/PrivateMain.jsp";
 			request.setAttribute("bList", bList);
 			request.setAttribute("pInfo", pInfo);
 			

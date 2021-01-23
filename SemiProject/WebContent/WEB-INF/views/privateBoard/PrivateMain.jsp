@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>비공개 건의 게시판</title>
 <style>
 .pagination {
 	justify-content: center;
@@ -128,16 +128,14 @@
 			</c:if>
 			
 			<%---------------------- Pagination ----------------------%>
-			<%-- 페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장 --%>
 			<c:choose>
-				<%--검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지일 때--%>
 				<c:when test="${!empty param.sk && !empty param.sv}">
-					<c:url var="pageUrl" value="/search.do"/>
+					<c:url var="pageUrl" value="/privateBoard/privateBoardSearch.do"/>
 					<%--쿼리스트링으로 사용할 내용을 변수에 저장--%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
 				</c:when>
 				<c:otherwise>
-					<c:url var="pageUrl" value="/board/list.do"/>
+					<c:url var="pageUrl" value="/privateBoard/list.do"/>
 				</c:otherwise>
 			</c:choose>
 			
@@ -210,7 +208,7 @@
 		
 				<!-- 검색창 -->
 			<div class="my-5">
-				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
+				<form action="${contextPath }/privateBoard/privateBoardSearch.do" method="GET" class="text-center" id="searchForm">
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
@@ -220,8 +218,6 @@
 					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
 					<button class="form-control btn btn-primary" style="width: 100px; display: inline-block;">검색</button>
 				</form>
-
-
 			</div>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>

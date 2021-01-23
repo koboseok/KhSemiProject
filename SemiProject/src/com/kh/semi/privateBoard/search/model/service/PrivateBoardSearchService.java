@@ -16,7 +16,7 @@ public class PrivateBoardSearchService {
 
 	/**검색 내용이 포함된 페이징 처리 정보 생성 Service
 	 * @param map
-	 * @return
+	 * @return pageInfo
 	 * @throws Exception
 	 */
 	public PageInfo getPageInfo(Map<String, Object> map) throws Exception {
@@ -48,7 +48,6 @@ public class PrivateBoardSearchService {
 	private String createCondition(Map<String, Object> map) {
 		
 		String condition = null;
-		
 		String searchKey = (String)map.get("searchKey");
 		String searchValue = (String)map.get("searchValue");
 		
@@ -67,26 +66,12 @@ public class PrivateBoardSearchService {
 						+ "OR BOARD_CONTENT LIKE '%' || '" + searchValue + "' || '%') ";
 			break;
 		case "writer" : 
-			condition = " MEMBER_ID LIKE '%' || '" + searchValue + "' || '%' ";
+			condition = " MEM_NM LIKE '%' || '" + searchValue + "' || '%' ";
 			break;		
 
 		}
 		return condition;
 	}
-/*
-
-	public List<Board> searchBoardList(Map<String, Object> map) throws Exception {
-		Connection conn = getConnection();
-				
-		String condition = createCondition(map);
-		
-		List<Board> bList = dao.searchBoardList(conn, map, condition);
-		
-		close(conn);
-		
-		return bList;
-	}
-	*/
 	
 	/** 검색 게시글 목록 리스트 조회 Service
 	    * @param map
