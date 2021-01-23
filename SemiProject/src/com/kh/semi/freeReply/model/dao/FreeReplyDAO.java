@@ -23,7 +23,7 @@ public class FreeReplyDAO {
    private Properties prop;
    
    public FreeReplyDAO() {
-       String fileName = Board.class.getResource("/com/kh/wsp/sql/reply/FreeReply-query.xml").getPath();
+       String fileName = Board.class.getResource("/com/kh/semi/sql/reply/FreeReply-query.xml").getPath();
          try {
             prop = new Properties();
             prop.loadFromXML(new FileInputStream(fileName)); 
