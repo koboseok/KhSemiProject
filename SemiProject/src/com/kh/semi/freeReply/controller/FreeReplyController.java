@@ -1,4 +1,4 @@
-package com.kh.semi.reply.controller;
+package com.kh.semi.freeReply.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kh.semi.reply.model.service.FreeReplyService;
-import com.kh.semi.reply.model.vo.FreeReply;
+import com.kh.semi.freeReply.model.service.FreeReplyService;
+import com.kh.semi.freeReply.model.vo.FreeReply;
 
 
-@WebServlet("/freeBoard/reply/*")
+@WebServlet("/freeReply/*")
 public class FreeReplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -25,7 +25,7 @@ public class FreeReplyController extends HttpServlet {
 	
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
-		String command = uri.substring((contextPath+"/reply").length());
+		String command = uri.substring((contextPath+"/freeReply").length());
 		
 		
 		try {
@@ -36,13 +36,13 @@ public class FreeReplyController extends HttpServlet {
 			
 			if(command.equals("/selectList.do")) {
 				
-				int fBoardNo = Integer.parseInt(request.getParameter("fBoardNo"));
+				int parentBoardNo = Integer.parseInt(request.getParameter("parentBoardNo"));
 				
-				List<FreeReply> fReplyList = service.selectFList(fBoardNo);
+				List<FreeReply> rList = service.selectList(parentBoardNo);
 				
 				Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm").create();
 				
-				gson.toJson(fReplyList, response.getWriter());
+				gson.toJson(rList, response.getWriter());
 				
 				
 				
@@ -52,17 +52,17 @@ public class FreeReplyController extends HttpServlet {
 				
 				
 				// 오라클에서 숫자로 이루어진 문자열은 자동으로 숫자로 변환되는 특징을 사용할 예정
-				String memName = request.getParameter("memName");
-				int fBoardNo = Integer.parseInt(request.getParameter("fBoardNo"));
-				String fReplyContent = request.getParameter("fReplyContent");	
+				String replyWriter = request.getParameter("replyWriter");
+				int parentBoardNo = Integer.parseInt(request.getParameter("parentBoardNo"));
+				String replyContent = request.getParameter("replyContent");	
 				
-				FreeReply fReply = new FreeReply();
+				FreeReply reply = new FreeReply();
 				
-				fReply.setMemName(memName); // 회원 번호 저장됨
-				fReply.setfReplyContent(fReplyContent);
-				fReply.setfBoardNo(fBoardNo);
+				reply.setMemName(replyWriter); // 회원 번호 저장됨
+				reply.setReplyContent(replyContent);
+				reply.setParentBoardNo(parentBoardNo);
 				
-				int result = service.insertFReply(fReply);
+				int result = service.insertReply(reply);
 				
 				response.getWriter().print(result);
 			
@@ -74,14 +74,14 @@ public class FreeReplyController extends HttpServlet {
 			else if(command.equals("/updateReply.do")){
 				
 				// 파라미터 얻어오기 댓글 번호
-				int fReplyNo = Integer.parseInt(request.getParameter("fReplyNo"));
-				String fReplyContent = request.getParameter("fReplyContent");
+				int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+				String replyContent = request.getParameter("replyContent");
 				
-				FreeReply fReply = new FreeReply();
-				fReply.setfReplyNo(fReplyNo);
-				fReply.setfReplyContent(fReplyContent);
+				FreeReply reply = new FreeReply();
+				reply.setReplyNo(replyNo);
+				reply.setReplyContent(replyContent);
 				
-				int result = service.updateFReply(fReply);
+				int result = service.updateReply(reply);
 				
 				response.getWriter().print(result);
 			
@@ -92,9 +92,9 @@ public class FreeReplyController extends HttpServlet {
 			else if(command.equals("/deleteReply.do")) {
 				
 				// 파라미터 얻어오기
-				int fReplyNo = Integer.parseInt(request.getParameter("fReplyNo"));
+				int replyNo = Integer.parseInt(request.getParameter("replyNo"));
 				
-				int result = service.updateReplyStatus(fReplyNo);
+				int result = service.updateReplyStatus(replyNo);
 				
 				response.getWriter().print(result);
 				

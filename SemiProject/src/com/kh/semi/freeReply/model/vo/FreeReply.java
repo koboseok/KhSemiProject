@@ -1,94 +1,101 @@
-package com.kh.semi.reply.model.vo;
+package com.kh.semi.freeReply.model.vo;
 
 import java.sql.Timestamp;
 
 public class FreeReply {
 	
-	private int fReplyNo; 		 		// 댓글 번호
-	private String fReplyContent; 		// 댓글 내용
-	private Timestamp fReplyCreateDate;	// 댓글 작성일
-	private int fBoardNo;			// 댓글이 작성된 게시글 번호
+	private int replyNo; 		 		// 댓글 번호
+	private String replyContent; 		// 댓글 내용
+	private Timestamp replyCreateDate;	// 댓글 작성일
+	private int parentBoardNo;			// 댓글이 작성된 게시글 번호
 	private String memName;			// 댓글 작성 회원
-	private String fReplyFL;			// 댓글 상태
-	private int memNo;
-	
-	
-	public FreeReply(){}
+	private String replyStatus;			// 댓글 상태
 
-	public FreeReply(int fReplyNo, String fReplyContent, Timestamp fReplyCreateDate, int fBoardNo, String memName,
-			String fReplyFL) {
+	
+	public FreeReply() {}
+
+
+	public FreeReply(int replyNo, String replyContent, Timestamp replyCreateDate, int parentBoardNo, String memName,
+			String replyStatus) {
 		super();
-		this.fReplyNo = fReplyNo;
-		this.fReplyContent = fReplyContent;
-		this.fReplyCreateDate = fReplyCreateDate;
-		this.fBoardNo = fBoardNo;
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyCreateDate = replyCreateDate;
+		this.parentBoardNo = parentBoardNo;
 		this.memName = memName;
-		this.fReplyFL = fReplyFL;
+		this.replyStatus = replyStatus;
 	}
 
-	public int getfReplyNo() {
-		return fReplyNo;
+
+	public int getReplyNo() {
+		return replyNo;
 	}
 
-	public void setfReplyNo(int fReplyNo) {
-		this.fReplyNo = fReplyNo;
+
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
 	}
 
-	public String getfReplyContent() {
-		return fReplyContent;
+
+	public String getReplyContent() {
+		return replyContent;
 	}
 
-	public void setfReplyContent(String fReplyContent) {
-		this.fReplyContent = fReplyContent;
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
 	}
 
-	public Timestamp getfReplyCreateDate() {
-		return fReplyCreateDate;
+
+	public Timestamp getReplyCreateDate() {
+		return replyCreateDate;
 	}
 
-	public void setfReplyCreateDate(Timestamp fReplyCreateDate) {
-		this.fReplyCreateDate = fReplyCreateDate;
+
+	public void setReplyCreateDate(Timestamp replyCreateDate) {
+		this.replyCreateDate = replyCreateDate;
 	}
 
-	public int getfBoardNo() {
-		return fBoardNo;
+
+	public int getParentBoardNo() {
+		return parentBoardNo;
 	}
 
-	public void setfBoardNo(int fBoardNo) {
-		this.fBoardNo = fBoardNo;
+
+	public void setParentBoardNo(int parentBoardNo) {
+		this.parentBoardNo = parentBoardNo;
 	}
+
 
 	public String getMemName() {
 		return memName;
 	}
 
+
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
 
-	public String getfReplyFL() {
-		return fReplyFL;
+
+	public String getReplyStatus() {
+		return replyStatus;
 	}
 
-	public void setfReplyFL(String fReplyFL) {
-		this.fReplyFL = fReplyFL;
+
+	public void setReplyStatus(String replyStatus) {
+		this.replyStatus = replyStatus;
 	}
 
-	public int getMemNo() {
-		return memNo;
-	}
-
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
-	}
 
 	@Override
 	public String toString() {
-		return "FreeReply [fReplyNo=" + fReplyNo + ", fReplyContent=" + fReplyContent + ", fReplyCreateDate="
-				+ fReplyCreateDate + ", fBoardNo=" + fBoardNo + ", memName=" + memName + ", fReplyFL=" + fReplyFL
-				+ ", memNo=" + memNo + "]";
+		return "FreeReply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate="
+				+ replyCreateDate + ", parentBoardNo=" + parentBoardNo + ", memName=" + memName + ", replyStatus="
+				+ replyStatus + "]";
 	}
-	
+
+
+
 	
 	
 	
