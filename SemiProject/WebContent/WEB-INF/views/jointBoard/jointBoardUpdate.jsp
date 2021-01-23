@@ -68,10 +68,6 @@
 				<label class="input-group-addon mr-3 insert-label">썸네일</label>
 				<div class="boardImg" id="titleImgArea">
 					<img id="titleImg" width="200" height="200">
-				</div>
-				<button type="button" id="del1">삭제</button>
-			</div>
-
 			<div class="form-inline mb-2">
 				<label class="input-group-addon mr-3 insert-label">업로드<br>이미지
 				</label>
@@ -191,12 +187,6 @@
             .attr("src", "${contextPath}/resources/uploadImages/${file.fileName}");
       </c:forEach>
       
-     /*  $("#del1").on("click",function()){
-    	  $(this).prev().children("img").remove();
-    	  var img = $("<img>").css("width","200px").css("height","200px");
-    	  
-    	  $(this).prev().append(img);
-      } */
    
    </script>
 
