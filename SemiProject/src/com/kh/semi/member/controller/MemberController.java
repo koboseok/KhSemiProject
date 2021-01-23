@@ -158,7 +158,7 @@ public class MemberController extends HttpServlet {
 
 			//			로그인 ********************************************
 			else if (command.equals("/login.do")) {
-
+				errorMsg = "로그인시 변경 과정에서 오류 발생";
 
 				//				1.POST 방식으로 전달된 데이터의 문자 인코딩 변경
 				//				request.setCharacterEncoding("UTF-8");
@@ -430,6 +430,94 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect(url);
 
 			}
+			
+//			회원정보 수정 *************************************************
+				else if(command.equals("/updateMember.do")) {
+					errorMsg = "회원정보로 이동하는 과정에서 오류 발생";
+				
+				//전송된 파라미터를 변수에 저장
+				String memberEmail = request.getParameter("email");
+				String memberName = request.getParameter("name");
+
+				String phone1 = request.getParameter("phone1");
+				String phone2 = request.getParameter("phone2");
+				String phone3 = request.getParameter("phone3");
+//				전화번호를 '-' 구분자로 하여 하나로 합치기
+				String memberPhone = phone1 + "-" + phone2 + "-" + phone3;
+				
+			
+				
+
+//				if (memberEmail != null) 
+					
+				
+//				Session에 있는 로그인 정보를 얻어온다. -> 회원번호 사용
+				HttpSession session = request.getSession();
+				Member loginMember = (Member)session.getAttribute("loginMember"); // 세션은 자료형이 object이므로 Member로 형 변환
+				
+//				얻어온 수정 정보와 회원번호를 하나의 Member객체에 저장
+				Member member = new Member();
+				member.setMemNo(loginMember.getMemNo()); // 회원의 고유번호를 통해 식별하기위한 식별자 역할
+				member.setMemName(memberName);
+				member.setMemPhone(memberPhone);
+				
+				
+				// 비지니스 로직 수행 후 결과 반환
+				int result = new MemberService().updateMember(member);
+				
+				swalIcon = null;
+				swalTitle = null;
+				swalText = null;
+				
+//				수정 성공 시
+				if(result > 0) {
+					swalIcon = "success";
+					swalTitle = "회원정보 수정 성공 !!";
+					swalText = "회원정보가 수정되었습니다.";
+					
+//					DB 데이터가 갱신된 경우 Session에 있는 회원정보도 갱신되어야한다.
+					
+//					기존 로그인 정보에서 email를 얻어와 갱신에 사용된 member객체에 저장
+//					
+					member.setMemEmail(loginMember.getMemEmail());
+//					member.setMemName(loginMember.getMemName());
+					member.setMemGrade(loginMember.getMemGrade());
+//					-> member 객체가 갱신된 회원정보를 모두 가지게된다.
+					
+//					Session에 있는 loginMember정보를 member로 갱신
+					session.setAttribute("loginMember", member);
+					
+							
+				}else {
+					swalIcon = "error";
+					swalTitle = "회원정보 수정 실패 ..";
+					swalText = "고객센터에 문의 바랍니다.";
+				}
+				
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				session.setAttribute("swalText", swalText);
+				
+//				수정 완료 후 다시 내 정보 페이지로 재요청 
+				response.sendRedirect("myPage.do");
+				
+			}
+			
+			//내 글 조회 페이지 Controller **************************************************
+				else if(command.equals("/boardList.do")) {
+					
+					path="/WEB-INF/views/member/boardList.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				}
+			//내 뎃글 조회 페이지 Controller **************************************************
+				else if(command.equals("/ReplyList.do")) {
+					
+					path="/WEB-INF/views/member/ReplyList.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				}
+		
 
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -38,14 +38,14 @@
 			<jsp:include page="sideMenu.jsp"></jsp:include>
 
 			<div class="col-sm-8">
-				<h3>회원 탈퇴</h3>
+				<h3 id="title-font">회원 탈퇴</h3>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateStatus.do" onsubmit="return secessionValidate();" 
 						class="form-horizontal" role="form">
 						<!-- 아이디 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
-								<h6>아이디</h6>
+								<h6 id="title-font">아이디</h6>
 							</div>
 							<div class="col-md-6">
 								<h5 id="id">${loginMember.memEmail }</h5>
@@ -55,7 +55,7 @@
 						<!-- 비밀번호 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
-								<h6>비밀번호</h6>
+								<h6 id="title-font">비밀번호</h6>
 							</div>
 							<div class="col-md-6">
 								<input type="password" class="form-control" id="currentPwd"
@@ -68,7 +68,7 @@
 
 							<div class="panel-body">
 								<div class="form-group pull-left">
-									<label class="control-label"> 회원 탈퇴 약관 </label>
+									<label class="control-label" id="title-font"> 회원 탈퇴 약관 </label>
 									<div class="col-xs-12">
 										<textarea class="form-control" readonly rows="10" cols="100">
 제1조
@@ -101,7 +101,7 @@
 												<input type="checkbox" name="agree" id="agree"
 													class="form-check-input custom-control-input"> <br>
 												<label class="form-check-label custom-control-label"
-													for="agree">위 약관에 동의합니다.</label>
+													for="agree" id="title-font">위 약관에 동의합니다.</label>
 											</div>
 										</div>
 									</div>
@@ -131,7 +131,19 @@
 
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
-	<script src="${contextPath}/resources/js/sims_member.js"></script>
+	<%-- <script src="${contextPath}/resources/js/sims_member.js"></script> --%>
+	<script>
+	function secessionValidate() {
+	    if(!$("#agree").prop("checked")) {
+	        // #agree 체크박스가 체크되어 있지 않다면
+	        swal("약관에 동의해 주세요.")
+	        return false;
+	    } else {
+	        return confirm("정말로 탈퇴 하시겠습니까?");
+	    }
+	}
+	
+	</script>
 
 </body>
 </html>

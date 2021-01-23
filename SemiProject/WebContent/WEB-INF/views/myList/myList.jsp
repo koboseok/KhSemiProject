@@ -294,7 +294,7 @@ div.setting:hover .setting-btn{
 						<%-- el 식은 null포인터 예외를 나타내지않고 빈문자열을 출력한다. --%>
 						<br>
 						<br>
-						금액 <br> <input type="number" class="form-control"
+						금액 <br> <input type="text" class="form-control"
 							id="servPrice" name="servPrice" placeholder="금액 "> <br>
 						 구독 시작일 <br> <input type="date" class="form-control"
 							id="startDt" name="startDt" placeholder="구독 시작일"> <br>
@@ -383,7 +383,7 @@ div.setting:hover .setting-btn{
 						</select>
 
 						
-						<br> <br> 금액 <br> <input type="number"
+						<br> <br> 금액 <br> <input type="text"
 							class="form-control" id="updateServPrice" name="updateServPrice"
 							placeholder="금액 "> <br> 구독 시작일 <br> <input
 							type="date" class="form-control" id="updateStartDt" name="updateStartDt"
@@ -456,9 +456,12 @@ div.setting:hover .setting-btn{
 		
 		// function init() {console.log("${ empty list ? 1 : !empty list and list.size() < 4 ? list.size() : 4  }")} init();
 		
+		// 삭제 되는 servCode 파라미터로 전달 
 		function delMyList(servCode1) {
 			$("#servCode1").val(servCode1);
 		}
+		
+		// 수정 되는 servCode 파라미터로 전달 
 		 function updateMyList(servCode2) {
 			console.log(servCode2);
 			$("#servCode2").val(servCode2);
