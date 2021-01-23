@@ -225,7 +225,7 @@
 					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
 				</div>
 				
-				<%-- <jsp:include page="../reply/jointReply.jsp"></jsp:include> --%>
+				<jsp:include page="jointReply.jsp"></jsp:include> 
 				
 			</div>
 
