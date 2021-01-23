@@ -13,6 +13,12 @@
     margin-bottom: 400px;
 	}
 	
+.lgImg {
+	width: 500px;
+	height: 160px;
+}
+
+	
 	.btn {
 	position: relative;
     left: 600px;
@@ -22,7 +28,9 @@
 	<div class="container" id="content-main">
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		
-		<h1 style="text-align: center; margin: 100px;">MY PAGE</h1>
+		<div class="text-center py-5">
+			<img src="${contextPath}/resources/images/My Page-logo.png" class="lgImg"/>
+		</div>
 
 		<div class="row my-5">
 			<jsp:include page="sideMenu.jsp"></jsp:include>

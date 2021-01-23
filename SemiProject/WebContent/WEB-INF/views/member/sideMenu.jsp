@@ -5,7 +5,7 @@
 	
 </script>
 <div class="col-sm-4 mt-5">
-	<h3 style="position: relative;left: 30px;">MENU</h3>
+	<h3 style="position: relative;left: 30px;" id="title-font">MENU</h3>
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-action nav-item" style="width: 200px;
     height: 50px; border: none;"><a class="nav-link" href="myPage.do" style="color: sandybrown; line-height: 1;">내정보</a></li>
