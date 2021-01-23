@@ -232,7 +232,20 @@ td {
 						url : "convertMember.do",
 						data : {"selectMemNo" : selectMemNo},
 						type : "post",
-						error : console.log("ajax로 parameter를 넘기는 과정에서 오류 발생")
+						success : function(result) {
+							if(result>0) {
+								swal({icon : "success", title : "일반 회원으로 전환 성공"})
+								.then(function() {
+									location.href = "memberList.do"
+								});
+							} else {
+								swal({icon : "error", title : "일반 회원으로 전환 실패"})
+								.then(function() {
+									location.href = "memberList.do"
+								});
+							}
+						},
+						error : console.log("ajax 통신 실패")
 					})
 					//$('#toRestoreBtn1').click();
 				}	

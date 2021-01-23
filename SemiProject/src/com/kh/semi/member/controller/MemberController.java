@@ -3,9 +3,7 @@ package com.kh.semi.member.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
@@ -150,13 +149,12 @@ public class MemberController extends HttpServlet {
 			}
 			//정지회원 페이지 Controller **************************************************
 			else if(command.equals("/blockMemPage.do")) {
-				errorMsg = "정지 회원 페이지 출력 중 오류가 발생했습니다.";
+				request.getSession().invalidate();
 				
-				path="/WEB-INF/views/member/blockMemPage.jsp";
+				path="/WEB-INF/views/member/aboutSims.jsp";
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
-
 
 			//			로그인 ********************************************
 			else if (command.equals("/login.do")) {
@@ -244,7 +242,19 @@ public class MemberController extends HttpServlet {
 
 					//						6) 생성된 쿠키를 클라이언트로 전달(응답)
 					response.addCookie(cookie);
+					response.sendRedirect(request.getHeader("referer"));
 
+				} else if(loginMember.getMemGrade().equals("B")) {
+						session.setAttribute("swalIcon", "error");
+						session.setAttribute("swalTitle", "로그인 실패");
+						session.setAttribute("swalText", "불량 회원으로 등록된 아이디 입니다.");
+						
+						Report report = mService.getReportReason(loginMember.getMemNo());
+						
+						request.setAttribute("report", report);
+						path="/WEB-INF/views/member/blockMemPage.jsp";
+						view = request.getRequestDispatcher(path);
+						view.forward(request, response);
 				} else {
 					//						7. 로그인이 실패했을 때 "아이디 또는 비밀번호를 확인해주세요."라고 경고창 띄우기
 					//						-> Session에 "로그인 실패"라는 문자열을 담아서 리다이렉트하기 
@@ -254,18 +264,9 @@ public class MemberController extends HttpServlet {
 					session.setAttribute("swalIcon", "error");
 					session.setAttribute("swalTitle", "로그인 실패");
 					session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
+					response.sendRedirect(request.getHeader("referer"));
 				}
-				if(loginMember.getMemGrade().equals("B") ) {
-					
-					
-					session.setAttribute("swalIcon", "error");
-					session.setAttribute("swalTitle", "로그인 실패");
-					session.setAttribute("swalText", "불량 회원으로 등록된 아이디 입니다.");
-					
-					
-					
-					
-				}
+				
 				
 
 
@@ -282,7 +283,7 @@ public class MemberController extends HttpServlet {
 				//redirect 방식을 이용하여 로그인을 요청했던 페이지로 이동
 				//referer : 사이트 방문 흔적
 				//request.getHeader("referer") : 요청 전 페이지 주소가 담겨있다.
-				response.sendRedirect(request.getHeader("referer"));
+				
 
 
 			}

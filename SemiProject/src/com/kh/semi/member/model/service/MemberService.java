@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.member.model.dao.MemberDAO;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
@@ -187,20 +188,15 @@ public class MemberService {
 		return result;
 	}
 
-	/**가입 시 구독 목록 등록 Service1
-	 * @param subData
+	/**정지 회원 사유 출력 service
 	 * @param memNo
-	 * @return result
+	 * @return
 	 * @throws Exception
 	 */
-	/*public int setMemSub(Map<String, Object> subData, int memNo) throws Exception{
+	public Report getReportReason(int memNo) throws Exception {
 		Connection conn = getConnection();
-		int result = dao.setMemSub(conn, subData, memNo);
+		Report report = dao.getReportReason(conn, memNo);
 		close(conn);
-		return result;
-	}*/
-	
-	
-	
-
+		return report;
+	}
 }

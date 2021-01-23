@@ -52,4 +52,10 @@ WHERE MEM_EMAIL = ?
 INSERT INTO MEM_SUB(MEM_NO, SERV_CODE, SUB_ST_DT, PRICE, SUB_END_DT)
 VALUES (?, ?, ?, ?, (ADD_MONTHS(?, 1)-1))
 </entry>
+<!-- 정지회원 사유 출력 -->
+<entry key="getReportReason">
+SELECT REPORT_DT, REPORT_REASON FROM REPORT
+WHERE MEM_NO = ?
+</entry>
+
 </properties>
