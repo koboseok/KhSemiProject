@@ -152,15 +152,6 @@
     }
     
 	
-		// 카테고리 초기값 지정
-		(function(){
-			$("#categoryCode > option").each(function(index, item){
-				if( $(item).text() == "${board.categoryName}"){
-					$(item).prop("selected", true);
-				}
-			});
-		})();
-
 	
 		// 이미지 배치
 		<c:forEach var="file" items="${fList}">
