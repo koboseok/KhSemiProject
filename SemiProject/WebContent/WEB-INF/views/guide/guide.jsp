@@ -77,9 +77,9 @@
 		회원 중 심하게 물의를 일으키는 회원을 신고하여 불량회원으로 처리하겠습니다.</p>
 
     <div class="guide-name">WHAT CONTENTS DO YO HAVE ON SIMS</div>
-    <p class="contents"><br><br>SUBSCRIBE 페이지를 보면 알 수 있겠죠 ? 
-						한번 SIMS 구경 해 보실래요 ?<br><a class="nav-link" href="${contextPath}/subscribe/main.do">
-										SUBSCRIBE로 이동 </a>
+    <p class="contents"><br><br>메인 페이지를 보면 알 수 있겠죠 ? 
+						한번 SIMS 구경 해 보실래요 ?<br><a class="nav-link" href="${contextPath}">
+										메인 페이지로 이동 </a>
 						</p>
     
     </div>
