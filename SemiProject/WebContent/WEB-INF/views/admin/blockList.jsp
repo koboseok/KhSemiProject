@@ -230,7 +230,7 @@ td {
 			//td를 클릭하면 라디오박스 체크
 			$(this).parent().children().eq(0).children().prop("checked", true);
 			//td를 클릭하면 회원번호 저장
-			selectMemNo = $(this).parent().children().eq(2).text();
+			selectMemNo = $(this).parent().children().eq(1).text();
 			console.log(selectMemNo);
 			//td를 클릭하면 불량회원으로 설정 가능하게 함
 			$('#selectMember').prop('value', true);

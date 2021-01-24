@@ -135,11 +135,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<!-- 별명 -->
 					<div class="row mb-3 form-row">
 						<div class="col-md-3">
-							<label for="name">별명</label>
+							<label for="name">별명<span class="text-danger">*</span></label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="name" name="name"
-								placeholder="2~10자 내 특수문자 사용 불가" required>
+								placeholder="2~10자 내 특수문자 사용 불가" autocomplete="off" required>
 						</div>
 
 						<div class="col-md-6 offset-md-3">
@@ -165,13 +165,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<!-- 전화번호2 -->
 						<div class="col-md-3">
 							<input type="number" class="form-control phone" id="phone2"
-								name="phone2" required>
+								name="phone2" autocomplete="off" required>
 						</div>
 
 						<!-- 전화번호3 -->
 						<div class="col-md-3">
 							<input type="number" class="form-control phone" id="phone3"
-								name="phone3" required>
+								name="phone3" autocomplete="off" required>
 						</div>
 
 						<div class="col-md-6 offset-md-3">
@@ -205,7 +205,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 										<div class="col-md-3 offset-md-2">
 											<a class="nav-link" data-toggle="modal" href="#search-modal">
 												<button type="button"
-													class="btn btn-secondary btn-sm btn-block search-select" 
+													class="btn btn-dark btn-sm btn-block search-select" 
 													id="search-select">검색</button>
 											</a>
 										</div>
@@ -217,7 +217,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 										</div>
 										<div class="col-md-3">
 											<input type="text" class="text-sm serviceCharge" name="serviceCharge"
-												id="serviceCharge">
+												autocomplete="off" id="serviceCharge">
 										</div>
 										<div class="offset-md-6"></div>
 									</div>
@@ -228,7 +228,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 										</div>
 										<div class="col-md-3">
 											<input type="date" class="text-sm paymentDate" name="paymentDate"
-												id="serviceDate">
+												autocomplete="off" id="serviceDate">
 										</div>
 										<div class="offset-md-6"></div>
 									</div>

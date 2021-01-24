@@ -97,6 +97,11 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 #btnWrapper {
 	text-align: center;
 }
+
+.page-link {
+	color : orange;
+}
+
 </style>
 
 </head>
@@ -200,7 +205,7 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 								name="reportDate" required> <br>
 							<span class="modal-align-box" style="margin-top: 15px;">
 							<label for="reportReason">신고 사유</label></span><br> 
-							<input type="text" class="form-control" id="reportReason" name="reportReason" required>
+							<input type="text" class="form-control" id="reportReason" name="reportReason" autocomplete="off" required>
 							<hr>
 
 							<div id="btnWrapper">

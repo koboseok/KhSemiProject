@@ -176,7 +176,7 @@ public class AdminDAO {
 		return result;
 	}
 
-	/** 전체 불량 회원 수 계산 DAO
+	/** 전체 정지회원 수 계산 DAO
 	 * @param conn
 	 * @return bListCount
 	 * @throws Exception
@@ -202,7 +202,7 @@ public class AdminDAO {
 	}
 
 
-	/**불량회원 목록 조회 dao
+	/**정회원 목록 조회 dao
 	 * @param conn
 	 * @param pInfo
 	 * @return bmList
@@ -374,7 +374,7 @@ public class AdminDAO {
 			    "FROM REPORT " +
 			    "LEFT JOIN MEMBER USING(MEM_NO) "+
 			    "WHERE" + condition + "AND MEM_STATUS = 'Y' AND MEM_GRADE = 'B') V) " +
-			"WHERE RNUM BETWEEN ? AND ? ";
+			"WHERE RNUM BETWEEN ? AND ? ORDER BY RNUM DESC";
 		
 		try {
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
