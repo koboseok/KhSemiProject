@@ -211,7 +211,6 @@
 	}); */
 	
 	</script>
-<body>
-
 </body>
+
 </html>
