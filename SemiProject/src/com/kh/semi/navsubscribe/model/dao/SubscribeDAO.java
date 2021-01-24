@@ -236,6 +236,32 @@ public class SubscribeDAO {
 		return replyInfo;
 	}
 
+	public SubscribeReply selectUserInfo(Connection conn, String user) throws Exception {
+		SubscribeReply userInfo = null;
+
+		String query = prop.getProperty("selectUserInfo");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, user);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				userInfo = new SubscribeReply();
+				userInfo.setSubNo(rset.getInt("SERV_CODE"));
+				userInfo.setMemberNo(rset.getInt("MEM_NO"));
+			}
+
+		} finally {
+			close(rset);
+			close(pstmt);
+
+		}
+
+		return userInfo;
+	}
+
 
 	
 

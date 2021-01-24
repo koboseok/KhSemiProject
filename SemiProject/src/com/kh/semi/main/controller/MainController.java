@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.semi.main.model.service.MainService;
 import com.kh.semi.navsubscribe.model.vo.Subscribe;
 
@@ -45,15 +46,10 @@ public class MainController extends HttpServlet {
 				errorMsg = "인기 구독서비스 조회 중 오류 발생";
 
 				String popName = request.getParameter("name");
+				
+				
 				List<Subscribe> popTopList = service.selectPopTop(popName);
-
-
-				path = "/WEB-INF/views/main/popularcategory.jsp";
-
-				request.setAttribute("popTopList", popTopList);
-
-				view = request.getRequestDispatcher(path);
-				view.forward(request, response);
+				new Gson().toJson(popTopList, response.getWriter());
 			}
 			
 		} catch (Exception e) {

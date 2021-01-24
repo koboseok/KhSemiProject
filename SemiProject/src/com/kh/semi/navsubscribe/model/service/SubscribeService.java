@@ -75,6 +75,16 @@ public class SubscribeService {
 		return replyInfo;
 	}
 
+	public SubscribeReply selectUserInfo(String user) throws Exception {
+		Connection conn = getConnection();
+
+		SubscribeReply userInfo = dao.selectUserInfo(conn, user);
+
+		close(conn);
+
+		return userInfo;
+	}
+
 
 	
 

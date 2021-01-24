@@ -15,6 +15,11 @@
 <meta name="author" content="" />
 
 <title>SIMS</title>
+<style>
+.carousel-indicators li {
+	margin-right: 50px;
+}
+</style>
 
 </head>
 <body>

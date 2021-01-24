@@ -26,12 +26,14 @@
 	display: inline-block;
 	margin-right: 30px;
 	vertical-align: top;
+	font-size:0.8em;
 }
 
-.rDate {
-	display: inline-block;
-	font-size: 0.5em;
+.rPoint {
+	font-size: 0.9em;
 	color: gray;
+	float: right;
+	padding-right: 30px;
 }
 
 #replyListArea {
@@ -47,6 +49,8 @@
 	text-align: right;
 }
 
+
+
 .replyUpdateContent {
 	resize: none;
 	width: 100%;
@@ -56,16 +60,50 @@
 	border-top: 1px solid #ccc;
 	padding: 15px 0;
 }
-.starR{
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  text-indent: -9999px;
-  cursor: pointer;
+
+.starRev {
+	float: right;
+	padding-right: 215px;
 }
-.starR.on{background-position:0 0;}
+
+.starR {
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat right 0;
+	background-size: auto 100%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+
+.starR.on {
+	background-position: 0 0;
+}
+
+#addReply {
+	background-color: orange;
+	border: none;
+}
+
+#addReply:hover {
+	background: #FF6600;
+}
+
+.srContent {
+	font-size: 1.1em;
+}
+
+.btn-primary {
+	background-color: orange;
+	border: none;
+}
+
+.btn-primary:hover {
+	background: #FF6600;
+}
+
 </style>
 <div id="reply-area ">
 	<!-- 댓글 작성 부분 -->
@@ -96,28 +134,26 @@
 			<!-- 로그인 x 또는 댓글 작성자가 아닌 회원의 화면 -->
 			<li class="reply-row">
 				<div>
-					<p class="rWriter">작성자</p>
-					<p class="rDate">작성일 : 2021.01.11 10:30</p>
+					<p class="rWriter"></p>
+					<p class="rDate"></p>
 				</div>
 
-				<p class="rContent">댓글 내용1</p>
+				<p class="rContent"></p>
 			</li>
 
 
 			<!-- 로그인한 회원이 댓글 작성자인 경우 -->
 			<li class="reply-row">
 				<div>
-					<p class="rWriter">작성자</p>
-					<p class="rDate">작성일 : 2021.01.11 10:30</p>
+					<p class="rWriter"></p>
+					<p class="rDate"></p>
 				</div>
 
-				<p class="rContent">댓글 내용2</p>
+				<p class="rContent"></p>
 
 				<div class="replyBtnArea">
 					<button class="btn btn-primary btn-sm ml-1"
-						onclick="showUpdateReply(2, this)">수정</button>
-					<button class="btn btn-primary btn-sm ml-1"
-						onclick="deleteReply(2)">삭제</button>
+						onclick="deleteReply(2)"></button>
 				</div>
 			</li>
 
@@ -127,111 +163,108 @@
 
 </div>
 <script>
-		$('.starRev span').click(function() {
-			$(this).parent().children('span').removeClass('on');
-			$(this).addClass('on').prevAll('span').addClass('on');
-			replyPoint = $(this).eq(0).text();
-			console.log(replyPoint);
-
-			return false;
-		});
-
-var loginMemberId = "${loginMember.memName}";
-var parentSubscribe = "${subscribe.subName}";
-
-// 페이지 로딩 완료 시 댓글 목록 호출
-$(function(){
-	selectReplyList();
-	
-});
-
-
-// 해당 게시글 댓글 목록 조회 함수(ajax)
-function selectReplyList(){
- 
-	$.ajax({
-		
-		url:"${contextPath}/subscribereply/selectList.do",
-		data : {"parentSubscribe" : parentSubscribe},
-		type : "post",
-		dataType : "JSON",
-		success : function(srList) {
-			//console.log(rList);
-			
-			$("#replyListArea").html("");
-			
-			
-			$.each(srList, function(index,item){
-				var li = $("<li>").addClass("reply-row");
-				var rWriter = $("<p>").addClass("rWriter").text("작성자 : " + item.MemberName);
-				var rPoint = $("<p>").addClass("rPoint").text("별점 : " + item.Point);
-				
-				var div = $("<div>");
-				div.append(rWriter).append(rPoint);
-				
-				var srContent = $("<p>").addClass("srContent").html(item.ReplyContent);
-			
-				
-				li.append(div).append(srContent);
-				
-				
-				
-				
-				// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
-				if(item.MemberName == loginMemberId){
-				// 대댓글, 수정, 삭제 버튼 영역
-				var replyBtnArea = $("<div>").addClass("replyBtnArea");
-					
-					// ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 수정, 삭제를 수행할 수 있는 함수를 이벤트 핸들러로 추가함. 
-					var deleteReply = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("삭제").attr("onclick", "deleteReply("+item.ReplyNo+")");
-					
-					replyBtnArea.append(deleteReply);
-					
-					li.append(replyBtnArea);
-				}
-
-				
-				$("#replyListArea").append(li);
-			});
-			
-			
-		},
-		error : function() {
-			console.log("댓글 목록 조회 실패");
-		}
-		
+	$('.starRev span').click(function() {
+		$(this).parent().children('span').removeClass('on');
+		$(this).addClass('on').prevAll('span').addClass('on');
+		replyPoint = $(this).eq(0).text();
+		console.log(replyPoint);
+		return false;
 	});
-}
 
-//-----------------------------------------------------------------------------------------
+	var loginMemberId = "${loginMember.memName}";
+	var parentSubscribe = "${subscribe.subName}";
 
-// 댓글 등록 (ajax)
-$("#addReply").on("click", function(){
-	
-	// 댓글 내용을 얻어와서 변수에 저장
-	var replyContent = $("#replyContent").val().trim();
-	
-	
-	// 로그인이 되어있지 않은 경우 == loginMemberId 전역변수에 저장된 값이 ""일 경우
-	if(loginMemberId == "") {
-		alert("로그인 후  이용해 주세요");
+	// 페이지 로딩 완료 시 댓글 목록 호출
+	$(function() {
+		selectReplyList();
+
+	});
+
+	// 해당 게시글 댓글 목록 조회 함수(ajax)
+	function selectReplyList() {
+
+		$.ajax({
+
+			url : "${contextPath}/subscribereply/selectList.do",
+			data : {
+				"parentSubscribe" : parentSubscribe
+			},
+			type : "post",
+			dataType : "JSON",
+			success : function(srList) {
+				//console.log(rList);
+
+				$("#replyListArea").html("");
+
+				$.each(srList,
+						function(index, item) {
+							var li = $("<li>").addClass("reply-row");
+							var rWriter = $("<p>").addClass("rWriter").text(
+									item.MemberName);
+							var rPoint = $("<p>").addClass("rPoint").text(
+									"별점 : " + item.Point);
+
+							var div = $("<div>");
+							div.append(rWriter).append(rPoint);
+
+							var srContent = $("<p>").addClass("srContent")
+									.html(item.ReplyContent);
+
+							li.append(div).append(srContent);
+
+							// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
+							if (item.MemberName == loginMemberId) {
+								// 대댓글, 수정, 삭제 버튼 영역
+								var replyBtnArea = $("<div>").addClass(
+										"replyBtnArea");
+
+								// ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 수정, 삭제를 수행할 수 있는 함수를 이벤트 핸들러로 추가함. 
+								var deleteReply = $("<button>").addClass(
+										"btn btn-primary btn-sm ml-1").text(
+										"삭제").attr("onclick",
+										"deleteReply(" + item.ReplyNo + ")");
+
+								replyBtnArea.append(deleteReply);
+
+								li.append(replyBtnArea);
+							}
+
+							$("#replyListArea").append(li);
+						});
+
+			},
+			error : function() {
+				console.log("댓글 목록 조회 실패");
+			}
+
+		});
 	}
-	else { 		// 로그인이 되어있다면..?
-		// 댓글 내용이 작성되어있는지 확인
-		if(replyContent.length == 0) {
-			alert("댓글을 입력해주세요");
-		}
-		else{		// 로그인 되어있고 댓글도 작성되어있는 경우
-			// 회원 번호를 얻어와서 변수에 저장
-			var replyWriter = "${loginMember.memNo}";
 
-			console.log(replyWriter);
-			
-			console.log(replyContent);
-			
-			console.log(parentSubscribe);
-			
-			
+	//-----------------------------------------------------------------------------------------
+
+	// 댓글 등록 (ajax)
+	$("#addReply").on("click", function() {
+
+		// 댓글 내용을 얻어와서 변수에 저장
+		var replyContent = $("#replyContent").val().trim();
+
+		// 로그인이 되어있지 않은 경우 == loginMemberId 전역변수에 저장된 값이 ""일 경우
+		if (loginMemberId == "") {
+			alert("로그인 후  이용해 주세요");
+		} else { // 로그인이 되어있다면..?
+			// 댓글 내용이 작성되어있는지 확인
+			if (replyContent.length == 0) {
+				alert("댓글을 입력해주세요");
+			} else { // 로그인 되어있고 댓글도 작성되어있는 경우
+				// 회원 번호를 얻어와서 변수에 저장
+				var replyWriter = "${loginMember.memNo}";
+
+				console.log(replyWriter);
+
+				console.log(replyContent);
+
+				console.log(parentSubscribe);
+
 				$.ajax({
 					url : "${contextPath}/subscribereply/insertReply.do",
 					data : {
@@ -250,7 +283,7 @@ $("#addReply").on("click", function(){
 							// 성공 메세지 출력
 							swal({
 								"icon" : "success",
-								"title" : "댓글 삽입에 성공하였습니다"
+								"title" : "댓글 등록에 성공하였습니다"
 							});
 
 							// 댓글 목록을 새로 갱신(다시 조회)
@@ -268,8 +301,6 @@ $("#addReply").on("click", function(){
 		}
 
 	});
-
-
 
 	//-----------------------------------------------------------------------------------------
 

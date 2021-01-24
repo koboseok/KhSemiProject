@@ -80,11 +80,15 @@ public class SubscribeController extends HttpServlet {
 
 				String reply = request.getParameter("name");
 				SubscribeReply replyInfo = service.selectReplyInfo(reply);
+				
+				String user = request.getParameter("name");
+				SubscribeReply userInfo = service.selectUserInfo(user);
 
 				path = "/WEB-INF/views/subscribe/subscribeInfo.jsp";
 
 				request.setAttribute("subscribe", subscribe);
 				request.setAttribute("replyInfo", replyInfo);
+				request.setAttribute("userInfo", userInfo);
 
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
