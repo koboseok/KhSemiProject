@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -49,6 +47,9 @@ public class FreeBoardController extends HttpServlet {
 		String swalText = null;
 
 		String errorMsg = null;
+		
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 
 		try {
 			FreeBoardService service = new FreeBoardService();
@@ -60,8 +61,13 @@ public class FreeBoardController extends HttpServlet {
 			// 목록조회
 			if(command.equals("/main.do")) {
 				errorMsg = "게시판 목록 조회 과정에서 오류 발생";
-
-
+		
+	
+				
+				
+				
+				
+				
 				PageInfo pInfo = service.getPageInfo(cp);
 
 				List<Board> bList = service.selectBoardList(pInfo);
@@ -74,9 +80,7 @@ public class FreeBoardController extends HttpServlet {
 
 						request.setAttribute("fList", fList);
 
-
 					}
-
 
 				}
 
@@ -89,13 +93,32 @@ public class FreeBoardController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 
+				
+				
+			
 
 			}
 
 			//게시글 상세 조회
 			else if (command.equals("/view.do")) {
 				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
-
+				
+				
+				
+				if(loginMember == null) {
+					
+					
+					swalIcon = "error";
+					swalTitle = "게시글은 회원만 열람 가능합니다.";
+					swalText = "로그인 후 이용해 주세요.";
+					
+				
+				
+				}else {
+					
+				
+				
+				
 				int boardNo = Integer.parseInt(request.getParameter("no"));
 
 				Board board = service.selectBoard(boardNo);
@@ -123,8 +146,28 @@ public class FreeBoardController extends HttpServlet {
 					response.sendRedirect("main.do?cp=1");
 				}
 
+				
+				
+				}
+				session.setAttribute("swalIcon", swalIcon);
+				session.setAttribute("swalTitle", swalTitle);
+				session.setAttribute("swalText", swalText);
+				
+				response.sendRedirect("main.do");
+				
+				
+				
+				
+				
 			}
+			
+			
+			
 
+			
+			
+			
+			
 			else if (command.equals("/insertForm.do")) {
 				path = "/WEB-INF/views/freeBoard/freeBoardInsert.jsp";
 				view = request.getRequestDispatcher(path);
@@ -201,7 +244,6 @@ public class FreeBoardController extends HttpServlet {
 				String boardContent = multiRequest.getParameter("boardContent");
 
 
-				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 				int boardWriter = loginMember.getMemNo();
 
 				//				fList , boardTitle, boardContent, categoryCode , boardWriter
