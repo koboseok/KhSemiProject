@@ -124,7 +124,7 @@
 					<label for="content">내용</label>
 				</div>
 				<textarea class="form-control" id="boardContent" name="boardContent"
-					rows="15" style="resize: none;"></textarea>
+					rows="15" style="resize: none;" placeholder = "'신고글을 남기실 때에는 게시판 이름과 게시글/댓글 여부, 게시글/댓글 번호를 정확하게 기재해주세요.'"></textarea>
 			</div>
 
 
@@ -132,7 +132,8 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-warning">등록</button>
-				<button type="button" class="btn btn-secondary">목록으로</button>
+				<button type="button" class="btn btn-secondary"
+					onclick="location.href='${header.referer}'">목록으로</button>
 			</div>
 
 		</form>

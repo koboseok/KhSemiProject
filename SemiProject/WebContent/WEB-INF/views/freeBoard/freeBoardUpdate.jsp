@@ -125,7 +125,9 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-warning">수정</button>
-				<button type="button" class="btn btn-secondary">이전으로</button>
+				<button type="button" class="btn btn-secondary"
+					onclick="location.href='${header.referer}'">이전으로</button>
+				
 			</div>
 
 		</form>

@@ -48,7 +48,7 @@
 }
 
 #list-table tbody tr:hover{
-	background-color : orange;
+	background-color :skyblue;
 	color : white;
 
 }

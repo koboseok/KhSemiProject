@@ -91,7 +91,7 @@
 }
 
 .grayArea {
-	font-size: 18px;
+	font-size: 15px;
 	color: gray;
 }
 
@@ -122,16 +122,17 @@
 					id="boardStyle">${board.categoryName}</h6>
 
 				<div
-					style="background-color: gainsboro; color: white; font-weight: bold; border: 5px solid gray">
+					style="background-color: #ff9100de;; color: white; font-weight: bold; border: 5px solid gray">
 					<!-- Title -->
 
-					<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+					<h2 class="mt-4" id="center">${board.boardTitle}</h2>
 					<br>
 				<!-- Writer -->
 				<p class="lead" id="center"style = "color : black; font-weight: bold;">${board.memName}</p>
 
 				</div>
 
+<br>
 				<!-- Date -->
 
 				<p class="grayArea" id="center">
