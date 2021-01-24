@@ -157,7 +157,7 @@
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
 				</c:when>
 				<c:otherwise>
-					<c:url var="pageUrl" value="/privateBoard/list.do"/>
+					<c:url var="pageUrl" value="/privateBoard/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
