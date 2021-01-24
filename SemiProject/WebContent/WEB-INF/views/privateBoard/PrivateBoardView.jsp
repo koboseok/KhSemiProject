@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>게시글</title>
 <style>
+
+
 #board-area {
 	min-height: 700px;
 	margin-bottom: 100px;
