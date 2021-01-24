@@ -63,7 +63,7 @@
 	
 	<script>
 		(function printToday(){
-			// 오늘 날짜 출력 
+			// 오늘 날짜 출력 '
 			
 			var now = new Date(); // 현재 시간
 			var year = now.getFullYear(); // 2021 getFullYear() :  Date()의 내장객체

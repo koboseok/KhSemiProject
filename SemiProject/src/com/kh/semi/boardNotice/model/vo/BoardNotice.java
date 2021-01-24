@@ -13,7 +13,7 @@ public class BoardNotice {
 	private String noticeFl; 		// 공지사항 상태
 	
 	public BoardNotice() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public BoardNotice(int noticeNo, String noticeTitle, String noticeContent, String memNm, int readCount,

@@ -20,7 +20,7 @@ AND NOTICE_FL = 'Y'
 
 </entry>
 
-<!-- 조회수 증가 -->
+<!-- 조회수 증가. -->
 <entry key="increaseReadCount">
 
 UPDATE NOTICE SET 

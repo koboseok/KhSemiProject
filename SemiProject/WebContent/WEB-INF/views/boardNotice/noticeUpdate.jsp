@@ -68,7 +68,7 @@
 	
 	
 	<script>
-	// 유효성 검사
+	// 유효성 검사.
 	function noticeValidate(){
 		if( $("#noticeTitle").val().trim().length == 0){
 			alert("제목을 입력해 주세요.");

@@ -36,7 +36,7 @@ input[name='searchValue'] {
 	height: 540px;
 }
 
-/* 목록에 마우스를 올릴 경우 손가락 모양으로 변경*/
+/* 목록에 마우스를 올릴 경우 손가락 모양으로 변경 ㄴ*/
 #list-table td:hover{
 	cursor : pointer;
 }

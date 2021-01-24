@@ -26,7 +26,7 @@ public class BoardNoticeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String uri = request.getRequestURI(); // 전체 요청 주소
+		String uri = request.getRequestURI(); // 전체 요청 주소''
 //		ex) /wsp/notice/list.do
 
 		String contextPath = request.getContextPath();
