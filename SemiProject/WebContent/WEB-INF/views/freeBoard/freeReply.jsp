@@ -65,7 +65,7 @@
                <textArea rows="3" id="replyContent"></textArea>
             </td>
             <td id="replyBtnArea">
-               <button class="btn btn-primary" id="addReply">
+               <button class="btn btn-warning" id="addReply">
                   댓글<br>등록
                </button>
             </td>
@@ -99,8 +99,8 @@
             <p class="rContent">댓글 내용2</p>
             
             <div class="replyBtnArea">
-               <button class="btn btn-primary btn-sm ml-1" onclick="showUpdateReply(2, this)">수정</button>
-               <button class="btn btn-primary btn-sm ml-1" onclick="deleteReply(2)">삭제</button>
+               <button class="btn btn-outline-secondary btn-sm ml-1" onclick="showUpdateReply(2, this)">수정</button>
+               <button class="btn btn-outline-danger btn-sm ml-1" onclick="deleteReply(2)">삭제</button>
             </div>
          </li>
    

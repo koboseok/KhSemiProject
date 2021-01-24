@@ -102,8 +102,8 @@
 			<hr class="mb-4">
 
 			<div class="text-center">
-				<button type="submit" class="btn btn-primary">수정</button>
-				<button type="button" class="btn btn-primary">이전으로</button>
+				<button type="submit" class="btn btn-warning">수정</button>
+				<button type="button" class="btn btn-secondary">이전으로</button>
 			</div>
 
 		</form>
