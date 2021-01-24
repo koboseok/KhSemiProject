@@ -176,7 +176,7 @@
 				</c:when>
 			
 				<c:otherwise>
-					<c:url var="pageUrl" value="/freeBoard/list.do"/>
+					<c:url var="pageUrl" value="/freeBoard/main.do"/>
 				</c:otherwise>
 			</c:choose>
 			
