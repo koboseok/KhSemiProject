@@ -47,10 +47,8 @@ pre {
 }
 
 #myListImg:hover {
-	width: 400px;
+	width: 500px;
     height: 200px;
-    background: url('${contextPath}/resources/images/마이리스트.png');
-    transition-duration: 0.5s;
 }
 
 </style>
@@ -122,8 +120,11 @@ pre {
 							</p>
 						</div>
 						<div class="col-md-2">
-							<a href="${contextPath}/myList/myList.do"> <img
-								src="${contextPath}/resources/images/ab-5.png" class="ab-img" id="myListImg" />
+							<a href="${contextPath}/myList/myList.do"> 
+							
+							<img src="${contextPath}/resources/images/ab-5.png" 
+							onmouseover= "this.src='${contextPath}/resources/images/마이리스트.png'" 
+							onmouseleave="this.src='${contextPath}/resources/images/ab-5.png'" class="ab-img" id="myListImg" />
 							</a>
 							<p>
 								<a class="ab-txt" href="${contextPath}/myList/myList.do">결제금액 관리</a>

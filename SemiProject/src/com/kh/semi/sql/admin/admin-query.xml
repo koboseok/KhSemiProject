@@ -52,6 +52,7 @@ SELECT * FROM
     LEFT JOIN MEMBER USING(MEM_NO)
     WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'B') V)
 WHERE RNUM BETWEEN ? AND ?
+ORDER BY RNUM DESC
 </entry>
 
 <!-- 불량회원에서 일반회원으로 전환 -->
