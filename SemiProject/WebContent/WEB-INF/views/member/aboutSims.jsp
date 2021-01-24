@@ -46,6 +46,12 @@ pre {
 	height: 200px;
 }
 
+#myListImg:hover {
+	width: 400px;
+    height: 200px;
+    background: url('${contextPath}/resources/images/마이리스트.png');
+    transition-duration: 0.5s;
+}
 
 </style>
 </head>
@@ -81,46 +87,46 @@ pre {
 					<div class="row inner-group">
 						<div class="col-md-2 offset-md-1 btn-box">
 
-							<a href="#" class="btn-2"> <img
+							<a href="${contextPath}/subscribe/main.do" class="btn-2"> <img
 								src="${contextPath}/resources/images/ab-1.png" class="ab-img" />
 							</a>
 
 							<p>
-								<a class="ab-txt" href="#">구독 큐레이션</a>
+								<a class="ab-txt" href="${contextPath}/subscribe/main.do">구독 큐레이션</a>
 							</p>
 						</div>
 						<div class="col-md-2">
 
-							<a href="#"> <img
+							<a href="${contextPath}/subscribe/info.do?name=티빙"> <img
 								src="${contextPath}/resources/images/ab-2.png" class="ab-img" />
 							</a>
 
 							<p>
-								<a class="ab-txt" href="#">별점 시스템</a>
+								<a class="ab-txt" href="${contextPath}/subscribe/info.do?name=티빙">별점 시스템</a>
 							</p>
 						</div>
 						<div class="col-md-2">
-							<a href="#"> <img
+							<a href="${contextPath}/freeBoard/main.do"> <img
 								src="${contextPath}/resources/images/ab-3.png" class="ab-img" />
 							</a>
 							<p>
-								<a class="ab-txt" href="#">구독정보 공유</a>
+								<a class="ab-txt" href="${contextPath}/freeBoard/main.do">구독정보 공유</a>
 							</p>
 						</div>
 						<div class="col-md-2">
-							<a href="#"> <img
+							<a href="${contextPath}/jointBoard/main.do"> <img
 								src="${contextPath}/resources/images/ab-4.png" class="ab-img" />
 							</a>
 							<p>
-								<a class="ab-txt" href="#">공동구매</a>
+								<a class="ab-txt" href="${contextPath}/jointBoard/main.do">공동구매</a>
 							</p>
 						</div>
 						<div class="col-md-2">
-							<a href="#"> <img
-								src="${contextPath}/resources/images/ab-5.png" class="ab-img" />
+							<a href="${contextPath}/myList/myList.do"> <img
+								src="${contextPath}/resources/images/ab-5.png" class="ab-img" id="myListImg" />
 							</a>
 							<p>
-								<a class="ab-txt" href="#">결제금액 관리</a>
+								<a class="ab-txt" href="${contextPath}/myList/myList.do">결제금액 관리</a>
 							</p>
 						</div>
 					</div>
@@ -143,6 +149,7 @@ SIMS를 방문하는 회원님들이 생활에 꼭 필요한 서비스를 구독
 			</div>
 		</div>
 	</div>
+
 
 
 </body>
