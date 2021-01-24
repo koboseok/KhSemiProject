@@ -209,8 +209,6 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">취소</button>
 							</div>
-							
-							
 						</form>
 					</div>
 				</div>
@@ -286,11 +284,10 @@ input[type="date"]::-webkit-outer-spin-button, input[type="date"]::-webkit-inner
 						<option value="memEmail">이메일</option>
 						<option value="memName">닉네임</option>
 					</select>
-					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
+					<input type="text" name="sv" class="form-control" autocomplete="off" style="width: 25%; display: inline-block;">
 					<button class="form-control btn btn-dark" style="width: 100px; display: inline-block;">검색</button>
 				</form>
 			</div>
-
 		</div>
 		
 	
