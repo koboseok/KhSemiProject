@@ -6,108 +6,128 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
-    .insert-label {
-      display: inline-block;
-      width: 80px;
-      line-height: 40px
-    }
-    
-    .boardImg{
-    	cursor : pointer;
-    }
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
+
+.insert-label {
+	display: inline-block;
+	width: 80px;
+	line-height: 40px
+}
+
+.boardImg {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 
-		<div class="container my-5">
+	<div class="container my-5">
 
-			<h3>비공개 건의 게시판 - 작성</h3>
+		<h1>
+			<span id="boardStyle"> 공동 구매 게시판 - 등록 </span>
+		</h1>
+		<hr>
+		<form action="${contextPath}/jointBoard/insert.do" method="post"
+			enctype="multipart/form-data" role="form"
+			onsubmit="return boardValidate();">
+
+			<div class="mb-2">
+				<label class="input-group-addon mr-3 insert-label">카테고리</label> <select
+					class="custom-select" id="categoryCode" name="categoryCode"
+					style="width: 150px;">
+					<option value="10">LifeStyle</option>
+					<option value="20">Food</option>
+					<option value="30">Contents</option>
+					<option value="40">Newsletter</option>
+
+				</select>
+			</div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">제목</label> <input
+					type="text" class="form-control" id="boardTitle" name="boardTitle"
+					size="70">
+			</div>
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성자</label>
+				<h5 class="my-0" id="writer">${loginMember.memName}</h5>
+			</div>
+
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성일</label>
+				<h5 class="my-0" id="today"></h5>
+			</div>
+
 			<hr>
-			<form action="${contextPath}/jointBoard/insert.do" method="post" 
-				  enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
 
-				<div class="mb-2">
-					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
-					<select	class="custom-select" id="categoryCode" name="categoryCode" style="width: 150px;">
-						<option value="10">LifeStyle</option>
-						<option value="20">Food</option>
-						<option value="30">Contents</option>
-						<option value="40">Newsletter</option>
-			
-					</select>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">썸네일</label>
+				<div class="boardImg" id="titleImgArea">
+					<img id="titleImg" width="200" height="200">
 				</div>
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">제목</label> 
-					<input type="text" class="form-control" id="boardTitle" name="boardTitle" size="70">
+			</div>
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">업로드<br>이미지
+				</label>
+				<div class="mr-2 boardImg" id="contentImgArea1">
+					<img id="contentImg1" width="150" height="150">
 				</div>
 
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성자</label>
-					<h5 class="my-0" id="writer">${loginMember.memName}</h5>
+				<div class="mr-2 boardImg" id="contentImgArea2">
+					<img id="contentImg2" width="150" height="150">
 				</div>
 
-
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성일</label>
-					<h5 class="my-0" id="today"></h5>
+				<div class="mr-2 boardImg" id="contentImgArea3">
+					<img id="contentImg3" width="150" height="150">
 				</div>
+			</div>
 
-				<hr>
 
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">썸네일</label>
-					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
-					</div>
+			<!-- 파일 업로드 하는 부분 -->
+			<div id="fileArea">
+
+				<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
+				<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)">
+				<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)">
+				<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+			</div>
+
+			<div class="form-group">
+				<div>
+					<label for="content">내용</label>
 				</div>
-
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
-					<div class="mr-2 boardImg" id="contentImgArea1">
-						<img id="contentImg1" width="150" height="150">
-					</div>
-
-					<div class="mr-2 boardImg" id="contentImgArea2">
-						<img id="contentImg2" width="150" height="150">
-					</div>
-
-					<div class="mr-2 boardImg" id="contentImgArea3">
-						<img id="contentImg3" width="150" height="150">
-					</div>
-				</div>
+				<textarea class="form-control" id="boardContent" name="boardContent"
+					rows="15" style="resize: none;"></textarea>
+			</div>
 
 
-				<!-- 파일 업로드 하는 부분 -->
-				<div id="fileArea">
-					
-					<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
-					<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
-					<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
-					<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
-				</div>
+			<hr class="mb-4">
 
-				<div class="form-group">
-					<div>
-						<label for="content">내용</label>
-					</div>
-					<textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;"></textarea>
-				</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-warning">등록</button>
+				<button type="button" class="btn btn-secondary">목록으로</button>
+			</div>
+
+		</form>
+	</div>
+
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
-				<hr class="mb-4">
-
-				<div class="text-center">
-					<button type="submit" class="btn btn-warning">등록</button>
-					<button type="button" class="btn btn-secondary">목록으로</button>
-				</div>
-
-			</form>
-		</div>
-
-		<jsp:include page="../common/footer.jsp"></jsp:include>
-		
-		
 	<script>
 		(function printToday(){
 			// 오늘 날짜 출력 

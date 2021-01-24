@@ -53,6 +53,7 @@
 #list-table tbody tr:hover{
 	background-color : orange;
 	color : white;
+
 }
 
 

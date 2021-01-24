@@ -6,121 +6,141 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
-    .insert-label {
-      display: inline-block;
-      width: 80px;
-      line-height: 40px
-    }
-    
-    .boardImg{
-    	cursor : pointer;
-    }
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
+
+.insert-label {
+	display: inline-block;
+	width: 80px;
+	line-height: 40px
+}
+
+.boardImg {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 
-		<div class="container my-5">
+	<div class="container my-5">
 
-			<h3>게시글 등록</h3>
-			<hr>
-			<!-- 파일 업로드를 위한 라이브러리 cos.jar 라이브러리 다운로드(http://www.servlets.com/) -->
-			
-			<!-- 
+		<h1>
+			<span id="boardStyle"> 비공개 건의 게시판 - 등록 </span>
+		</h1>
+		<hr>
+		<!-- 파일 업로드를 위한 라이브러리 cos.jar 라이브러리 다운로드(http://www.servlets.com/) -->
+
+		<!-- 
 				- enctype : form 태그 데이터가 서버로 제출 될 때 인코딩 되는 방법을 지정. (POST 방식일 때만 사용 가능)
 				- application/x-www-form-urlencoded : 모든 "문자"를 서버로 전송하기 전에 인코딩 (form태그 기본값)
 				-> bytecode -> text 모든 parameter가 String으로 들어오는 이유
 				- multipart/form-data : 모든 문자를 인코딩 하지 않음.(원본 데이터가 유지되어 이미지, 파일등을 서버로 전송 할 수 있음.) 
 				-> "다양한 형태로 전달될테니까 텍스트로 취급하지 말아라 (post)" -> 길이가 길기 때문
 			-->
-			<form action="${contextPath}/privateBoard/insert.do" method="post" 
-				  enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
+		<form action="${contextPath}/privateBoard/insert.do" method="post"
+			enctype="multipart/form-data" role="form"
+			onsubmit="return boardValidate();">
 
-				<div class="mb-2">
-					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
-					<select	class="custom-select" id="categoryCode" name="categoryCode" style="width: 150px;">
-						<option value="10">신고</option>
-						<option value="20">요청</option>
-						<option value="30">오류</option>
-						<option value="40">문의</option>
-		
-					</select>
+			<div class="mb-2">
+				<label class="input-group-addon mr-3 insert-label">카테고리</label> <select
+					class="custom-select" id="categoryCode" name="categoryCode"
+					style="width: 150px;">
+					<option value="10">신고</option>
+					<option value="20">요청</option>
+					<option value="30">오류</option>
+					<option value="40">문의</option>
+
+				</select>
+			</div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">제목</label> <input
+					type="text" class="form-control" id="boardTitle" name="boardTitle"
+					size="70">
+			</div>
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성자</label>
+				<h5 class="my-0" id="writer">${loginMember.memName }</h5>
+			</div>
+
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">작성일</label>
+				<h5 class="my-0" id="today"></h5>
+			</div>
+
+			<hr>
+
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">썸네일</label>
+				<div class="boardImg" id="titleImgArea">
+					<img id="titleImg" width="200" height="200">
 				</div>
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">제목</label> 
-					<input type="text" class="form-control" id="boardTitle" name="boardTitle" size="70">
-				</div>
+			</div>
 
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성자</label>
-					<h5 class="my-0" id="writer">${loginMember.memName }</h5>
-				</div>
-
-
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성일</label>
-					<h5 class="my-0" id="today"></h5>
-				</div>
-
-				<hr>
-
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">썸네일</label>
-					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
-					</div>
-				</div>
-
-				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
-					<div class="mr-2 boardImg" id="contentImgArea1">
-						<img id="contentImg1" width="150" height="150">
-					</div>
-
-					<div class="mr-2 boardImg" id="contentImgArea2">
-						<img id="contentImg2" width="150" height="150">
-					</div>
-
-					<div class="mr-2 boardImg" id="contentImgArea3">
-						<img id="contentImg3" width="150" height="150">
-					</div>
+			<div class="form-inline mb-2">
+				<label class="input-group-addon mr-3 insert-label">업로드<br>이미지
+				</label>
+				<div class="mr-2 boardImg" id="contentImgArea1">
+					<img id="contentImg1" width="150" height="150">
 				</div>
 
+				<div class="mr-2 boardImg" id="contentImgArea2">
+					<img id="contentImg2" width="150" height="150">
+				</div>
 
-				<!-- 파일 업로드 하는 부분 -->
-				<div id="fileArea">
-					<!--  multiple 속성
+				<div class="mr-2 boardImg" id="contentImgArea3">
+					<img id="contentImg3" width="150" height="150">
+				</div>
+			</div>
+
+
+			<!-- 파일 업로드 하는 부분 -->
+			<div id="fileArea">
+				<!--  multiple 속성
 						- input 요소 하나에 둘 이상의 값을 입력할 수 있음을 명시 (파일 여러개 선택 가능) 안 쓸 것....근데 궁금하다
 					 -->
-					 
-					 <!-- this: 이벤트가 발생한 해당 요소 -->
-					<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
-					<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
-					<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
-					<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+
+				<!-- this: 이벤트가 발생한 해당 요소 -->
+				<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
+				<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)">
+				<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)">
+				<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+			</div>
+
+			<div class="form-group">
+				<div>
+					<label for="content">내용</label>
 				</div>
-
-				<div class="form-group">
-					<div>
-						<label for="content">내용</label>
-					</div>
-					<textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;"></textarea>
-				</div>
+				<textarea class="form-control" id="boardContent" name="boardContent"
+					rows="15" style="resize: none;"></textarea>
+			</div>
 
 
-				<hr class="mb-4">
+			<hr class="mb-4">
 
-				<div class="text-center">
-					<button type="submit" class="btn btn-warning">등록</button>
-					<button type="button" class="btn btn-secondary">목록으로</button>
-				</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-warning">등록</button>
+				<button type="button" class="btn btn-secondary">목록으로</button>
+			</div>
 
-			</form>
-		</div>
+		</form>
+	</div>
 
-		<jsp:include page="../common/footer.jsp"></jsp:include>
-		
-		
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+
+
 	<script>
 		(function printToday(){
 			// 오늘 날짜 출력 

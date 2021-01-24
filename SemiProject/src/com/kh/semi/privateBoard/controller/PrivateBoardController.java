@@ -127,6 +127,8 @@ public class PrivateBoardController extends HttpServlet {
 					
 										
 					
+										
+					
 			 
 					
 				
@@ -159,6 +161,8 @@ public class PrivateBoardController extends HttpServlet {
 					response.sendRedirect("main.do?cp=1");
 				}
 			}
+			
+				
 			}
 			
 //			********** 게시글 작성 화면 전환 Controller **********
