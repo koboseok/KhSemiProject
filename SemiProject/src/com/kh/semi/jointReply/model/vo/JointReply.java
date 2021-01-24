@@ -2,7 +2,7 @@ package com.kh.semi.jointReply.model.vo;
 
 import java.sql.Timestamp;
 
-public class JointReply {
+	public class JointReply {
 	
 	private int replyNo; 		 		// 댓글 번호
 	private String replyContent; 		// 댓글 내용
@@ -13,6 +13,20 @@ public class JointReply {
 
 	
 	public JointReply() {}
+	
+	
+	
+	
+
+	public JointReply(int replyNo, String replyContent, Timestamp replyCreateDate) {
+		super();
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyCreateDate = replyCreateDate;
+	}
+
+
+
 
 
 	public JointReply(int replyNo, String replyContent, Timestamp replyCreateDate, int parentBoardNo, String memName,

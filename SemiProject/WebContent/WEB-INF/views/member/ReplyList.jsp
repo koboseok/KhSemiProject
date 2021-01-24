@@ -63,18 +63,18 @@
 							</thead>
 							<tbody>
 								<c:choose>
-									<c:when test="${empty fList}">
+									<c:when test="${empty fReply}">
 										<tr>
 											<td colspan="3">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${fList}">
-											<tr>
-												<td>${board.boardNo}</td>
-												<td>${createDate}</td>
-												<td>${createDate}</td>
+										<c:forEach var="board" items="${fReply}">
+											<tr id="freeBoard" onclick="boardNo(this);">
+												<td>${board.replyNo}</td>
+												<td>${board.replyContent}</td>
+												<td>${board.replyCreateDate}</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -101,18 +101,18 @@
 							
 							<tbody>
 								<c:choose>
-									<c:when test="${empty jList}">
+									<c:when test="${empty jReply}">
 										<tr>
 											<td colspan="3">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${jList}">
-											<tr>
-												<td>${board.boardNo}</td>
-												<td>${board.memName}</td>
-												<td>${createDate}</td>
+										<c:forEach var="board" items="${jReply}">
+											<tr id="jointBoard" onclick="boardNo(this);">
+												<td>${board.replyNo}</td>
+												<td>${board.replyContent}</td>
+												<td>${board.replyCreateDate}</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -139,18 +139,18 @@
 							
 							<tbody>
 								<c:choose>
-									<c:when test="${empty pList}">
+									<c:when test="${empty pReply}">
 										<tr>
 											<td colspan="3">존재하는 게시글이 없습니다.</td>
 										</tr>
 									</c:when>
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
-										<c:forEach var="board" items="${pList}">
-											<tr>
-												<td>${board.boardNo}</td>
-												<td>${board.memName}</td>
-												<td>${createDate}</td>
+										<c:forEach var="board" items="${pReply}">
+											<tr id="privateBoard" onclick="boardNo(this);">
+												<td>${board.replyNo}</td>
+												<td>${board.replyContent}</td>
+												<td>${board.replyCreateDate}</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -181,6 +181,18 @@
 
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	<script >
+	
+	function boardNo(obj) {
+		var boardNo = obj.children[0].innerHTML;
+		/* console.log(obj.children[0].innerHTML); */
+		 location.href = "${contextPath}/member/replyView.do?replyNo=" + boardNo + "&boardName="+ obj.id;
+		 console.log(boardNo);
+		 
+	}
+	
+	</script>
 <body>
 
 </body>
