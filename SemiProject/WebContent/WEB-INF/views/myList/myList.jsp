@@ -92,7 +92,7 @@ div.setting:hover .setting-btn{
 	heigth: 400px;
 }
 .imgMouseover{
-	width : 400%;
+	width : 420%;
 	 
 }
 .setting{
@@ -119,15 +119,15 @@ div.setting:hover .setting-btn{
 
  
 .gearBtn {
-	background : white;
+	background : bisque;
 	border : none;
 }
 .delBtn {
-	background : white;
+	background : bisque;
 	border : none;
 }
 .setBtn{
-	background : white;
+	background : bisque;
 	border : none;
 }
 #test1 {
@@ -142,8 +142,9 @@ div.setting:hover .setting-btn{
 	width : 700px;
 	height : 300px;
 	text-align : center;
-	background : darkorange;
-	border-radius : 20px;
+	
+	background-color: bisque; 
+	border-radius: 50px;
 }
 
 #pre1{
@@ -153,6 +154,13 @@ div.setting:hover .setting-btn{
 	font-family : fantasy;
 }
 
+#pre2{
+	
+	font-size : 20px;
+	
+}
+
+.addbtn
 
 </style>
 
@@ -173,7 +181,7 @@ div.setting:hover .setting-btn{
 
 	<!-- if문 시작 로그인이 되어있을 경우 -->
 	<c:if test="${!empty loginMember }"> -
-		<div class="container contain" style="background-color: white;">
+		<div class="container contain" style="background-color: bisque; border-radius: 50px;">
 			<div class="row" id="slider-div" style="height: 300px; ">
 			
 				<!-- 포문 시작-->
@@ -188,7 +196,7 @@ div.setting:hover .setting-btn{
 									src="${ contextPath }/resources/images/${item.servImg}" />
 								<div class="showdocument si slider-div">
 
-									${item.servNm }(${item.servCode })
+									${item.servNm }
 									
 									<button class=" float-right delBtn del" name="delMylist" data-toggle="modal" href="#modal-container-3"
 												onclick="delMyList(${item.servCode});" >
@@ -212,11 +220,11 @@ div.setting:hover .setting-btn{
 				<div class="col-md-3 ">
 					<div class="row">
 						<div class="col-md-12" id="test1">
-							<button class="btn addBtn " style="background: forestgreen;"
-								data-toggle="modal" href="#modal-container-2">
-								<br> <img class="add-sub"
-									src="${contextPath }/resources/images/add-sub.png" />
-								<pre style="color: white;">구독 서비스 추가</pre>
+							<button class="btn addBtn " style="background: repeating-linear-gradient(45deg, black, transparent 100px);
+   								 height: 120px;" data-toggle="modal" href="#modal-container-2">
+								<br> <%-- <img class="add-sub"
+									src="${contextPath }/resources/images/add-sub.png" /> --%>
+								<pre style="color: crimson; font-weight: 600;">구독서비스 추가</pre>
 							</button>
 						</div>
 					</div>
@@ -229,17 +237,17 @@ div.setting:hover .setting-btn{
 	
 	
 	<c:if test = "${!empty list }">
-		<div class="container contain">
+		<div class="container contain" style="background-color: bisque; border-radius: 50px;">
 			<div class="row">
 				<div class="col-md-12" >
 					<div class="row">
 						<div class="col-md-6" height="25%">
-						<pre>	저번달 지출 내역 : ${temp }원 </pre>
+						<pre id="pre2">	 저번달 지출 내역 : ${temp }원 </pre>
 						
 						</div>
 						
 						<div class="col-md-6" height="25%">
-						<pre>	이번달 지출 내역 : ${sum}원 </pre>
+						<pre id="pre2">	 이번달 지출 내역 : ${sum}원 </pre>
 						
 						</div>
 					</div>

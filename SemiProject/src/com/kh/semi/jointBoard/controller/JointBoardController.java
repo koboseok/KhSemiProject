@@ -116,7 +116,7 @@ public class JointBoardController extends HttpServlet {
 				if(loginMember == null) {
 
 
-					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalIcon", "warning");
 					request.getSession().setAttribute("swalTitle", "회원만 열람가능합니다.");
 					response.sendRedirect("main.do?cp=" + cp);
 					
