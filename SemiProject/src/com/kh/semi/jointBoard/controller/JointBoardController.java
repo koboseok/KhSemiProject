@@ -100,42 +100,40 @@ public class JointBoardController extends HttpServlet {
 
 
 			}
-
-			//			********** 게시글 상세 조회 **********
 			else if (command.equals("/view.do")) {
 				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+
 
 
 				if(loginMember == null) {
 
 
-					swalIcon = "error";
-					swalTitle = "게시글은 회원만 열람 가능합니다.";
-					swalText = "로그인 후 이용해 주세요.";
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "회원만 열람가능합니다.");
+					response.sendRedirect("main.do?cp=1");
 
 
 
 				}else {
 
 
+
 					int boardNo = Integer.parseInt(request.getParameter("no"));
 
-					//				살세조회 비즈니스 로직 수행 후 결과 반환 받기
 					Board board = service.selectBoard(boardNo);
 
 					if(board != null) { // 상세 조회 성공 시
 
-						//					해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
 						List<Attachment> fList = service.selectBoardFiles(boardNo);
 
-						if(!fList.isEmpty()) { // 해당 게시글 이미지 정보가 DB에 있을 경우 (조회 성공)
+						if(!fList.isEmpty()) {
 
 							request.setAttribute("fList", fList);
 
 						}
 
 
-						path = "/WEB-INF/views/jointBoard/jointBoardView.jsp";
+						path = "/WEB-INF/views/freeBoard/freeBoardView.jsp";
 						request.setAttribute("board", board);
 						view = request.getRequestDispatcher(path);
 						view.forward(request, response);
@@ -146,14 +144,18 @@ public class JointBoardController extends HttpServlet {
 						request.getSession().setAttribute("swalTitle", "게시글 상세 조회 실패");
 						response.sendRedirect("main.do?cp=1");
 					}
-				}
-				session.setAttribute("swalIcon", swalIcon);
-				session.setAttribute("swalTitle", swalTitle);
-				session.setAttribute("swalText", swalText);
 
-				response.sendRedirect("main.do");
+
+
+				}
+
+
+
+
 
 			}
+
+
 
 
 			//			********** 게시글 작성 화면 전환 Controller **********
