@@ -48,7 +48,7 @@ public class PrivateBoardController extends HttpServlet {
 		String errorMsg = null;
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		Member memName = (Member)session.getAttribute("memName");
+		
 		
 		
 		try {
