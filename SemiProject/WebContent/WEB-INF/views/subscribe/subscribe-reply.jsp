@@ -26,7 +26,7 @@
 	display: inline-block;
 	margin-right: 30px;
 	vertical-align: top;
-	font-size:0.8em;
+	font-size: 0.8em;
 }
 
 .rPoint {
@@ -48,8 +48,6 @@
 .replyBtnArea {
 	text-align: right;
 }
-
-
 
 .replyUpdateContent {
 	resize: none;
@@ -103,7 +101,6 @@
 .btn-primary:hover {
 	background: #FF6600;
 }
-
 </style>
 <div id="reply-area ">
 	<!-- 댓글 작성 부분 -->
@@ -251,7 +248,8 @@
 		// 로그인이 되어있지 않은 경우 == loginMemberId 전역변수에 저장된 값이 ""일 경우
 		if (loginMemberId == "") {
 			alert("로그인 후  이용해 주세요");
-		} else { // 로그인이 되어있다면..?
+
+	}else { // 로그인이 되어있다면..?
 			// 댓글 내용이 작성되어있는지 확인
 			if (replyContent.length == 0) {
 				alert("댓글을 입력해주세요");
