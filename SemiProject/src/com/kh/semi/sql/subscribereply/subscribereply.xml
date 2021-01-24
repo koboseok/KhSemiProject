@@ -9,7 +9,7 @@
 		SERV_CODE)
 		JOIN MEMBER USING (MEM_NO)
 		WHERE SERV_NM = ?
-		AND STATUS_RE ='N'
+		AND STATUS_RE ='Y'
 		ORDER BY SERV_NO DESC
 	</entry>
 
@@ -18,13 +18,13 @@
 		VALUES(SEQ_SEO.NEXTVAL, ?, ?,
 		DEFAULT, (SELECT SERV_CODE
 		FROM SUBSERVICE
-		WHERE SERV_NM=?) , ?)
+		WHERE SERV_NM=?) , ?, DEFAULT)
 	</entry>
 
 
 	<entry key="updateReplyStatus">
 		UPDATE SUBSERVICE_RE SET
-		STATUS_RE = 'Y'
+		STATUS_RE = 'N'
 		WHERE SERV_NO = ?
 	</entry>
 </properties>

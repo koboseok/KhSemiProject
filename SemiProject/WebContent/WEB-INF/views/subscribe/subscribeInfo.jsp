@@ -172,7 +172,7 @@
 						<p id="content">사용자 평점 : ${replyInfo.point}</p>
 					</div>
 					<div class="user">
-						<p id="content">서비스 사용자 수 : ${replyInfo.memberNo}</p>
+						<p id="content">서비스 사용자 수 : ${userInfo.memberNo}</p>
 					</div>
 				</div>
 			</div>
@@ -192,6 +192,14 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 
+<script>
+
+
+
+
+
+
+</script>
 
 
 

@@ -68,6 +68,10 @@ ul {
 	display: inline-block;
 	width: 50%;
 }
+
+.btn-box .btn-2 {
+  background-image: url(../images/search.png);
+}
 </style>
 
 </head>
@@ -88,10 +92,9 @@ ul {
 		<div class="main_container layout_padding">
 
 			<div class="content-top">
+			<p>카테고리 별 인기항목이 궁금하신가요? 그럼 버튼을 눌러보세요!</p>
 				<c:forEach var="subscribe" items="${popTopList}">
 					<div class="img-box b-1">
-						<img src="${contextPath}/resources/images/${subscribe.subImage}"
-							alt="">
 						<div class="btn-box">
 							<a href="" class="btn-2"> </a>
 						</div>
@@ -107,9 +110,35 @@ ul {
 	<script>
 		$(".list li").on("click", function() {
 			var popName = $(this).eq(0).text();
-			console.log(popName);
+			
+			$.ajax({
+				url : "${contextPath}/main/pop.do",
+				data : {"name" : popName},
+				dataType : "json",
+				success : function(popTopList){
+					
+					$(".content-top").html("");
+					
+					$.each(popTopList, function(index,item){
+						var div1 = $("<div class='img-box b-1'>");
+						var img = $("<img>").attr("src", "${contextPath}/resources/images/" + item.SubImage);
+						var div2 = $("<div class='btn-box'>");
+						var a = $("<a>").attr("href", "${contextPath}/subscribe/info.do?name=" + item.SubName);
+						
+						div2.append(a);
+						div1.append(img);
+						div1.append(div2);
+						$(".content-top").append(div1);
+						
+					});
+					
+				}, error : function(){
+					console.log("error");
 
-			location.href = "${contextPath}/main/pop.do?name="+popName;
+				}
+				
+			});
+			
 		});
 	</script>
 
