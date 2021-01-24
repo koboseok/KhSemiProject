@@ -27,7 +27,7 @@ public class BoardNoticeDAO {
 //	외부 XML 파일에 작성된 SQL을 읽어올 변수를 선언
 	Properties prop = null;
 	
-//	기본생성자로 NoticeDAO 객체 생성 시 SQL이 작성된 xml파일 얻어오기
+//	기본생성자로 NoticeDAO 객체 생성 시 SQL이 작성된 xml파일 얻어오기''
 	public BoardNoticeDAO() {
 		String fileName = BoardNoticeDAO.class.getResource("/com/kh/semi/sql/notice/notice-query.xml").getPath();
 		try {

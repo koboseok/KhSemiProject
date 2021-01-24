@@ -35,7 +35,7 @@ public class BoardNoticeService {
 	 * @throws Exception
 	 */
 	public BoardNotice selectNotice(int noticeNo) throws Exception {
-//		1) 커넥션 얻어오기
+//		1) 커넥션 얻어오기'
 		Connection conn = getConnection();
 
 //		2) DAO 수행 후 결과 반환

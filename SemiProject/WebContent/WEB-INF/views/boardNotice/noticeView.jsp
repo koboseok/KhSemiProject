@@ -17,7 +17,7 @@
 
 		<div id="notice-area">
 
-			<!-- Title -->
+			<!-- Title. -->
 			<h1 class="mt-4">${notice.noticeTitle }</h1>
 
 			<!-- Writer -->
