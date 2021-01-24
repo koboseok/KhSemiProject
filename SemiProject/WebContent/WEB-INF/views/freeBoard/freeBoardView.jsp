@@ -90,9 +90,7 @@
 	list-style-type: none;
 }
 
-.board-dateArea {
-	font-size: 14px;
-}
+
 
 /* 이미지 선택 색 변경*/
 .carousel-indicators>li {
@@ -100,7 +98,7 @@
 }
 
 .grayArea {
-	font-size: 18px;
+	font-size: 15px;
 	color: gray;
 }
 
@@ -118,10 +116,10 @@
 		</h1>
 
 		<div>
-			<div style="background-color: gainsboro; color: white; font-weight: bold; border:5px solid gray">
+			<div style="background-color: #ff9100de;; color: white; font-weight: bold; border:5px solid gray">
 				<!-- Title -->
 
-				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+				<h2 class="mt-4" id="center">${board.boardTitle}</h2>
 				<br>
 				<!-- Writer -->
 				<p class="lead" id="center"style = "color : black; font-weight: bold;">${board.memName}</p>
@@ -129,11 +127,11 @@
 			</div>
 
 
-
+<br>
 
 			<!-- Date -->
 
-				<p class="grayArea" id="center">
+				<p class="grayArea" id="center" >
 					<span class="board-dateArea"> 작성일 : <fmt:formatDate
 							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" />
 						&nbsp;&nbsp;|&nbsp;&nbsp; 마지막 수정일 : <fmt:formatDate

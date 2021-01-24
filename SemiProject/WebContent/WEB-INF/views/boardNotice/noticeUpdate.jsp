@@ -7,6 +7,17 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
 	#notice-area{ margin-bottom:200px;}
 	#notice-content{ padding-bottom:150px;}
 </style>
@@ -16,7 +27,9 @@
 
 	<div class="container my-5">
 
-		<h3>공지사항 수정</h3>
+		<h1>
+			<span id="boardStyle"> 공지 사항 - 수정 </span>
+		</h1>
 	      <hr>
 	      <div class="bg-white rounded shadow-sm container py-3">
 	        <form method="POST" action="update.do?no=${param.no }" role="form" onsubmit="return noticeValidate();">
@@ -56,8 +69,9 @@
 	        <hr class="mb-4">
 	
        	<div class="text-center">
-					<button type="submit" class="btn btn-primary">수정</button>
-					<a href="view.do?no=${param.no }" class="btn btn-primary">취소</a>
+					<button type="submit" class="btn btn-warning">수정</button>
+				<button type="button" class="btn btn-secondary"
+					onclick="location.href='${header.referer}'">이전으로</button>
 				</div>
 	        
       </form>

@@ -248,14 +248,28 @@
 	<script>
 	      // 게시글 상세보기 기능 (jquery를 통해 작업)      
 	      $("#list-table td").on("click", function() {
-	         // 게시글 번호 얻어오기
-	         var boardNo = $(this).parent().children().eq(0).text();
-	         //console.log(boardNo);
-	         
-	         var url = "${contextPath}/privateBoard/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
-	         
-	         location.href = url;
+	    	  
+	    	  var memName = "${loginMember.memName}";
+	    	  var memGrade = "${loginMember.memGrade}";
+	    	  var boardWriter =  $(this).parent().children().eq(3).text();
+	    	  
+	    	  if(memGrade == "A"  ||  memName == boardWriter){
+		         // 게시글 번호 얻어오기
+		         var boardNo = $(this).parent().children().eq(0).text();
+		         //console.log(boardNo);
+		         
+		         var url = "${contextPath}/privateBoard/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+		         
+		         location.href = url;
+	    	  }else{
+	    		  swal({icon : "warning", title : "작성자만 열람 가능합니다."});
+	    	  }
+	    	  
+	    	  
 	      });
+	      
+	      
+	      
 	      
 	      //검색 내용이 있을 경우 검색창에 해당 내용을 작성해놓는 기능
 	      (function(){

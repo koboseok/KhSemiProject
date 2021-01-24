@@ -37,17 +37,13 @@
 			<h1>
 			<span id="boardStyle"> 자유 게시판 - 등록 </span>
 		</h1>
-			<hr>
-			<!-- 파일 업로드를 위한 라이브러리 cos.jar 라이브러리 다운로드(http://www.servlets.com/) -->
-			
-			<!-- 
-				- enctype : form 태그 데이터가 서버로 제출 될 때 인코딩 되는 방법을 지정. (POST 방식일 때만 사용 가능)
-				- application/x-www-form-urlencoded : 모든 문자를 서버로 전송하기 전에 인코딩 (form태그 기본값)
-				- multipart/form-data : 모든 문자를 인코딩 하지 않음.(원본 데이터가 유지되어 이미지, 파일등을 서버로 전송 할 수 있음.) 
-			-->
+			<br>
+		
 			<form action="${contextPath}/freeBoard/insert.do" method="post" 
 				  enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
 
+		
+	
 		
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label" id= "boardStyle">제목</label> 
@@ -64,6 +60,7 @@
 					<label class="input-group-addon mr-3 insert-label"  id= "boardStyle">작성일</label>
 					<h5 class="my-0" id="today"></h5>
 				</div>
+		
 
 				<hr>
 
@@ -105,12 +102,13 @@
 					<textarea class="form-control" id="boardContent" name="boardContent" rows="15" style="resize: none;"></textarea>
 				</div>
 
-
+		
 				<hr>
 
 				<div class="text-center">
 					<button type="submit" class="btn btn-warning">등록</button>
-					<button type="button" class="btn btn-secondary">목록으로</button>
+						<button type="button" class="btn btn-secondary"
+					onclick="location.href='${header.referer}'">목록으로</button>
 				</div>
 
 			</form>
