@@ -7,6 +7,20 @@
 <meta charset="UTF-8">
 <title>비공개 건의 게시판</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#boardStyle{
+	  font-family:'SDSamliphopangche_Outline';
+	
+}
+
 .pagination {
 	justify-content: center;
 }
@@ -47,7 +61,10 @@
 	
 }
 
-
+#list-table tbody tr:hover{
+	background-color : orange;
+	color : white;
+}
 </style>
 
 </head>
@@ -55,12 +72,16 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container my-5">
 		
-		<h1>게시판</h1>
+		<h1>
+		<span id="boardStyle">
+		비공개 건의 게시판
+		</span>
+		</h1>
 		
 			<div class="list-wrapper">
 				<table class="table table-hover table-striped my-5" id="list-table">
 					<thead>
-						<tr>
+						<tr id="boardStyle">
 							<th>글번호</th>
 							<th>카테고리</th>
 							<th>제목</th>
@@ -123,8 +144,8 @@
 
 			<%-- 로그인이 되어있는 경우 --%>
 			<c:if test="${!empty loginMember}">
-			<button type="button" class="btn btn-warning float-right" id="insertBtn" 
-			onclick="location.href = '${contextPath}/privateBoard/insertForm.do'">글쓰기</button>
+			<button type="button" class="btn btn-warning float-right" id="insertBtn"
+			onclick="location.href = '${contextPath}/privateBoard/insertForm.do'" style = "background-color : orange">글쓰기</button>
 			</c:if>
 			
 			<%---------------------- Pagination ----------------------%>
@@ -216,7 +237,7 @@
 						<option value="writer">작성자</option>
 					</select>
 					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-					<button class="form-control btn btn-warning" style="width: 100px; display: inline-block;">검색</button>
+					<button class="form-control btn btn-warning" style="width: 100px; display: inline-block; background-color : orange">검색</button>
 				</form>
 			</div>
 	</div>
