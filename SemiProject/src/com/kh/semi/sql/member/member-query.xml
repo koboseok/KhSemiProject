@@ -130,5 +130,67 @@ WHERE BOARD_WRITER = ?
 </entry>
 
 
+<!-- 자유게시판 댓글 조회 -->
+<entry key="selectfReplyList">
+
+SELECT REPLY_NO , REPLY_CONTENT , REPLY_CREATE_DT
+FROM F_REPLY
+JOIN MEMBER ON(REPLY_WRITER = MEM_NO)
+WHERE REPLY_WRITER = ?
+
+
+</entry>
+<!-- 공동구매 게시판 댓글 조회 -->
+<entry key="selectjReplyList">
+SELECT REPLY_NO , REPLY_CONTENT , REPLY_CREATE_DT
+FROM J_REPLY
+JOIN MEMBER ON(REPLY_WRITER = MEM_NO)
+WHERE REPLY_WRITER = ?
+
+</entry>
+<!-- 비공개 건의 게시판 댓글 조회 -->
+<entry key="selectpReplyList">
+SELECT REPLY_NO , REPLY_CONTENT , REPLY_CREATE_DT
+FROM P_REPLY
+JOIN MEMBER ON(REPLY_WRITER = MEM_NO)
+WHERE REPLY_WRITER = ?
+
+</entry>
+
+<!-- 자유 게시판 댓글  -->
+<entry key="selectfBoardNo">
+
+SELECT BOARD_NO 
+FROM F_BOARD
+JOIN F_REPLY ON (BOARD_NO = PARENT_BOARD_NO)
+WHERE REPLY_NO = ?
+
+
+</entry>
+
+<!-- 공동 댓글 -->
+<entry key="selectjBoardNo">
+
+SELECT BOARD_NO 
+FROM J_BOARD
+JOIN J_REPLY ON (BOARD_NO = PARENT_BOARD_NO)
+WHERE REPLY_NO = ?
+
+
+</entry>
+
+<!-- 비공개 댓글 -->
+<entry key="selectpBoardNo">
+
+SELECT BOARD_NO 
+FROM P_BOARD
+JOIN P_REPLY ON (BOARD_NO = PARENT_BOARD_NO)
+WHERE REPLY_NO = ?
+
+
+</entry>
+
+
+
 
 </properties>

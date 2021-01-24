@@ -1,6 +1,7 @@
 package com.kh.semi.member.model.dao;
 import static com.kh.semi.common.JDBCTemplate.*;
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,8 +15,11 @@ import java.util.Properties;
 
 import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeReply.model.vo.FreeReply;
+import com.kh.semi.jointReply.model.vo.JointReply;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.privateReply.model.vo.PrivateReply;
 
 public class MemberDAO {
 
@@ -193,7 +197,7 @@ public class MemberDAO {
 			close(pstmt);
 
 		}
-		System.out.println("DAO" + loginMember);
+		//System.out.println("DAO" + loginMember);
 		return loginMember;
 	}
 
@@ -466,6 +470,12 @@ public class MemberDAO {
 	}
 
 
+	/** 비공개 게시글 조회 
+	 * @param conn
+	 * @param memNo
+	 * @return
+	 * @throws Exception
+	 */
 	public List<com.kh.semi.privateBoard.model.vo.Board> selectpBoardList(Connection conn, int memNo) throws Exception {
 		
 		List<com.kh.semi.privateBoard.model.vo.Board> pList = null;
@@ -495,6 +505,157 @@ public class MemberDAO {
 		
 		
 		return pList;
+	}
+
+
+	/** 자유게시판 댓글 조회
+	 * @param conn
+	 * @param memNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<FreeReply> selectfReplyList(Connection conn, int memNo) throws Exception {
+		
+		List<FreeReply> fReply = null;
+		
+
+		String query = prop.getProperty("selectfReplyList");
+		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			fReply = new ArrayList<FreeReply>();
+			
+			while(rset.next()) {
+				fReply.add(new FreeReply(rset.getInt("REPLY_NO"), rset.getString("REPLY_CONTENT"),
+									rset.getTimestamp("REPLY_CREATE_DT")));
+			}
+			
+			
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		
+		
+		return fReply;
+	}
+
+
+	/** 공동구매 게시판 댓글 조회
+	 * @param conn
+	 * @param memNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointReply> selectjReplyList(Connection conn, int memNo) throws Exception {
+		List<JointReply> jReply = null;
+		
+		String query = prop.getProperty("selectjReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			jReply = new ArrayList<JointReply>();
+			
+			while(rset.next()) {
+				jReply.add(new JointReply(rset.getInt("REPLY_NO"), rset.getString("REPLY_CONTENT"),
+									rset.getTimestamp("REPLY_CREATE_DT")));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		
+		return jReply;
+	}
+
+
+	/** 비공개 건의 게시판 댓글 조회
+	 * @param conn
+	 * @param memNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PrivateReply> selectpReplyList(Connection conn, int memNo) throws Exception {
+	List<PrivateReply> pReply = null;
+		
+		String query = prop.getProperty("selectpReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			pReply = new ArrayList<PrivateReply>();
+			
+			while(rset.next()) {
+				pReply.add(new PrivateReply(rset.getInt("REPLY_NO"), rset.getString("REPLY_CONTENT"),
+									rset.getTimestamp("REPLY_CREATE_DT")));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		
+		return pReply;
+	}
+
+
+	public int selectfBoardNo(Connection conn, String boardName ,int replyNo) throws Exception{
+		
+		int boardNo = 0;
+		
+		String query = null;
+		
+		switch (boardName) {
+			case "freeBoard" :  query = prop.getProperty("selectfBoardNo"); break;
+			case "jointBoard" :  query = prop.getProperty("selectjBoardNo"); break;
+			case "privateBoard" :  query = prop.getProperty("selectpBoardNo"); break;
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, replyNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				boardNo = rset.getInt(1);
+				
+			}
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return boardNo;
 	}
 	
 	

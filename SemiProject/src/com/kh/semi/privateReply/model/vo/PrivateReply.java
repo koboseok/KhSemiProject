@@ -14,6 +14,18 @@ public class PrivateReply {
 	
 	public PrivateReply() {}
 
+	
+	
+
+	public PrivateReply(int replyNo, String replyContent, Timestamp replyCreateDate) {
+		super();
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyCreateDate = replyCreateDate;
+	}
+
+
+
 
 	public PrivateReply(int replyNo, String replyContent, Timestamp replyCreateDate, int parentBoardNo, String memName,
 			String replyStatus) {

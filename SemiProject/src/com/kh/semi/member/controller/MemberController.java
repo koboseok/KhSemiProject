@@ -17,9 +17,12 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.semi.admin.model.vo.Report;
 import com.kh.semi.freeBoard.model.vo.Board;
+import com.kh.semi.freeReply.model.vo.FreeReply;
+import com.kh.semi.jointReply.model.vo.JointReply;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.MemSubscribe;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.privateReply.model.vo.PrivateReply;
 
 @WebServlet("/member/*")
 public class MemberController extends HttpServlet {
@@ -177,7 +180,7 @@ public class MemberController extends HttpServlet {
 				//				3.아이디와 비밀번호를 Member 객체에 세팅
 				Member member = new Member();
 
-				member.setMemEmail(memEmail);;
+				member.setMemEmail(memEmail);
 				member.setMemPwd(memPwd);
 
 				//				* try-catch를 이용하여 service, dao에서 발생한 예외를 처리
@@ -187,7 +190,7 @@ public class MemberController extends HttpServlet {
 				//					(로그인이란 ? id/pw 가 일치하는 회원정보를 DB에서 조회해 오는 것)
 				Member loginMember = new MemberService().loginMember(member);
 
-				System.out.println(loginMember);
+				//System.out.println(loginMember);
 
 				//					로그인 정보는 로그아웃 또는 브라우저가 종료될 때 까지 유지되어야한다.
 				//					--> Session을 활용함 
@@ -533,13 +536,45 @@ public class MemberController extends HttpServlet {
 				else if(command.equals("/ReplyList.do")) {
 					errorMsg = "내 댓글 조회 중 오류 발생";
 					
+					HttpSession session = request.getSession();
+					Member loginMember = (Member)session.getAttribute("loginMember");
+					
+					int memNo = loginMember.getMemNo();
+					
+					List<FreeReply> fReply =  new MemberService().selectfReplyList(memNo);
+					
+					List<JointReply> jReply =  new MemberService().selectjReplyList(memNo);
+					
+					List<PrivateReply> pReply =  new MemberService().selectpReplyList(memNo);
 					
 					
+				
+					
+					request.setAttribute("fReply", fReply);
+					request.setAttribute("jReply", jReply);
+					request.setAttribute("pReply", pReply);
 					
 					
 					path="/WEB-INF/views/member/ReplyList.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
+				}
+				else if (command.equals("/replyView.do")) {
+					
+					String boardName = request.getParameter("boardName");
+					
+					int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+					
+					int boardNo = new MemberService().selectfBoardNo(boardName, replyNo);
+				
+					/*
+					 * String uri = request.getRequestURI(); String contextPath =
+					 * request.getContextPath();
+					 */
+					
+					
+					response.sendRedirect(contextPath+"/"+boardName+"/view.do?no="+boardNo);
+					
 				}
 		
 

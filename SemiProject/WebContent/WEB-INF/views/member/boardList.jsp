@@ -73,8 +73,8 @@
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
 										<c:forEach var="board" items="${fList}">
-											<tr>
-												<td>${board.boardNo}</td>
+											<tr id="freeBoard" onclick="boardNo(this);">
+												<td >${board.boardNo}</td>
 												<td>${board.boardTitle}</td>
 												<td>${board.memName}</td>
 												<td>${board.readCount}</td>
@@ -116,7 +116,7 @@
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
 										<c:forEach var="board" items="${jList}">
-											<tr>
+											<tr id="jointBoard" onclick="boardNo(this);">
 												<td>${board.boardNo}</td>
 												<td>${board.categoryName}</td>
 												<td >${board.boardTitle}</td>
@@ -160,7 +160,7 @@
 									<%--조회된 게시글 목록이 있을 때 --%>
 									<c:otherwise>
 										<c:forEach var="board" items="${pList}">
-											<tr>
+											<tr id="privateBoard"onclick="boardNo(this);">
 												<td>${board.boardNo}</td>
 												<td>${board.categoryName}</td>
 												<td >${board.boardTitle}</td>
@@ -187,11 +187,30 @@
 
 
 
-
-
-
-
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	
+	
+	<script>
+	function boardNo(obj) {
+		var boardNo = obj.children[0].innerHTML;
+		/* console.log(obj.children[0].innerHTML); */
+		 location.href = "${contextPath}/"+ obj.id +"/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+		 
+	}
+	/* $("tr").on("click", function(){
+		
+		// 게시글 번호 얻어오기
+		var boardNo = $(this).parent().children().eq(0).text();
+		//console.log(boardNo);
+		
+		var url = "${contextPath}/freeBoard/view.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+		
+		location.href = url;
+		
+	}); */
+	
+	</script>
 <body>
 
 </body>
