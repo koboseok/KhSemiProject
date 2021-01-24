@@ -13,7 +13,7 @@ AND PARENT_BOARD_NO = ?
 
 <!--댓글 삽입 -->
 <entry key="insertReply">
-INSERT INTO P_REPLY VALUES(SEQ_FRNO.NEXTVAL, ?, DEFAULT, DEFAULT, ?, ?)
+INSERT INTO P_REPLY VALUES(SEQ_PRNO.NEXTVAL, ?, DEFAULT, DEFAULT, ?, ?)
 </entry>
 
 <!-- 댓글 수정 -->
