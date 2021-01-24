@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
+
 .pagination {
 	justify-content: center;
 }
