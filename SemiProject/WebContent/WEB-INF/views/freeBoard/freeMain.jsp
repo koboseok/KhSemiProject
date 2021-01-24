@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
+
+.boardTitle>img {
+	width: 50px;
+	height: 50px;
+}
 .pagination {
 	justify-content: center;
 }
@@ -76,23 +81,22 @@
 									<tr>
 										<td>${board.boardNo}</td>
 										
-										<td class="boardTitle">
+										<td class ="boardTitle">
+											
 											
 											<%-- 썸네일 출력 --%>
 											<c:forEach var="thumbnail" items="${fList}">
-												<%-- 현재 출력할려는 게시글 번호와
-														썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면
-												 --%>
-												<c:if test="${board.boardNo == thumbnail.parentBoardNo }">
-													
-													<img src="${contextPath}/resources/uploadImages/${thumbnail.fileName}">                         
-													
+												
+												<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중
+													부모 게시글 번호가 일치하는 썸네일 정보가 있다면 --%>
+												<c:if test="${ board.boardNo == thumbnail.parentBoardNo }">
+													<img  src="${contextPath}/resources/uploadImages/${thumbnail.fileName}">
 												</c:if>
+																								
 											</c:forEach>
 											
 											${board.boardTitle}
 										</td>
-										
 										
 										
 										<td>${board.memName}</td>
