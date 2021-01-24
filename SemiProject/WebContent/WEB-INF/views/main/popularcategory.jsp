@@ -105,8 +105,8 @@ ul {
 
 
 	<script>
-		$(".list li*").on("click", function() {
-			var popName = $(this).parent().children().eq(0).text();
+		$(".list li").on("click", function() {
+			var popName = $(this).eq(0).text();
 			console.log(popName);
 
 			location.href = "${contextPath}/main/pop.do?name="+popName;

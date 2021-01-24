@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="selectList">
+		SELECT MEM_NM, SERV_NO, MEM_NO, SERV_RE_CONTENT,
+		SERV_POINT
+		FROM SUBSERVICE_RE
+		JOIN SUBSERVICE ON (SERVICE_CODE =
+		SERV_CODE)
+		JOIN MEMBER USING (MEM_NO)
+		WHERE SERV_NM = ?
+		AND STATUS_RE ='N'
+		ORDER BY SERV_NO DESC
+	</entry>
 
+	<entry key="insertReply">
+		INSERT INTO SUBSERVICE_RE
+		VALUES(SEQ_SEO.NEXTVAL, ?, ?,
+		DEFAULT, (SELECT SERV_CODE
+		FROM SUBSERVICE
+		WHERE SERV_NM=?) , ?)
+	</entry>
+
+
+	<entry key="updateReplyStatus">
+		UPDATE SUBSERVICE_RE SET
+		STATUS_RE = 'Y'
+		WHERE SERV_NO = ?
+	</entry>
 </properties>
