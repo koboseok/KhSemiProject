@@ -120,7 +120,7 @@ public class AdminController extends HttpServlet {
 				
 				response.getWriter().print(result);
 			}
-			//검색 Controller ******************************************
+			//회원 검색 Controller ******************************************
 			else if(command.equals("/memberSearch.do")) {
 				errorMsg = "회원 검색 과정에서 오류 발생";
 				
@@ -143,6 +143,30 @@ public class AdminController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
+			//정지 회원 검색 Controller ******************************************
+			else if(command.equals("/bMemberSearch.do")) {
+				errorMsg = "정지 회원 검색 과정에서 오류 발생";
+				
+				String searchKey = request.getParameter("sk");
+				String searchValue = request.getParameter("sv");
+				cp = request.getParameter("cp");
+				
+				Map<String, Object> map = new HashMap<String,Object>();
+				map.put("searchKey", searchKey);
+				map.put("searchValue", searchValue);
+				map.put("currentPage", cp);
+				
+				PageInfo pInfo = service.getbSearchPageInfo(map);
+				List<Report> bmList = service.searchbMemberList(map, pInfo);
+			
+				path = "/WEB-INF/views/admin/blockList.jsp";
+				request.setAttribute("bmList", bmList);
+				request.setAttribute("pInfo", pInfo);
+				
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			path = "/WEB-INF/views/common/errorPage.jsp";

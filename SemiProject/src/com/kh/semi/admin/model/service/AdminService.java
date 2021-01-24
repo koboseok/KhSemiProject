@@ -91,7 +91,7 @@ public class AdminService {
 
 	/** 불량회원 목록 조회 service
 	 * @param pInfo
-	 * @return
+	 * @return bmList
 	 * @throws Exception
 	 */
 	public List<Report> selectBmemberList(PageInfo pInfo) throws Exception {
@@ -142,7 +142,7 @@ public class AdminService {
 
 	/**검색 조건에 따라 SQL문에 사용될 조건문을 조합하는 메소드
 	 * @param map
-	 * @return
+	 * @return condition
 	 * @throws Exception
 	 */
 	private String createCondition(Map<String, Object> map) throws Exception {
@@ -161,6 +161,7 @@ public class AdminService {
 			break;
 		case "memName" : 
 			condition = " MEM_NM LIKE '%' || '" + searchValue + "' || '%' ";
+			break;
 		}
 		return condition;
 
@@ -182,6 +183,46 @@ public class AdminService {
 		
 		return mList;
 	}
+
+	/**불량 회원 검색 결과 페이징 처리 Service
+	 * @param map
+	 * @return 
+	 * @throws Exception
+	 */
+	public PageInfo getbSearchPageInfo(Map<String, Object> map) throws Exception {
+		Connection conn = getConnection();
+		
+		map.put("currentPage", (map.get("currentPage")==null) ? 1 
+				: Integer.parseInt((String)map.get("currentPage")));
+		String condition = createCondition(map);
+		
+		int listCount = dao.getbSearchListCount(conn, condition);
+		
+		close(conn);
+		
+		return new PageInfo((int)map.get("currentPage"), listCount);
+		
+	}
+
+	/**검색 불량 회원 목록 조회 service
+	 * @param map
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Report> searchbMemberList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Report> bmList = dao.searchbMemberList(conn, pInfo, condition);
+		
+		close(conn);
+		
+		return bmList;
+	}
+
+	
 
 
 

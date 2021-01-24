@@ -305,7 +305,7 @@ public class AdminDAO {
 				"(SELECT * FROM MEMBER WHERE " + condition + 
 				" AND MEM_STATUS = 'Y' AND MEM_GRADE = 'G' ORDER BY MEM_NO DESC) V)" +
 				" WHERE RNUM BETWEEN ? AND ?";
-
+		
 		try {
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
 			int endRow = startRow + pInfo.getLimit()-1;
@@ -330,6 +330,83 @@ public class AdminDAO {
 		}
 
 		return mList;
+	}
+
+	/**검색 조건을 만족하는 불량 회원 수 가져오는 DAO 
+	 * @param conn
+	 * @param condition
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int getbSearchListCount(Connection conn, String condition) throws Exception {
+		int listCount = 0;
+
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE MEM_STATUS = 'Y' AND MEM_GRADE = 'B' AND " + condition;
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return listCount;		
+	}
+
+	/**검색 정지회원 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Report> searchbMemberList(Connection conn, PageInfo pInfo, String condition) throws Exception{
+		List<Report> bmList = null;
+		String query = "SELECT * FROM " +
+				"(SELECT ROWNUM RNUM, V.* " +
+				"FROM " +
+				"(SELECT REPORT_NO, MEM_NO, MEM_NM, MEM_EMAIL, BOARD_CODE, REPORT_B_C_NO, REPORT_B_NO, REPORT_REASON, REPORT_DT " +
+			    "FROM REPORT " +
+			    "LEFT JOIN MEMBER USING(MEM_NO) "+
+			    "WHERE" + condition + "AND MEM_STATUS = 'Y' AND MEM_GRADE = 'B') V) " +
+			"WHERE RNUM BETWEEN ? AND ? ";
+		
+		try {
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;
+			int endRow = startRow + pInfo.getLimit()-1;
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			bmList = new ArrayList<Report>();
+
+			while(rset.next()) {
+				Report report = new Report(rset.getInt("REPORT_NO"),
+						rset.getString("REPORT_REASON"),
+						rset.getDate("REPORT_DT"),
+						rset.getInt("REPORT_B_NO"),
+						rset.getString("REPORT_B_C_NO"),
+						rset.getInt("MEM_NO"),
+						rset.getString("BOARD_CODE"),
+						rset.getString("MEM_NM"),
+						rset.getString("MEM_EMAIL"));
+				
+				bmList.add(report);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return bmList;
 	}
 
 
