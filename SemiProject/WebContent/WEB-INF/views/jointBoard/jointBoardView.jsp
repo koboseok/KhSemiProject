@@ -92,12 +92,11 @@
 
 .grayArea {
 	font-size: 18px;
-	color : gray;
+	color: gray;
 }
 
 #center {
 	text-align: center;
-	
 }
 /* 이미지 선택 색 변경*/
 .carousel-indicators>li {
@@ -119,30 +118,32 @@
 
 				<!-- Category -->
 				<h6 class="mt-4"
-					style=" text-align: center; font-size: 150%; color : orange;" id="boardStyle">${board.categoryName}</h6>
+					style="text-align: center; font-size: 150%; color: orange;"
+					id="boardStyle">${board.categoryName}</h6>
 
-				<div style = "background-color :gainsboro; color : white; font-weight: bold; border:5px solid gray">
-				<!-- Title -->
-				
-				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
-						<br>
+				<div
+					style="background-color: gainsboro; color: white; font-weight: bold; border: 5px solid gray">
+					<!-- Title -->
+
+					<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+					<br>
 				<!-- Writer -->
-				<p class="lead" id="center" style = " font-weight: bold;">작성자 : ${board.memName}</p>
-				
-					</div>
+				<p class="lead" id="center"style = "color : black; font-weight: bold;">${board.memName}</p>
+
+				</div>
 
 				<!-- Date -->
-				
-					<p class = "grayArea" id="center">
+
+				<p class="grayArea" id="center">
 					<span class="board-dateArea"> 작성일 : <fmt:formatDate
-							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> &nbsp;&nbsp;|&nbsp;&nbsp;
-													마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
-							pattern="yyyy년 MM월 dd일" />
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" />
+						&nbsp;&nbsp;|&nbsp;&nbsp; 마지막 수정일 : <fmt:formatDate
+							value="${board.boardModifyDate }" pattern="yyyy년 MM월 dd일" />
 					</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
 				</p>
 
-     <hr>
-			
+				<hr>
+
 
 
 

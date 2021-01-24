@@ -99,14 +99,15 @@
 	background-color: #ccc !important;
 }
 
+.grayArea {
+	font-size: 18px;
+	color: gray;
+}
+
 #center {
 	text-align: center;
 }
 
-.grayArea {
-	font-size: 18px;
-	color : gray;
-}
 </style>
 </head>
 <body>
@@ -119,34 +120,36 @@
 
 			<div id="board-area">
 
-			<!-- Category -->
-		<h6 class="mt-4"
-					style=" text-align: center; font-size: 150%; " id="boardStyle">${board.categoryName}</h6>
+				<!-- Category -->
+				<h6 class="mt-4"
+					style="text-align: center; font-size: 150%; color: orange;"
+					id="boardStyle">${board.categoryName}</h6>
 
-			<div style = "background-color :gainsboro; color : white; font-weight: bold; border:5px solid gray">
-				<!-- Title -->
-				
-				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
-						<br>
-				<!-- Writer -->
-				<p class="lead" id="center">작성자 : ${board.memName}</p>
-				
-					</div>
+				<div
+					style="background-color: gainsboro; color: white; font-weight: bold; border: 5px solid gray">
+					<!-- Title -->
 
-				
-						<!-- Date -->
-					
-				<p class = "grayArea" id="center">
+					<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+					<br>
+					<!-- Writer -->
+				<p class="lead" id="center"style = "color : black; font-weight: bold;">${board.memName}</p>
+				</div>
+
+
+				<!-- Date -->
+
+				<p class="grayArea" id="center">
 					<span class="board-dateArea"> 작성일 : <fmt:formatDate
-							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> &nbsp;&nbsp;|&nbsp;&nbsp;
-													마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
-							pattern="yyyy년 MM월 dd일" />
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" />
+						&nbsp;&nbsp;|&nbsp;&nbsp; 마지막 수정일 : <fmt:formatDate
+							value="${board.boardModifyDate }" pattern="yyyy년 MM월 dd일" />
 					</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
 				</p>
-				
+
+
 				<hr>
 
-				
+
 				<!-- 이미지 출력 -->
 				<div class="carousel slide boardImgArea" id="board-image">
 					<c:if test="${!empty fList}">
