@@ -178,7 +178,7 @@ display: inline-block;}
 
 							
 
-								<li class="nav-item"><a class="nav-link" href="${contextPath}/boardNotice/main.do ">
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/notice/list.do ">
 										board </a>
 										<ul class="navbar-nav" id="inner-ul">
 										<li id="inner-li"><a id="inner-a"  href="${contextPath}/freeBoard/main.do">자유 게시판</a></li>
