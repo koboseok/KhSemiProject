@@ -24,7 +24,7 @@
 
 	<div class="container my-5">
 
-		<h3>비공개 건의 게시판- 수정</h3>
+		<h3>공동구매 게시판</h3>
 		<hr>
 
 		<c:if test="${!empty param.sk && !empty param.sv}">
@@ -39,7 +39,7 @@
 				<label class="input-group-addon mr-3 insert-label">카테고리</label> <select
 					class="custom-select" id="categoryCode" name="categoryCode"
 					style="width: 150px;">
-					<option value="10">LifeStyle</option>
+					<option value="10">Lifestyle</option>
 					<option value="20">Food</option>
 					<option value="30">Contents</option>
 					<option value="40">Newsletter</option>
@@ -53,7 +53,7 @@
 
 			<div class="form-inline mb-2">
 				<label class="input-group-addon mr-3 insert-label">작성자</label>
-				<h5 class="my-0" id="writer">${board.memName }</h5>
+				<h5 class="my-0" id="writer">${board.memName}</h5>
 			</div>
 
 
@@ -68,6 +68,9 @@
 				<label class="input-group-addon mr-3 insert-label">썸네일</label>
 				<div class="boardImg" id="titleImgArea">
 					<img id="titleImg" width="200" height="200">
+				</div>
+			</div>
+
 			<div class="form-inline mb-2">
 				<label class="input-group-addon mr-3 insert-label">업로드<br>이미지
 				</label>
@@ -105,8 +108,8 @@
 			<hr class="mb-4">
 
 			<div class="text-center">
-				<button type="submit" class="btn btn-primary">수정</button>
-				<button type="button" class="btn btn-primary"
+				<button type="submit" class="btn btn-warning">수정</button>
+				<button type="button" class="btn btn-secondary"
 					onclick="location.href='${header.referer}'">이전으로</button>
 			</div>
 
@@ -118,22 +121,22 @@
 
 	<script>
 
-      // 유효성 검사 
-      function updateValidate() {
-         if ($("#boardTitle").val().trim().length == 0) {
-            alert("제목을 입력해 주세요.");
-            $("#title").focus();
-            return false;
-         }
+		// 유효성 검사 
+		function updateValidate() {
+			if ($("#boardTitle").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#boardTitle").focus();
+				return false;
+			}
 
-         if ($("#boardContent").val().trim().length == 0) {
-            alert("내용을 입력해 주세요.");
-            $("#boardContent").focus();
-            return false;
-         }
-      }
-      
-       // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+			if ($("#boardContent").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#boardContent").focus();
+				return false;
+			}
+		}
+		
+		 // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
     $(function () {
        $("#fileArea").hide();
 
@@ -142,53 +145,50 @@
         $("#img" + index).click();
       });
     });
-       
+		 
 
     // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
     function LoadImg(value, num) {
       if (value.files && value.files[0]) {
         var reader = new FileReader();
         // 자바스크립트 FileReader
-          // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
-            
+       	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+				
         reader.readAsDataURL(value.files[0]);
         // FileReader.readAsDataURL()
-         // 지정된의 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
-         
-          // FileReader.onload
-            // load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
+      	// 지정된의 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
+      	
+       	// FileReader.onload
+				// load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
         reader.onload = function (e) {
-           //console.log(e.target.result);
-           // e.target.result
-           // -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
-           
+        	//console.log(e.target.result);
+        	// e.target.result
+        	// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
+        	
           $(".boardImg").eq(num).children("img").attr("src", e.target.result);
         }
 
       }
     }
     
-      // 카테고리 초기값 지정
-      (function(){
-         $("#categoryCode > option").each(function(index, item) {
-            
-            if($(item).text() == "${board.categoryName}"){
-               $(item).prop("selected", true);
-            }
-            
-         });
-         
-      })();
-
-   
-      // 이미지 배치
-      <c:forEach var="file" items="${fList}">
-         $(".boardImg").eq(${file.fileLevel}).children("img")
-            .attr("src", "${contextPath}/resources/uploadImages/${file.fileName}");
-      </c:forEach>
-      
-   
-   </script>
+    
+	
+		// 카테고리 초기값 지정
+	(function() {
+		$("#categoryCode > option").each(function(index, item) {
+			if($(item).text() == "${board.categoryName}") {
+				$(item).prop("selected", true)
+			}
+		})	
+	})();
+	
+	
+		// 이미지 배치
+	<c:forEach var="file" items="${fList}">
+		$(".boardImg").eq(${file.fileLevel}).children("img")
+		.attr("src", "${contextPath}/resources/uploadImages/${file.fileName}");
+	</c:forEach>
+	</script>
 
 </body>
 </html>
