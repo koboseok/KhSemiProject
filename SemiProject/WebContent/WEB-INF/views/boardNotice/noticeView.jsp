@@ -22,7 +22,7 @@
 
 			<!-- Writer -->
 			<p class="lead">
-				작성자 : <a class="idSelect">${notice.memNm }</a>
+				작성자 : <a class="idSelect">${notice.memNm}</a>
 			</p>
 
 			<hr>

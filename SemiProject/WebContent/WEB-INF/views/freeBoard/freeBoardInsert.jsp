@@ -6,7 +6,18 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
     .insert-label {
       display: inline-block;
       width: 80px;
@@ -23,7 +34,9 @@
 
 		<div class="container my-5">
 
-			<h3>게시글 등록</h3>
+			<h1>
+			<span id="boardStyle"> 자유 게시판 - 등록 </span>
+		</h1>
 			<hr>
 			<!-- 파일 업로드를 위한 라이브러리 cos.jar 라이브러리 다운로드(http://www.servlets.com/) -->
 			
@@ -37,32 +50,32 @@
 
 		
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">제목</label> 
+					<label class="input-group-addon mr-3 insert-label" id= "boardStyle">제목</label> 
 					<input type="text" class="form-control" id="boardTitle" name="boardTitle" size="70">
 				</div>
 
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성자</label>
+					<label class="input-group-addon mr-3 insert-label"  id= "boardStyle">작성자</label>
 					<h5 class="my-0" id="writer">${loginMember.memName}</h5>
 				</div>
 
 
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성일</label>
+					<label class="input-group-addon mr-3 insert-label"  id= "boardStyle">작성일</label>
 					<h5 class="my-0" id="today"></h5>
 				</div>
 
 				<hr>
 
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">썸네일</label>
+					<label class="input-group-addon mr-3 insert-label"  id= "boardStyle">썸네일</label>
 					<div class="boardImg" id="titleImgArea">
 						<img id="titleImg" width="200" height="200">
 					</div>
 				</div>
 
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+					<label class="input-group-addon mr-3 insert-label"  id= "boardStyle">업로드<br>이미지</label>
 					<div class="mr-2 boardImg" id="contentImgArea1">
 						<img id="contentImg1" width="150" height="150">
 					</div>

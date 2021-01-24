@@ -8,6 +8,18 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
 .insert-label {
 	display: inline-block;
 	width: 80px;
@@ -24,7 +36,9 @@
 
 	<div class="container my-5">
 
-		<h3>공동구매 게시판</h3>
+		<h1>
+			<span id="boardStyle"> 공동 구매 게시판 - 수정 </span>
+		</h1>
 		<hr>
 
 		<c:if test="${!empty param.sk && !empty param.sv}">

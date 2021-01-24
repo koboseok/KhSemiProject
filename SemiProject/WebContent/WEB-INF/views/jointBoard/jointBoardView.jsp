@@ -8,6 +8,19 @@
 <meta charset="UTF-8">
 <title>게시글</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
+
 #board-area {
 	min-height: 700px;
 	margin-bottom: 100px;
@@ -77,10 +90,15 @@
 	list-style-type: none;
 }
 
-.board-dateArea {
-	font-size: 14px;
+.grayArea {
+	font-size: 18px;
+	color : gray;
 }
 
+#center {
+	text-align: center;
+	
+}
 /* 이미지 선택 색 변경*/
 .carousel-indicators>li {
 	background-color: #ccc !important;
@@ -91,32 +109,40 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container  my-5">
 
+		<h1 id="center">
+			<span id="boardStyle"> 공동 구매 게시판 </span>
+		</h1>
+
 		<div>
 
 			<div id="board-area">
 
 				<!-- Category -->
-				<h6 class="mt-4">카테고리 : [${board.categoryName}]</h6>
+				<h6 class="mt-4"
+					style=" text-align: center; font-size: 150%; color : orange;" id="boardStyle">${board.categoryName}</h6>
 
+				<div style = "background-color :gainsboro; color : white; font-weight: bold; border:5px solid gray">
 				<!-- Title -->
-				<h3 class="mt-4">${board.boardTitle}</h3>
-
+				
+				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+						<br>
 				<!-- Writer -->
-				<p class="lead">작성자 : ${board.memName}</p>
-
-				<hr>
+				<p class="lead" id="center" style = " font-weight: bold;">작성자 : ${board.memName}</p>
+				
+					</div>
 
 				<!-- Date -->
-				<p>
+				
+					<p class = "grayArea" id="center">
 					<span class="board-dateArea"> 작성일 : <fmt:formatDate
-							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> <br>
-						마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> &nbsp;&nbsp;|&nbsp;&nbsp;
+													마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
 							pattern="yyyy년 MM월 dd일" />
-					</span> <span class="float-right">조회수 ${board.readCount } </span>
+					</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
 				</p>
 
-				<hr>
-
+     <hr>
+			
 
 
 
@@ -221,12 +247,12 @@
 					</c:choose>
 
 
-				<a href="${goToList}" class="btn btn-warning float-right">목록으로</a>
-				
+					<a href="${goToList}" class="btn btn-warning float-right">목록으로</a>
+
 				</div>
-				
-				<jsp:include page="jointReply.jsp"></jsp:include> 
-				
+
+				<jsp:include page="jointReply.jsp"></jsp:include>
+
 			</div>
 
 

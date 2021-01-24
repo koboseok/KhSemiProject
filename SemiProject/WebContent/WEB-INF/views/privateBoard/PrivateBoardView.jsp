@@ -8,7 +8,18 @@
 <meta charset="UTF-8">
 <title>게시글</title>
 <style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
+#boardStyle {
+	font-family: 'SDSamliphopangche_Outline';
+}
 
 #board-area {
 	min-height: 700px;
@@ -87,38 +98,55 @@
 .carousel-indicators>li {
 	background-color: #ccc !important;
 }
+
+#center {
+	text-align: center;
+}
+
+.grayArea {
+	font-size: 18px;
+	color : gray;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container  my-5">
-
+		<h1 id="center">
+			<span id="boardStyle"> 비공개 건의 게시판 </span>
+		</h1>
 		<div>
 
 			<div id="board-area">
 
-				<!-- Category -->
-				<h6 class="mt-4">카테고리 : [${board.categoryName}]</h6>
+			<!-- Category -->
+		<h6 class="mt-4"
+					style=" text-align: center; font-size: 150%; " id="boardStyle">${board.categoryName}</h6>
 
+			<div style = "background-color :gainsboro; color : white; font-weight: bold; border:5px solid gray">
 				<!-- Title -->
-				<h3 class="mt-4">${board.boardTitle}</h3>
-
+				
+				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
+						<br>
 				<!-- Writer -->
-				<p class="lead">작성자 : ${board.memName}</p>
+				<p class="lead" id="center">작성자 : ${board.memName}</p>
+				
+					</div>
 
-				<hr>
-
-				<!-- Date -->
-				<p>
+				
+						<!-- Date -->
+					
+				<p class = "grayArea" id="center">
 					<span class="board-dateArea"> 작성일 : <fmt:formatDate
-							value="${board.boardCreateDate}"
-							pattern="yyyy년  MM월 dd일 HH:mm:ss" /> <br> 마지막 수정일 : <fmt:formatDate
-							value="${board.boardModifyDate}"
-							pattern="yyyy년  MM월 dd일 HH:mm:ss" />
-					</span> <span class="float-right">조회수 ${board.readCount}</span>
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" /> &nbsp;&nbsp;|&nbsp;&nbsp;
+													마지막 수정일 : <fmt:formatDate value="${board.boardModifyDate }"
+							pattern="yyyy년 MM월 dd일" />
+					</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
 				</p>
-
+				
 				<hr>
+
+				
 				<!-- 이미지 출력 -->
 				<div class="carousel slide boardImgArea" id="board-image">
 					<c:if test="${!empty fList}">
@@ -206,19 +234,19 @@
 					</c:choose>
 
 
-			<a href="${goToList}" class=" btn btn-warning  float-right">목록으로</a>
+					<a href="${goToList}" class=" btn btn-warning  float-right">목록으로</a>
 				</div>
 
 			</div>
-				<jsp:include page="privateReply.jsp"></jsp:include>
+			<jsp:include page="privateReply.jsp"></jsp:include>
 
 
 
 		</div>
-		
+
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
-	
+
 
 	<script>
 		$("#deleteBtn").on("click", function() {
