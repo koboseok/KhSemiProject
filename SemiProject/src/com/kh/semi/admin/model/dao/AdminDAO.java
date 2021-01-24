@@ -191,6 +191,7 @@ public class AdminDAO {
 
 			if(rset.next()) {
 				bListCount = rset.getInt(1);
+				System.out.println(bListCount);
 			}
 
 		}finally {
@@ -202,7 +203,7 @@ public class AdminDAO {
 	}
 
 
-	/**정회원 목록 조회 dao
+	/**정지회원 목록 조회 dao
 	 * @param conn
 	 * @param pInfo
 	 * @return bmList
@@ -373,8 +374,9 @@ public class AdminDAO {
 				"(SELECT REPORT_NO, MEM_NO, MEM_NM, MEM_EMAIL, BOARD_CODE, REPORT_B_C_NO, REPORT_B_NO, REPORT_REASON, REPORT_DT " +
 			    "FROM REPORT " +
 			    "LEFT JOIN MEMBER USING(MEM_NO) "+
-			    "WHERE" + condition + "AND MEM_STATUS = 'Y' AND MEM_GRADE = 'B') V) " +
-			"WHERE RNUM BETWEEN ? AND ? ORDER BY RNUM DESC";
+			    "WHERE" + condition + "AND MEM_STATUS = 'Y' AND MEM_GRADE = 'B') V"
+			    		+ " ORDER BY REPORT_NO DESC) " +
+			"WHERE RNUM BETWEEN ? AND ?";
 		
 		try {
 			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit()+1;

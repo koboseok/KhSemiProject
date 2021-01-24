@@ -270,8 +270,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								<option selected>카테고리</option>
 								<option>Contents</option>
 								<option>Food</option>
-								<option>Lifestyle</option>
-								<option>Newsletter</option>
+								<option>Life style</option>
+								<option>News letter</option>
 							</select>
 							</div>
 						
