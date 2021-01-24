@@ -65,7 +65,7 @@
                <textArea rows="3" id="replyContent"></textArea>
             </td>
             <td id="replyBtnArea">
-               <button class="btn btn-primary" id="addReply">
+               <button class="btn btn-warning" id="addReply">
                   댓글<br>등록
                </button>
             </td>
@@ -99,8 +99,8 @@
             <p class="rContent">댓글 내용2</p>
             
             <div class="replyBtnArea">
-               <button class="btn btn-primary btn-sm ml-1" onclick="showUpdateReply(2, this)">수정</button>
-               <button class="btn btn-primary btn-sm ml-1" onclick="deleteReply(2)">삭제</button>
+               <button class="btn btn-outline-secondary btn-sm ml-1" onclick="showUpdateReply(2, this)">수정</button>
+               <button class="btn btn-outline-danger btn-sm ml-1" onclick="deleteReply(2)">삭제</button>
             </div>
          </li>
    
@@ -153,8 +153,8 @@ function selectReplyList(){
                   var replyBtnArea = $("<div>").addClass("replyBtnArea");
               
                      // ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 수정, 삭제를 수행할 수 있는 함수를 이벤트 핸들러로 추가함. 
-              var showUpdate = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("수정").attr("onclick", "showUpdateReply("+item.replyNo+", this)");
-              var deleteReply = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("삭제").attr("onclick", "deleteReply("+item.replyNo+")");
+              var showUpdate = $("<button>").addClass("btn btn-outline-secondary btn-sm ml-1").text("수정").attr("onclick", "showUpdateReply("+item.replyNo+", this)");
+              var deleteReply = $("<button>").addClass("btn btn-outline-danger btn-sm ml-1").text("삭제").attr("onclick", "deleteReply("+item.replyNo+")");
               
               replyBtnArea.append(showUpdate).append(deleteReply);
                
@@ -281,10 +281,10 @@ function showUpdateReply(replyNo, el){
 	
 	
 	// 수정 버튼
-	var updateReply = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	var updateReply = $("<button>").addClass("btn btn-outline-secondary btn-sm ml-1").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
 	
 	// 취소 버튼
-	var cancelBtn = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
+	var cancelBtn = $("<button>").addClass("btn btn-outline-danger btn-sm ml-1").text("취소").attr("onclick", "updateCancel(this)");
 	
 	var replyBtnArea = $(el).parent();
 	

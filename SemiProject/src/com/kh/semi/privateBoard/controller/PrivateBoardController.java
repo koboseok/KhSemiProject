@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -48,6 +46,9 @@ public class PrivateBoardController extends HttpServlet {
 		String swalText = null;
 		
 		String errorMsg = null;
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
 		
 		try {
 			PrivateBoardService service = new PrivateBoardService();
@@ -107,6 +108,22 @@ public class PrivateBoardController extends HttpServlet {
 			else if (command.equals("/view.do")) {
 				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
 				
+				
+				
+				
+
+				if(loginMember == null) {
+
+
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "회원만 열람가능합니다.");
+					response.sendRedirect("main.do?cp=" + cp);
+					
+
+
+				}else {
+					
+				
 				int boardNo = Integer.parseInt(request.getParameter("no"));
 				
 //				살세조회 비즈니스 로직 수행 후 결과 반환 받기
@@ -135,7 +152,7 @@ public class PrivateBoardController extends HttpServlet {
 					request.getSession().setAttribute("swalTitle", "게시글 상세 조회 실패");
 					response.sendRedirect("main.do?cp=1");
 				}
-				
+			}
 			}
 			
 //			********** 게시글 작성 화면 전환 Controller **********
@@ -229,7 +246,6 @@ public class PrivateBoardController extends HttpServlet {
 				int categoryCode = Integer.parseInt(multiRequest.getParameter("categoryCode"));
 				
 //				세션에서 로그인한 회원의 번호를 얻어오기
-				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 				int boardWriter = loginMember.getMemNo();
 				
 //				fList , boardTitle, boardContent, categoryCode , boardWriter

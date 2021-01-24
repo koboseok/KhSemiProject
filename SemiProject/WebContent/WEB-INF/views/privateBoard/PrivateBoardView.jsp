@@ -170,7 +170,7 @@
 					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
 					<c:if
 						test="${!empty loginMember && (board.memName == loginMember.memName)}">
-						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button>
+						<button id="deleteBtn" class="btn btn-danger float-right">삭제</button>
 
 						<%--게시글 수정 후 상세조회 페이지로 돌아오기 위한 url조합 --%>
 						<c:if test="${!empty param.sv && !empty param.sk}">
@@ -179,7 +179,7 @@
 
 						</c:if>
 						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}"
-							class="btn btn-primary float-right ml-1 mr-1">수정</a>
+							class="btn btn-secondary float-right ml-1 mr-1">수정</a>
 					</c:if>
 
 
@@ -204,7 +204,7 @@
 					</c:choose>
 
 
-					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
+			<a href="${goToList}" class=" btn btn-warning  float-right">목록으로</a>
 				</div>
 
 			</div>
