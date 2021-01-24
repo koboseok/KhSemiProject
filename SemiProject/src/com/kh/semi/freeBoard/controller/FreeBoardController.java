@@ -110,7 +110,7 @@ public class FreeBoardController extends HttpServlet {
 
 					request.getSession().setAttribute("swalIcon", "error");
 					request.getSession().setAttribute("swalTitle", "회원만 열람가능합니다.");
-					response.sendRedirect("main.do?cp=1");
+					response.sendRedirect("main.do?cp=" + cp);
 
 
 

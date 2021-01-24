@@ -96,8 +96,8 @@
 				<hr>
 
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary">등록</button>
-					<button type="button" class="btn btn-primary">목록으로</button>
+					<button type="submit" class="btn btn-warning">등록</button>
+					<button type="button" class="btn btn-secondary">목록으로</button>
 				</div>
 
 			</form>
