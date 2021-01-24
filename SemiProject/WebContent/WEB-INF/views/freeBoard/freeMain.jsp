@@ -95,7 +95,7 @@
 						<c:choose>
 							<c:when test="${empty bList }">
 								<tr>
-									<td colspan="6">존재하는 게시글이 없습니다.</td>
+									<td colspan="5">존재하는 게시글이 없습니다.</td>
 								</tr>
 							</c:when>
 							

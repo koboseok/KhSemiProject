@@ -2,6 +2,7 @@
 
 <style>
 /*댓글*/
+
 .replyWrite>table {
    width: 90%;
    margin-top: 100px;
@@ -25,11 +26,13 @@
    display: inline-block;
    margin-right: 30px;
    vertical-align: top;
+     font-weight: bold;
+
 }
 
 .rDate {
    display: inline-block;
-   font-size: 0.5em;
+   font-size: 0.8em;
    color: gray;
 }
 
@@ -52,8 +55,9 @@
 }
 
 .reply-row{
-   border-top : 1px solid #ccc;
+    border-top : 2px solid #ccc;
    padding : 15px 0;
+     
 }
 </style>
 <div id="reply-area ">
@@ -153,8 +157,8 @@ function selectReplyList(){
                   var replyBtnArea = $("<div>").addClass("replyBtnArea");
               
                      // ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 수정, 삭제를 수행할 수 있는 함수를 이벤트 핸들러로 추가함. 
-              var showUpdate = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("수정").attr("onclick", "showUpdateReply("+item.replyNo+", this)");
-              var deleteReply = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("삭제").attr("onclick", "deleteReply("+item.replyNo+")");
+              var showUpdate = $("<button>").addClass("btn btn-outline-secondary btn-sm ml-1").text("수정").attr("onclick", "showUpdateReply("+item.replyNo+", this)");
+              var deleteReply = $("<button>").addClass("btn btn-outline-danger btn-sm ml-1").text("삭제").attr("onclick", "deleteReply("+item.replyNo+")");
               
               replyBtnArea.append(showUpdate).append(deleteReply);
                
@@ -281,10 +285,10 @@ function showUpdateReply(replyNo, el){
 	
 	
 	// 수정 버튼
-	var updateReply = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	var updateReply = $("<button>").addClass("btn btn-outline-secondary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
 	
 	// 취소 버튼
-	var cancelBtn = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
+	var cancelBtn = $("<button>").addClass("btn btn-outline-danger btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
 	
 	var replyBtnArea = $(el).parent();
 	

@@ -99,13 +99,13 @@
 	background-color: #ccc !important;
 }
 
-#center {
-	text-align: center;
-}
-
 .grayArea {
 	font-size: 18px;
 	color: gray;
+}
+
+#center {
+	text-align: center;
 }
 </style>
 </head>
@@ -124,7 +124,7 @@
 				<h1 class="mt-4" id="center">${board.boardTitle}</h1>
 				<br>
 				<!-- Writer -->
-				<p class="lead" id="center">작성자 : ${board.memName}</p>
+				<p class="lead" id="center"style = "color : black; font-weight: bold;">${board.memName}</p>
 
 			</div>
 
@@ -132,14 +132,15 @@
 
 
 			<!-- Date -->
-		
-			<p class="grayArea" id="center">
-				<span class="board-dateArea"> 작성일 : <fmt:formatDate
-						value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" />
-					&nbsp;&nbsp;|&nbsp;&nbsp; 마지막 수정일 : <fmt:formatDate
-						value="${board.boardModifyDate }" pattern="yyyy년 MM월 dd일" />
-				</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
-			</p>
+
+				<p class="grayArea" id="center">
+					<span class="board-dateArea"> 작성일 : <fmt:formatDate
+							value="${board.boardCreateDate }" pattern="yyyy년 MM월 dd일" />
+						&nbsp;&nbsp;|&nbsp;&nbsp; 마지막 수정일 : <fmt:formatDate
+							value="${board.boardModifyDate }" pattern="yyyy년 MM월 dd일" />
+					</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>조회수 ${board.readCount } </span>
+				</p>
+
 			<hr>
 			
 			<!-- 이미지 출력 -->
