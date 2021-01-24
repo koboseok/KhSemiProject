@@ -149,7 +149,8 @@ a {
 
 			<div class="middle_top">
 				<div class="title_box">
-					<p class="main_title">CONTENTS</p>
+					<p class="main_title"></p>
+					
 				</div>
 
 

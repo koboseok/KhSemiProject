@@ -198,6 +198,7 @@ public class SubscribeDAO {
 				conSubscribe.setSubNo(rset.getInt("SERV_CODE"));
 				conSubscribe.setSubName(rset.getString("SERV_NM"));
 				conSubscribe.setSubImage(rset.getString("SERV_IMG"));
+				conSubscribe.setCategoryName(rset.getString("SERV_CATEGORY"));
 
 				exList.add(conSubscribe);
 			}

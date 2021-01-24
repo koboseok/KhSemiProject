@@ -44,7 +44,8 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" />
+										<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%EC%9C%A0%ED%8A%9C%EB%B8%8C%20%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84">
+										<img src="${contextPath}/resources/images/main-youtube.jpg" alt="" /></a>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -67,7 +68,7 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-bookcrew.png" alt="" />
+										<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%EB%B6%81%ED%81%AC%EB%A3%A8"><img src="${contextPath}/resources/images/main-bookcrew.png" alt="" /></a>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -92,7 +93,8 @@
 							<div class="row">
 								<div class="col-md-6 px-0">
 									<div class="img-box">
-										<img src="${contextPath}/resources/images/main-greencar.png" alt="" />
+										<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%EA%B7%B8%EB%A6%B0%EC%B9%B4">
+										<img src="${contextPath}/resources/images/main-greencar.png" alt="" /></a>
 									</div>
 								</div>
 								<div class="col-md-6">
