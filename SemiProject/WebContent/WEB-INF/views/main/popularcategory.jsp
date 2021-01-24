@@ -123,7 +123,7 @@ ul {
 						var div1 = $("<div class='img-box b-1'>");
 						var img = $("<img>").attr("src", "${contextPath}/resources/images/" + item.SubImage);
 						var div2 = $("<div class='btn-box'>");
-						var a = $("<a>").attr("href", "${contextPath}/subscribe/info.do?name=" + item.SubName);
+						var a = $("<a class='btn-2'>").attr("href", "${contextPath}/subscribe/info.do?name=" + item.SubName);
 						
 						div2.append(a);
 						div1.append(img);
