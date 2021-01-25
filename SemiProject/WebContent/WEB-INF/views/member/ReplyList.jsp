@@ -74,7 +74,9 @@
 											<tr id="freeBoard" onclick="boardNo(this);">
 												<td>${board.replyNo}</td>
 												<td>${board.replyContent}</td>
-												<td>${board.replyCreateDate}</td>
+												<td>
+													<fmt:formatDate value="${board.replyCreateDate }" pattern="yyyy-MM-dd HH:mm"/>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -112,7 +114,9 @@
 											<tr id="jointBoard" onclick="boardNo(this);">
 												<td>${board.replyNo}</td>
 												<td>${board.replyContent}</td>
-												<td>${board.replyCreateDate}</td>
+												<td>
+													<fmt:formatDate value="${board.replyCreateDate }" pattern="yyyy-MM-dd HH:mm"/>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -150,7 +154,7 @@
 											<tr id="privateBoard" onclick="boardNo(this);">
 												<td>${board.replyNo}</td>
 												<td>${board.replyContent}</td>
-												<td>${board.replyCreateDate}</td>
+												<td><fmt:formatDate value="${board.replyCreateDate }" pattern="yyyy-MM-dd HH:mm"/></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>

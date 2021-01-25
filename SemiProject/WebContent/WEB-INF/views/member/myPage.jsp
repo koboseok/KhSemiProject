@@ -53,8 +53,9 @@
 								<h6 id="title-font">이메일</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="form-control" id="email" name="email" 
-											value="${ loginMember.memEmail } ">
+								<%-- <input type="email" class="form-control" id="email" name="email" 
+											value="${ loginMember.memEmail } "> --%>
+											<h4>${ loginMember.memEmail }</h4>
 								
 							</div>
 						</div>
