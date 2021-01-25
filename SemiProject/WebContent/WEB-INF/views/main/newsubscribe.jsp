@@ -88,17 +88,19 @@
 					</p>
 				</div>
 				<div class="img-box b-1">
-					<img src="${contextPath}/resources/images/main-laftel.png" alt="">
+					<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%EB%9D%BC%ED%94%84%ED%85%94">
+					<img src="${contextPath}/resources/images/main-laftel.png" alt="" /></a>
 					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
+						<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%EB%9D%BC%ED%94%84%ED%85%94" class="btn-2"> </a>
 					</div>
 				</div>
 			</div>
 			<div class="box-1">
 				<div class="img-box b-1">
-					<img src="${contextPath}/resources/images/main-freshcode.PNG" alt="">
+					<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%ED%94%84%EB%A0%88%EC%8B%9C%EC%BD%94%EB%93%9C">
+					<img src="${contextPath}/resources/images/main-freshcode.PNG" alt="" /></a>
 					<div class="btn-box">
-						<a href="" class="btn-2"> </a>
+						<a href="http://localhost:8080/SemiProject/subscribe/info.do?name=%ED%94%84%EB%A0%88%EC%8B%9C%EC%BD%94%EB%93%9C" class="btn-2"> </a>
 					</div>
 				</div>
 				<div class="p-content">
